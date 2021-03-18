@@ -140,13 +140,12 @@
   border-radius: 5px;
   outline: none;
   border: none;
-  /* background: #0e9e39; */
+  background: #0e9e39;
   color: rgb(255, 255, 255);
   font-weight: 500;
   cursor: pointer;
   font-size: 15px;
   transition: 0.2s ease-out;
-  background: pink;
 }
 
 .portal-login-login input:hover {
