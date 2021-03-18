@@ -1,0 +1,118 @@
+.image-slider {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: rgb(0, 0, 0);
+}
+
+.image-slider::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #1a1a1d70, #09302875);
+}
+
+.arrow-left-container {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  left: 5%;
+  top: 50%;
+}
+
+.arrow-arrow {
+  background: rgba(255, 255, 255, 0.2);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: 0.1s ease-in-out;
+  color: white;
+}
+
+.arrow-arrow:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transition: 0.1s ease-in-out;
+}
+
+.arrow-right-container {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  right: 5%;
+  top: 50%;
+}
+
+.arrow {
+  color: white;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.slide {
+  opacity: 0.5;
+  transition: 0.5s ease-in-out;
+}
+
+.slide.active {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: 0.5s ease-in-out;
+}
+
+.indicator {
+  width: 4.5%;
+  height: 5%;
+  min-width: 50px;
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.indicator i {
+  font-size: 13px;
+}
+
+.school-slider-name {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  color: white;
+  z-index: 1;
+  text-align: center;
+  width: 75%;
+}
+
+.school-slider-name h2 {
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+  font-size: 38px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.school-slider-name p {
+  font-size: 19px;
+}

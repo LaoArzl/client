@@ -1,0 +1,172 @@
+.portal-login {
+  width: 100%;
+  height: 100vh;
+  background: #fafdff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.portal-login-wrapper {
+  width: 30%;
+  height: 60%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 8px 20px 0px rgba(63, 61, 61, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.portal-login-header {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 25px;
+  color: #323b44;
+}
+
+.login-error-messages {
+  width: 75%;
+  height: 10%;
+  background: rgb(255, 210, 210);
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: rgb(209, 24, 24);
+  border: 1px solid rgb(255, 151, 151);
+  border-radius: 3px;
+}
+
+.login-error-messages i {
+  margin-right: 5px;
+}
+
+.login-error-messages-hidden {
+  height: 5%;
+  width: 75%;
+  color: transparent;
+}
+
+.portal-login-form {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.portal-login-label {
+  width: 75%;
+  height: 10%;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(109, 109, 109);
+  display: flex;
+  align-items: center;
+}
+
+.portal-login-input {
+  width: 75%;
+  height: 14%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.portal-login-input input {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  border: 1px solid rgb(206, 206, 206);
+  padding-left: 10px;
+}
+
+.portal-login-input input:focus {
+  border: 1px solid #108d3580;
+  box-shadow: 0px 3px 30px 0px rgba(107, 255, 144, 0.1);
+}
+
+.portal-login-input-span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1px;
+  width: 20%;
+  height: 92%;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-left: 1px solid rgb(221, 221, 221);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  color: rgb(109, 109, 109);
+  z-index: 1;
+  transition: 0.2s ease-in;
+  background: white;
+}
+
+.portal-login-input-span-hidden {
+  display: none;
+}
+
+.portal-login-input-span:hover {
+  color: #323b44;
+  background: rgb(241, 241, 241);
+  transition: 0.2s ease-in;
+}
+
+.portal-login-login {
+  width: 75%;
+  height: 14%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.portal-login-login input {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background: #0e9e39;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s ease-out;
+}
+
+.portal-login-login input:hover {
+  background: #0d8b33;
+  transition: 0.2s ease-in;
+}
+
+.portal-login-forgot {
+  width: 75%;
+  height: 10%;
+  font-size: 14px;
+  color: rgb(54, 113, 223);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.portal-login-forgot span {
+  cursor: pointer;
+}
+
+.portal-login-forgot span:hover {
+  text-decoration: underline;
+}

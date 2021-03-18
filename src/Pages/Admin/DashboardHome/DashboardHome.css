@@ -1,0 +1,90 @@
+.dashboard-wrapper {
+  width: 100%;
+  height: 100vh;
+  background: #f6fbff;
+  display: flex;
+}
+
+.dashboard-home-content {
+  width: 95%;
+  height: 100%;
+  background: #f6fbff;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-home-actual {
+  width: 96%;
+  height: 89%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f6fbff;
+  overflow-y: scroll;
+}
+
+.dashboard-overview-card-wrapper {
+  width: 100%;
+  height: 25%;
+  display: flex;
+}
+
+.dashboard-overview-card {
+  width: 22%;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+  margin-right: 3%;
+}
+
+.dashboard-overview-card::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  background: url("./crissxcross.png");
+  opacity: 0.5;
+}
+
+.card1 {
+  background: #2ea66b;
+}
+
+.card2 {
+  background: #2661d6;
+}
+
+.card3 {
+  background: #2661d6;
+}
+
+.card4 {
+  background: #2661d6;
+}
+
+.dashboard-overview-card-header {
+  width: 100%;
+  height: 70%;
+  color: white;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+}
+
+.dashboard-overview-card-body {
+  width: 100%;
+  height: 30%;
+  padding-left: 15%;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.dashboard-overview-card-body p,
+.dashboard-overview-card-header h1 {
+  z-index: 2;
+}
