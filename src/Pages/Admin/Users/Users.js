@@ -39,48 +39,29 @@ const Users = () => {
         <div className="users-content">
           <DashboardHeader />
           <div className="users-actual">
-            <div className="users-actual-student-header">
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="user-actual-search"
-              >
-                <input
-                  type="search"
-                  placeholder="Search"
-                  className="user-actual-search-input"
-                  onChange={(e) => setSearchItem(e.target.value)}
-                  value={searchItem}
-                />
-                <span>
-                  <i class="fas fa-search"></i>
+            <div className="user-actual-navigation">
+              <div className="student-teacher-nav">
+                <span
+                  onClick={changeStudent}
+                  className={
+                    userType ? "student-nav-span" : "student-nav-span-active"
+                  }
+                >
+                  Students
                 </span>
-              </form>
+                <span
+                  onClick={changeTeacher}
+                  className={
+                    userType ? "teacher-nav-span-active" : "teacher-nav-span"
+                  }
+                >
+                  Teachers
+                </span>
+              </div>
               <Link to="/admin/create-user" className="user-actual-link-create">
                 <i class="fas fa-plus"></i>
                 <p>Add User</p>
               </Link>
-            </div>
-            <div className="user-actual-navigation">
-              <span
-                onClick={changeStudent}
-                className={
-                  userType
-                    ? "user-actual-nav-student"
-                    : "user-actual-nav-student-active"
-                }
-              >
-                <p>Student</p>
-              </span>
-              <span
-                onClick={changeTeacher}
-                className={
-                  userType
-                    ? "user-actual-nav-teacher-active"
-                    : "user-actual-nav-teacher"
-                }
-              >
-                <p>Teacher</p>
-              </span>
             </div>
             <div className="user-actual-userlist">
               {userType ? <TeacherList /> : <StudentList />}

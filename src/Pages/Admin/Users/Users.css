@@ -1,7 +1,7 @@
 .users-wrapper {
   width: 100%;
   height: 100vh;
-  background: #f5f6fa;
+  background: #f6fbff;
   display: flex;
 }
 
@@ -19,20 +19,7 @@
   width: 96%;
   height: 89%;
   margin: 0 auto;
-  background: #f5f6fa;
-}
-
-.users-actual-student-header {
-  width: 100%;
-  display: flex;
-  height: 8%;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  color: #ffffff;
-  margin-bottom: 15px;
-  justify-content: space-between;
+  background: #f6fbff;
 }
 
 .user-actual-search {
@@ -47,7 +34,7 @@
   position: absolute;
   color: #2ea66b;
   top: 50%;
-  right: 5px;
+  left: 5px;
   transform: translateY(-50%);
   width: 9%;
   height: 100%;
@@ -65,7 +52,7 @@
   border-radius: 100px;
   border-style: none;
   border: 1px solid rgb(228, 233, 235);
-  padding-left: 15px;
+  padding-left: 45px;
   background: #ffffff;
   padding-right: 10px;
 }
@@ -74,30 +61,20 @@
   border: 1px solid #2ea66b;
 }
 
-.user-actual-search-search {
-  width: 17%;
-  height: 100%;
-  outline-style: none;
-  border-radius: 3px;
-  border-style: none;
-  background: #2ea66b;
-  cursor: pointer;
-  color: white;
-}
-
 .user-actual-link-create {
-  width: 9%;
-  height: 100%;
+  width: 11%;
+  height: 95%;
   background: #2ea66b;
   color: white;
   font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
+  border-radius: 8px;
   cursor: pointer;
   transition: 0.2s ease-out;
   text-decoration: none;
+  box-shadow: 0px 8px 30px 0px rgba(53, 79, 95, 0.3);
 }
 
 .user-actual-link-create i {
@@ -111,19 +88,89 @@
 }
 
 .user-actual-navigation {
-  width: 25%;
+  width: 100%;
   height: 10%;
-  margin-bottom: 15px;
-  background: #ecf1f5;
   display: flex;
-  box-shadow: 0px 8px 30px 0px rgba(69, 102, 122, 0.1);
-  border-radius: 3px;
   align-items: center;
+  background: #f6fbff;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.student-teacher-nav {
+  width: 85%;
+  height: 100%;
+  border-bottom: 1px solid lightgrey;
+  color: grey;
+  display: flex;
+  align-items: center;
+}
+
+.student-nav-span {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
   justify-content: center;
+  margin-right: 30px;
+  color: rgb(187, 187, 187);
+  font-weight: 500;
+}
+
+.student-nav-span-active {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #2ea66b;
+  margin-top: 2px;
+  justify-content: center;
+  margin-right: 30px;
+  color: #2ea66b;
+  font-weight: 500;
+}
+
+.teacher-nav-span-active {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #2ea66b;
+  margin-top: 2px;
+  justify-content: center;
+  color: #2ea66b;
+  font-weight: 500;
+}
+
+.teacher-nav-span {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+  justify-content: center;
+  color: rgb(187, 187, 187);
+  font-weight: 500;
+}
+
+.user-actual-nav {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #2ea66b;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.user-actual-nav p i {
+  font-size: 15px;
+  height: 100%;
 }
 
 .user-actual-nav-student {
-  width: 50%;
+  width: 30%;
   height: 100%;
   font-size: 18px;
   font-weight: 500;
@@ -132,23 +179,24 @@
   justify-content: center;
   cursor: pointer;
   margin-top: 2px;
-  color: lightgrey;
+  color: grey;
   position: relative;
 }
 
 .user-actual-nav-student-active {
-  width: 49%;
-  height: 96%;
+  width: 30%;
+  height: 100%;
   font-size: 18px;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #2ea66b;
-  background: white;
+  background: #2ea66b;
+  color: white;
   position: relative;
-  border-radius: 3px;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
 }
 
 .user-actual-nav-student-active::after {
@@ -180,7 +228,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: lightgrey;
+  color: grey;
   position: relative;
 }
 
@@ -249,7 +297,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #323b44;
+  color: #4e5c69;
   transition: 0.1s ease-out;
 }
 
@@ -302,8 +350,17 @@
   align-items: center;
   padding-left: 20px;
   text-decoration: none;
-  color: #323b44;
+  color: #4e5c69;
   font-size: 15px;
+}
+
+.studentlist-header-id-span {
+  color: #4e5c69;
+}
+
+.studentlist-header-id-span:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .studentlist-header-name-span {
@@ -313,7 +370,7 @@
   align-items: center;
   padding-left: 20px;
   text-decoration: none;
-  color: #323b44;
+  color: #4e5c69;
   font-size: 15px;
 }
 
@@ -327,7 +384,7 @@
   height: 13%;
   display: flex;
   font-size: 16px;
-  color: #323b44;
+  color: #4e5c69;
   background: rgb(255, 255, 255);
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.05);
