@@ -83,7 +83,7 @@ const PortalLogin = () => {
             }}
           >
             <div className="portal-login-label">
-              <label>Laos</label>
+              <label>Username</label>
             </div>
             <div className="portal-login-input">
               <input
