@@ -157,8 +157,7 @@
   width: 75%;
   height: 10%;
   font-size: 14px;
-  /* color: rgb(54, 113, 223); */
-  color: red;
+  color: rgb(54, 113, 223);
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
