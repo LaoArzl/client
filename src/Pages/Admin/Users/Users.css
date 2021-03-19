@@ -11,8 +11,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
   padding-bottom: 10px;
+  overflow-y: scroll;
 }
 
 .users-actual {
@@ -24,43 +24,38 @@
 
 .user-actual-sort {
   width: 100%;
-  height: 7%;
+  height: 10%;
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  justify-content: space-between;
 }
 
-.user-actual-filter {
-  width: 20%;
+.user-actual-sort-left {
+  width: 50%;
   height: 100%;
   display: flex;
+  align-items: flex-end;
 }
 
 .actual-filter {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.actual-sort {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  color: grey;
-  font-size: 14px;
-}
-
-.user-actual-search-input {
   width: 30%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: grey;
+  height: 75%;
+}
+.user-actual-search-input {
+  width: 60%;
+  height: 75%;
   border-radius: 500px;
   border: 1px solid rgb(235, 240, 240);
   outline-style: none;
   padding-right: 15px;
   padding-left: 15px;
-  font-size: 12px;
+  font-size: 13px;
   background: rgb(255, 255, 255);
   margin-right: 20px;
 }
@@ -167,22 +162,33 @@
 
 .user-actual-userlist {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  border-radius: 15px;
+  position: relative;
+  background: white;
+}
+
+.user-actual-prev-next {
+  width: 100%;
+  height: 10%;
+  background: rgba(255, 192, 203, 0.219);
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 /*User lists separate page */
 .user-studentlist-separate {
   width: 100%;
   height: 100%;
-  border-radius: 3px;
-  background: rgb(255, 255, 255);
   box-shadow: 0px 8px 30px 0px rgba(53, 79, 95, 0.2);
   border-radius: 15px;
+  background: white;
 }
 
 .user-studentlist-header {
   width: 100%;
-  height: 13%;
+  height: 10%;
   display: flex;
   font-weight: 500;
   font-size: 15px;
@@ -190,6 +196,7 @@
   position: sticky;
   top: 0;
   justify-content: space-between;
+  background: white;
 }
 
 .studentlist-header-number {
@@ -300,11 +307,11 @@
 
 .user-studentlist-body-wrapper {
   width: 100%;
-  height: 13%;
+  height: 9%;
   display: flex;
   font-size: 16px;
   color: #4e5c69;
-
+  background: white;
   border-radius: 5px;
   justify-content: space-between;
 }
