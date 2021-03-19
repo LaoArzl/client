@@ -16,9 +16,6 @@ const TeacherList = () => {
           <div className="studentlist-header-gender">Gender</div>
           <div className="studentlist-header-grade">Advising</div>
           <div className="studentlist-header-action">Action</div>
-          <div className="studentlist-header-action-menu">
-            <i class="fas fa-ellipsis-v"></i>
-          </div>
         </div>
         <div className="user-studentlist-body">
           {teachers

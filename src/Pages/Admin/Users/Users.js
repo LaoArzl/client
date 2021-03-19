@@ -63,6 +63,19 @@ const Users = () => {
                 <p>Add User</p>
               </Link>
             </div>
+            <div className="user-actual-sort">
+              <input
+                type="search"
+                className="user-actual-search-input"
+                placeholder="Type to Search"
+                onChange={(e) => setSearchItem(e.target.value)}
+                value={searchItem}
+              />
+              <div className="user-actual-filter">
+                <div className="actual-sort">Sort by:</div>
+                <div className="actual-filter"></div>
+              </div>
+            </div>
             <div className="user-actual-userlist">
               {userType ? <TeacherList /> : <StudentList />}
             </div>
