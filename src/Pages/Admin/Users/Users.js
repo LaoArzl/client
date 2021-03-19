@@ -51,11 +51,9 @@ const Users = () => {
                   onChange={(e) => setSearchItem(e.target.value)}
                   value={searchItem}
                 />
-                <input
-                  type="submit"
-                  value="Search"
-                  className="user-actual-search-search"
-                />
+                <span>
+                  <i class="fas fa-search"></i>
+                </span>
               </form>
               <Link to="/admin/create-user" className="user-actual-link-create">
                 <i class="fas fa-plus"></i>
