@@ -20,11 +20,7 @@ export const DashboardData = [
     icon: <DashboardRoundedIcon fontSize="small" />,
     link: "/admin/dashboard",
   },
-  {
-    name: "Add User",
-    icon: <GroupAddRoundedIcon fontSize="small" />,
-    link: "/admin/create-user",
-  },
+
   {
     name: "Announcement",
     icon: <CallToActionRoundedIcon fontSize="small" />,
@@ -46,8 +42,18 @@ export const DashboardData = [
     link: "/admin/school-year",
   },
   {
-    name: "Users",
-    icon: <GroupRoundedIcon fontSize="small" />,
-    link: "/admin/users",
+    name: "Students",
+    icon: <SchoolRoundedIcon fontSize="small" />,
+    link: "/admin/students",
+  },
+  {
+    name: "Subjects",
+    icon: <SchoolRoundedIcon fontSize="small" />,
+    link: "/admin/subjects",
+  },
+  {
+    name: "Teachers",
+    icon: <SchoolRoundedIcon fontSize="small" />,
+    link: "/admin/teachers",
   },
 ];
