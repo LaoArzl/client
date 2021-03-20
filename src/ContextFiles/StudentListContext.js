@@ -9,6 +9,7 @@ export const StudentListProvider = (props) => {
   const [userType, setUserType] = useState(false);
   const [searchItem, setSearchItem] = useState("");
   const [accessToken, setAccessToken] = useState("");
+  const [searchTeacher, setSearchTeacher] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/student-list").then((response) => {
@@ -37,6 +38,7 @@ export const StudentListProvider = (props) => {
         value01: [teachers, setTeachers],
         value02: [userType, setUserType],
         value03: [searchItem, setSearchItem],
+        value04: [searchTeacher, setSearchTeacher],
       }}
     >
       {props.children}

@@ -20,11 +20,7 @@ export const DashboardData = [
     icon: <DashboardRoundedIcon fontSize="small" />,
     link: "/admin/dashboard",
   },
-  {
-    name: "Add User",
-    icon: <GroupAddRoundedIcon fontSize="small" />,
-    link: "/admin/create-user",
-  },
+
   {
     name: "Announcement",
     icon: <CallToActionRoundedIcon fontSize="small" />,
@@ -59,11 +55,5 @@ export const DashboardData = [
     name: "Teachers",
     icon: <SchoolRoundedIcon fontSize="small" />,
     link: "/admin/teachers",
-  },
-
-  {
-    name: "Users",
-    icon: <GroupRoundedIcon fontSize="small" />,
-    link: "/admin/users",
   },
 ];

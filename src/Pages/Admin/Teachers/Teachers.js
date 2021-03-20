@@ -1,17 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import "./Students.css";
+import "../Students/Students.css";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
-import { CreateStudentContext } from "../../../ContextFiles/CreateStudentContext";
-import ReactPaginate from "react-paginate";
+import { CreateTeacherContext } from "../../../ContextFiles/CreateTeacherContext";
 import Axios from "axios";
 
-const Students = () => {
-  const { value00, value03 } = useContext(StudentListContext);
-  const [students, setStudents] = value00;
-  const [searchItem, setSearchItem] = value03;
+const Teachers = () => {
+  const { value01, value04 } = useContext(StudentListContext);
+  const [teachers, setTeachers] = value01;
+  const [searchTeacher, setSearchTeacher] = value04;
 
   const {
     value1,
@@ -24,101 +23,92 @@ const Students = () => {
     value8,
     value9,
     value10,
-    value12,
-  } = useContext(CreateStudentContext);
-  const [userStudent, setUserStudent] = value1;
-  const [studentNumber, setStudentNumber] = value2;
-  const [usernameStudent, setUsernameStudent] = value3;
-  const [passwordStudent, setPasswordStudent] = value4;
-  const [rePasswordStudent, setRePasswordStudent] = value5;
-  const [lastnameStudent, setLastnameStudent] = value6;
-  const [middlenameStudent, setMiddlenameStudent] = value7;
-  const [firstnameStudent, setFirstnameStudent] = value8;
-  const [genderStudent, setGenderStudent] = value9;
-  const [registerStatusStud, setRegisterStatusStud] = value10;
+  } = useContext(CreateTeacherContext);
+  const [userTeacher, setUserTeacher] = value1;
+  const [teacherNumber, setTeacherNumber] = value2;
+  const [usernameTeacher, setUsernameTeacher] = value3;
+  const [passwordTeacher, setPasswordTeacher] = value4;
+  const [rePasswordTeacher, setRePasswordTeacher] = value5;
+  const [lastnameTeacher, setLastnameTeacher] = value6;
+  const [middlenameTeacher, setMiddlenameTeacher] = value7;
+  const [firstnameTeacher, setFirstnameTeacher] = value8;
+  const [genderTeacher, setGenderTeacher] = value9;
+  const [registerStatusTeac, setRegisterStatusTeac] = value10;
 
   const refresh = () => {
-    setRegisterStatusStud("");
-    setUsernameStudent("");
-    setUserStudent("Student");
-    setPasswordStudent("");
-    setFirstnameStudent("");
-    setGenderStudent("");
-    setMiddlenameStudent("");
-    setLastnameStudent("");
-    setRePasswordStudent("");
-    setStudentNumber("");
+    setRegisterStatusTeac("");
+    setUsernameTeacher("");
+    setUserTeacher("Teacher");
+    setPasswordTeacher("");
+    setFirstnameTeacher("");
+    setGenderTeacher("");
+    setMiddlenameTeacher("");
+    setLastnameTeacher("");
+    setRePasswordTeacher("");
+    setTeacherNumber("");
   };
-
   const submitRegister = () => {
-    Axios.post("http://localhost:3001/register-student", {
-      student_id: studentNumber,
-      userStudent: userStudent,
-      username: usernameStudent,
-      password: passwordStudent,
-      rePassword: rePasswordStudent,
-      lastname: lastnameStudent,
+    Axios.post("http://localhost:3001/register-teacher", {
+      teacher_id: teacherNumber,
+      userTeacher: userTeacher,
+      username: usernameTeacher,
+      password: passwordTeacher,
+      rePassword: rePasswordTeacher,
+      lastname: lastnameTeacher,
+      middlename: middlenameTeacher,
+      firstname: firstnameTeacher,
       fullName:
-        firstnameStudent +
+        firstnameTeacher +
         " " +
-        middlenameStudent[0] +
+        middlenameTeacher[0] +
         "." +
         " " +
-        lastnameStudent,
-      middlename: middlenameStudent,
-      firstname: firstnameStudent,
-      gender: genderStudent,
+        lastnameTeacher,
+      gender: genderTeacher,
     }).then((response) => {
       if (response.data.empty) {
-        setRegisterStatusStud(response.data.empty);
+        setRegisterStatusTeac(response.data.empty);
       } else if (response.data.kulangs) {
-        setRegisterStatusStud(response.data.kulangs);
+        setRegisterStatusTeac(response.data.kulangs);
       } else if (response.data.kulangss) {
-        setRegisterStatusStud(response.data.kulangss);
+        setRegisterStatusTeac(response.data.kulangss);
       } else if (response.data.notMatch) {
-        setRegisterStatusStud(response.data.notMatch);
+        setRegisterStatusTeac(response.data.notMatch);
       } else if (response.data.err) {
-        setRegisterStatusStud(response.data.err);
+        setRegisterStatusTeac(response.data.err);
       } else if (response.data.success) {
-        setStudents([
-          ...students,
+        setTeachers([
+          ...teachers,
           {
-            student_id: studentNumber,
-            userStudent: userStudent,
-            username: usernameStudent,
-            password: passwordStudent,
-            rePassword: rePasswordStudent,
-            lastName: lastnameStudent,
+            teacher_id: teacherNumber,
+            userTeacher: userTeacher,
+            username: usernameTeacher,
+            password: passwordTeacher,
+            rePassword: rePasswordTeacher,
+            lastName: lastnameTeacher,
+            middleName: middlenameTeacher,
+            firstName: firstnameTeacher,
             fullName:
-              firstnameStudent +
+              firstnameTeacher +
               " " +
-              middlenameStudent[0] +
+              middlenameTeacher[0] +
               "." +
               " " +
-              lastnameStudent,
-            middleName: middlenameStudent,
-            firstName: firstnameStudent,
-            gender: genderStudent,
+              lastnameTeacher,
+            gender: genderTeacher,
           },
         ]);
-        setRegisterStatusStud(response.data.success);
+        setRegisterStatusTeac(response.data.success);
       }
     });
   };
 
-  const [pageNumber, setPageNumber] = useState(0);
-  const [showReg, setShowReg] = useState(false);
-  const perPage = 10;
-  const donePage = pageNumber * perPage;
-
-  const pageCount = Math.ceil(students.length / perPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
   useEffect(() => {
-    setUserStudent("Student");
+    setUserTeacher("Teacher");
   }, []);
+
+  const [showReg, setShowReg] = useState(false);
+
   return (
     <>
       <div className="students-wrapper">
@@ -127,7 +117,7 @@ const Students = () => {
           <DashboardHeader />
           <div className="students-content-body">
             <div className="students-content-lists-header">
-              {showReg ? <p>Add Student</p> : <p>List of students</p>}
+              {showReg ? "" : <p>List of Teachers</p>}
               <div
                 onClick={() => setShowReg(!showReg)}
                 className="add-students"
@@ -144,7 +134,7 @@ const Students = () => {
                   ) : (
                     <>
                       <i class="fas fa-plus"></i>
-                      Add Student
+                      Add Teacher
                     </>
                   )}
                 </span>
@@ -160,24 +150,24 @@ const Students = () => {
                   >
                     <div
                       className={
-                        registerStatusStud === ""
+                        registerStatusTeac === ""
                           ? "hidinger"
-                          : registerStatusStud ===
+                          : registerStatusTeac ===
                             "Successfully created account."
                           ? "user-actual-error"
                           : "user-actual-error-red"
                       }
                     >
-                      {registerStatusStud}
+                      {registerStatusTeac}
                     </div>
                     <div className="create-student-id create-div-first">
                       <div className="id-left">
-                        <label>Student ID *</label>
+                        <label>Teacher ID *</label>
                       </div>
                       <div className="id-right ">
                         <input
-                          onChange={(e) => setStudentNumber(e.target.value)}
-                          value={studentNumber}
+                          onChange={(e) => setTeacherNumber(e.target.value)}
+                          value={teacherNumber}
                           className="ask-imp"
                           type="text"
                         />
@@ -189,8 +179,8 @@ const Students = () => {
                       </div>
                       <div className="id-right id-right-right">
                         <input
-                          onChange={(e) => setUsernameStudent(e.target.value)}
-                          value={usernameStudent}
+                          onChange={(e) => setUsernameTeacher(e.target.value)}
+                          value={usernameTeacher}
                           type="text"
                           className="id-right-password"
                         />
@@ -203,8 +193,8 @@ const Students = () => {
                       </div>
                       <div className="id-right id-right-right">
                         <input
-                          onChange={(e) => setPasswordStudent(e.target.value)}
-                          value={passwordStudent}
+                          onChange={(e) => setPasswordTeacher(e.target.value)}
+                          value={passwordTeacher}
                           type="password"
                           className="id-right-password"
                         />
@@ -217,8 +207,8 @@ const Students = () => {
                       </div>
                       <div className="id-right">
                         <input
-                          onChange={(e) => setRePasswordStudent(e.target.value)}
-                          value={rePasswordStudent}
+                          onChange={(e) => setRePasswordTeacher(e.target.value)}
+                          value={rePasswordTeacher}
                           type="password"
                         />
                       </div>
@@ -230,8 +220,8 @@ const Students = () => {
                       </div>
                       <div className="id-right">
                         <input
-                          onChange={(e) => setLastnameStudent(e.target.value)}
-                          value={lastnameStudent}
+                          onChange={(e) => setLastnameTeacher(e.target.value)}
+                          value={lastnameTeacher}
                           type="text"
                         />
                       </div>
@@ -242,8 +232,8 @@ const Students = () => {
                       </div>
                       <div className="id-right">
                         <input
-                          onChange={(e) => setFirstnameStudent(e.target.value)}
-                          value={firstnameStudent}
+                          onChange={(e) => setFirstnameTeacher(e.target.value)}
+                          value={firstnameTeacher}
                           type="text"
                         />
                       </div>
@@ -254,8 +244,8 @@ const Students = () => {
                       </div>
                       <div className="id-right">
                         <input
-                          onChange={(e) => setMiddlenameStudent(e.target.value)}
-                          value={middlenameStudent}
+                          onChange={(e) => setMiddlenameTeacher(e.target.value)}
+                          value={middlenameTeacher}
                           type="text"
                         />
                       </div>
@@ -266,8 +256,8 @@ const Students = () => {
                       </div>
                       <div className="id-right">
                         <select
-                          onChange={(e) => setGenderStudent(e.target.value)}
-                          value={genderStudent}
+                          onChange={(e) => setGenderTeacher(e.target.value)}
+                          value={genderTeacher}
                         >
                           <option value="">Select option</option>
                           <option value="Male">Male</option>
@@ -299,33 +289,32 @@ const Students = () => {
                       type="search"
                       className="students-content-search"
                       placeholder="Type to Search"
-                      onChange={(e) => setSearchItem(e.target.value)}
-                      value={searchItem}
+                      onChange={(e) => setSearchTeacher(e.target.value)}
+                      value={searchTeacher}
                     />
                   </div>
                   <div className="student-list-header">
                     <div className="student-list-number">#</div>
-                    <div className="student-list-id">Student ID</div>
+                    <div className="student-list-id">Teacher ID</div>
                     <div className="student-list-name">Name</div>
                     <div className="student-list-gender">Gender</div>
                     <div className="student-list-gradelevel">Year</div>
                     <div className="student-list-action">Action</div>
                   </div>
-                  {students
+                  {teachers
                     .filter((val) => {
-                      if (searchItem === "") {
+                      if (searchTeacher === "") {
                         return val;
-                      } else if (val.student_id.includes(searchItem)) {
+                      } else if (val.teacher_id.includes(searchTeacher)) {
                         return val;
                       } else if (
                         val.fullName
                           .toLowerCase()
-                          .includes(searchItem.toLowerCase())
+                          .includes(searchTeacher.toLowerCase())
                       ) {
                         return val;
                       }
                     })
-                    .slice(donePage, donePage + perPage)
                     .map((value, key) => {
                       return (
                         <>
@@ -334,7 +323,7 @@ const Students = () => {
                               {key + 1}
                             </div>
                             <div className="student-list-id-span">
-                              {value.student_id}
+                              {value.teacher_id}
                             </div>
                             <div className="student-list-name-span">
                               {value.fullName}
@@ -352,17 +341,6 @@ const Students = () => {
                     })}
                 </>
               )}
-              <ReactPaginate
-                previousLabel="Prev"
-                nextLabel="Next"
-                pageCount={pageCount}
-                onPageChange={changePage}
-                containerClassName="paginationContainer"
-                previousLinkClassName="prevButton"
-                nextLinkClassName="nextButton"
-                disabledLinkClassName="disableButton"
-                activeLinkClassName="activeButton"
-              />
             </div>
           </div>
         </div>
@@ -371,4 +349,4 @@ const Students = () => {
   );
 };
 
-export default withRouter(Students);
+export default withRouter(Teachers);
