@@ -46,6 +46,22 @@ export const DashboardData = [
     link: "/admin/school-year",
   },
   {
+    name: "Students",
+    icon: <SchoolRoundedIcon fontSize="small" />,
+    link: "/admin/students",
+  },
+  {
+    name: "Subjects",
+    icon: <SchoolRoundedIcon fontSize="small" />,
+    link: "/admin/subjects",
+  },
+  {
+    name: "Teachers",
+    icon: <SchoolRoundedIcon fontSize="small" />,
+    link: "/admin/teachers",
+  },
+
+  {
     name: "Users",
     icon: <GroupRoundedIcon fontSize="small" />,
     link: "/admin/users",

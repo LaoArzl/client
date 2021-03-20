@@ -32,7 +32,7 @@ const Class = () => {
               className={showChanges === true ? "class-actual-after" : ""}
             ></div>
             <div className="class-actual-header">
-              <p>School Year {current} </p>
+              <p>School Year {current === 0 ? "" : current} </p>
               <span onClick={changeYear}>
                 <i className="fas fa-cog"></i> Change
               </span>

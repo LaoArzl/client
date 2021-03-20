@@ -8,9 +8,9 @@ export const SchoolYearState = (props) => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/current-sy").then((response) => {
-      if (!response.data.result) {
+      if ((response.data.result = null)) {
         setCurrent(0);
-      } else {
+      } else if (response.data.result) {
         setCurrent(response.data.result[0].schoolYear);
       }
     });

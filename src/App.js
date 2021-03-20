@@ -29,6 +29,7 @@ import SchoolYear from "./Pages/Admin/SchoolYear/SchoolYear";
 import Users from "./Pages/Admin/Users/Users";
 import UserStudent from "./Pages/Admin/Users/UserStudent";
 import UserTeacher from "./Pages/Admin/Users/UserTeacher";
+import Students from "./Pages/Admin/Students/Students";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -188,6 +189,13 @@ function App() {
                             })}
                             exact
                             component={UserTeacher}
+                            isAuth={isAuth}
+                          />
+
+                          <ProtectedAdmin
+                            path="/admin/students"
+                            exact
+                            component={Students}
                             isAuth={isAuth}
                           />
 

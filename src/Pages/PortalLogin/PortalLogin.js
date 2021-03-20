@@ -110,6 +110,12 @@ const PortalLogin = () => {
                 {showPassword ? "Hide" : "Show"}
               </span>
             </div>
+            <select className="portal-login-type">
+              <option value="">Login as:</option>
+              <option value="Student">Student</option>
+              <option value="Teacher">Student</option>
+              <option value="Admin">Student</option>
+            </select>
             <div className="portal-login-login">
               <input type="submit" value="LOGIN" onClick={submitLogin} />
             </div>

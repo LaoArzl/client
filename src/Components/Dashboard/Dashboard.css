@@ -1,7 +1,7 @@
 .sidebar {
   width: 5%;
-  height: 100%;
-  background: #1b354b;
+  height: 100vh;
+  background: #213444;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -9,8 +9,8 @@
 
 .extra-sidebar {
   width: 20%;
-  height: 100%;
-  background: #1b354b;
+  height: 100vh;
+  background: #213444;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -52,16 +52,16 @@
 
 .router-link {
   list-style: none;
-  color: #95a9b9;
+  color: #aaafb3;
   text-decoration: none;
   width: 100%;
-  height: 9%;
+  height: 8%;
 }
 
 .dashboard-links li:hover,
 .dashboard-extra-links li:hover {
   color: #ffffff;
-  transition: 0.1s ease-in;
+  background: #ffffff1c;
 }
 
 .dashboard-icon {
@@ -90,7 +90,7 @@
   width: 100%;
   height: 10%;
   color: #ffffff;
-  background: #1b354b;
+  background: #213444;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +100,7 @@
   width: 100%;
   height: 10%;
   color: #ffffff;
-  background: #1b354b;
+  background: #213444;
   display: flex;
   align-items: center;
   justify-content: center;

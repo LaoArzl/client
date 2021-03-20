@@ -76,7 +76,7 @@
 
 .portal-login-input {
   width: 75%;
-  height: 14%;
+  height: 13%;
   margin-bottom: 10px;
   position: relative;
 }
@@ -169,4 +169,8 @@
 
 .portal-login-forgot span:hover {
   text-decoration: underline;
+}
+
+.portal-login-type {
+  width: 75%;
 }
