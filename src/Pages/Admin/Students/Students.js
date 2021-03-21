@@ -120,6 +120,21 @@ const Students = () => {
     setUserStudent("Student");
   }, []);
 
+  const generateUsername = () => {
+    setUsernameStudent(studentNumber);
+  };
+
+  const generatePassword = () => {
+    let result = "";
+    let characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    setPasswordStudent(result);
+  };
+
   return (
     <>
       <div className="students-wrapper">
@@ -174,7 +189,12 @@ const Students = () => {
                           type="text"
                           className="id-right-password"
                         />
-                        <span className="id-right-generate">Generate</span>
+                        <span
+                          onClick={generateUsername}
+                          className="id-right-generate"
+                        >
+                          Generate
+                        </span>
                       </div>
                     </div>
                     <div className="create-student-id">
@@ -185,10 +205,15 @@ const Students = () => {
                         <input
                           onChange={(e) => setPasswordStudent(e.target.value)}
                           value={passwordStudent}
-                          type="password"
+                          type="text"
                           className="id-right-password"
                         />
-                        <span className="id-right-generate">Generate</span>
+                        <span
+                          onClick={generatePassword}
+                          className="id-right-generate"
+                        >
+                          Generate
+                        </span>
                       </div>
                     </div>
                     <div className="create-student-id">
@@ -199,7 +224,7 @@ const Students = () => {
                         <input
                           onChange={(e) => setRePasswordStudent(e.target.value)}
                           value={rePasswordStudent}
-                          type="password"
+                          type="text"
                         />
                       </div>
                     </div>

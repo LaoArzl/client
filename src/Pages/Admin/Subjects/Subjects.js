@@ -12,7 +12,20 @@ const Subjects = () => {
       <div className="subject-wrapper">
         {showForm ? (
           <>
-            <form className="add-subject-form"></form>
+            <form className="add-subject-form">
+              <div className="add-subject-form-header">
+                <h2>Add Subject</h2>
+              </div>
+              <div className="add-subject-form-body">
+                <div className="add-subject-form-body-left"></div>
+                <div className="add-subject-form-body-right">
+                  <input type="text" className="subject-id" />
+                  <input type="text" className="subject-name" />
+                  <input type="text" className="subject-description" />
+                  <input type="text" className="subject-capacity" />
+                </div>
+              </div>
+            </form>
           </>
         ) : null}
         <Dashboard />
