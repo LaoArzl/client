@@ -119,6 +119,7 @@ const Students = () => {
   useEffect(() => {
     setUserStudent("Student");
   }, []);
+
   return (
     <>
       <div className="students-wrapper">
@@ -128,27 +129,6 @@ const Students = () => {
           <div className="students-content-body">
             <div className="students-content-lists-header">
               {showReg ? <p>Add Student</p> : <p>List of students</p>}
-              <div
-                onClick={() => setShowReg(!showReg)}
-                className="add-students"
-              >
-                <span
-                  className={
-                    showReg ? "add-students-cancel" : "add-students-span"
-                  }
-                >
-                  {showReg ? (
-                    <>
-                      <i class="fas fa-window-close"></i> Return
-                    </>
-                  ) : (
-                    <>
-                      <i class="fas fa-plus"></i>
-                      Add Student
-                    </>
-                  )}
-                </span>
-              </div>
             </div>
             <div className="students-content-lists-body">
               {showReg ? (
@@ -302,6 +282,23 @@ const Students = () => {
                       onChange={(e) => setSearchItem(e.target.value)}
                       value={searchItem}
                     />
+                    <span
+                      onClick={() => setShowReg(!showReg)}
+                      className={
+                        showReg ? "add-students-cancel" : "add-students-span"
+                      }
+                    >
+                      {showReg ? (
+                        <>
+                          <i class="fas fa-window-close"></i> Return
+                        </>
+                      ) : (
+                        <>
+                          <i class="fas fa-plus"></i>
+                          Add Student
+                        </>
+                      )}
+                    </span>
                   </div>
                   <div className="student-list-header">
                     <div className="student-list-number">#</div>
@@ -311,7 +308,9 @@ const Students = () => {
                     <div className="student-list-gradelevel">Year</div>
                     <div className="student-list-action">Action</div>
                   </div>
+                  {}
                   {students
+
                     .filter((val) => {
                       if (searchItem === "") {
                         return val;
@@ -325,7 +324,7 @@ const Students = () => {
                         return val;
                       }
                     })
-                    .slice(donePage, donePage + perPage)
+
                     .map((value, key) => {
                       return (
                         <>
@@ -349,7 +348,8 @@ const Students = () => {
                           </div>
                         </>
                       );
-                    })}
+                    })
+                    .slice(donePage, donePage + perPage)}
                 </>
               )}
               <ReactPaginate

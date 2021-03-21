@@ -2,6 +2,7 @@
   width: 100%;
   height: auto;
   display: flex;
+  background: #f5f5fb;
 }
 
 .students-content {
@@ -12,18 +13,17 @@
 .students-content-body {
   width: 100%;
   height: 90%;
-  background: #f6fbff;
   overflow-y: scroll;
 }
 
 .students-content-lists-header {
   width: 95%;
-  height: 13%;
+  height: 10vh;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   margin: 0 auto;
   margin-top: 20px;
+  color: #323b44;
 }
 
 .students-content-lists-header p {
@@ -31,20 +31,13 @@
   font-size: 22px;
 }
 
-.add-students {
-  width: 15%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 .add-students-span {
-  width: 75%;
-  height: 65%;
-  background: #2ea66b;
-  color: white;
-  border-radius: 3px;
+  width: 11%;
+  min-width: 125px;
+  height: 55%;
+  background: #3b65ef;
+  color: #ffffff;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +49,7 @@
 
 .add-students-cancel {
   width: 75%;
-  height: 65%;
+  height: 55%;
   background: rgb(219, 76, 33);
   border-radius: 3px;
   display: flex;
@@ -76,7 +69,8 @@
 }
 
 .add-students-span:hover {
-  background: #268a5a;
+  background: #3458ce;
+  color: white;
   transition: 0.2s ease-in;
 }
 
@@ -90,21 +84,21 @@
   width: 95%;
   height: auto;
   min-height: 200px;
-  background: rgb(255, 255, 255);
+  border: 1px solid rgb(235, 235, 235);
+  background: white;
   margin: 0 auto;
-  border-radius: 3px;
-  border: 1px solid rgb(235, 240, 240);
-  box-shadow: 0px 8px 30px 0px rgba(53, 79, 95, 0.1);
+  border-radius: 20px;
+  /* box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.2); */
   margin-bottom: 40px;
   padding-bottom: 10px;
 }
 
 .students-content-lists-body-header {
   width: 95%;
-  height: 10vh;
+  height: 12vh;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin: 0 auto;
   margin-top: 0px;
 
@@ -112,8 +106,8 @@
 }
 
 .students-content-search {
-  width: 30%;
-  height: 50%;
+  width: 40%;
+  height: 45%;
   border-style: none;
   outline-style: none;
   border-radius: 500px;
@@ -125,12 +119,16 @@
 }
 
 .student-list-header {
-  width: 100%;
-  height: 11vh;
+  width: 95%;
+  margin: 0 auto;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   font-weight: 500;
   font-size: 15px;
+  color: #323b44;
+  border-radius: 2px;
+  border-bottom: 1px solid rgb(235, 235, 235);
 }
 
 .student-list-number,
@@ -174,22 +172,14 @@
 }
 
 .student-list-body {
-  width: 100%;
-  height: 8vh;
+  margin: 0 auto;
+  width: 95%;
+  height: 11vh;
   display: flex;
-  font-size: 14px;
+  font-size: 15px;
   position: relative;
-}
-
-.student-list-body:after {
-  content: "";
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0%;
-  width: 98%;
-  height: 100%;
-  border-top: 1px solid rgb(226, 226, 226);
-  position: absolute;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  color: rgb(95, 95, 95);
 }
 
 .create-student-form {

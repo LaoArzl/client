@@ -1,0 +1,139 @@
+.subject-wrapper {
+  width: 100%;
+  height: auto;
+  background: #f5f5fb;
+  display: flex;
+  position: relative;
+}
+
+.subject-wrapper-active {
+  width: 100%;
+  height: 100%;
+  background: #00000079;
+  display: flex;
+  position: relative;
+  z-index: 2;
+  position: absolute;
+}
+
+.add-subject-form {
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  border-radius: 15px;
+  background: white;
+}
+
+.subject-content {
+  width: 95%;
+  height: 100vh;
+}
+
+.subject-content-body {
+  width: 100%;
+  height: 90%;
+}
+
+.subject-content-body-header {
+  width: 95%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.subject-content-body-body {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 20px;
+}
+
+.subject-content-body-body-header {
+  width: 95%;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.subject-content-search {
+  width: 40%;
+  height: 45%;
+  border-style: none;
+  outline-style: none;
+  border-radius: 500px;
+  border: 1px solid rgb(226, 226, 226);
+  background: #f7f9fc;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 13px;
+}
+
+.add-subject-span {
+  width: 11%;
+  min-width: 125px;
+  height: 55%;
+  background: #3b65ef;
+  color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease-out;
+  font-weight: 500;
+}
+
+.add-subject-span i {
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.add-subject-span:hover {
+  background: #3458ce;
+  color: white;
+  transition: 0.2s ease-in;
+}
+
+.subject-lists-header {
+  width: 95%;
+  margin: 0 auto;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 15px;
+  color: #323b44;
+  border-radius: 2px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.subject-lists-code,
+.subject-lists-name,
+.subject-lists-capacity,
+.subject-lists-action {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.subject-lists-empty {
+  width: 95%;
+  margin: 0 auto;
+  height: 11vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}

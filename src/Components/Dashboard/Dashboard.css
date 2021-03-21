@@ -1,19 +1,21 @@
 .sidebar {
   width: 5%;
   height: 100vh;
-  background: #213444;
+  background: #ffffff;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  border-right: 1px solid rgb(235, 235, 235);
 }
 
 .extra-sidebar {
   width: 20%;
   height: 100vh;
-  background: #213444;
+  background: #ffffff;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  border-right: 1px solid rgb(235, 235, 235);
 }
 
 .dashboard-links {
@@ -44,7 +46,7 @@
   width: 100%;
   height: 100%;
   display: flex;
-  font-size: 14px;
+  font-size: 15px;
   align-items: center;
   justify-content: flex-start;
   padding-left: 15%;
@@ -52,45 +54,61 @@
 
 .router-link {
   list-style: none;
-  color: #aaafb3;
+  color: #b8bcd5;
   text-decoration: none;
   width: 100%;
-  height: 8%;
+  height: 10%;
+  font-weight: 500;
+  transition: 0.1s ease-out;
 }
 
 .dashboard-links li:hover,
 .dashboard-extra-links li:hover {
-  color: #ffffff;
-  background: #ffffff1c;
+  color: #323b44;
+  transition: 0.1s ease-in;
 }
 
 .dashboard-icon {
   display: flex;
   align-items: center;
-  font-size: 13px;
 }
 
 .dashboard-extra-icon {
   display: flex;
   align-items: center;
-  font-size: 14px;
-  margin-right: 10%;
+  margin-right: 15%;
 }
 
 #link-active {
-  background: #ffffff33;
-  color: #ffffff;
+  color: #323b44;
   width: 100%;
   transition: 0.1s ease-in;
   align-items: center;
   position: relative;
 }
 
+#link-active::after {
+  width: 2px;
+  border-radius: 300px;
+  transform: translateY(-50%);
+  height: 30%;
+  background: #3b65ef;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+#link-active .dashboard-icon,
+#link-active .dashboard-extra-icon {
+  color: #3b65ef;
+}
+
 .dashboard-menu-section {
   width: 100%;
   height: 10%;
-  color: #ffffff;
-  background: #213444;
+  color: #323b44;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,8 +117,8 @@
 .dashboard-extra-menu-section {
   width: 100%;
   height: 10%;
-  color: #ffffff;
-  background: #213444;
+  color: #323b44;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
