@@ -17,13 +17,55 @@ const Subjects = () => {
                 <h2>Add Subject</h2>
               </div>
               <div className="add-subject-form-body">
-                <div className="add-subject-form-body-left"></div>
-                <div className="add-subject-form-body-right">
-                  <input type="text" className="subject-id" />
-                  <input type="text" className="subject-name" />
-                  <input type="text" className="subject-description" />
-                  <input type="text" className="subject-capacity" />
+                <div className="add-subject-input">
+                  <div className="add-subject-left">
+                    <label>Subject Code *</label>
+                  </div>
+                  <div className="add-subject-right">
+                    <input type="text" className="subject-code" />
+                  </div>
                 </div>
+
+                <div className="add-subject-input">
+                  <div className="add-subject-left">
+                    <label>Subject *</label>
+                  </div>
+                  <div className="add-subject-right">
+                    <input type="text" className="subject-name" />
+                  </div>
+                </div>
+
+                <div className="add-subject-textarea">
+                  <div className="add-subject-left-textarea">
+                    <label>Description *</label>
+                  </div>
+                  <div className="add-subject-right">
+                    <textarea type="text" className="subject-description" />
+                  </div>
+                </div>
+
+                <div className="add-subject-input">
+                  <div className="add-subject-left">
+                    <label>Year *</label>
+                  </div>
+                  <div className="add-subject-right">
+                    <input type="text" className="subject-year" />
+                  </div>
+                </div>
+
+                <div className="add-subject-input">
+                  <div className="add-subject-left">
+                    <label>Capacity *</label>
+                  </div>
+                  <div className="add-subject-right">
+                    <input type="text" className="subject-capacity" />
+                  </div>
+                </div>
+                <input
+                  type="submit"
+                  className="add-subject-submit"
+                  value="Submit"
+                />
               </div>
             </form>
           </>

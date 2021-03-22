@@ -32,6 +32,7 @@
 .subject-content {
   width: 95%;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 .subject-content-body {
@@ -141,7 +142,7 @@
 
 .add-subject-form-header {
   width: 100%;
-  height: 15%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,27 +150,81 @@
 
 .add-subject-form-body {
   width: 100%;
-  height: 85%;
-  display: flex;
+  height: 80%;
 }
 
-.add-subject-form-body-left {
-  width: 30%;
-  height: auto;
-}
-
-.add-subject-form-body-right {
-  width: 70%;
-  height: auto;
-}
-
-.add-subject-form-body-right input {
-  width: 95%;
+.add-subject-input {
+  width: 85%;
   height: 9%;
-  margin-bottom: 15px;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.add-subject-submit {
+  width: 85%;
+  height: 10%;
+  display: flex;
+  margin: 0 auto;
   border-style: none;
   outline-style: none;
-  border-radius: 3px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  margin-top: 5px;
+  background: #4ac49e;
+  color: white;
+  cursor: pointer;
+}
+
+.add-subject-left {
+  width: 25%;
+  height: 100%;
+  font-size: 14px;
+  color: rgb(90, 90, 90);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.add-subject-left-textarea {
+  width: 25%;
+  height: 50%;
+  font-size: 14px;
+  color: rgb(90, 90, 90);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.add-subject-right {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-subject-textarea {
+  width: 85%;
+  height: 18%;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.add-subject-right input,
+.add-subject-right textarea {
+  width: 90%;
+  height: 100%;
+  resize: none;
+  border-style: none;
+  outline-style: none;
   border: 1px solid rgb(226, 226, 226);
   background: #f7f9fc;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
 }
