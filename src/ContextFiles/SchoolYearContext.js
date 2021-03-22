@@ -34,8 +34,9 @@ export const SchoolYearState = (props) => {
         value2: [listYear, setListYear],
         sub1: [subjectCode, setSubjectCode],
         sub2: [subject, setSubject],
-        sub3: [subjectYear, setSubjectYear],
-        sub4: [subjectCapacity, setSubjectCapacity],
+        sub3: [subjectDes, setSubjectDes],
+        sub4: [subjectYear, setSubjectYear],
+        sub5: [subjectCapacity, setSubjectCapacity],
       }}
     >
       {props.children}

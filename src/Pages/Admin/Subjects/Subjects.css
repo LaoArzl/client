@@ -226,6 +226,7 @@
 }
 
 .add-subject-right input,
+.add-subject-right select,
 .add-subject-right textarea {
   width: 90%;
   height: 100%;
