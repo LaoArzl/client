@@ -3,10 +3,16 @@ import { withRouter } from "react-router-dom";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import "./Subjects.css";
+import Axios from "axios";
+import { SchoolYearContext } from "../../../ContextFiles/SchoolYearContext";
 
 const Subjects = () => {
   const [subjectList, setSubjectList] = useState("");
   const [showForm, setShowForm] = useState(false);
+
+  const addSubject = () => {
+    Axios.post("http://localhost:3001/add-subject");
+  };
   return (
     <>
       <div className="subject-wrapper">
@@ -79,7 +85,7 @@ const Subjects = () => {
           <DashboardHeader />
           <div className="subject-content-body">
             <div className="subject-content-body-header">
-              <h2>List of Subjects</h2>
+              <p>List of Subjects</p>
             </div>
             <div className="subject-content-body-body">
               <div className="subject-content-body-body-header">

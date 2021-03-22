@@ -38,7 +38,7 @@ const Class = () => {
               </span>
             </div>
             <div className="class-actual-body">
-              {current === 0 ? <Empty /> : <p> There is</p>}
+              {current === 0 ? <Empty /> : <p> There is s</p>}
             </div>
           </div>
         </div>

@@ -126,13 +126,12 @@ const Students = () => {
 
   const generatePassword = () => {
     let result = "";
-    let characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let charactersLength = characters.length;
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    setPasswordStudent(result);
+    setPasswordStudent("ECPLC" + result);
   };
 
   return (
@@ -187,14 +186,8 @@ const Students = () => {
                           onChange={(e) => setUsernameStudent(e.target.value)}
                           value={usernameStudent}
                           type="text"
-                          className="id-right-password"
+                          className="id-right-username"
                         />
-                        <span
-                          onClick={generateUsername}
-                          className="id-right-generate"
-                        >
-                          Generate
-                        </span>
                       </div>
                     </div>
                     <div className="create-student-id">

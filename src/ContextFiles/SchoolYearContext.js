@@ -5,6 +5,11 @@ export const SchoolYearContext = createContext();
 export const SchoolYearState = (props) => {
   const [current, setCurrent] = useState(null);
   const [listYear, setListYear] = useState([]);
+  const [subjectCode, setSubjectCode] = useState("");
+  const [subject, setSubject] = useState("");
+  const [subjectDes, setSubjectDes] = useState("");
+  const [subjectYear, setSubjectYear] = useState("");
+  const [subjectCapacity, setSubjectCapacity] = useState(0);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/current-sy").then((response) => {
@@ -24,7 +29,14 @@ export const SchoolYearState = (props) => {
 
   return (
     <SchoolYearContext.Provider
-      value={{ value1: [current, setCurrent], value2: [listYear, setListYear] }}
+      value={{
+        value1: [current, setCurrent],
+        value2: [listYear, setListYear],
+        sub1: [subjectCode, setSubjectCode],
+        sub2: [subject, setSubject],
+        sub3: [subjectYear, setSubjectYear],
+        sub4: [subjectCapacity, setSubjectCapacity],
+      }}
     >
       {props.children}
     </SchoolYearContext.Provider>

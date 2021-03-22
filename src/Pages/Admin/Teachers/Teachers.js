@@ -182,9 +182,8 @@ const Teachers = () => {
                           onChange={(e) => setUsernameTeacher(e.target.value)}
                           value={usernameTeacher}
                           type="text"
-                          className="id-right-password"
+                          className="id-right-username"
                         />
-                        <span className="id-right-generate">Generate</span>
                       </div>
                     </div>
                     <div className="create-student-id">

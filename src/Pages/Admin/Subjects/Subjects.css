@@ -1,7 +1,7 @@
 .subject-wrapper {
   width: 100%;
   height: auto;
-  background: #f5f5fb;
+  background: #ffffff;
   display: flex;
   position: relative;
 }
@@ -47,6 +47,9 @@
   align-items: center;
   margin: 0 auto;
   margin-top: 20px;
+  font-weight: 500;
+  font-size: 22px;
+  color: #323b44;
 }
 
 .subject-content-body-body {
@@ -56,6 +59,7 @@
   background: white;
   border: 1px solid rgb(235, 235, 235);
   border-radius: 20px;
+  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
 }
 
 .subject-content-body-body-header {
@@ -176,6 +180,12 @@
   background: #4ac49e;
   color: white;
   cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.add-subject-submit:hover {
+  background: #3ca080;
+  transition: 0.2s ease-in;
 }
 
 .add-subject-left {

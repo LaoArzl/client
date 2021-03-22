@@ -1,11 +1,12 @@
 import React from "react";
-import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
-import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
-import CallToActionRoundedIcon from "@material-ui/icons/CallToActionRounded";
-import ClassRoundedIcon from "@material-ui/icons/ClassRounded";
-import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import SchoolRoundedIcon from "@material-ui/icons/SchoolRounded";
-import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
+import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
+import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
+import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
+import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
+import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
+import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
+import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
 
 const styles = {
   largeIcon: {
@@ -17,43 +18,43 @@ const styles = {
 export const DashboardData = [
   {
     name: "Dashboard",
-    icon: <DashboardRoundedIcon fontSize="small" />,
+    icon: <DashboardOutlinedIcon fontSize="small" />,
     link: "/admin/dashboard",
   },
 
   {
     name: "Announcement",
-    icon: <CallToActionRoundedIcon fontSize="small" />,
+    icon: <EventOutlinedIcon fontSize="small" />,
     link: "/admin/announcement",
   },
   {
     name: "Class",
-    icon: <ClassRoundedIcon fontSize="small" />,
+    icon: <AccountTreeOutlinedIcon fontSize="small" />,
     link: "/admin/class",
   },
   {
     name: "Message",
-    icon: <SendRoundedIcon fontSize="small" />,
+    icon: <SendOutlinedIcon fontSize="small" />,
     link: "/admin/message",
   },
   {
     name: "School Year",
-    icon: <SchoolRoundedIcon fontSize="small" />,
+    icon: <SchoolOutlinedIcon fontSize="small" />,
     link: "/admin/school-year",
   },
   {
     name: "Students",
-    icon: <SchoolRoundedIcon fontSize="small" />,
+    icon: <PersonOutlineOutlinedIcon fontSize="small" />,
     link: "/admin/students",
   },
   {
     name: "Subjects",
-    icon: <SchoolRoundedIcon fontSize="small" />,
+    icon: <ImportContactsOutlinedIcon fontSize="small" />,
     link: "/admin/subjects",
   },
   {
     name: "Teachers",
-    icon: <SchoolRoundedIcon fontSize="small" />,
+    icon: <SupervisorAccountOutlinedIcon fontSize="small" />,
     link: "/admin/teachers",
   },
 ];
