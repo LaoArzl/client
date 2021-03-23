@@ -9,32 +9,46 @@ import { SchoolYearContext } from "../../../ContextFiles/SchoolYearContext";
 const Subjects = () => {
   const [subjectList, setSubjectList] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const { sub1, sub2, sub3, sub4, sub5 } = useContext(SchoolYearContext);
+  const { sub1, sub2, sub3, sub4, sub5, sub6 } = useContext(SchoolYearContext);
   const [subjectCode, setSubjectCode] = sub1;
   const [subject, setSubject] = sub2;
   const [subjectDes, setSubjectDes] = sub3;
   const [subjectYear, setSubjectYear] = sub4;
   const [subjectCapacity, setSubjectCapacity] = sub5;
+  const [subjects, setSubjects] = sub6;
 
   const addSubject = () => {
     Axios.post("http://localhost:3001/add-subject", {
-      subjectCode,
-      subject,
-      subjectDes,
-      subjectYear,
-      subjectCapacity,
+      subjectCode: subjectCode,
+      subject: subject,
+      subjectDes: subjectDes,
+      subjectYear: subjectYear,
+      subjectCapacity: subjectCapacity,
+    }).then((response) => {
+      if (response) {
+        setSubjects([
+          ...subjects,
+          {
+            subjectCode: subjectCode,
+            subject: subject,
+            subjectDes: subjectDes,
+            subjectYear: subjectYear,
+            subjectCapacity: subjectCapacity,
+          },
+        ]);
+      }
     });
   };
 
-  useEffect(() => {
-    console.log(subjectYear);
-  }, [99]);
   return (
     <>
       <div className="subject-wrapper">
         {showForm ? (
           <>
-            <form className="add-subject-form">
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="add-subject-form"
+            >
               <div className="add-subject-form-header">
                 <h2>Add Subject</h2>
               </div>
@@ -86,7 +100,9 @@ const Subjects = () => {
                     <label>Year *</label>
                   </div>
                   <div className="add-subject-right">
-                    <select onChange={(e) => setSubjectYear(e.target.value)}>
+                    <select
+                      onChange={(e) => setSubjectYear(parseInt(e.target.value))}
+                    >
                       <option value="">Select option</option>
                       <option value="1">Kinder 1</option>
                       <option value="2">Kinder 2</option>
@@ -116,6 +132,7 @@ const Subjects = () => {
                   </div>
                 </div>
                 <input
+                  onClick={addSubject}
                   type="submit"
                   className="add-subject-submit"
                   value="Submit"
@@ -157,16 +174,31 @@ const Subjects = () => {
               </div>
               <div
                 className={
-                  subjectList === ""
+                  subjects === null
                     ? "subject-lists-empty"
                     : "subject-lists-wrapper"
                 }
               >
-                {subjectList === "" ? (
-                  <p>There is currently no subject.</p>
-                ) : (
-                  "Have"
-                )}
+                {subjects === null
+                  ? null
+                  : subjects.map((value, key) => {
+                      return (
+                        <>
+                          <div className="subject-lists-code-span">
+                            {value.subject_id}
+                          </div>
+                          <div className="subject-lists-name-span">
+                            {value.subjectName}
+                          </div>
+                          <div className="subject-lists-capacity-span">
+                            {value.capacity}
+                          </div>
+                          <div className="subject-lists-action-span">
+                            {value.subject_id}
+                          </div>
+                        </>
+                      );
+                    })}
               </div>
             </div>
           </div>

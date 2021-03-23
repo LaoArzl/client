@@ -134,7 +134,42 @@
   align-items: center;
 }
 
+.subject-lists-code-span,
+.subject-lists-name-span,
+.subject-lists-capacity-span,
+.subject-lists-action-span {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .subject-lists-empty {
+  width: 95%;
+  margin: 0 auto;
+  height: 11vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  position: relative;
+}
+
+.subject-lists-empty::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "There is currently no subject.";
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.subject-lists-wrapper {
   width: 95%;
   margin: 0 auto;
   height: 11vh;
