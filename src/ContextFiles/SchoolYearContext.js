@@ -8,9 +8,11 @@ export const SchoolYearState = (props) => {
   const [subjectCode, setSubjectCode] = useState("");
   const [subject, setSubject] = useState("");
   const [subjectDes, setSubjectDes] = useState("");
-  const [subjectYear, setSubjectYear] = useState(0);
+  const [subjectError, setSubjectError] = useState("");
   const [subjectCapacity, setSubjectCapacity] = useState(0);
+
   const [subjects, setSubjects] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/current-sy").then((response) => {
@@ -31,12 +33,22 @@ export const SchoolYearState = (props) => {
   useEffect(() => {
     Axios.get("http://localhost:3001/add-subject").then((response) => {
       if (response.data.length === 0) {
-        setSubjects(null);
+        setSubjects("");
       } else {
         setSubjects(response.data);
       }
     });
   }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/create-class").then((response) => {
+      if (response.data.length === 0) {
+        setClasses("");
+      } else {
+        setClasses(response.data);
+      }
+    });
+  });
 
   return (
     <SchoolYearContext.Provider
@@ -46,9 +58,10 @@ export const SchoolYearState = (props) => {
         sub1: [subjectCode, setSubjectCode],
         sub2: [subject, setSubject],
         sub3: [subjectDes, setSubjectDes],
-        sub4: [subjectYear, setSubjectYear],
+        sub4: [subjectError, setSubjectError],
         sub5: [subjectCapacity, setSubjectCapacity],
         sub6: [subjects, setSubjects],
+        class1: [classes, setClasses],
       }}
     >
       {props.children}

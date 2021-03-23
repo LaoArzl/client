@@ -2,12 +2,13 @@
   width: 100%;
   height: auto;
   display: flex;
-  background: #f5f5fb;
+  background: #ffffff;
 }
 
 .students-content {
   width: 95%;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 .students-content-body {
@@ -22,8 +23,8 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  margin-top: 20px;
   color: #323b44;
+  margin-bottom: 10px;
 }
 
 .students-content-lists-header p {
@@ -88,9 +89,9 @@
   background: white;
   margin: 0 auto;
   border-radius: 20px;
-  /* box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.2); */
   margin-bottom: 40px;
   padding-bottom: 10px;
+  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
 }
 
 .students-content-lists-body-header {
@@ -174,11 +175,11 @@
 .student-list-body {
   margin: 0 auto;
   width: 95%;
-  height: 11vh;
+  height: 10vh;
   display: flex;
   font-size: 15px;
   position: relative;
-  border-bottom: 1px solid rgb(235, 235, 235);
+  /* border-bottom: 1px solid rgb(235, 235, 235); */
   color: rgb(95, 95, 95);
 }
 

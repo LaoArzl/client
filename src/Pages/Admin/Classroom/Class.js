@@ -4,42 +4,62 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import "./Class.css";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import { SchoolYearContext } from "../../../ContextFiles/SchoolYearContext";
-import Empty from "./Empty.js";
+import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 
 const Class = () => {
-  const { value1, value2 } = useContext(SchoolYearContext);
-  const [current, setCurrent] = value1;
-  const [listYear, setListYear] = value2;
-  const [showChanges, setShowChanges] = useState(false);
-  const changeYear = () => {
-    setShowChanges(true);
-  };
+  const { value01 } = useContext(StudentListContext);
+  const [teachers, setTeachers] = value01;
+  const { class1 } = useContext(SchoolYearContext);
+  const [classes, setClasses] = class1;
 
-  const changeYearTwo = () => {
-    setShowChanges(false);
-  };
+  const [showCreate, setShowCreate] = useState(false);
   return (
     <>
-      <div
-        onClick={changeYearTwo}
-        className={showChanges ? "class-wrapper-black" : "class-wrapper-black"}
-      >
+      <div className="class-wrapper">
+        {showCreate ? (
+          <>
+            <form className="create-subject-form">
+              <select>
+                {teachers.map((value) => {
+                  return (
+                    <option value={value.teacher_id}>{value.firstName}</option>
+                  );
+                })}
+              </select>
+            </form>
+          </>
+        ) : (
+          ""
+        )}
         <Dashboard />
+        <div
+          onClick={() => setShowCreate(!showCreate)}
+          className={showCreate ? "class-wrapper-active" : ""}
+        ></div>
         <div className="class-content">
           <DashboardHeader />
-          <div className="class-actual">
-            <div
-              className={showChanges === true ? "class-actual-after" : ""}
-            ></div>
-            <div className="class-actual-header">
-              <p>School Year {current === 0 ? "" : current} </p>
-              <span onClick={changeYear}>
-                <i className="fas fa-cog"></i> Change
+          <div className="class-actual-header">Class</div>
+          <div className="class-actual-body">
+            <div className="class-actual-body-header">
+              <span
+                onClick={() => setShowCreate(true)}
+                className="add-class-button"
+              >
+                <i className="fas fa-plus"></i>
+                Create Class
               </span>
             </div>
-            <div className="class-actual-body">
-              {current === 0 ? <Empty /> : <p> There is s</p>}
-            </div>
+            {classes === "" ? (
+              <>
+                <div className="class-actual-body-empty">
+                  There is currently no class.
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="class-actual-body-have"></div>
+              </>
+            )}
           </div>
         </div>
       </div>

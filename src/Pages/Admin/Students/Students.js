@@ -140,248 +140,245 @@ const Students = () => {
         <Dashboard />
         <div className="students-content">
           <DashboardHeader />
-          <div className="students-content-body">
-            <div className="students-content-lists-header">
-              {showReg ? <p>Add Student</p> : <p>List of students</p>}
-            </div>
-            <div className="students-content-lists-body">
-              {showReg ? (
-                <>
-                  <form
-                    onSubmit={(e) => e.preventDefault()}
-                    className="create-student-form"
-                    autoComplete="off"
+          <div className="students-content-lists-header">
+            {showReg ? <p>Add Student</p> : <p>List of students</p>}
+          </div>
+          <div className="students-content-lists-body">
+            {showReg ? (
+              <>
+                <form
+                  onSubmit={(e) => e.preventDefault()}
+                  className="create-student-form"
+                  autoComplete="off"
+                >
+                  <div
+                    className={
+                      registerStatusStud === ""
+                        ? "hidinger"
+                        : registerStatusStud === "Successfully created account."
+                        ? "user-actual-error"
+                        : "user-actual-error-red"
+                    }
                   >
-                    <div
-                      className={
-                        registerStatusStud === ""
-                          ? "hidinger"
-                          : registerStatusStud ===
-                            "Successfully created account."
-                          ? "user-actual-error"
-                          : "user-actual-error-red"
-                      }
-                    >
-                      {registerStatusStud}
+                    {registerStatusStud}
+                  </div>
+                  <div className="create-student-id create-div-first">
+                    <div className="id-left">
+                      <label>Student ID *</label>
                     </div>
-                    <div className="create-student-id create-div-first">
-                      <div className="id-left">
-                        <label>Student ID *</label>
-                      </div>
-                      <div className="id-right ">
-                        <input
-                          onChange={(e) => setStudentNumber(e.target.value)}
-                          value={studentNumber}
-                          className="ask-imp"
-                          type="text"
-                        />
-                      </div>
+                    <div className="id-right ">
+                      <input
+                        onChange={(e) => setStudentNumber(e.target.value)}
+                        value={studentNumber}
+                        className="ask-imp"
+                        type="text"
+                      />
                     </div>
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>Username *</label>
-                      </div>
-                      <div className="id-right id-right-right">
-                        <input
-                          onChange={(e) => setUsernameStudent(e.target.value)}
-                          value={usernameStudent}
-                          type="text"
-                          className="id-right-username"
-                        />
-                      </div>
+                  </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>Username *</label>
                     </div>
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>Password *</label>
-                      </div>
-                      <div className="id-right id-right-right">
-                        <input
-                          onChange={(e) => setPasswordStudent(e.target.value)}
-                          value={passwordStudent}
-                          type="text"
-                          className="id-right-password"
-                        />
-                        <span
-                          onClick={generatePassword}
-                          className="id-right-generate"
-                        >
-                          Generate
-                        </span>
-                      </div>
+                    <div className="id-right id-right-right">
+                      <input
+                        onChange={(e) => setUsernameStudent(e.target.value)}
+                        value={usernameStudent}
+                        type="text"
+                        className="id-right-username"
+                      />
                     </div>
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>Confirm Password *</label>
-                      </div>
-                      <div className="id-right">
-                        <input
-                          onChange={(e) => setRePasswordStudent(e.target.value)}
-                          value={rePasswordStudent}
-                          type="text"
-                        />
-                      </div>
+                  </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>Password *</label>
                     </div>
+                    <div className="id-right id-right-right">
+                      <input
+                        onChange={(e) => setPasswordStudent(e.target.value)}
+                        value={passwordStudent}
+                        type="text"
+                        className="id-right-password"
+                      />
+                      <span
+                        onClick={generatePassword}
+                        className="id-right-generate"
+                      >
+                        Generate
+                      </span>
+                    </div>
+                  </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>Confirm Password *</label>
+                    </div>
+                    <div className="id-right">
+                      <input
+                        onChange={(e) => setRePasswordStudent(e.target.value)}
+                        value={rePasswordStudent}
+                        type="text"
+                      />
+                    </div>
+                  </div>
 
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>Last Name *</label>
-                      </div>
-                      <div className="id-right">
-                        <input
-                          onChange={(e) => setLastnameStudent(e.target.value)}
-                          value={lastnameStudent}
-                          type="text"
-                        />
-                      </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>Last Name *</label>
                     </div>
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>First Name *</label>
-                      </div>
-                      <div className="id-right">
-                        <input
-                          onChange={(e) => setFirstnameStudent(e.target.value)}
-                          value={firstnameStudent}
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>Middle Name *</label>
-                      </div>
-                      <div className="id-right">
-                        <input
-                          onChange={(e) => setMiddlenameStudent(e.target.value)}
-                          value={middlenameStudent}
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div className="create-student-id">
-                      <div className="id-left">
-                        <label>Gender</label>
-                      </div>
-                      <div className="id-right">
-                        <select
-                          onChange={(e) => setGenderStudent(e.target.value)}
-                          value={genderStudent}
-                        >
-                          <option value="">Select option</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="id-right-submit">
+                    <div className="id-right">
                       <input
-                        onClick={refresh}
-                        type="reset"
-                        className="student-reset"
-                        value="Reset"
-                      />
-                      <input
-                        onClick={submitRegister}
-                        type="submit"
-                        className="student-submit"
-                        value="Create"
+                        onChange={(e) => setLastnameStudent(e.target.value)}
+                        value={lastnameStudent}
+                        type="text"
                       />
                     </div>
-                  </form>
-                </>
-              ) : (
-                <>
-                  <div className="students-content-lists-body-header">
+                  </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>First Name *</label>
+                    </div>
+                    <div className="id-right">
+                      <input
+                        onChange={(e) => setFirstnameStudent(e.target.value)}
+                        value={firstnameStudent}
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>Middle Name *</label>
+                    </div>
+                    <div className="id-right">
+                      <input
+                        onChange={(e) => setMiddlenameStudent(e.target.value)}
+                        value={middlenameStudent}
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="create-student-id">
+                    <div className="id-left">
+                      <label>Gender</label>
+                    </div>
+                    <div className="id-right">
+                      <select
+                        onChange={(e) => setGenderStudent(e.target.value)}
+                        value={genderStudent}
+                      >
+                        <option value="">Select option</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="id-right-submit">
                     <input
-                      type="search"
-                      className="students-content-search"
-                      placeholder="Type to Search"
-                      onChange={(e) => setSearchItem(e.target.value)}
-                      value={searchItem}
+                      onClick={refresh}
+                      type="reset"
+                      className="student-reset"
+                      value="Reset"
                     />
-                    <span
-                      onClick={() => setShowReg(!showReg)}
-                      className={
-                        showReg ? "add-students-cancel" : "add-students-span"
-                      }
-                    >
-                      {showReg ? (
-                        <>
-                          <i class="fas fa-window-close"></i> Return
-                        </>
-                      ) : (
-                        <>
-                          <i class="fas fa-plus"></i>
-                          Add Student
-                        </>
-                      )}
-                    </span>
+                    <input
+                      onClick={submitRegister}
+                      type="submit"
+                      className="student-submit"
+                      value="Create"
+                    />
                   </div>
-                  <div className="student-list-header">
-                    <div className="student-list-number">#</div>
-                    <div className="student-list-id">Student ID</div>
-                    <div className="student-list-name">Name</div>
-                    <div className="student-list-gender">Gender</div>
-                    <div className="student-list-gradelevel">Year</div>
-                    <div className="student-list-action">Action</div>
-                  </div>
-                  {}
-                  {students
+                </form>
+              </>
+            ) : (
+              <>
+                <div className="students-content-lists-body-header">
+                  <input
+                    type="search"
+                    className="students-content-search"
+                    placeholder="Type to Search"
+                    onChange={(e) => setSearchItem(e.target.value)}
+                    value={searchItem}
+                  />
+                  <span
+                    onClick={() => setShowReg(!showReg)}
+                    className={
+                      showReg ? "add-students-cancel" : "add-students-span"
+                    }
+                  >
+                    {showReg ? (
+                      <>
+                        <i className="fas fa-window-close"></i> Return
+                      </>
+                    ) : (
+                      <>
+                        <i className="fas fa-plus"></i>
+                        Add Student
+                      </>
+                    )}
+                  </span>
+                </div>
+                <div className="student-list-header">
+                  <div className="student-list-number">#</div>
+                  <div className="student-list-id">Student ID</div>
+                  <div className="student-list-name">Name</div>
+                  <div className="student-list-gender">Gender</div>
+                  <div className="student-list-gradelevel">Year</div>
+                  <div className="student-list-action">Action</div>
+                </div>
+                {}
+                {students
 
-                    .filter((val) => {
-                      if (searchItem === "") {
-                        return val;
-                      } else if (val.student_id.includes(searchItem)) {
-                        return val;
-                      } else if (
-                        val.fullName
-                          .toLowerCase()
-                          .includes(searchItem.toLowerCase())
-                      ) {
-                        return val;
-                      }
-                    })
+                  .filter((val) => {
+                    if (searchItem === "") {
+                      return val;
+                    } else if (val.student_id.includes(searchItem)) {
+                      return val;
+                    } else if (
+                      val.fullName
+                        .toLowerCase()
+                        .includes(searchItem.toLowerCase())
+                    ) {
+                      return val;
+                    }
+                  })
 
-                    .map((value, key) => {
-                      return (
-                        <>
-                          <div className="student-list-body">
-                            <div className="student-list-number-span">
-                              {key + 1}
-                            </div>
-                            <div className="student-list-id-span">
-                              {value.student_id}
-                            </div>
-                            <div className="student-list-name-span">
-                              {value.fullName}
-                            </div>
-                            <div className="student-list-gender-span">
-                              {value.gender}
-                            </div>
-                            <div className="student-list-gradelevel-span">
-                              {value.gradeLevel}
-                            </div>
-                            <div className="student-list-action-span">Edit</div>
+                  .map((value, key) => {
+                    return (
+                      <>
+                        <div className="student-list-body">
+                          <div className="student-list-number-span">
+                            {key + 1}
                           </div>
-                        </>
-                      );
-                    })
-                    .slice(donePage, donePage + perPage)}
-                </>
-              )}
-              <ReactPaginate
-                previousLabel="Prev"
-                nextLabel="Next"
-                pageCount={pageCount}
-                onPageChange={changePage}
-                containerClassName="paginationContainer"
-                previousLinkClassName="prevButton"
-                nextLinkClassName="nextButton"
-                disabledLinkClassName="disableButton"
-                activeLinkClassName="activeButton"
-              />
-            </div>
+                          <div className="student-list-id-span">
+                            {value.student_id}
+                          </div>
+                          <div className="student-list-name-span">
+                            {value.fullName}
+                          </div>
+                          <div className="student-list-gender-span">
+                            {value.gender}
+                          </div>
+                          <div className="student-list-gradelevel-span">
+                            {value.gradeLevel}
+                          </div>
+                          <div className="student-list-action-span">Edit</div>
+                        </div>
+                      </>
+                    );
+                  })
+                  .slice(donePage, donePage + perPage)}
+              </>
+            )}
+            <ReactPaginate
+              previousLabel="Prev"
+              nextLabel="Next"
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName="paginationContainer"
+              previousLinkClassName="prevButton"
+              nextLinkClassName="nextButton"
+              disabledLinkClassName="disableButton"
+              activeLinkClassName="activeButton"
+            />
           </div>
         </div>
       </div>

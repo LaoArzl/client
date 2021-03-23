@@ -7,13 +7,12 @@ import Axios from "axios";
 import { SchoolYearContext } from "../../../ContextFiles/SchoolYearContext";
 
 const Subjects = () => {
-  const [subjectList, setSubjectList] = useState("");
   const [showForm, setShowForm] = useState(false);
   const { sub1, sub2, sub3, sub4, sub5, sub6 } = useContext(SchoolYearContext);
   const [subjectCode, setSubjectCode] = sub1;
   const [subject, setSubject] = sub2;
   const [subjectDes, setSubjectDes] = sub3;
-  const [subjectYear, setSubjectYear] = sub4;
+  const [subjectError, setSubjectError] = sub4;
   const [subjectCapacity, setSubjectCapacity] = sub5;
   const [subjects, setSubjects] = sub6;
 
@@ -22,22 +21,38 @@ const Subjects = () => {
       subjectCode: subjectCode,
       subject: subject,
       subjectDes: subjectDes,
-      subjectYear: subjectYear,
       subjectCapacity: subjectCapacity,
     }).then((response) => {
-      if (response) {
+      if (response.data.error) {
+        setSubjectError(response.data.error);
+      } else if (response.data.empty) {
+        setSubjectError(response.data.empty);
+      } else if (response.data.success) {
+        setSubjectCode("");
+        setSubject("");
+        setSubjectDes("");
+        setSubjectCapacity(0);
+        setSubjectError(response.data.success);
+        setTimeout(() => setSubjectError(""), 5000);
         setSubjects([
           ...subjects,
           {
             subjectCode: subjectCode,
             subject: subject,
             subjectDes: subjectDes,
-            subjectYear: subjectYear,
             subjectCapacity: subjectCapacity,
           },
         ]);
       }
     });
+  };
+
+  const refresh = () => {
+    setSubjectCode("");
+    setSubject("");
+    setSubjectCapacity(0);
+    setSubjectDes("");
+    setShowForm(false);
   };
 
   return (
@@ -52,6 +67,7 @@ const Subjects = () => {
               <div className="add-subject-form-header">
                 <h2>Add Subject</h2>
               </div>
+              <div className="add-subject-form-error">{subjectError}</div>
               <div className="add-subject-form-body">
                 <div className="add-subject-input">
                   <div className="add-subject-left">
@@ -97,27 +113,6 @@ const Subjects = () => {
 
                 <div className="add-subject-input">
                   <div className="add-subject-left">
-                    <label>Year *</label>
-                  </div>
-                  <div className="add-subject-right">
-                    <select
-                      onChange={(e) => setSubjectYear(parseInt(e.target.value))}
-                    >
-                      <option value="">Select option</option>
-                      <option value="1">Kinder 1</option>
-                      <option value="2">Kinder 2</option>
-                      <option value="3">Grade 1</option>
-                      <option value="4">Grade 2</option>
-                      <option value="5">Grade 3</option>
-                      <option value="6">Grade 4</option>
-                      <option value="7">Grade 5</option>
-                      <option value="8">Grade 6</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="add-subject-input">
-                  <div className="add-subject-left">
                     <label>Capacity *</label>
                   </div>
                   <div className="add-subject-right">
@@ -136,6 +131,12 @@ const Subjects = () => {
                   type="submit"
                   className="add-subject-submit"
                   value="Submit"
+                />
+                <input
+                  onClick={refresh}
+                  type="reset"
+                  className="add-subject-cancel"
+                  value="Cancel"
                 />
               </div>
             </form>
@@ -172,34 +173,31 @@ const Subjects = () => {
                 <div className="subject-lists-capacity">Student capacity</div>
                 <div className="subject-lists-action">Action</div>
               </div>
-              <div
-                className={
-                  subjects === null
-                    ? "subject-lists-empty"
-                    : "subject-lists-wrapper"
-                }
-              >
-                {subjects === null
-                  ? null
-                  : subjects.map((value, key) => {
-                      return (
-                        <>
-                          <div className="subject-lists-code-span">
-                            {value.subject_id}
-                          </div>
-                          <div className="subject-lists-name-span">
-                            {value.subjectName}
-                          </div>
-                          <div className="subject-lists-capacity-span">
-                            {value.capacity}
-                          </div>
-                          <div className="subject-lists-action-span">
-                            {value.subject_id}
-                          </div>
-                        </>
-                      );
-                    })}
-              </div>
+
+              {subjects === "" ? (
+                <div className="subject-lists-empty"></div>
+              ) : (
+                subjects.map((value, key) => {
+                  return (
+                    <>
+                      <div className="subject-lists-wrapper">
+                        <div className="subject-lists-code-span">
+                          {value.subject_id}
+                        </div>
+                        <div className="subject-lists-name-span">
+                          {value.subjectName}
+                        </div>
+                        <div className="subject-lists-capacity-span">
+                          {value.capacity}
+                        </div>
+                        <div className="subject-lists-action-span">
+                          {value.subject_id}
+                        </div>
+                      </div>
+                    </>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
