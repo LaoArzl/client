@@ -20,6 +20,9 @@ const Class = () => {
           <>
             <form className="create-subject-form">
               <select>
+                <option disabled value="">
+                  Select Option
+                </option>
                 {teachers.map((value) => {
                   return (
                     <option value={value.teacher_id}>{value.firstName}</option>
