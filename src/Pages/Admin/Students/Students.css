@@ -150,6 +150,16 @@
   justify-content: center;
 }
 
+.student-list-action-span i {
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.student-list-action-span i:hover {
+  color: red;
+}
+
 .student-list-id,
 .student-list-id-span,
 .student-list-gender,

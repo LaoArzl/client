@@ -11,13 +11,13 @@ export const LoginProvider = (props) => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/user-login").then((response) => {
-      if (response.data.loggedIn) {
-        setRole(response.data.user[0].userType);
-        setAccessToken(response.data.token);
-      } else {
+      if (response.data.length == 0) {
         console.log("No User");
         setRole("");
         setAccessToken("MockValueToken");
+      } else if (response.data.loggedIn) {
+        setRole(response.data.user);
+        setAccessToken(response.data.token);
       }
     });
   }, []);

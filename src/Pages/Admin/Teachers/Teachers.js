@@ -328,7 +328,10 @@ const Teachers = () => {
                           <div className="student-list-gradelevel-span">
                             {value.gradeLevel}
                           </div>
-                          <div className="student-list-action-span">Edit</div>
+                          <div className="student-list-action-span">
+                            <i class="far fa-edit"></i>
+                            <i class="far fa-trash-alt"></i>
+                          </div>
                         </div>
                       </>
                     );

@@ -1,0 +1,11 @@
+.student-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: white;
+}
+
+.student-content {
+  width: 95%;
+  height: 100vh;
+}

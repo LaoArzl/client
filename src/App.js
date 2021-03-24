@@ -48,6 +48,9 @@ import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
+import StudentGrades from "./Pages/Student/StudentGrades/StudentGrades";
+import StudentClass from "./Pages/Student/StudentClass/StudentClass";
+import StudentMessage from "./Pages/Student/StudentMessage/StudentMessage";
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
@@ -55,10 +58,7 @@ function App() {
   Axios.defaults.withCredentials = true;
   useEffect(() => {
     Axios.get("http://localhost:3001/user-login").then((response) => {
-      if (
-        response.data.loggedIn &&
-        response.data.user[0].userType === "Admin"
-      ) {
+      if (response.data.loggedIn && response.data.user === "Admin") {
         setIsAuth(true);
       } else {
         setIsAuth(false);
@@ -205,6 +205,27 @@ function App() {
                             path="/user/teacher/"
                             exact
                             component={TeacherProfile}
+                          />
+
+                          <Route
+                            path="/user/student/"
+                            exact
+                            component={StudentProfile}
+                          />
+                          <Route
+                            path="/user/student/grades"
+                            exact
+                            component={StudentGrades}
+                          />
+                          <Route
+                            path="/user/student/class"
+                            exact
+                            component={StudentClass}
+                          />
+                          <Route
+                            path="/user/student/message"
+                            exact
+                            component={StudentMessage}
                           />
 
                           <Route
