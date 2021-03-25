@@ -58,6 +58,12 @@ const PortalLogin = () => {
     });
   }, []);
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/user-login").then((response) => {
+      console.log(response);
+    });
+  }, []);
+
   return (
     <>
       {role === "Admin" && <Redirect to="/admin/dashboard" />}
@@ -92,7 +98,7 @@ const PortalLogin = () => {
               />
             </div>
             <div className="portal-login-label">
-              <label>Password</label>
+              <label>Passwords</label>
             </div>
             <div className="portal-login-input">
               <input
