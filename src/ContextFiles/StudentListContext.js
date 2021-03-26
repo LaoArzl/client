@@ -13,20 +13,20 @@ export const StudentListProvider = (props) => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/student-list").then((response) => {
-      if (response) {
-        setStudents(response.data);
+      if (response.data.length == 0) {
+        setStudents([]);
       } else {
-        setStudents([{ error: "No User" }, { error: "Unavailable" }]);
+        setStudents(response.data);
       }
     });
   }, []);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/teacher-list").then((response) => {
-      if (response) {
-        setTeachers(response.data);
+      if (response.data.length == 0) {
+        setTeachers([]);
       } else {
-        setTeachers([{ error: "No User" }, { error: "Unavailable" }]);
+        setTeachers(response.data);
       }
     });
   }, []);

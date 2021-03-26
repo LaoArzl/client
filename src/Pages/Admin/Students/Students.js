@@ -83,7 +83,7 @@ const Students = () => {
         setStudents([
           ...students,
           {
-            student_id: studentNumber,
+            _id: studentNumber,
             userStudent: userStudent,
             username: usernameStudent,
             password: passwordStudent,
@@ -330,7 +330,7 @@ const Students = () => {
                   .filter((val) => {
                     if (searchItem === "") {
                       return val;
-                    } else if (val.student_id.includes(searchItem)) {
+                    } else if (val._id.includes(searchItem)) {
                       return val;
                     } else if (
                       val.fullName
@@ -349,7 +349,7 @@ const Students = () => {
                             {key + 1}
                           </div>
                           <div className="student-list-id-span">
-                            {value.student_id}
+                            {value._id}
                           </div>
                           <div className="student-list-name-span">
                             {value.fullName}

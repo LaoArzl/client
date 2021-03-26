@@ -141,8 +141,6 @@
   height: 100%;
   display: flex;
   align-items: center;
-  background: pink;
-  color: red;
 }
 
 .subject-lists-empty {
@@ -194,6 +192,24 @@
   height: 5%;
   display: flex;
   justify-content: center;
+}
+
+.add-subject-form-error-green {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  color: rgb(29, 167, 29);
+  font-size: 15px;
+}
+
+.add-subject-form-error-red {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  color: rgb(219, 22, 22);
+  font-size: 15px;
 }
 
 .add-subject-form-body {

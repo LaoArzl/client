@@ -58,12 +58,6 @@ const PortalLogin = () => {
     });
   }, []);
 
-  useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
-      console.log(response);
-    });
-  }, []);
-
   return (
     <>
       {role === "Admin" && <Redirect to="/admin/dashboard" />}
@@ -116,12 +110,7 @@ const PortalLogin = () => {
                 {showPassword ? "Hide" : "Show"}
               </span>
             </div>
-            <select className="portal-login-type">
-              <option value="">Login as:</option>
-              <option value="Student">Student</option>
-              <option value="Teacher">Student</option>
-              <option value="Admin">Student</option>
-            </select>
+
             <div className="portal-login-login">
               <input type="submit" value="LOGIN" onClick={submitLogin} />
             </div>

@@ -187,6 +187,12 @@ function App() {
                             isAuth={isAuth}
                           />
 
+                          {/* <Route
+                            path="/admin/students"
+                            exact
+                            component={Students}
+                          /> */}
+
                           <ProtectedAdmin
                             path="/admin/teachers"
                             exact

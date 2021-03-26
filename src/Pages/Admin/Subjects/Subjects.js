@@ -10,8 +10,8 @@ const Subjects = () => {
   const [showForm, setShowForm] = useState(false);
   const { sub1, sub2, sub3, sub4, sub5, sub6 } = useContext(SchoolYearContext);
   const [subjectCode, setSubjectCode] = sub1;
-  const [subject, setSubject] = sub2;
-  const [subjectDes, setSubjectDes] = sub3;
+  const [subjectName, setSubjectName] = sub2;
+  const [subjectDescription, setSubjectDescription] = sub3;
   const [subjectError, setSubjectError] = sub4;
   const [subjectCapacity, setSubjectCapacity] = sub5;
   const [subjects, setSubjects] = sub6;
@@ -19,27 +19,31 @@ const Subjects = () => {
   const addSubject = () => {
     Axios.post("http://localhost:3001/add-subject", {
       subjectCode: subjectCode,
-      subject: subject,
-      subjectDes: subjectDes,
+      subjectName: subjectName,
+      subjectDescription: subjectDescription,
       subjectCapacity: subjectCapacity,
     }).then((response) => {
       if (response.data.error) {
         setSubjectError(response.data.error);
       } else if (response.data.empty) {
         setSubjectError(response.data.empty);
+      } else if (response.data.exceed) {
+        setSubjectError(response.data.exceed);
+      } else if (response.data.zero) {
+        setSubjectError(response.data.zero);
       } else if (response.data.success) {
         setSubjectCode("");
-        setSubject("");
-        setSubjectDes("");
+        setSubjectName("");
+        setSubjectDescription("");
         setSubjectCapacity(0);
         setSubjectError(response.data.success);
         setTimeout(() => setSubjectError(""), 5000);
         setSubjects([
           ...subjects,
           {
-            subjectCode: subjectCode,
-            subject: subject,
-            subjectDes: subjectDes,
+            _id: subjectCode,
+            subjectName: subjectName,
+            subjectDescription: subjectDescription,
             subjectCapacity: subjectCapacity,
           },
         ]);
@@ -49,9 +53,9 @@ const Subjects = () => {
 
   const refresh = () => {
     setSubjectCode("");
-    setSubject("");
+    setSubjectName("");
     setSubjectCapacity(0);
-    setSubjectDes("");
+    setSubjectDescription("");
     setShowForm(false);
   };
 
@@ -67,7 +71,17 @@ const Subjects = () => {
               <div className="add-subject-form-header">
                 <h2>Add Subject</h2>
               </div>
-              <div className="add-subject-form-error">{subjectError}</div>
+              <div
+                className={
+                  subjectError === ""
+                    ? "add-subject-form-error"
+                    : subjectError === "Subject added successfully"
+                    ? "add-subject-form-error-green"
+                    : "add-subject-form-error-red"
+                }
+              >
+                {subjectError}
+              </div>
               <div className="add-subject-form-body">
                 <div className="add-subject-input">
                   <div className="add-subject-left">
@@ -89,8 +103,8 @@ const Subjects = () => {
                   </div>
                   <div className="add-subject-right">
                     <input
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
+                      value={subjectName}
+                      onChange={(e) => setSubjectName(e.target.value)}
                       type="text"
                       className="subject-name"
                     />
@@ -103,8 +117,8 @@ const Subjects = () => {
                   </div>
                   <div className="add-subject-right">
                     <textarea
-                      value={subjectDes}
-                      onChange={(e) => setSubjectDes(e.target.value)}
+                      value={subjectDescription}
+                      onChange={(e) => setSubjectDescription(e.target.value)}
                       type="text"
                       className="subject-description"
                     />
@@ -182,13 +196,13 @@ const Subjects = () => {
                     <>
                       <div className="subject-lists-wrapper">
                         <div className="subject-lists-code-span">
-                          {value.subject_id}
+                          {value._id}
                         </div>
                         <div className="subject-lists-name-span">
                           {value.subjectName}
                         </div>
                         <div className="subject-lists-capacity-span">
-                          {value.capacity}
+                          {value.subjectCapacity}
                         </div>
                         <div className="subject-lists-action-span">
                           {value.subject_id}

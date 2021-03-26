@@ -6,8 +6,8 @@ export const SchoolYearState = (props) => {
   const [current, setCurrent] = useState(null);
   const [listYear, setListYear] = useState([]);
   const [subjectCode, setSubjectCode] = useState("");
-  const [subject, setSubject] = useState("");
-  const [subjectDes, setSubjectDes] = useState("");
+  const [subjectName, setSubjectName] = useState("");
+  const [subjectDescription, setSubjectDescription] = useState("");
   const [subjectError, setSubjectError] = useState("");
   const [subjectCapacity, setSubjectCapacity] = useState(0);
 
@@ -56,8 +56,8 @@ export const SchoolYearState = (props) => {
         value1: [current, setCurrent],
         value2: [listYear, setListYear],
         sub1: [subjectCode, setSubjectCode],
-        sub2: [subject, setSubject],
-        sub3: [subjectDes, setSubjectDes],
+        sub2: [subjectName, setSubjectName],
+        sub3: [subjectDescription, setSubjectDescription],
         sub4: [subjectError, setSubjectError],
         sub5: [subjectCapacity, setSubjectCapacity],
         sub6: [subjects, setSubjects],

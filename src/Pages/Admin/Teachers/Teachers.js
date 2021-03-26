@@ -80,7 +80,7 @@ const Teachers = () => {
         setTeachers([
           ...teachers,
           {
-            teacher_id: teacherNumber,
+            _id: teacherNumber,
             userTeacher: userTeacher,
             username: usernameTeacher,
             password: passwordTeacher,
@@ -299,7 +299,7 @@ const Teachers = () => {
                   .filter((val) => {
                     if (searchTeacher === "") {
                       return val;
-                    } else if (val.teacher_id.includes(searchTeacher)) {
+                    } else if (val._id.includes(searchTeacher)) {
                       return val;
                     } else if (
                       val.fullName
@@ -317,7 +317,7 @@ const Teachers = () => {
                             {key + 1}
                           </div>
                           <div className="student-list-id-span">
-                            {value.teacher_id}
+                            {value._id}
                           </div>
                           <div className="student-list-name-span">
                             {value.fullName}
