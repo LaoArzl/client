@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "../Students/Students.css";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import { CreateTeacherContext } from "../../../ContextFiles/CreateTeacherContext";
 import Axios from "axios";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 const Teachers = () => {
   const { value01, value04 } = useContext(StudentListContext);
@@ -329,8 +331,25 @@ const Teachers = () => {
                             {value.gradeLevel}
                           </div>
                           <div className="student-list-action-span">
-                            <i class="far fa-edit"></i>
-                            <i class="far fa-trash-alt"></i>
+                            <Tippy
+                              content="Edit"
+                              arrow={false}
+                              placement="left"
+                            >
+                              <Link
+                                className="student-list-action-link"
+                                to={"/admin/users/teacher-profile/" + value._id}
+                              >
+                                <i class="far fa-edit"></i>
+                              </Link>
+                            </Tippy>
+                            <Tippy
+                              content="Delete"
+                              arrow={false}
+                              placement="right"
+                            >
+                              <i class="far fa-trash-alt"></i>
+                            </Tippy>
                           </div>
                         </div>
                       </>

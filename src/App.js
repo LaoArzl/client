@@ -28,6 +28,7 @@ import SchoolYear from "./Pages/Admin/SchoolYear/SchoolYear";
 import Students from "./Pages/Admin/Students/Students";
 import Teachers from "./Pages/Admin/Teachers/Teachers";
 import Subjects from "./Pages/Admin/Subjects/Subjects";
+import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -40,8 +41,6 @@ import { CreateTeacherState } from "./ContextFiles/CreateTeacherContext";
 
 //Protected Routes
 import ProtectedAdmin from "./ProtectedRoutes/ProtectedAdmin";
-import ProtectedTeacher from "./ProtectedRoutes/ProtectedTeacher";
-import ProtectedStudent from "./ProtectedRoutes/ProtectedStudent";
 
 //Teacher Pages
 import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
@@ -167,18 +166,21 @@ function App() {
                             exact
                             component={UserStudent}
                             isAuth={isAuth}
-                          />
+                          />  */}
 
-                          <ProtectedAdmin
-                            path={teacherUser.map((value) => {
-                              return (
-                                "/admin/users/teacher-profile/" + value.user_id
-                              );
-                            })}
-                            exact
-                            component={UserTeacher}
-                            isAuth={isAuth}
-                          /> */}
+                          {teacherUser.map((value) => {
+                            return (
+                              <ProtectedAdmin
+                                path={
+                                  "/admin/users/teacher-profile/" + value._id
+                                }
+                                id={value._id}
+                                exact
+                                component={UserTeacher}
+                                isAuth={isAuth}
+                              />
+                            );
+                          })}
 
                           <ProtectedAdmin
                             path="/admin/students"
@@ -186,12 +188,6 @@ function App() {
                             component={Students}
                             isAuth={isAuth}
                           />
-
-                          {/* <Route
-                            path="/admin/students"
-                            exact
-                            component={Students}
-                          /> */}
 
                           <ProtectedAdmin
                             path="/admin/teachers"
