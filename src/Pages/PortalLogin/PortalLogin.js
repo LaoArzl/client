@@ -10,8 +10,8 @@ const PortalLogin = () => {
   const [error, setError] = useState("");
 
   //Data from LoginContext
-  const { value2 } = useContext(LoginContext);
-  const [role, setRole] = value2;
+  const { loginRole } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
 
   Axios.defaults.withCredentials = true;
 
@@ -29,8 +29,9 @@ const PortalLogin = () => {
       } else if (!response.data.auth) {
         console.log("Error Logging in");
       } else if (response.data.auth) {
-        window.location.reload();
-        localStorage.setItem("token", response.data.user[0].token);
+        // window.location.reload();
+        localStorage.setItem("token", response.data.token);
+        setRole(response.data.userType);
       }
     });
   };
@@ -60,67 +61,76 @@ const PortalLogin = () => {
 
   return (
     <>
-      {role === "Admin" && <Redirect to="/admin/dashboard" />}
-      {role === "Teacher" && <Redirect to="/user/teacher" />}
-      <div className="portal-login">
-        <div className="portal-login-wrapper">
-          <div className="portal-login-header">
-            <p>User Login</p>
-          </div>
-          <div
-            className={
-              error === ""
-                ? "login-error-messages-hidden"
-                : "login-error-messages"
-            }
-          >
-            <i className="fas fa-times-circle"></i> {error}
-          </div>
-          <form
-            className="portal-login-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <div className="portal-login-label">
-              <label>Username</label>
+      {/* {role === "Admin" && <Redirect to="/admin/dashboard" />} */}
+      {/* {role === "Teacher" && <Redirect to="/user/teacher" />} */}
+      {/* {role === "Student" && <Redirect to="/user/student" />} */}
+      {role === "Teacher" ? (
+        <Redirect to="/user/teacher" />
+      ) : role === "Student" ? (
+        <Redirect to="/user/student" />
+      ) : role === "Admin" ? (
+        <Redirect to="/admin/dashboard" />
+      ) : (
+        <div className="portal-login">
+          <div className="portal-login-wrapper">
+            <div className="portal-login-header">
+              <p>User Login</p>
             </div>
-            <div className="portal-login-input">
-              <input
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-              />
+            <div
+              className={
+                error === ""
+                  ? "login-error-messages-hidden"
+                  : "login-error-messages"
+              }
+            >
+              <i className="fas fa-times-circle"></i> {error}
             </div>
-            <div className="portal-login-label">
-              <label>Passwords</label>
-            </div>
-            <div className="portal-login-input">
-              <input
-                type={showPassword ? "text" : "password"}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <span
-                onClick={togglePassword}
-                className={
-                  password === ""
-                    ? "portal-login-input-span-hidden"
-                    : "portal-login-input-span"
-                }
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
-            </div>
+            <form
+              className="portal-login-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <div className="portal-login-label">
+                <label>Username</label>
+              </div>
+              <div className="portal-login-input">
+                <input
+                  type="text"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="portal-login-label">
+                <label>Passwords</label>
+              </div>
+              <div className="portal-login-input">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  onClick={togglePassword}
+                  className={
+                    password === ""
+                      ? "portal-login-input-span-hidden"
+                      : "portal-login-input-span"
+                  }
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </span>
+              </div>
 
-            <div className="portal-login-login">
-              <input type="submit" value="LOGIN" onClick={submitLogin} />
-            </div>
+              <div className="portal-login-login">
+                <input type="submit" value="LOGIN" onClick={submitLogin} />
+              </div>
 
-            <div className="portal-login-forgot">
-              <span>Forgot password?</span>
-            </div>
-          </form>
+              <div className="portal-login-forgot">
+                <span>Forgot password?</span>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

@@ -31,7 +31,7 @@ export const SchoolYearState = (props) => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/add-subject").then((response) => {
+    Axios.get("http://localhost:3001/add/subject").then((response) => {
       if (response.data.length === 0) {
         setSubjects("");
       } else {

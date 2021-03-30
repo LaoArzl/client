@@ -5,28 +5,14 @@ import Axios from "axios";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import ProfileHeader from "../../../Components/ProfileHeader/ProfileHeader";
 import ProfileCard from "../../../Components/ProfileCard/ProfileCard";
+import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 
 const TeacherProfile = () => {
-  const { value2, value3 } = useContext(LoginContext);
-  const [role, setRole] = value2;
+  const { loginRole, value3 } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
 
   const [userId, setUserId] = useState("");
   const [fullname, setFullname] = useState("");
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
-      if (response) {
-        setFullname(
-          response.data.user[0].firstName +
-            " " +
-            response.data.user[0].middleName +
-            " " +
-            response.data.user[0].lastName
-        );
-        setUserId(response.data.user[0].user_id);
-      }
-    });
-  }, []);
 
   return (
     <>
@@ -36,6 +22,7 @@ const TeacherProfile = () => {
         <div className="user-profile">
           <ProfileHeader />
           <div className="user-content">
+            <DashboardHeader />
             {fullname}
             {userId}
           </div>

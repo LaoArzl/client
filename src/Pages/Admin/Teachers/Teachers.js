@@ -5,6 +5,8 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import { CreateTeacherContext } from "../../../ContextFiles/CreateTeacherContext";
+import BrokenPage from "../../../Components/My404Component/BrokenPage";
+import { LoginContext } from "../../../ContextFiles/LoginContext";
 import Axios from "axios";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
@@ -83,14 +85,13 @@ const Teachers = () => {
           ...teachers,
           {
             _id: teacherNumber,
-            userTeacher: userTeacher,
+            userType: userTeacher,
             username: usernameTeacher,
             password: passwordTeacher,
-            rePassword: rePasswordTeacher,
-            lastName: lastnameTeacher,
-            middleName: middlenameTeacher,
-            firstName: firstnameTeacher,
-            fullName:
+            lastname: lastnameTeacher,
+            middlename: middlenameTeacher,
+            firstname: firstnameTeacher,
+            fullname:
               firstnameTeacher +
               " " +
               middlenameTeacher[0] +
@@ -110,256 +111,285 @@ const Teachers = () => {
   }, []);
 
   const [showReg, setShowReg] = useState(false);
+  const [showExport, setShowExport] = useState(false);
+
+  const { loginRole } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
 
   return (
     <>
-      <div className="students-wrapper">
-        <Dashboard />
-        <div className="students-content">
-          <DashboardHeader />
-          <div className="students-content-lists-header">
-            {showReg ? "" : <p>List of Teachers</p>}
-            <div onClick={() => setShowReg(!showReg)} className="add-students">
-              <span
-                className={
-                  showReg ? "add-students-cancel" : "add-students-span"
-                }
-              >
-                {showReg ? (
-                  <>
-                    <i class="fas fa-window-close"></i> Return
-                  </>
-                ) : (
-                  <>
-                    <i class="fas fa-plus"></i>
-                    Add Teacher
-                  </>
-                )}
-              </span>
+      {role !== "Admin" ? (
+        <BrokenPage />
+      ) : (
+        <div className="students-wrapper">
+          <Dashboard />
+          <div className="students-content">
+            <DashboardHeader />
+            <div className="students-content-lists-header">
+              {showReg ? "" : <p>List of Teachers</p>}
+            </div>
+            <div className="students-content-lists-body">
+              {showReg ? (
+                <>
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="create-student-form"
+                    autoComplete="off"
+                  >
+                    <div
+                      className={
+                        registerStatusTeac === ""
+                          ? "hidinger"
+                          : registerStatusTeac ===
+                            "Successfully created account."
+                          ? "user-actual-error"
+                          : "user-actual-error-red"
+                      }
+                    >
+                      {registerStatusTeac}
+                    </div>
+                    <div className="create-student-id create-div-first">
+                      <div className="id-left">
+                        <label>Teacher ID *</label>
+                      </div>
+                      <div className="id-right ">
+                        <input
+                          onChange={(e) => setTeacherNumber(e.target.value)}
+                          value={teacherNumber}
+                          className="ask-imp"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Username *</label>
+                      </div>
+                      <div className="id-right id-right-right">
+                        <input
+                          onChange={(e) => setUsernameTeacher(e.target.value)}
+                          value={usernameTeacher}
+                          type="text"
+                          className="id-right-username"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Password *</label>
+                      </div>
+                      <div className="id-right id-right-right">
+                        <input
+                          onChange={(e) => setPasswordTeacher(e.target.value)}
+                          value={passwordTeacher}
+                          type="password"
+                          className="id-right-password"
+                        />
+                        <span className="id-right-generate">Generate</span>
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Confirm Password *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setRePasswordTeacher(e.target.value)}
+                          value={rePasswordTeacher}
+                          type="password"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Last Name *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setLastnameTeacher(e.target.value)}
+                          value={lastnameTeacher}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>First Name *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setFirstnameTeacher(e.target.value)}
+                          value={firstnameTeacher}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Middle Name *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setMiddlenameTeacher(e.target.value)}
+                          value={middlenameTeacher}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Gender</label>
+                      </div>
+                      <div className="id-right">
+                        <select
+                          onChange={(e) => setGenderTeacher(e.target.value)}
+                          value={genderTeacher}
+                        >
+                          <option value="">Select option</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="id-right-submit">
+                      <input
+                        onClick={refresh}
+                        type="reset"
+                        className="student-reset"
+                        value="Reset"
+                      />
+                      <input
+                        onClick={submitRegister}
+                        type="submit"
+                        className="student-submit"
+                        value="Create"
+                      />
+                    </div>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <div className="students-content-lists-body-header">
+                    <input
+                      type="search"
+                      className="students-content-search"
+                      placeholder="Type to Search"
+                      onChange={(e) => setSearchTeacher(e.target.value)}
+                      value={searchTeacher}
+                    />
+                    <div className="add-student-span-wrapper">
+                      <span
+                        onClick={() => setShowExport(!showExport)}
+                        className="add-students-span-two"
+                      >
+                        Export <i class="fas fa-caret-square-down"></i>
+                        <ul
+                          className={
+                            showExport
+                              ? "add-students-span-two-after"
+                              : "hidinger"
+                          }
+                        >
+                          <li>.CSV</li>
+                          <li>.pdf</li>
+                          <li>.docx</li>
+                        </ul>
+                      </span>
+                      <span
+                        onClick={() => setShowReg(!showReg)}
+                        className={
+                          showReg ? "add-students-cancel" : "add-students-span"
+                        }
+                      >
+                        {showReg ? (
+                          <>
+                            <i class="fas fa-window-close"></i> Return
+                          </>
+                        ) : (
+                          <>
+                            <i class="fas fa-plus"></i>
+                            Add Teacher
+                          </>
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="student-list-header">
+                    <div className="student-list-number">#</div>
+                    <div className="student-list-id">Teacher ID</div>
+                    <div className="student-list-name">Name</div>
+                    <div className="student-list-gender">Gender</div>
+                    <div className="student-list-gradelevel">Advising</div>
+                    <div className="student-list-action">Action</div>
+                  </div>
+                  {teachers
+                    .filter((val) => {
+                      if (searchTeacher === "") {
+                        return val;
+                      } else if (val._id.includes(searchTeacher)) {
+                        return val;
+                      } else if (
+                        val.fullName
+                          .toLowerCase()
+                          .includes(searchTeacher.toLowerCase())
+                      ) {
+                        return val;
+                      }
+                    })
+                    .map((value, key) => {
+                      return (
+                        <>
+                          <div className="student-list-body">
+                            <div className="student-list-number-span">
+                              {key + 1}
+                            </div>
+                            <div className="student-list-id-span">
+                              {value._id}
+                            </div>
+                            <div className="student-list-name-span">
+                              {value.fullname}
+                            </div>
+                            <div className="student-list-gender-span">
+                              {value.gender}
+                            </div>
+                            <div className="student-list-gradelevel-span">
+                              {value.grade}
+                            </div>
+                            <div className="student-list-action-span">
+                              <Tippy
+                                content="Edit"
+                                arrow={false}
+                                placement="left"
+                              >
+                                <Link
+                                  className="student-list-action-link"
+                                  to={
+                                    "/admin/users/teacher-profile/" + value._id
+                                  }
+                                >
+                                  <i class="far fa-edit"></i>
+                                </Link>
+                              </Tippy>
+                              <Tippy
+                                content="Delete"
+                                arrow={false}
+                                placement="right"
+                              >
+                                <i class="far fa-trash-alt"></i>
+                              </Tippy>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })}
+                </>
+              )}
             </div>
           </div>
-          <div className="students-content-lists-body">
-            {showReg ? (
-              <>
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                  className="create-student-form"
-                  autoComplete="off"
-                >
-                  <div
-                    className={
-                      registerStatusTeac === ""
-                        ? "hidinger"
-                        : registerStatusTeac === "Successfully created account."
-                        ? "user-actual-error"
-                        : "user-actual-error-red"
-                    }
-                  >
-                    {registerStatusTeac}
-                  </div>
-                  <div className="create-student-id create-div-first">
-                    <div className="id-left">
-                      <label>Teacher ID *</label>
-                    </div>
-                    <div className="id-right ">
-                      <input
-                        onChange={(e) => setTeacherNumber(e.target.value)}
-                        value={teacherNumber}
-                        className="ask-imp"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Username *</label>
-                    </div>
-                    <div className="id-right id-right-right">
-                      <input
-                        onChange={(e) => setUsernameTeacher(e.target.value)}
-                        value={usernameTeacher}
-                        type="text"
-                        className="id-right-username"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Password *</label>
-                    </div>
-                    <div className="id-right id-right-right">
-                      <input
-                        onChange={(e) => setPasswordTeacher(e.target.value)}
-                        value={passwordTeacher}
-                        type="password"
-                        className="id-right-password"
-                      />
-                      <span className="id-right-generate">Generate</span>
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Confirm Password *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setRePasswordTeacher(e.target.value)}
-                        value={rePasswordTeacher}
-                        type="password"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Last Name *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setLastnameTeacher(e.target.value)}
-                        value={lastnameTeacher}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>First Name *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setFirstnameTeacher(e.target.value)}
-                        value={firstnameTeacher}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Middle Name *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setMiddlenameTeacher(e.target.value)}
-                        value={middlenameTeacher}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Gender</label>
-                    </div>
-                    <div className="id-right">
-                      <select
-                        onChange={(e) => setGenderTeacher(e.target.value)}
-                        value={genderTeacher}
-                      >
-                        <option value="">Select option</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="id-right-submit">
-                    <input
-                      onClick={refresh}
-                      type="reset"
-                      className="student-reset"
-                      value="Reset"
-                    />
-                    <input
-                      onClick={submitRegister}
-                      type="submit"
-                      className="student-submit"
-                      value="Create"
-                    />
-                  </div>
-                </form>
-              </>
-            ) : (
-              <>
-                <div className="students-content-lists-body-header">
-                  <input
-                    type="search"
-                    className="students-content-search"
-                    placeholder="Type to Search"
-                    onChange={(e) => setSearchTeacher(e.target.value)}
-                    value={searchTeacher}
-                  />
-                </div>
-                <div className="student-list-header">
-                  <div className="student-list-number">#</div>
-                  <div className="student-list-id">Teacher ID</div>
-                  <div className="student-list-name">Name</div>
-                  <div className="student-list-gender">Gender</div>
-                  <div className="student-list-gradelevel">Year</div>
-                  <div className="student-list-action">Action</div>
-                </div>
-                {teachers
-                  .filter((val) => {
-                    if (searchTeacher === "") {
-                      return val;
-                    } else if (val._id.includes(searchTeacher)) {
-                      return val;
-                    } else if (
-                      val.fullName
-                        .toLowerCase()
-                        .includes(searchTeacher.toLowerCase())
-                    ) {
-                      return val;
-                    }
-                  })
-                  .map((value, key) => {
-                    return (
-                      <>
-                        <div className="student-list-body">
-                          <div className="student-list-number-span">
-                            {key + 1}
-                          </div>
-                          <div className="student-list-id-span">
-                            {value._id}
-                          </div>
-                          <div className="student-list-name-span">
-                            {value.fullName}
-                          </div>
-                          <div className="student-list-gender-span">
-                            {value.gender}
-                          </div>
-                          <div className="student-list-gradelevel-span">
-                            {value.gradeLevel}
-                          </div>
-                          <div className="student-list-action-span">
-                            <Tippy
-                              content="Edit"
-                              arrow={false}
-                              placement="left"
-                            >
-                              <Link
-                                className="student-list-action-link"
-                                to={"/admin/users/teacher-profile/" + value._id}
-                              >
-                                <i class="far fa-edit"></i>
-                              </Link>
-                            </Tippy>
-                            <Tippy
-                              content="Delete"
-                              arrow={false}
-                              placement="right"
-                            >
-                              <i class="far fa-trash-alt"></i>
-                            </Tippy>
-                          </div>
-                        </div>
-                      </>
-                    );
-                  })}
-              </>
-            )}
-          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

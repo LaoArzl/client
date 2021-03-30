@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import "./DashboardHeader.css";
 import Logo from "./logo.png";
-import Admin from "./admin.png";
-import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import { LogoutContext } from "../../ContextFiles/LogoutContext";
 import Axios from "axios";
 
@@ -38,7 +36,6 @@ const DashboardHeader = () => {
               <i class="fas fa-user-shield"></i>
             </div>
             <div className="dashboard-header-profile-name">
-              <p>Admin</p>
               <i className="fas fa-chevron-down"></i>
             </div>
             <div

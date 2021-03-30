@@ -4,16 +4,10 @@ import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountO
 import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
 import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
-import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
+import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
-
-const styles = {
-  largeIcon: {
-    width: 60,
-    height: 60,
-  },
-};
+import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 
 export const DashboardData = [
   {
@@ -23,34 +17,35 @@ export const DashboardData = [
   },
 
   {
-    name: "Announcement",
+    name: "Events",
     icon: <EventOutlinedIcon fontSize="small" />,
     link: "/admin/announcement",
   },
   {
-    name: "Class",
+    name: "Classes",
     icon: <AccountTreeOutlinedIcon fontSize="small" />,
     link: "/admin/class",
   },
   {
-    name: "Message",
-    icon: <SendOutlinedIcon fontSize="small" />,
-    link: "/admin/message",
+    name: "Fees",
+    icon: <PaymentOutlinedIcon fontSize="small" />,
+    link: "/admin/fees",
   },
   {
-    name: "School Year",
-    icon: <SchoolOutlinedIcon fontSize="small" />,
-    link: "/admin/school-year",
+    name: "Grades",
+    icon: <RateReviewOutlinedIcon fontSize="small" />,
+    link: "/admin/grades",
+  },
+
+  {
+    name: "Messages",
+    icon: <SendOutlinedIcon fontSize="small" />,
+    link: "/admin/message",
   },
   {
     name: "Students",
     icon: <PersonOutlineOutlinedIcon fontSize="small" />,
     link: "/admin/students",
-  },
-  {
-    name: "Subjects",
-    icon: <ImportContactsOutlinedIcon fontSize="small" />,
-    link: "/admin/subjects",
   },
   {
     name: "Teachers",

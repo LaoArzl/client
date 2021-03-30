@@ -24,11 +24,11 @@ import DashboardHome from "./Pages/Admin/DashboardHome/DashboardHome";
 import Announcement from "./Pages/Admin/Announcement/Announcement";
 import Classroom from "./Pages/Admin/Classroom/Class";
 import Message from "./Pages/Admin/Message/Message";
-import SchoolYear from "./Pages/Admin/SchoolYear/SchoolYear";
 import Students from "./Pages/Admin/Students/Students";
 import Teachers from "./Pages/Admin/Teachers/Teachers";
-import Subjects from "./Pages/Admin/Subjects/Subjects";
 import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
+import AdminFees from "./Pages/Admin/Fees/AdminFees";
+import Grades from "./Pages/Admin/Grades/Grades";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -36,7 +36,6 @@ import { LogoutState } from "./ContextFiles/LogoutContext";
 import { LoginProvider } from "./ContextFiles/LoginContext";
 import { CreateStudentState } from "./ContextFiles/CreateStudentContext";
 import { StudentListProvider } from "./ContextFiles/StudentListContext";
-import { SchoolYearState } from "./ContextFiles/SchoolYearContext";
 import { CreateTeacherState } from "./ContextFiles/CreateTeacherContext";
 
 //Protected Routes
@@ -50,6 +49,7 @@ import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
 import StudentGrades from "./Pages/Student/StudentGrades/StudentGrades";
 import StudentClass from "./Pages/Student/StudentClass/StudentClass";
 import StudentMessage from "./Pages/Student/StudentMessage/StudentMessage";
+import Fees from "./Pages/Student/Fees/Fees";
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
@@ -87,77 +87,75 @@ function App() {
     <>
       <div className="app">
         <CreateTeacherState>
-          <SchoolYearState>
-            <StudentListProvider>
-              <CreateStudentState>
-                <LoginProvider>
-                  <LogoutState>
-                    <DashboardStatus>
-                      <Router>
-                        <Switch>
-                          <Route
-                            path="/access-denied"
-                            exact={true}
-                            component={NoPermisison}
-                          />
-                          <Route path="/" exact component={HomePage} />
-                          <Route path="/about" exact component={About} />
-                          <Route
-                            path="/enrollment-procedure"
-                            exact
-                            component={EnrollmentProcedure}
-                          />
-                          <Route
-                            path="/tuition-fees"
-                            exact
-                            component={TuitionFess}
-                          />
-                          <Route
-                            path="/board-of-trustees"
-                            exact
-                            component={BoardTrustees}
-                          />
-                          <Route
-                            path="/teaching-and-non-teaching-staff"
-                            exact
-                            component={TeachersStaff}
-                          />
-                          <Route path="/contact" exact component={Contact} />
-                          <Route path="/login" exact component={PortalLogin} />
+          <StudentListProvider>
+            <CreateStudentState>
+              <LoginProvider>
+                <LogoutState>
+                  <DashboardStatus>
+                    <Router>
+                      <Switch>
+                        <Route
+                          path="/access-denied"
+                          exact={true}
+                          component={NoPermisison}
+                        />
+                        <Route path="/" exact component={HomePage} />
+                        <Route path="/about" exact component={About} />
+                        <Route
+                          path="/enrollment-procedure"
+                          exact
+                          component={EnrollmentProcedure}
+                        />
+                        <Route
+                          path="/tuition-fees"
+                          exact
+                          component={TuitionFess}
+                        />
+                        <Route
+                          path="/board-of-trustees"
+                          exact
+                          component={BoardTrustees}
+                        />
+                        <Route
+                          path="/teaching-and-non-teaching-staff"
+                          exact
+                          component={TeachersStaff}
+                        />
+                        <Route path="/contact" exact component={Contact} />
+                        <Route path="/login" exact component={PortalLogin} />
 
-                          <ProtectedAdmin
+                        {/* <ProtectedAdmin
                             path="/admin/dashboard"
                             isAuth={isAuth}
                             exact
                             component={DashboardHome}
-                          />
+                          /> */}
 
-                          <ProtectedAdmin
-                            path="/admin/class"
-                            isAuth={isAuth}
-                            exact
-                            component={Classroom}
-                          />
-                          <ProtectedAdmin
-                            path="/admin/announcement"
-                            isAuth={isAuth}
-                            exact
-                            component={Announcement}
-                          />
-                          <ProtectedAdmin
-                            path="/admin/message"
-                            isAuth={isAuth}
-                            exact
-                            component={Message}
-                          />
-                          <ProtectedAdmin
-                            path="/admin/school-year"
-                            isAuth={isAuth}
-                            exact
-                            component={SchoolYear}
-                          />
+                        <Route
+                          path="/admin/dashboard"
+                          exact
+                          component={DashboardHome}
+                        />
 
-                          {/* <ProtectedAdmin
+                        <Route path="/admin/grades" exact component={Grades} />
+
+                        <Route
+                          path="/admin/class"
+                          exact
+                          component={Classroom}
+                        />
+                        <Route
+                          path="/admin/announcement"
+                          exact
+                          component={Announcement}
+                        />
+                        <Route
+                          path="/admin/message"
+                          exact
+                          component={Message}
+                        />
+
+                        {/* <ProtectedAdmin
                             path={studentUser.map((value) => {
                               return (
                                 "/admin/users/student-profile/" + value.user_id
@@ -168,81 +166,76 @@ function App() {
                             isAuth={isAuth}
                           />  */}
 
-                          {teacherUser.map((value) => {
-                            return (
-                              <ProtectedAdmin
-                                path={
-                                  "/admin/users/teacher-profile/" + value._id
-                                }
-                                id={value._id}
-                                exact
-                                component={UserTeacher}
-                                isAuth={isAuth}
-                              />
-                            );
-                          })}
+                        {teacherUser.map((value) => {
+                          return (
+                            <Route
+                              path={"/admin/users/teacher-profile/" + value._id}
+                              id={value._id}
+                              exact
+                              component={UserTeacher}
+                            />
+                          );
+                        })}
 
-                          <ProtectedAdmin
-                            path="/admin/students"
-                            exact
-                            component={Students}
-                            isAuth={isAuth}
-                          />
+                        <Route
+                          path="/admin/students"
+                          exact
+                          component={Students}
+                        />
 
-                          <ProtectedAdmin
-                            path="/admin/teachers"
-                            exact
-                            component={Teachers}
-                            isAuth={isAuth}
-                          />
+                        <Route
+                          path="/admin/teachers"
+                          exact
+                          component={Teachers}
+                        />
 
-                          <ProtectedAdmin
-                            path="/admin/subjects"
-                            exact
-                            component={Subjects}
-                            isAuth={isAuth}
-                          />
+                        <Route path="/admin/fees" exact component={AdminFees} />
 
-                          <Route
-                            path="/user/teacher/"
-                            exact
-                            component={TeacherProfile}
-                          />
+                        <Route
+                          path="/user/teacher/"
+                          exact
+                          component={TeacherProfile}
+                        />
 
-                          <Route
-                            path="/user/student/"
-                            exact
-                            component={StudentProfile}
-                          />
-                          <Route
-                            path="/user/student/grades"
-                            exact
-                            component={StudentGrades}
-                          />
-                          <Route
-                            path="/user/student/class"
-                            exact
-                            component={StudentClass}
-                          />
-                          <Route
-                            path="/user/student/message"
-                            exact
-                            component={StudentMessage}
-                          />
+                        <Route
+                          path="/user/student/"
+                          exact
+                          component={StudentProfile}
+                        />
+                        <Route
+                          path="/user/student/grades"
+                          exact
+                          component={StudentGrades}
+                        />
+                        <Route
+                          path="/user/student/class"
+                          exact
+                          component={StudentClass}
+                        />
+                        <Route
+                          path="/user/student/message"
+                          exact
+                          component={StudentMessage}
+                        />
 
-                          <Route
-                            path="*"
-                            exact={true}
-                            component={My404ErrorComponent}
-                          />
-                        </Switch>
-                      </Router>
-                    </DashboardStatus>
-                  </LogoutState>
-                </LoginProvider>
-              </CreateStudentState>
-            </StudentListProvider>
-          </SchoolYearState>
+                        <Route
+                          path="/user/student/fees"
+                          exact
+                          component={Fees}
+                        />
+
+                        <Route
+                          path="*"
+                          exact={true}
+                          component={My404ErrorComponent}
+                        />
+                      </Switch>
+                    </Router>
+                  </DashboardStatus>
+                </LogoutState>
+              </LoginProvider>
+            </CreateStudentState>
+          </StudentListProvider>
         </CreateTeacherState>
       </div>
     </>

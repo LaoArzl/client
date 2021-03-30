@@ -9,7 +9,6 @@
   width: 95%;
   height: 100vh;
   overflow-y: scroll;
-  background: pink;
 }
 
 .students-content-body {
@@ -32,10 +31,18 @@
   font-size: 22px;
 }
 
+.add-student-span-wrapper {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .add-students-span {
-  width: 11%;
+  width: 25%;
   min-width: 125px;
-  height: 55%;
+  height: 65%;
   background: #3b65ef;
   color: #ffffff;
   border-radius: 8px;
@@ -46,6 +53,71 @@
   font-size: 14px;
   transition: 0.2s ease-out;
   font-weight: 500;
+}
+
+.add-students-span-two {
+  width: 25%;
+  min-width: 125px;
+  height: 65%;
+  color: #3b65ef;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease-out;
+  font-weight: 500;
+  margin-right: 10px;
+  transition: 0.2s ease-out;
+  position: relative;
+}
+
+.add-students-span-two-after {
+  width: 100%;
+  height: 230%;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 110%;
+  border-radius: 8px;
+  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.2);
+  border: 1px solid rgb(235, 235, 235);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 3;
+}
+
+.add-students-span-two-after li {
+  width: 100%;
+  height: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #323b44;
+  text-transform: lowercase;
+}
+
+.add-students-span-two-after li:hover {
+  background: rgb(243, 243, 243);
+  color: #3b65ef;
+}
+
+.add-students-span-two:hover {
+  background: #3b65ef2c;
+  transition: 0.2s ease-in;
+  border-style: none;
+}
+
+.add-students-span-two i {
+  margin-left: 10px;
+  font-size: 13px;
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
 }
 
 .add-students-cancel {
@@ -90,7 +162,6 @@
   margin: 0 auto;
   border-radius: 20px;
   margin-bottom: 40px;
-  padding-bottom: 10px;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
 }
 
@@ -102,8 +173,6 @@
   justify-content: space-between;
   margin: 0 auto;
   margin-top: 0px;
-
-  /* border-bottom: 1px solid rgb(226, 226, 226); */
 }
 
 .students-content-search {
@@ -198,11 +267,12 @@
 .student-list-body {
   margin: 0 auto;
   width: 95%;
-  height: 10vh;
+  height: 8vh;
   display: flex;
   font-size: 15px;
   position: relative;
-  /* border-bottom: 1px solid rgb(235, 235, 235); */
+  border-bottom: 1px solid rgb(235, 235, 235);
+  border-radius: 5px;
   color: rgb(95, 95, 95);
 }
 

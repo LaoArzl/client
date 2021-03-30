@@ -1,0 +1,12 @@
+.grades-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.grades-content {
+  width: 95%;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+  overflow-y: scroll;
+}

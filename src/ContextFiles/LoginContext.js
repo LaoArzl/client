@@ -26,7 +26,7 @@ export const LoginProvider = (props) => {
     <LoginContext.Provider
       value={{
         value1: [accessToken, setAccessToken],
-        value2: [role, setRole],
+        loginRole: [role, setRole],
       }}
     >
       {props.children}

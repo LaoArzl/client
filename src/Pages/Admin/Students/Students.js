@@ -5,6 +5,8 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import { CreateStudentContext } from "../../../ContextFiles/CreateStudentContext";
+import BrokenPage from "../../../Components/My404Component/BrokenPage";
+import { LoginContext } from "../../../ContextFiles/LoginContext";
 import ReactPaginate from "react-paginate";
 import Axios from "axios";
 
@@ -84,20 +86,19 @@ const Students = () => {
           ...students,
           {
             _id: studentNumber,
-            userStudent: userStudent,
+            userType: userStudent,
             username: usernameStudent,
             password: passwordStudent,
-            rePassword: rePasswordStudent,
             lastName: lastnameStudent,
-            fullName:
+            fullname:
               firstnameStudent +
               " " +
               middlenameStudent[0] +
               "." +
               " " +
               lastnameStudent,
-            middleName: middlenameStudent,
-            firstName: firstnameStudent,
+            middlename: middlenameStudent,
+            firstname: firstnameStudent,
             gender: genderStudent,
           },
         ]);
@@ -134,254 +135,281 @@ const Students = () => {
     setPasswordStudent("ECPLC" + result);
   };
 
+  const [showExport, setShowExport] = useState(false);
+  const { loginRole } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
   return (
     <>
-      <div className="students-wrapper">
-        <Dashboard />
-        <div className="students-content">
-          <DashboardHeader />
-          <div className="students-content-lists-header">
-            {showReg ? <p>Add Student</p> : <p>List of students</p>}
-          </div>
-          <div className="students-content-lists-body">
-            {showReg ? (
-              <>
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                  className="create-student-form"
-                  autoComplete="off"
-                >
-                  <div
-                    className={
-                      registerStatusStud === ""
-                        ? "hidinger"
-                        : registerStatusStud === "Successfully created account."
-                        ? "user-actual-error"
-                        : "user-actual-error-red"
-                    }
+      {role !== "Admin" ? (
+        <BrokenPage />
+      ) : (
+        <div className="students-wrapper">
+          <Dashboard />
+          <div className="students-content">
+            <DashboardHeader />
+            <div className="students-content-lists-header">
+              {showReg ? <p>Add Student</p> : <p>List of students</p>}
+            </div>
+            <div className="students-content-lists-body">
+              {showReg ? (
+                <>
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="create-student-form"
+                    autoComplete="off"
                   >
-                    {registerStatusStud}
-                  </div>
-                  <div className="create-student-id create-div-first">
-                    <div className="id-left">
-                      <label>Student ID *</label>
+                    <div
+                      className={
+                        registerStatusStud === ""
+                          ? "hidinger"
+                          : registerStatusStud ===
+                            "Successfully created account."
+                          ? "user-actual-error"
+                          : "user-actual-error-red"
+                      }
+                    >
+                      {registerStatusStud}
                     </div>
-                    <div className="id-right ">
+                    <div className="create-student-id create-div-first">
+                      <div className="id-left">
+                        <label>Student ID *</label>
+                      </div>
+                      <div className="id-right ">
+                        <input
+                          onChange={(e) => setStudentNumber(e.target.value)}
+                          value={studentNumber}
+                          className="ask-imp"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Username *</label>
+                      </div>
+                      <div className="id-right id-right-right">
+                        <input
+                          onChange={(e) => setUsernameStudent(e.target.value)}
+                          value={usernameStudent}
+                          type="text"
+                          className="id-right-username"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Password *</label>
+                      </div>
+                      <div className="id-right id-right-right">
+                        <input
+                          onChange={(e) => setPasswordStudent(e.target.value)}
+                          value={passwordStudent}
+                          type="text"
+                          className="id-right-password"
+                        />
+                        <span
+                          onClick={generatePassword}
+                          className="id-right-generate"
+                        >
+                          Generate
+                        </span>
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Confirm Password *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setRePasswordStudent(e.target.value)}
+                          value={rePasswordStudent}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Last Name *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setLastnameStudent(e.target.value)}
+                          value={lastnameStudent}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>First Name *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setFirstnameStudent(e.target.value)}
+                          value={firstnameStudent}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Middle Name *</label>
+                      </div>
+                      <div className="id-right">
+                        <input
+                          onChange={(e) => setMiddlenameStudent(e.target.value)}
+                          value={middlenameStudent}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="create-student-id">
+                      <div className="id-left">
+                        <label>Gender</label>
+                      </div>
+                      <div className="id-right">
+                        <select
+                          onChange={(e) => setGenderStudent(e.target.value)}
+                          value={genderStudent}
+                        >
+                          <option value="">Select option</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="id-right-submit">
                       <input
-                        onChange={(e) => setStudentNumber(e.target.value)}
-                        value={studentNumber}
-                        className="ask-imp"
-                        type="text"
+                        onClick={refresh}
+                        type="reset"
+                        className="student-reset"
+                        value="Reset"
+                      />
+                      <input
+                        onClick={submitRegister}
+                        type="submit"
+                        className="student-submit"
+                        value="Create"
                       />
                     </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Username *</label>
-                    </div>
-                    <div className="id-right id-right-right">
-                      <input
-                        onChange={(e) => setUsernameStudent(e.target.value)}
-                        value={usernameStudent}
-                        type="text"
-                        className="id-right-username"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Password *</label>
-                    </div>
-                    <div className="id-right id-right-right">
-                      <input
-                        onChange={(e) => setPasswordStudent(e.target.value)}
-                        value={passwordStudent}
-                        type="text"
-                        className="id-right-password"
-                      />
+                  </form>
+                </>
+              ) : (
+                <>
+                  <div className="students-content-lists-body-header">
+                    <input
+                      type="search"
+                      className="students-content-search"
+                      placeholder="Type to Search"
+                      onChange={(e) => setSearchItem(e.target.value)}
+                      value={searchItem}
+                    />
+                    <div className="add-student-span-wrapper">
                       <span
-                        onClick={generatePassword}
-                        className="id-right-generate"
+                        onClick={() => setShowExport(!showExport)}
+                        className="add-students-span-two"
                       >
-                        Generate
+                        Export <i class="fas fa-caret-square-down"></i>
+                        <ul
+                          className={
+                            showExport
+                              ? "add-students-span-two-after"
+                              : "hidinger"
+                          }
+                        >
+                          <li>.CSV</li>
+                          <li>.pdf</li>
+                          <li>.docx</li>
+                        </ul>
+                      </span>
+                      <span
+                        onClick={() => setShowReg(!showReg)}
+                        className={
+                          showReg ? "add-students-cancel" : "add-students-span"
+                        }
+                      >
+                        {showReg ? (
+                          <>
+                            <i className="fas fa-window-close"></i> Return
+                          </>
+                        ) : (
+                          <>
+                            <i className="fas fa-plus"></i>
+                            Add Student
+                          </>
+                        )}
                       </span>
                     </div>
                   </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Confirm Password *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setRePasswordStudent(e.target.value)}
-                        value={rePasswordStudent}
-                        type="text"
-                      />
-                    </div>
+                  <div className="student-list-header">
+                    <div className="student-list-number">#</div>
+                    <div className="student-list-id">Student ID</div>
+                    <div className="student-list-name">Name</div>
+                    <div className="student-list-gender">Gender</div>
+                    <div className="student-list-gradelevel">Year</div>
+                    <div className="student-list-action">Action</div>
                   </div>
+                  {}
+                  {students
 
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Last Name *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setLastnameStudent(e.target.value)}
-                        value={lastnameStudent}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>First Name *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setFirstnameStudent(e.target.value)}
-                        value={firstnameStudent}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Middle Name *</label>
-                    </div>
-                    <div className="id-right">
-                      <input
-                        onChange={(e) => setMiddlenameStudent(e.target.value)}
-                        value={middlenameStudent}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="create-student-id">
-                    <div className="id-left">
-                      <label>Gender</label>
-                    </div>
-                    <div className="id-right">
-                      <select
-                        onChange={(e) => setGenderStudent(e.target.value)}
-                        value={genderStudent}
-                      >
-                        <option value="">Select option</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="id-right-submit">
-                    <input
-                      onClick={refresh}
-                      type="reset"
-                      className="student-reset"
-                      value="Reset"
-                    />
-                    <input
-                      onClick={submitRegister}
-                      type="submit"
-                      className="student-submit"
-                      value="Create"
-                    />
-                  </div>
-                </form>
-              </>
-            ) : (
-              <>
-                <div className="students-content-lists-body-header">
-                  <input
-                    type="search"
-                    className="students-content-search"
-                    placeholder="Type to Search"
-                    onChange={(e) => setSearchItem(e.target.value)}
-                    value={searchItem}
-                  />
-                  <span
-                    onClick={() => setShowReg(!showReg)}
-                    className={
-                      showReg ? "add-students-cancel" : "add-students-span"
-                    }
-                  >
-                    {showReg ? (
-                      <>
-                        <i className="fas fa-window-close"></i> Return
-                      </>
-                    ) : (
-                      <>
-                        <i className="fas fa-plus"></i>
-                        Add Student
-                      </>
-                    )}
-                  </span>
-                </div>
-                <div className="student-list-header">
-                  <div className="student-list-number">#</div>
-                  <div className="student-list-id">Student ID</div>
-                  <div className="student-list-name">Name</div>
-                  <div className="student-list-gender">Gender</div>
-                  <div className="student-list-gradelevel">Year</div>
-                  <div className="student-list-action">Action</div>
-                </div>
-                {}
-                {students
+                    .filter((val) => {
+                      if (searchItem === "") {
+                        return val;
+                      } else if (val._id.includes(searchItem)) {
+                        return val;
+                      } else if (
+                        val.fullName
+                          .toLowerCase()
+                          .includes(searchItem.toLowerCase())
+                      ) {
+                        return val;
+                      }
+                    })
 
-                  .filter((val) => {
-                    if (searchItem === "") {
-                      return val;
-                    } else if (val._id.includes(searchItem)) {
-                      return val;
-                    } else if (
-                      val.fullName
-                        .toLowerCase()
-                        .includes(searchItem.toLowerCase())
-                    ) {
-                      return val;
-                    }
-                  })
-
-                  .map((value, key) => {
-                    return (
-                      <>
-                        <div className="student-list-body">
-                          <div className="student-list-number-span">
-                            {key + 1}
+                    .map((value, key) => {
+                      return (
+                        <>
+                          <div className="student-list-body">
+                            <div className="student-list-number-span">
+                              {key + 1}
+                            </div>
+                            <div className="student-list-id-span">
+                              {value._id}
+                            </div>
+                            <div className="student-list-name-span">
+                              {value.fullname}
+                            </div>
+                            <div className="student-list-gender-span">
+                              {value.gender}
+                            </div>
+                            <div className="student-list-gradelevel-span">
+                              {value.gradeLevel}
+                            </div>
+                            <div className="student-list-action-span">Edit</div>
                           </div>
-                          <div className="student-list-id-span">
-                            {value._id}
-                          </div>
-                          <div className="student-list-name-span">
-                            {value.fullName}
-                          </div>
-                          <div className="student-list-gender-span">
-                            {value.gender}
-                          </div>
-                          <div className="student-list-gradelevel-span">
-                            {value.gradeLevel}
-                          </div>
-                          <div className="student-list-action-span">Edit</div>
-                        </div>
-                      </>
-                    );
-                  })
-                  .slice(donePage, donePage + perPage)}
-              </>
-            )}
-            <ReactPaginate
-              previousLabel="Prev"
-              nextLabel="Next"
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName="paginationContainer"
-              previousLinkClassName="prevButton"
-              nextLinkClassName="nextButton"
-              disabledLinkClassName="disableButton"
-              activeLinkClassName="activeButton"
-            />
+                        </>
+                      );
+                    })
+                    .slice(donePage, donePage + perPage)}
+                </>
+              )}
+              <ReactPaginate
+                previousLabel="Prev"
+                nextLabel="Next"
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName="paginationContainer"
+                previousLinkClassName="prevButton"
+                nextLinkClassName="nextButton"
+                disabledLinkClassName="disableButton"
+                activeLinkClassName="activeButton"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

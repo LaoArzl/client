@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import "./Message.css";
 import { withRouter } from "react-router-dom";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
+import "./AdminFees.css";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 
-const Message = () => {
+const AdminFees = () => {
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
   return (
@@ -14,11 +14,10 @@ const Message = () => {
       {role !== "Admin" ? (
         <BrokenPage />
       ) : (
-        <div className="message-wrapper">
+        <div className="adminfees-wrapper">
           <Dashboard />
-          <div className="message-content">
+          <div className="adminfees-content">
             <DashboardHeader />
-            <div className="message-actual"></div>
           </div>
         </div>
       )}
@@ -26,4 +25,4 @@ const Message = () => {
   );
 };
 
-export default withRouter(Message);
+export default withRouter(AdminFees);

@@ -99,7 +99,8 @@
 .administrator-div-after {
   position: absolute;
   top: 105%;
-  width: 120%;
+  min-width: 250px;
+  width: 150%;
   right: 0;
   height: 200%;
   display: flex;
