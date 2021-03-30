@@ -62,7 +62,7 @@ const Class = () => {
           ></div>
           <div className="class-content">
             <DashboardHeader />
-            <div className="class-actual-header">Class</div>
+            <div className="class-actual-header">Classroom</div>
             <div className="class-actual-body">
               <div className="class-actual-body-header">
                 <span

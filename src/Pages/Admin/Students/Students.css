@@ -2,13 +2,14 @@
   width: 100%;
   height: auto;
   display: flex;
-  background: #ffffff;
+  background: #f7f8fc;
 }
 
 .students-content {
   width: 95%;
   height: 100vh;
   overflow-y: scroll;
+  position: relative;
 }
 
 .students-content-body {
@@ -24,11 +25,12 @@
   margin: 0 auto;
   color: #323b44;
   margin-bottom: 10px;
+  border-radius: 3px;
 }
 
 .students-content-lists-header p {
   font-weight: 500;
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .add-student-span-wrapper {
@@ -157,10 +159,10 @@
   width: 95%;
   height: auto;
   min-height: 200px;
-  border: 1px solid rgb(235, 235, 235);
+  /* border: 1px solid rgb(235, 235, 235); */
   background: white;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-bottom: 40px;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
 }
@@ -189,7 +191,7 @@
 }
 
 .student-list-header {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   height: 10vh;
   display: flex;
@@ -199,6 +201,7 @@
   color: #323b44;
   border-radius: 2px;
   border-bottom: 1px solid rgb(235, 235, 235);
+  margin-bottom: 5px;
 }
 
 .student-list-number,
@@ -266,12 +269,11 @@
 
 .student-list-body {
   margin: 0 auto;
-  width: 95%;
+  width: 100%;
   height: 8vh;
   display: flex;
   font-size: 15px;
   position: relative;
-  border-bottom: 1px solid rgb(235, 235, 235);
   border-radius: 5px;
   color: rgb(95, 95, 95);
 }
@@ -476,15 +478,17 @@
 }
 
 .paginationContainer {
-  width: auto;
+  width: 95%;
   height: 10vh;
   display: flex;
   list-style: none;
   align-items: center;
+  margin: 0 auto;
 }
 
 .activeButton {
   color: green;
+  margin: 5px;
 }
 
 .prevButton {

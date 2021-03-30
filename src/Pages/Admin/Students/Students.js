@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "./Students.css";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
@@ -9,6 +9,8 @@ import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 import ReactPaginate from "react-paginate";
 import Axios from "axios";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 const Students = () => {
   const { value00, value03 } = useContext(StudentListContext);
@@ -138,6 +140,7 @@ const Students = () => {
   const [showExport, setShowExport] = useState(false);
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
+
   return (
     <>
       {role !== "Admin" ? (
@@ -387,7 +390,14 @@ const Students = () => {
                             <div className="student-list-gradelevel-span">
                               {value.gradeLevel}
                             </div>
-                            <div className="student-list-action-span">Edit</div>
+                            <div className="student-list-action-span">
+                              <Link
+                                className="student-list-action-link"
+                                to={"/admin/edit-user/" + value._id}
+                              >
+                                <i class="far fa-edit"></i>
+                              </Link>
+                            </div>
                           </div>
                         </>
                       );

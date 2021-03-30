@@ -10,6 +10,7 @@ export const StudentListProvider = (props) => {
   const [searchItem, setSearchItem] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [searchTeacher, setSearchTeacher] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/student-list").then((response) => {
@@ -31,6 +32,16 @@ export const StudentListProvider = (props) => {
     });
   }, []);
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/all-users").then((response) => {
+      if (response.data.length == 0) {
+        setAllUsers([]);
+      } else {
+        setAllUsers(response.data);
+      }
+    });
+  }, []);
+
   return (
     <StudentListContext.Provider
       value={{
@@ -39,6 +50,7 @@ export const StudentListProvider = (props) => {
         value02: [userType, setUserType],
         value03: [searchItem, setSearchItem],
         value04: [searchTeacher, setSearchTeacher],
+        valueAllUsers: [allUsers, setAllUsers],
       }}
     >
       {props.children}

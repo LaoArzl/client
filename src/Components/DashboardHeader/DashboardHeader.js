@@ -33,7 +33,7 @@ const DashboardHeader = () => {
           <div className="middle-separator"></div>
           <div onClick={logoutMenu} className="dashboard-admin-profile">
             <div className="dashboard-header-profile">
-              <i class="fas fa-user-shield"></i>
+              <i className="fas fa-user-shield"></i>
             </div>
             <div className="dashboard-header-profile-name">
               <i className="fas fa-chevron-down"></i>
@@ -47,12 +47,12 @@ const DashboardHeader = () => {
             >
               <span className="dashboard-profile-span1">
                 <p>
-                  <i class="fas fa-user-circle"></i>Profile
+                  <i className="fas fa-user-circle"></i>Profile
                 </p>
               </span>
               <span onClick={submitLogout} className="dashboard-profile-span2">
                 <p>
-                  <i class="fas fa-sign-out-alt"></i>Logout
+                  <i className="fas fa-sign-out-alt"></i>Logout
                 </p>
               </span>
             </div>

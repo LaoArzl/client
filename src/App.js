@@ -27,6 +27,7 @@ import Message from "./Pages/Admin/Message/Message";
 import Students from "./Pages/Admin/Students/Students";
 import Teachers from "./Pages/Admin/Teachers/Teachers";
 import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
+import UserStudent from "./Pages/Admin/Students/UserStudent";
 import AdminFees from "./Pages/Admin/Fees/AdminFees";
 import Grades from "./Pages/Admin/Grades/Grades";
 
@@ -169,10 +170,21 @@ function App() {
                         {teacherUser.map((value) => {
                           return (
                             <Route
-                              path={"/admin/users/teacher-profile/" + value._id}
+                              path={"/admin/edit-user/" + value._id}
                               id={value._id}
                               exact
                               component={UserTeacher}
+                            />
+                          );
+                        })}
+
+                        {studentUser.map((value) => {
+                          return (
+                            <Route
+                              path={"/admin/edit-user/" + value._id}
+                              id={value._id}
+                              exact
+                              component={UserStudent}
                             />
                           );
                         })}

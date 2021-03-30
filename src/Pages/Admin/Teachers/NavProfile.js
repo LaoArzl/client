@@ -6,9 +6,7 @@ const NavProfile = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setId(
-      window.location.pathname.replace("/admin/users/teacher-profile/", "")
-    );
+    setId(window.location.pathname.replace("/admin/edit-user/", ""));
   }, []);
 
   useEffect(() => {

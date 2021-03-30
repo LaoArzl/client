@@ -355,19 +355,17 @@ const Teachers = () => {
                               {value.gender}
                             </div>
                             <div className="student-list-gradelevel-span">
-                              {value.grade}
+                              {value.username}
                             </div>
                             <div className="student-list-action-span">
                               <Tippy
                                 content="Edit"
                                 arrow={false}
-                                placement="left"
+                                placement="bottom"
                               >
                                 <Link
                                   className="student-list-action-link"
-                                  to={
-                                    "/admin/users/teacher-profile/" + value._id
-                                  }
+                                  to={"/admin/edit-user/" + value._id}
                                 >
                                   <i class="far fa-edit"></i>
                                 </Link>
@@ -375,7 +373,7 @@ const Teachers = () => {
                               <Tippy
                                 content="Delete"
                                 arrow={false}
-                                placement="right"
+                                placement="bottom"
                               >
                                 <i class="far fa-trash-alt"></i>
                               </Tippy>

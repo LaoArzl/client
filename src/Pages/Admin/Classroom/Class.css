@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   height: auto;
-  background: #ffffff;
+  background: #f7f8fc;
   flex-direction: row;
   position: relative;
 }
@@ -21,7 +21,7 @@
 .class-content {
   width: 95%;
   height: 100vh;
-  background: #ffffff;
+  background: #f7f8fc;
   overflow-y: scroll;
 }
 
@@ -29,21 +29,21 @@
   width: 95%;
   height: 10vh;
   margin: 0 auto;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 500;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .class-actual-body {
   width: 95%;
   height: auto;
   min-height: 200px;
-  border: 1px solid rgb(235, 235, 235);
   background: white;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-bottom: 40px;
   padding-bottom: 10px;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
@@ -63,7 +63,7 @@
   width: 11%;
   min-width: 125px;
   height: 55%;
-  background: #3b65ef;
+  background: #0464fc;
   color: #ffffff;
   border-radius: 8px;
   display: flex;
@@ -76,7 +76,7 @@
 }
 
 .add-class-button:hover {
-  background: #3458ce;
+  background: #044ec7;
   transition: 0.2s ease-in;
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Dashboard.css";
 import { DashboardData } from "./DashboardData";
 import { Link } from "react-router-dom";
@@ -11,6 +11,10 @@ const Dashboard = () => {
   const dashboardMenu = () => {
     setShowName(!showName);
   };
+
+  useEffect(() => {
+    console.log(window.location.pathname.replace(/[0-9]/g, "."));
+  }, []);
 
   return (
     <>
@@ -31,12 +35,27 @@ const Dashboard = () => {
                     className="li-middle"
                     key={key}
                     id={
-                      window.location.pathname === val.link ? "link-active" : ""
+                      window.location.pathname === val.link ||
+                      window.location.pathname.replace(/[0-9]/g, ".") ===
+                        val.links ||
+                      window.location.pathname.replace(/[0-9]/g, ",") ===
+                        val.links
+                        ? "link-active"
+                        : ""
                     }
                   >
                     <div
                       className={
                         showName ? "dashboard-extra-icon" : "dashboard-icon"
+                      }
+                      id={
+                        window.location.pathname === val.link ||
+                        window.location.pathname.replace(/[0-9]/g, ".") ===
+                          val.links ||
+                        window.location.pathname.replace(/[0-9]/g, ",") ===
+                          val.links
+                          ? "icon-active"
+                          : "icon-inactive"
                       }
                     >
                       {val.icon}

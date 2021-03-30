@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
@@ -46,10 +46,12 @@ export const DashboardData = [
     name: "Students",
     icon: <PersonOutlineOutlinedIcon fontSize="small" />,
     link: "/admin/students",
+    links: "/admin/edit-user/....-.....",
   },
   {
     name: "Teachers",
     icon: <SupervisorAccountOutlinedIcon fontSize="small" />,
     link: "/admin/teachers",
+    links: "/admin/edit-user/,,,,-,,,,",
   },
 ];
