@@ -54,15 +54,57 @@
   height: 12vh;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin: 0 auto;
   border-bottom: 1px solid rgb(235, 235, 235);
 }
 
+.class-actual-body-header-nav {
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+
+.class-actual-body-header-1 {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.class-actual-body-header-1-active,
+.class-actual-body-header-2-active {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0464fc;
+  border-bottom: 2px solid #0464fc;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.class-actual-body-header-2 {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+
 .add-class-button {
-  width: 11%;
+  width: 12%;
   min-width: 125px;
-  height: 55%;
+  height: 65%;
   background: #0464fc;
   color: #ffffff;
   border-radius: 8px;
@@ -85,18 +127,28 @@
   margin-right: 5px;
 }
 
-.class-actual-body-empty {
+.class-actual-body-active {
   width: 100%;
   height: 10vh;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.class-actual-body-archive {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: flex-end;
   justify-content: center;
   font-size: 14px;
 }
 
 .create-subject-form {
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: auto;
+  min-height: 200px;
   background: rgb(255, 255, 255);
   position: absolute;
   top: 50%;
@@ -104,4 +156,86 @@
   transform: translate(-50%, -50%);
   border-radius: 15px;
   z-index: 3;
+  padding-top: 35px;
+  padding-bottom: 15px;
+}
+
+.create-class-div {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.create-class-div-submit {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-right: 5%;
+}
+
+.create-class-div label {
+  width: 25%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  font-size: 14px;
+}
+
+.create-class-div input,
+.create-class-div select {
+  width: 65%;
+  height: 38px;
+  border-radius: 5px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+}
+
+.create-class-div select:focus,
+.create-class-div input:focus {
+  border: 1px solid rgb(170, 183, 192);
+}
+
+.create-class-create-btn {
+  width: 22%;
+  height: 45px;
+  background: #0464fc;
+  border-style: none;
+  outline-style: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-left: 15px;
+  transition: 0.2s ease-out;
+}
+.create-class-create-btn:hover {
+  transition: 0.2s ease-in;
+  background: #044ec7;
+}
+
+.create-class-reset-btn {
+  width: 22%;
+  height: 45px;
+  background: rgb(229, 231, 238);
+  border-style: none;
+  outline-style: none;
+  border-radius: 5px;
+  color: #323b44;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.create-class-reset-btn:hover {
+  transition: 0.2s ease-in;
+  background: rgb(207, 208, 214);
 }

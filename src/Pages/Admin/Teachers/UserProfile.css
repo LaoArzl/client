@@ -65,7 +65,7 @@
   align-items: center;
   padding-left: 15%;
   cursor: pointer;
-  color: #0464fc;
+  color: #323b44;
   position: relative;
   font-size: 15px;
   font-weight: 500;
@@ -92,7 +92,7 @@
 } */
 
 .user-navigation-profile:hover {
-  color: #0464fc;
+  color: #323b44;
   transition: 0.1s ease-in;
   background: #f5f6fa;
 }
@@ -126,9 +126,15 @@
   height: 30vh;
 }
 
+.user-nav-wrapper-body {
+  width: 100%;
+  height: 45vh;
+  position: relative;
+}
+
 .user-nav-account-body-form {
   width: 100%;
-  height: 40vh;
+  height: 100%;
   padding-left: 5%;
 }
 
@@ -138,6 +144,22 @@
   width: auto;
   height: auto;
   margin-bottom: 20px;
+}
+.div-green {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  margin-bottom: 20px;
+  color: rgb(30, 197, 30);
+}
+.div-red {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  margin-bottom: 20px;
+  color: red;
 }
 
 .div input {
@@ -152,7 +174,7 @@
 }
 
 .div input:focus {
-  border: 1px solid #a7d0ff;
+  border: 1px solid rgb(170, 183, 192);
 }
 
 .div label {
@@ -173,19 +195,67 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s ease-out;
+  color: #323b44;
 }
 
 .div span:hover {
   background: rgb(207, 208, 214);
 
+  transition: 0.2s ease-in;
+}
+
+.user-nav-wrapper-form-after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 5%;
+}
+
+.change-password-submit {
+  display: flex;
+}
+
+.change-password-span1 {
+  width: 11%;
+  height: 40px;
+  background: #0464fc;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 10px;
+  cursor: pointer;
   transition: 0.2s ease-out;
 }
-/* 
-.user-nav-form-after {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 50%;
-} */
+
+.change-password-span2 {
+  width: 11%;
+  height: 40px;
+  background: rgb(229, 231, 238);
+  border-radius: 5px;
+  color: #323b44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.change-password-span2:hover {
+  background: rgb(207, 208, 214);
+
+  transition: 0.2s ease-in;
+}
+
+.change-password-span1:hover {
+  background: #044ec7;
+
+  transition: 0.2s ease-in;
+}

@@ -29,7 +29,6 @@ import Teachers from "./Pages/Admin/Teachers/Teachers";
 import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
 import AdminFees from "./Pages/Admin/Fees/AdminFees";
-import Grades from "./Pages/Admin/Grades/Grades";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -137,8 +136,6 @@ function App() {
                           exact
                           component={DashboardHome}
                         />
-
-                        <Route path="/admin/grades" exact component={Grades} />
 
                         <Route
                           path="/admin/class"

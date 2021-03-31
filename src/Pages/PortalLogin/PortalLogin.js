@@ -3,6 +3,7 @@ import "./PortalLogin.css";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../ContextFiles/LoginContext";
+import { ClipLoader } from "react-spinners";
 
 const PortalLogin = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ const PortalLogin = () => {
   //Data from LoginContext
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
+  const [loadingLog, setLoadingLog] = useState(false);
 
   Axios.defaults.withCredentials = true;
 
@@ -121,7 +123,11 @@ const PortalLogin = () => {
               </div>
 
               <div className="portal-login-login">
-                <input type="submit" value="LOGIN" onClick={submitLogin} />
+                <input
+                  onClick={submitLogin}
+                  type="submit"
+                  value="LOGIN"
+                ></input>
               </div>
 
               <div className="portal-login-forgot">

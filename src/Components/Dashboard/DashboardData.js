@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
-import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
@@ -23,18 +22,13 @@ export const DashboardData = [
   },
   {
     name: "Classes",
-    icon: <AccountTreeOutlinedIcon fontSize="small" />,
+    icon: <RateReviewOutlinedIcon fontSize="small" />,
     link: "/admin/class",
   },
   {
     name: "Fees",
     icon: <PaymentOutlinedIcon fontSize="small" />,
     link: "/admin/fees",
-  },
-  {
-    name: "Grades",
-    icon: <RateReviewOutlinedIcon fontSize="small" />,
-    link: "/admin/grades",
   },
 
   {
