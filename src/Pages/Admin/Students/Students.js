@@ -395,7 +395,7 @@ const Students = () => {
                                 className="student-list-action-link"
                                 to={"/admin/edit-user/" + value._id}
                               >
-                                <i class="far fa-edit"></i>
+                                <i class="fas fa-pen"></i>
                               </Link>
                             </div>
                           </div>

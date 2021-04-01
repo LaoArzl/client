@@ -43,6 +43,9 @@ import ProtectedAdmin from "./ProtectedRoutes/ProtectedAdmin";
 
 //Teacher Pages
 import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
+import TeacherGrades from "./Pages/Teacher/TeacherGrades/TeacherGrades";
+import TeacherClass from "./Pages/Teacher/TeacherClass/TeacherClass";
+import TeacherMessage from "./Pages/Teacher/TeacherMessage/TeacherMessage";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
@@ -204,6 +207,22 @@ function App() {
                           path="/user/teacher/"
                           exact
                           component={TeacherProfile}
+                        />
+
+                        <Route
+                          path="/user/teacher/grades"
+                          exact
+                          component={TeacherGrades}
+                        />
+                        <Route
+                          path="/user/teacher/class"
+                          exact
+                          component={TeacherClass}
+                        />
+                        <Route
+                          path="/user/teacher/message"
+                          exact
+                          component={TeacherMessage}
                         />
 
                         <Route

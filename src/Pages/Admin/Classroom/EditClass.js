@@ -1,6 +1,6 @@
 import React from "react";
 
-const Empty = () => {
+const EditClass = () => {
   return (
     <>
       <div className="empty-class">sd</div>
@@ -8,4 +8,4 @@ const Empty = () => {
   );
 };
 
-export default Empty;
+export default EditClass;

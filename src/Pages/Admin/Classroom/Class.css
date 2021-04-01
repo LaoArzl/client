@@ -3,7 +3,6 @@
   width: 100%;
   height: auto;
   background: #f7f8fc;
-  flex-direction: row;
   position: relative;
 }
 
@@ -45,7 +44,6 @@
   margin: 0 auto;
   border-radius: 10px;
   margin-bottom: 40px;
-  padding-bottom: 10px;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
 }
 
@@ -56,7 +54,6 @@
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  border-bottom: 1px solid rgb(235, 235, 235);
 }
 
 .class-actual-body-header-nav {
@@ -129,11 +126,11 @@
 
 .class-actual-body-active {
   width: 100%;
-  height: 10vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  height: auto;
+  min-height: 10vh;
   font-size: 14px;
+  justify-content: center;
+  position: relative;
 }
 
 .class-actual-body-archive {
@@ -238,4 +235,86 @@
 .create-class-reset-btn:hover {
   transition: 0.2s ease-in;
   background: rgb(207, 208, 214);
+}
+
+.class-actual-body-active-span {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.class-actual-body-active-header {
+  width: 100%;
+  height: 10vh;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  display: flex;
+}
+
+.class-actual-body-active-number {
+  width: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.class-actual-body-active-name {
+  width: 25%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.class-actual-body-active-adviser {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.class-actual-body-active-capacity {
+  width: 35%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.class-actual-body-active-action {
+  width: 10%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.class-actual-body-active-action i {
+  cursor: pointer;
+  font-size: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.1s ease-out;
+  color: grey;
+}
+
+.class-actual-body-active-action i:hover {
+  color: #323b44;
+  box-shadow: 0px 8px 30px 0px rgba(49, 68, 80, 0.2);
+  transition: 0.1s ease-in;
+}
+
+.class-actual-body-active-body {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  color: rgb(95, 95, 95);
 }

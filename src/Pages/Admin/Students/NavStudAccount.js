@@ -107,7 +107,7 @@ const NavStudAccount = () => {
                 <div className="div">
                   <label>Confirm Password</label>
                   <input
-                    type="password"
+                    type="text"
                     value={changeConfirm}
                     className="div-input-password"
                     onChange={(e) => setChangeConfirm(e.target.value)}

@@ -9,7 +9,7 @@ import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 
 const Class = () => {
-  const { value01 } = useContext(StudentListContext);
+  const { value01, valueAllClass } = useContext(StudentListContext);
   const [teachers, setTeachers] = value01;
   const [activeClass, setActiveClass] = useState(0);
   const [archivedClass, setArchivedClass] = useState(0);
@@ -20,6 +20,8 @@ const Class = () => {
   const [role, setRole] = loginRole;
   const [activeArch, setActiveArch] = useState(false);
 
+  const [classroom, setClassroom] = valueAllClass;
+
   useEffect(() => {
     Axios.get("http://localhost:3001/class/class-active").then((response) => {
       if (response.data.length === 0) {
@@ -28,7 +30,7 @@ const Class = () => {
         setActiveClass(response.data);
       }
     });
-  });
+  }, []);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/class/class-archived").then((response) => {
@@ -186,11 +188,45 @@ const Class = () => {
 
               {activeArch === false ? (
                 <div className="class-actual-body-active">
-                  {activeClass === 0 ? (
-                    <p>There is no active class.</p>
-                  ) : (
-                    "There is ;)"
-                  )}
+                  <div className="class-actual-body-active-header">
+                    <div className="class-actual-body-active-number">#</div>
+                    <div className="class-actual-body-active-name">
+                      Class name
+                    </div>
+                    <div className="class-actual-body-active-adviser">
+                      Class adviser
+                    </div>
+                    <div className="class-actual-body-active-capacity">
+                      Capacity
+                    </div>
+                    <div className="class-actual-body-active-action">
+                      Action
+                    </div>
+                  </div>
+                  {classroom.map((key, value) => {
+                    return (
+                      <div
+                        key={value}
+                        className="class-actual-body-active-body"
+                      >
+                        <div className="class-actual-body-active-number">
+                          {value + 1}
+                        </div>
+                        <div className="class-actual-body-active-name">
+                          {key.className}
+                        </div>
+                        <div className="class-actual-body-active-adviser">
+                          {key.adviser_id.fullname}
+                        </div>
+                        <div className="class-actual-body-active-capacity">
+                          {key.capacity}
+                        </div>
+                        <div className="class-actual-body-active-action">
+                          <i class="fas fa-pen"></i>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="class-actual-body-archive">

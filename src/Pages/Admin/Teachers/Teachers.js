@@ -8,8 +8,6 @@ import { CreateTeacherContext } from "../../../ContextFiles/CreateTeacherContext
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 import Axios from "axios";
-import Tippy from "@tippy.js/react";
-import "tippy.js/dist/tippy.css";
 
 const Teachers = () => {
   const { value01, value04 } = useContext(StudentListContext);
@@ -358,25 +356,12 @@ const Teachers = () => {
                               {value.username}
                             </div>
                             <div className="student-list-action-span">
-                              <Tippy
-                                content="Edit"
-                                arrow={false}
-                                placement="bottom"
+                              <Link
+                                className="student-list-action-link"
+                                to={"/admin/edit-user/" + value._id}
                               >
-                                <Link
-                                  className="student-list-action-link"
-                                  to={"/admin/edit-user/" + value._id}
-                                >
-                                  <i class="far fa-edit"></i>
-                                </Link>
-                              </Tippy>
-                              <Tippy
-                                content="Delete"
-                                arrow={false}
-                                placement="bottom"
-                              >
-                                <i class="far fa-trash-alt"></i>
-                              </Tippy>
+                                <i class="fas fa-pen"></i>
+                              </Link>
                             </div>
                           </div>
                         </>

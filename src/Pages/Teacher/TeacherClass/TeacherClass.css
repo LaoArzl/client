@@ -1,0 +1,23 @@
+.user-class {
+  width: 100%;
+  height: auto;
+  background: #f7f8fc;
+  display: flex;
+}
+
+.user-class-content {
+  width: 95%;
+  height: 100vh;
+  background: #f7f8fc;
+  overflow-y: scroll;
+}
+
+.user-class-content-header {
+  width: 95%;
+  height: 12vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 500;
+}

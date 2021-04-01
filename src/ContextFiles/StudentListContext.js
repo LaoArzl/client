@@ -6,6 +6,7 @@ export const StudentListContext = createContext();
 export const StudentListProvider = (props) => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const [classroom, setClassroom] = useState([]);
   const [userType, setUserType] = useState(false);
   const [searchItem, setSearchItem] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -33,6 +34,18 @@ export const StudentListProvider = (props) => {
   }, []);
 
   useEffect(() => {
+    Axios.get("http://localhost:3001/class/populate-teacher").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setClassroom([]);
+        } else {
+          setClassroom(response.data);
+        }
+      }
+    );
+  }, []);
+
+  useEffect(() => {
     Axios.get("http://localhost:3001/all-users").then((response) => {
       if (response.data.length == 0) {
         setAllUsers([]);
@@ -51,6 +64,7 @@ export const StudentListProvider = (props) => {
         value03: [searchItem, setSearchItem],
         value04: [searchTeacher, setSearchTeacher],
         valueAllUsers: [allUsers, setAllUsers],
+        valueAllClass: [classroom, setClassroom],
       }}
     >
       {props.children}

@@ -1,31 +1,27 @@
 import React, { useContext, useState, useEffect } from "react";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
-import "./TeacherProfile.css";
+import "./TeacherClass.css";
 import Axios from "axios";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
-import ProfileHeader from "../../../Components/ProfileHeader/ProfileHeader";
-import ProfileCard from "../../../Components/ProfileCard/ProfileCard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import TeacherDashboard from "../TeacherDashboard/TeacherDashboard";
 
-const TeacherProfile = () => {
-  const { loginRole, value3 } = useContext(LoginContext);
+const TeacherClass = () => {
+  const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
-
-  const [userId, setUserId] = useState("");
-  const [fullname, setFullname] = useState("");
 
   return (
     <>
       {role !== "Teacher" ? (
         <BrokenPage />
       ) : (
-        <div className="user-profile">
+        <div className="user-class">
           <TeacherDashboard />
-          <div className="user-content">
+          <div className="user-class-content">
             <DashboardHeader />
-            {fullname}
-            {userId}
+            <div className="user-class-content-header">
+              <p>Your Class</p>
+            </div>
           </div>
         </div>
       )}
@@ -33,4 +29,4 @@ const TeacherProfile = () => {
   );
 };
 
-export default TeacherProfile;
+export default TeacherClass;

@@ -1,11 +1,11 @@
-.user-profile {
+.user-grades {
+  display: flex;
   width: 100%;
   height: auto;
   background: #f7f8fc;
-  display: flex;
 }
 
-.user-content {
+.user-content-grades {
   width: 95%;
   height: 100vh;
   background: #f7f8fc;

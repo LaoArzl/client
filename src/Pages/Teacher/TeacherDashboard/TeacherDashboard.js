@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
-import { StudentDashboardData } from "./StudentDashboardData";
+import { TeacherDashboardData } from "./TeacherDashboardData";
 import { Link } from "react-router-dom";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-import "./StudentDashboard.css";
 import { DashboardContext } from "../../../ContextFiles/DashboardContext";
 
-const StudentDashboard = () => {
+const TeacherDashboard = () => {
   const [showName, setShowName] = useContext(DashboardContext);
   const dashboardMenu = () => {
     setShowName(!showName);
@@ -22,7 +21,7 @@ const StudentDashboard = () => {
           <i onClick={dashboardMenu} class="fas fa-bars"></i>
         </div>
         <ul className={showName ? "dashboard-extra-links" : "dashboard-links"}>
-          {StudentDashboardData.map((val, key) => {
+          {TeacherDashboardData.map((val, key) => {
             return (
               <Link className="router-link" to={val.link} key={key}>
                 <Tippy content={val.name} arrow={false} placement="right">
@@ -65,4 +64,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default TeacherDashboard;
