@@ -6,6 +6,7 @@ export const LoginContext = createContext();
 export const LoginProvider = (props) => {
   const [accessToken, setAccessToken] = useState("");
   const [role, setRole] = useState("");
+  const [userID, setUserID] = useState("");
 
   Axios.defaults.withCredentials = true;
 
@@ -27,6 +28,7 @@ export const LoginProvider = (props) => {
       value={{
         value1: [accessToken, setAccessToken],
         loginRole: [role, setRole],
+        valueID: [userID, setUserID],
       }}
     >
       {props.children}

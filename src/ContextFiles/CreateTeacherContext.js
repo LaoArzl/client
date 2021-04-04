@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 
 export const CreateTeacherContext = createContext();
 
@@ -13,6 +13,7 @@ export const CreateTeacherState = (props) => {
   const [firstnameTeacher, setFirstnameTeacher] = useState("");
   const [genderTeacher, setGenderTeacher] = useState("");
   const [registerStatusTeac, setRegisterStatusTeac] = useState("");
+  const [regTeacher, setRegTeacher] = useState({});
   return (
     <CreateTeacherContext.Provider
       value={{
@@ -26,6 +27,7 @@ export const CreateTeacherState = (props) => {
         value8: [firstnameTeacher, setFirstnameTeacher],
         value9: [genderTeacher, setGenderTeacher],
         value10: [registerStatusTeac, setRegisterStatusTeac],
+        valueRegTeacher: [regTeacher, setRegTeacher],
       }}
     >
       {props.children}

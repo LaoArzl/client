@@ -50,6 +50,7 @@ const Class = () => {
   const [classCapacity, setClassCapacity] = useState(0);
   const [classYear, setClassYear] = useState("");
   const [classAdviser, setClassAdviser] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const submitCreate = () => {
     Axios.post("http://localhost:3001/class/create-class", {
@@ -57,6 +58,17 @@ const Class = () => {
       classCapacity: classCapacity,
       classYear: classYear,
       classAdviser: classAdviser,
+    }).then((response) => {
+      if (response.data.err) {
+        setErrMsg(response.data.err);
+      } else if (response.data.success) {
+        setClassName("");
+        setClassCapacity("");
+        setClassYear("");
+        setClassAdviser("");
+        setErrMsg(response.data.success);
+        setTimeout(() => setErrMsg(""), 5000);
+      }
     });
   };
 
@@ -72,6 +84,17 @@ const Class = () => {
                 onSubmit={(e) => e.preventDefault()}
                 className="create-subject-form"
               >
+                <div
+                  className={
+                    errMsg === ""
+                      ? "class-error-message"
+                      : errMsg === "Successfully created"
+                      ? "class-error-message-green"
+                      : "class-error-message-red"
+                  }
+                >
+                  {errMsg}
+                </div>
                 <div className="create-class-div">
                   <label>Class Name</label>
                   <input
@@ -86,6 +109,8 @@ const Class = () => {
                     onChange={(e) => setClassCapacity(e.target.value)}
                     value={classCapacity}
                     type="number"
+                    min="1"
+                    max="40"
                   ></input>
                 </div>
                 <div className="create-class-div">
@@ -152,7 +177,9 @@ const Class = () => {
           ></div>
           <div className="class-content">
             <DashboardHeader />
-            <div className="class-actual-header">Classroom</div>
+            <div className="class-actual-header">
+              <h2>Classroom</h2>
+            </div>
             <div className="class-actual-body">
               <div className="class-actual-body-header">
                 <div className="class-actual-body-header-nav">
@@ -206,7 +233,7 @@ const Class = () => {
                   {classroom.map((key, value) => {
                     return (
                       <div
-                        key={value}
+                        key={key._id}
                         className="class-actual-body-active-body"
                       >
                         <div className="class-actual-body-active-number">

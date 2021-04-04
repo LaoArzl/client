@@ -4,12 +4,19 @@ import { Link } from "react-router-dom";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { DashboardContext } from "../../../ContextFiles/DashboardContext";
+import { LoginContext } from "../../../ContextFiles/LoginContext";
 
-const TeacherDashboard = () => {
+const TeacherDashboard = (props) => {
   const [showName, setShowName] = useContext(DashboardContext);
+  const { valueID } = useContext(LoginContext);
+  const [userID, setUserID] = valueID;
+
   const dashboardMenu = () => {
     setShowName(!showName);
   };
+
+  const id = localStorage.getItem("id");
+
   return (
     <>
       <div className={showName ? "extra-sidebar" : "sidebar"}>
@@ -18,18 +25,19 @@ const TeacherDashboard = () => {
             showName ? "dashboard-extra-menu-section" : "dashboard-menu-section"
           }
         >
-          <i onClick={dashboardMenu} class="fas fa-bars"></i>
+          <i onClick={dashboardMenu} className="fas fa-bars"></i>
         </div>
         <ul className={showName ? "dashboard-extra-links" : "dashboard-links"}>
           {TeacherDashboardData.map((val, key) => {
             return (
-              <Link className="router-link" to={val.link} key={key}>
+              <Link className="router-link" to={val.link + id} key={key}>
                 <Tippy content={val.name} arrow={false} placement="right">
                   <li
                     className="li-middle"
-                    key={key}
                     id={
-                      window.location.pathname === val.link ? "link-active" : ""
+                      window.location.pathname === val.link + id
+                        ? "link-active"
+                        : ""
                     }
                   >
                     <div
@@ -37,7 +45,7 @@ const TeacherDashboard = () => {
                         showName ? "dashboard-extra-icon" : "dashboard-icon"
                       }
                       id={
-                        window.location.pathname === val.link
+                        window.location.pathname === val.link + id
                           ? "icon-active"
                           : "icon-inactive"
                       }

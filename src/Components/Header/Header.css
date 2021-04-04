@@ -50,7 +50,7 @@
 .navbar {
   width: 100%;
   height: 7vh;
-  background: #0d8f34;
+  background: #05803e;
   display: flex;
   justify-content: center;
   min-height: 40px;
@@ -98,7 +98,7 @@
 
 .portal-route-link {
   text-decoration: none;
-  color: #026b24;
+  color: #056934;
   height: 100%;
   width: 100%;
   justify-content: center;
@@ -228,7 +228,7 @@
     display: flex;
     min-width: 111%;
     height: auto;
-    background: linear-gradient(180deg, #0d8f34, #0eb13f);
+    background: linear-gradient(180deg, #05803e, #07a14f);
     flex-direction: column;
     position: absolute;
     top: 100%;

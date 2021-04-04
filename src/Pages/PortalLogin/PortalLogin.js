@@ -3,7 +3,7 @@ import "./PortalLogin.css";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../ContextFiles/LoginContext";
-import { ClipLoader } from "react-spinners";
+import { StudentListContext } from "../../ContextFiles/StudentListContext";
 
 const PortalLogin = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +11,10 @@ const PortalLogin = () => {
   const [error, setError] = useState("");
 
   //Data from LoginContext
-  const { loginRole } = useContext(LoginContext);
+  const { loginRole, valueID } = useContext(LoginContext);
+  const [userID, setUserID] = valueID;
+  const { value01 } = useContext(StudentListContext);
+  const [teachers, setTeachers] = value01;
   const [role, setRole] = loginRole;
   const [loadingLog, setLoadingLog] = useState(false);
 
@@ -31,7 +34,8 @@ const PortalLogin = () => {
       } else if (!response.data.auth) {
         console.log("Error Logging in");
       } else if (response.data.auth) {
-        // window.location.reload();
+        localStorage.setItem("id", response.data._id);
+
         localStorage.setItem("token", response.data.token);
         setRole(response.data.userType);
       }
@@ -61,15 +65,18 @@ const PortalLogin = () => {
     });
   }, []);
 
+  const id = localStorage.getItem("id");
+
   return (
     <>
-      {/* {role === "Admin" && <Redirect to="/admin/dashboard" />} */}
-      {/* {role === "Teacher" && <Redirect to="/user/teacher" />} */}
-      {/* {role === "Student" && <Redirect to="/user/student" />} */}
       {role === "Teacher" ? (
-        <Redirect to="/user/teacher" />
+        <>
+          <Redirect to={"/user/teacher/" + id} />;
+        </>
       ) : role === "Student" ? (
-        <Redirect to="/user/student" />
+        <>
+          <Redirect to="/user/student" />
+        </>
       ) : role === "Admin" ? (
         <Redirect to="/admin/dashboard" />
       ) : (

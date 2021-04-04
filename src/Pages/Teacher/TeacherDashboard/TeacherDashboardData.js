@@ -9,22 +9,22 @@ export const TeacherDashboardData = [
   {
     name: "Profile",
     icon: <AccountBoxOutlinedIcon fontSize="small" />,
-    link: "/user/teacher",
+    link: "/user/teacher/",
   },
   {
     name: "Class",
     icon: <LocalLibraryOutlinedIcon fontSize="small" />,
-    link: "/user/teacher/class",
+    link: "/user/teacher/class/",
   },
 
   {
     name: "Grades",
     icon: <RateReviewOutlinedIcon fontSize="small" />,
-    link: "/user/teacher/grades",
+    link: "/user/teacher/grades/",
   },
   {
     name: "Message",
     icon: <SendOutlinedIcon fontSize="small" />,
-    link: "/user/teacher/message",
+    link: "/user/teacher/message/",
   },
 ];

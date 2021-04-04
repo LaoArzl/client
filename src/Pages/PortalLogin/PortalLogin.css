@@ -92,7 +92,7 @@
 }
 
 .portal-login-input input:focus {
-  border: 1px solid #108d3580;
+  border: 1px solid #05803e;
   box-shadow: 0px 3px 30px 0px rgba(107, 255, 144, 0.1);
 }
 
@@ -140,7 +140,7 @@
   border-radius: 5px;
   outline: none;
   border: none;
-  background: #0e9e39;
+  background: #08a04f;
   color: rgb(255, 255, 255);
   font-weight: 500;
   cursor: pointer;
@@ -152,7 +152,7 @@
 }
 
 .portal-login-login input:hover {
-  background: #0d8b33;
+  background: #05803e;
   transition: 0.2s ease-in;
 }
 

@@ -24,7 +24,7 @@ const Dashboard = () => {
             showName ? "dashboard-extra-menu-section" : "dashboard-menu-section"
           }
         >
-          <i onClick={dashboardMenu} class="fas fa-bars"></i>
+          <i onClick={dashboardMenu} className="fas fa-bars"></i>
         </div>
         <ul className={showName ? "dashboard-extra-links" : "dashboard-links"}>
           {DashboardData.map((val, key) => {

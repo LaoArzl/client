@@ -1,7 +1,7 @@
 .userprofile-wrapper {
   width: 100%;
   height: auto;
-  background: #f7f8fc;
+  background: #ffffff;
   display: flex;
 }
 
@@ -9,7 +9,7 @@
   width: 95%;
   height: 100vh;
   overflow-y: scroll;
-  background: #f7f8fc;
+  background: #ffffff;
 }
 
 .user-profile-content {
@@ -65,7 +65,7 @@
   align-items: center;
   padding-left: 15%;
   cursor: pointer;
-  color: #323b44;
+  color: #0464fc;
   position: relative;
   font-size: 15px;
   font-weight: 500;
@@ -92,7 +92,7 @@
 } */
 
 .user-navigation-profile:hover {
-  color: #323b44;
+  color: #0464fc;
   transition: 0.1s ease-in;
   background: #f5f6fa;
 }
@@ -105,6 +105,7 @@
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
   border-radius: 20px;
   margin-bottom: 20px;
+  border: 1px solid rgb(235, 235, 235);
 }
 
 .user-nav-wrapper {
@@ -112,6 +113,7 @@
   height: auto;
 }
 
+/*User Profile */
 .user-nav-wrapper-header {
   width: 100%;
   height: 15vh;
@@ -119,6 +121,85 @@
   align-items: center;
   padding-left: 5%;
   color: #323b44;
+}
+
+.user-nav-wrapper-profile-body {
+  width: 100%;
+  height: auto;
+  padding-left: 5%;
+}
+
+.user-nav-wrapper-sub-header {
+  width: 100%;
+  height: 10vh;
+  color: #323b44;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.user-profile-photo {
+  width: 100px;
+  height: 100px;
+  background: rgb(232, 233, 235);
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 1px solid rgb(206, 206, 206);
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.user-profile-photo span {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  background: #0464fc;
+  border-radius: 50%;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.user-profile-photo span:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease-in;
+}
+
+.update-user-profile {
+  width: 55%;
+  height: auto;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 25px;
+}
+
+.update-user-profile label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.update-user-profile input {
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(244, 246, 248);
+  border: 1px solid rgb(227, 230, 233);
+  padding-left: 10px;
 }
 
 .user-nav-account-body {
@@ -152,6 +233,7 @@
   height: auto;
   margin-bottom: 20px;
   color: rgb(30, 197, 30);
+  font-size: 15px;
 }
 .div-red {
   display: flex;
@@ -160,6 +242,7 @@
   height: auto;
   margin-bottom: 20px;
   color: red;
+  font-size: 15px;
 }
 
 .div input {

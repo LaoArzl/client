@@ -16,7 +16,7 @@ const DashboardHome = () => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/total-student").then((response) => {
-      if (response.data.length == 0) {
+      if (response.data.length === 0) {
         setTotalStudent(0);
       } else {
         setTotalStudent(response.data);
@@ -26,7 +26,7 @@ const DashboardHome = () => {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/total-teacher").then((response) => {
-      if (response.data.length == 0) {
+      if (response.data.length === 0) {
         setTotalTeacher(0);
       } else {
         setTotalTeacher(response.data);

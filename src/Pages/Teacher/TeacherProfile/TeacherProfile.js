@@ -8,12 +8,21 @@ import ProfileCard from "../../../Components/ProfileCard/ProfileCard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import TeacherDashboard from "../TeacherDashboard/TeacherDashboard";
 
-const TeacherProfile = () => {
-  const { loginRole, value3 } = useContext(LoginContext);
+const TeacherProfile = (props) => {
+  const { loginRole, valueID } = useContext(LoginContext);
   const [role, setRole] = loginRole;
+  const pops = props.id;
+  const [teacherData, setTeacherData] = useState([]);
 
-  const [userId, setUserId] = useState("");
-  const [fullname, setFullname] = useState("");
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/teacher/${pops}`).then((response) => {
+      if (response.data.length === 0) {
+        setTeacherData([]);
+      } else {
+        setTeacherData(response.data);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -21,11 +30,12 @@ const TeacherProfile = () => {
         <BrokenPage />
       ) : (
         <div className="user-profile">
-          <TeacherDashboard />
+          <TeacherDashboard id={pops} />
           <div className="user-content">
             <DashboardHeader />
-            {fullname}
-            {userId}
+            <div className="user-content-header">
+              <h2>Teacher {teacherData.firstname}</h2>
+            </div>
           </div>
         </div>
       )}

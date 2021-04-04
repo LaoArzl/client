@@ -1,0 +1,217 @@
+.create-user-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: #ffffff;
+}
+
+.create-user-content {
+  width: 95%;
+  height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.create-user-content-header {
+  width: 95%;
+  height: 20vh;
+  background: white;
+  border-radius: 10px;
+
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.create-teacher-btn,
+.create-student-btn {
+  width: 13%;
+  height: 45%;
+  background: #0464fc;
+  margin-right: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease-out;
+}
+
+.create-teacher-btn:hover,
+.create-student-btn:hover {
+  background: #0455d6;
+  transition: 0.2s ease-in;
+}
+
+.create-btn-diactive {
+  width: 13%;
+  height: 45%;
+  background: rgb(229, 234, 236);
+  margin-right: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a4adb6;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease-out;
+}
+
+.create-btn-diactive:hover {
+  background: rgb(206, 210, 212);
+  transition: 0.2s ease-in;
+}
+
+.create-user-content-body {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+/*Children Component */
+.user-wrapper {
+  width: 100%;
+  height: auto;
+  background: white;
+  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 10px;
+}
+
+.left-right-wrapper {
+  width: 100%;
+
+  display: flex;
+}
+.user-wrapper-left {
+  width: 50%;
+  height: 100%;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 40px;
+  height: 70vh;
+}
+
+.user-wrapper-right {
+  width: 50%;
+  height: 100%;
+  padding-top: 40px;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
+}
+
+.user-wrapper-left div,
+.user-wrapper-right div {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-bottom: 25px;
+}
+
+.user-wrapper-left div input,
+.user-wrapper-right div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(244, 246, 248);
+  border: 1px solid rgb(227, 230, 233);
+  padding-left: 10px;
+}
+
+.user-wrapper-left div select,
+.user-wrapper-right div select {
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(244, 246, 248);
+  border: 1px solid rgb(227, 230, 233);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.user-wrapper-left div input:focus,
+.user-wrapper-right div input:focus,
+.user-wrapper-left div select:focus,
+.user-wrapper-right div select:focus {
+  border: 1px solid rgb(137, 185, 228);
+}
+
+.user-wrapper-left div label,
+.user-wrapper-right div label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.user-wrapper-right span {
+  width: 80%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+#submit-btn {
+  width: 25%;
+  height: 40px;
+  background: #0464fc;
+  outline-style: none;
+  border-style: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+#submit-btn:hover {
+  background: #0455d6;
+  transition: 0.2s ease-in;
+}
+
+.error-prompt {
+  width: 85%;
+  margin: 0 auto;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  display: none;
+}
+
+.error-prompt-green {
+  color: rgb(17, 172, 17);
+  width: 85%;
+  margin: 0 auto;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.error-prompt-red {
+  color: red;
+  width: 85%;
+  margin: 0 auto;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}

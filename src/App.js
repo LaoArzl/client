@@ -29,6 +29,7 @@ import Teachers from "./Pages/Admin/Teachers/Teachers";
 import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
 import AdminFees from "./Pages/Admin/Fees/AdminFees";
+import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -38,14 +39,12 @@ import { CreateStudentState } from "./ContextFiles/CreateStudentContext";
 import { StudentListProvider } from "./ContextFiles/StudentListContext";
 import { CreateTeacherState } from "./ContextFiles/CreateTeacherContext";
 
-//Protected Routes
-import ProtectedAdmin from "./ProtectedRoutes/ProtectedAdmin";
-
 //Teacher Pages
 import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
 import TeacherGrades from "./Pages/Teacher/TeacherGrades/TeacherGrades";
 import TeacherClass from "./Pages/Teacher/TeacherClass/TeacherClass";
 import TeacherMessage from "./Pages/Teacher/TeacherMessage/TeacherMessage";
+import ClassTeacher from "./Pages/ClassComponents/ClassTeacher";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
@@ -55,25 +54,15 @@ import StudentMessage from "./Pages/Student/StudentMessage/StudentMessage";
 import Fees from "./Pages/Student/Fees/Fees";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
-
-  Axios.defaults.withCredentials = true;
-  useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
-      if (response.data.loggedIn && response.data.user === "Admin") {
-        setIsAuth(true);
-      } else {
-        setIsAuth(false);
-      }
-    });
-  }, []);
-
   const [studentUser, setStudentUser] = useState([]);
   const [teacherUser, setTeacherUser] = useState([]);
+  const [classData, setClassData] = useState([]);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/student-list").then((response) => {
-      if (response.data) {
+      if (response.data.length === 0) {
+        setStudentUser([]);
+      } else {
         setStudentUser(response.data);
       }
     });
@@ -81,8 +70,20 @@ function App() {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/teacher-list").then((response) => {
-      if (response.data) {
+      if (response.data.length === 0) {
+        setTeacherUser([]);
+      } else {
         setTeacherUser(response.data);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/class/classroom-list").then((response) => {
+      if (response.data.length === 0) {
+        setClassData([]);
+      } else {
+        setClassData(response.data);
       }
     });
   }, []);
@@ -170,6 +171,7 @@ function App() {
                         {teacherUser.map((value) => {
                           return (
                             <Route
+                              key={value._id}
                               path={"/admin/edit-user/" + value._id}
                               id={value._id}
                               exact
@@ -196,6 +198,12 @@ function App() {
                         />
 
                         <Route
+                          path="/admin/admission"
+                          exact
+                          component={CreateUser}
+                        />
+
+                        <Route
                           path="/admin/teachers"
                           exact
                           component={Teachers}
@@ -203,27 +211,46 @@ function App() {
 
                         <Route path="/admin/fees" exact component={AdminFees} />
 
-                        <Route
-                          path="/user/teacher/"
-                          exact
-                          component={TeacherProfile}
-                        />
+                        {teacherUser.map((value) => {
+                          return (
+                            <Route path={"/user/teacher/" + value._id} exact>
+                              <TeacherProfile id={value._id} />
+                            </Route>
+                          );
+                        })}
 
-                        <Route
-                          path="/user/teacher/grades"
-                          exact
-                          component={TeacherGrades}
-                        />
-                        <Route
-                          path="/user/teacher/class"
-                          exact
-                          component={TeacherClass}
-                        />
-                        <Route
-                          path="/user/teacher/message"
-                          exact
-                          component={TeacherMessage}
-                        />
+                        {teacherUser.map((value) => {
+                          return (
+                            <Route
+                              path={"/user/teacher/grades/" + value._id}
+                              exact
+                            >
+                              <TeacherGrades />
+                            </Route>
+                          );
+                        })}
+
+                        {teacherUser.map((value) => {
+                          return (
+                            <Route
+                              path={"/user/teacher/class/" + value._id}
+                              exact
+                            >
+                              <TeacherClass id={value._id} />
+                            </Route>
+                          );
+                        })}
+
+                        {teacherUser.map((value) => {
+                          return (
+                            <Route
+                              path={"/user/teacher/message/" + value._id}
+                              exact
+                            >
+                              <TeacherMessage />
+                            </Route>
+                          );
+                        })}
 
                         <Route
                           path="/user/student/"
@@ -251,6 +278,22 @@ function App() {
                           exact
                           component={Fees}
                         />
+
+                        {classData.map((key, value) => {
+                          return (
+                            <Route
+                              key={key}
+                              path={"/teacher-class/" + key._id}
+                              exact
+                            >
+                              <ClassTeacher
+                                id={key._id}
+                                name={key.className}
+                                adviser={key.adviser_id}
+                              />
+                            </Route>
+                          );
+                        })}
 
                         <Route
                           path="*"

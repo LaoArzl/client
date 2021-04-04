@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
-import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import ForumOutlinedIcon from "@material-ui/icons/ForumOutlined";
 import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
-import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
+import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 
 export const DashboardData = [
@@ -13,6 +13,11 @@ export const DashboardData = [
     name: "Dashboard",
     icon: <DashboardOutlinedIcon fontSize="small" />,
     link: "/admin/dashboard",
+  },
+  {
+    name: "Admission",
+    icon: <PersonAddOutlinedIcon fontSize="small" />,
+    link: "/admin/admission",
   },
 
   {
@@ -33,7 +38,7 @@ export const DashboardData = [
 
   {
     name: "Messages",
-    icon: <SendOutlinedIcon fontSize="small" />,
+    icon: <ForumOutlinedIcon fontSize="small" />,
     link: "/admin/message",
   },
   {
