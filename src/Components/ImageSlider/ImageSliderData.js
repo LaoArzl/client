@@ -5,7 +5,7 @@ import Slider3 from "./Slider3.jpg";
 export const ImageSliderData = [
   {
     image: Slider1,
-    title: "Early Childhood Prep Learning Center",
+    title: "Early Childhood Prep Learning Centers",
     subTitle: "Putik, Zamboanga City",
     indicator: [
       <i className="fas fa-circle"></i>,
