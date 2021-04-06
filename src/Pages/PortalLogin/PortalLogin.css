@@ -34,7 +34,6 @@
 .login-error-messages {
   width: 75%;
   height: 10%;
-  background: rgb(255, 210, 210);
   font-size: 14px;
   display: flex;
   justify-content: center;
@@ -42,7 +41,6 @@
   align-items: center;
   margin-bottom: 10px;
   color: rgb(209, 24, 24);
-  border: 1px solid rgb(255, 151, 151);
   border-radius: 3px;
 }
 

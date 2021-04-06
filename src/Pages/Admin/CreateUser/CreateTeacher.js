@@ -9,6 +9,7 @@ const CreateTeacher = (props) => {
       id: props.regTeacher.id,
       password: props.regTeacher.password,
       rePassword: props.regTeacher.rePassword,
+      gender: props.regTeacher.gender,
       lastname: props.regTeacher.lastname,
       firstname: props.regTeacher.firstname,
       middlename: props.regTeacher.middlename,
@@ -32,6 +33,7 @@ const CreateTeacher = (props) => {
           lastname: "",
           firstname: "",
           middlename: "",
+          gender: "",
         });
         props.setTeachers([
           ...props.teachers,
@@ -47,6 +49,7 @@ const CreateTeacher = (props) => {
               "." +
               " " +
               props.regTeacher.lastname,
+            gender: props.regTeacher.gender,
           },
         ]);
       }
@@ -85,6 +88,7 @@ const CreateTeacher = (props) => {
                     lastname: props.regTeacher.lastname,
                     firstname: props.regTeacher.firstname,
                     middlename: props.regTeacher.middlename,
+                    gender: props.regTeacher.gender,
                   });
                 }}
               ></input>
@@ -105,6 +109,7 @@ const CreateTeacher = (props) => {
                     lastname: props.regTeacher.lastname,
                     firstname: props.regTeacher.firstname,
                     middlename: props.regTeacher.middlename,
+                    gender: props.regTeacher.gender,
                   });
                 }}
               ></input>
@@ -125,9 +130,37 @@ const CreateTeacher = (props) => {
                     lastname: props.regTeacher.lastname,
                     firstname: props.regTeacher.firstname,
                     middlename: props.regTeacher.middlename,
+                    gender: props.regTeacher.gender,
                   });
                 }}
               ></input>
+            </div>
+
+            <div>
+              <label>Gender *</label>
+              <select
+                value={props.regTeacher.gender}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  props.setRegTeacher({
+                    id: props.regTeacher.id,
+                    userType: props.regTeacher.userType,
+                    password: props.regTeacher.password,
+                    rePassword: props.regTeacher.rePassword,
+                    lastname: props.regTeacher.lastname,
+                    firstname: props.regTeacher.firstname,
+                    middlename: props.regTeacher.middlename,
+                    gender: value,
+                  });
+                }}
+              >
+                <option disabled value="">
+                  Select Option
+                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
           <div className="user-wrapper-right">
@@ -146,6 +179,7 @@ const CreateTeacher = (props) => {
                     lastname: value,
                     firstname: props.regTeacher.firstname,
                     middlename: props.regTeacher.middlename,
+                    gender: props.regTeacher.gender,
                   });
                 }}
               ></input>
@@ -166,6 +200,7 @@ const CreateTeacher = (props) => {
                     lastname: props.regTeacher.lastname,
                     firstname: value,
                     middlename: props.regTeacher.middlename,
+                    gender: props.regTeacher.gender,
                   });
                 }}
               ></input>
@@ -185,10 +220,13 @@ const CreateTeacher = (props) => {
                     lastname: props.regTeacher.lastname,
                     firstname: props.regTeacher.firstname,
                     middlename: value,
+                    gender: props.regTeacher.gender,
                   });
                 }}
               ></input>
             </div>
+
+
 
             <span>
               <input

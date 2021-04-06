@@ -2,13 +2,13 @@
   width: 100%;
   height: auto;
   display: flex;
-  background: #f7f8fc;
+  background: #ffffff;
 }
 
 .class-content {
   width: 95%;
   height: 100vh;
-  background: #f7f8fc;
+  background: #f7f8fb;
   overflow-y: scroll;
 }
 

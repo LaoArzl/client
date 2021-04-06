@@ -3,6 +3,7 @@
   width: 100%;
   height: auto;
   position: relative;
+  background: #f7f8fb;
 }
 
 .class-wrapper-active {
@@ -11,7 +12,7 @@
   height: 100vh;
   background: #00000075;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   top: 0;
 }
@@ -20,18 +21,7 @@
   width: 95%;
   height: 100vh;
   overflow-y: scroll;
-}
-
-.class-actual-header {
-  width: 95%;
-  height: 10vh;
-  margin: 0 auto;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  color: #323b44;
+  background: #f7f8fb;
 }
 
 .class-actual-body {
@@ -43,7 +33,6 @@
   border-radius: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
-  border: 1px solid rgb(235, 235, 235);
 }
 
 .class-actual-body-header {
@@ -53,6 +42,46 @@
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.div-class-search {
+  width: 35%;
+  height: 60%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.div-class-active {
+  width: 15%;
+  height: 60%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.div-class-search i {
+  position: absolute;
+  left: 15px;
+  color: #1dbc60;
+  font-size: 14px;
+}
+
+.div-class-search input {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border-style: none;
+  outline-style: none;
+  padding-left: 40px;
+  border: 1px solid rgb(235, 235, 235);
+  padding-right: 10px;
+}
+
+.div-class-search input:focus {
+  border: 1px solid rgb(184, 198, 214);
 }
 
 .class-actual-body-header-nav {
@@ -74,16 +103,28 @@
 
 .class-actual-body-header-1-active,
 .class-actual-body-header-2-active {
-  width: 25%;
+  width: 40%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0464fc;
-  border-bottom: 2px solid #0464fc;
+  color: #1dbc60;
+  border-bottom: 2px solid #1dbc60;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+}
+.class-actual-body-header-1,
+.class-actual-body-header-2 {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #7a7a7a;
 }
 
 .class-actual-body-header-2 {
@@ -101,7 +142,7 @@
   width: 12%;
   min-width: 125px;
   height: 65%;
-  background: #0464fc;
+  background: #1dbc60;
   color: #ffffff;
   border-radius: 8px;
   display: flex;
@@ -114,7 +155,7 @@
 }
 
 .add-class-button:hover {
-  background: #044ec7;
+  background: #17974c;
   transition: 0.2s ease-in;
 }
 
@@ -151,7 +192,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  z-index: 3;
+  z-index: 4;
   padding-top: 35px;
   padding-bottom: 15px;
 }
@@ -205,7 +246,7 @@
 .create-class-create-btn {
   width: 22%;
   height: 45px;
-  background: #0464fc;
+  background: #1dbc60;
   border-style: none;
   outline-style: none;
   border-radius: 5px;
@@ -216,7 +257,7 @@
 }
 .create-class-create-btn:hover {
   transition: 0.2s ease-in;
-  background: #044ec7;
+  background: #17974c;
 }
 
 .create-class-reset-btn {
@@ -246,37 +287,33 @@
 .class-actual-body-active-header {
   width: 100%;
   height: 10vh;
-  border-bottom: 1px solid rgb(235, 235, 235);
+  border-bottom: 5px solid #f7f8fb;
   display: flex;
-}
-
-.class-actual-body-active-number {
-  width: 5%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 13px;
+  color: #7a7a7a;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
 }
 
 .class-actual-body-active-name {
-  width: 25%;
+  width: 20%;
   height: 100%;
-
   display: flex;
   align-items: center;
-  padding-left: 20px;
 }
 
 .class-actual-body-active-adviser {
-  width: 25%;
+  width: 20%;
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 20px;
 }
 
 .class-actual-body-active-capacity {
-  width: 35%;
+  width: 20%;
   height: 100%;
   justify-content: center;
   display: flex;
@@ -312,10 +349,21 @@
 
 .class-actual-body-active-body {
   width: 100%;
-  height: 8vh;
+  height: 10vh;
   display: flex;
-  border-bottom: 1px solid rgb(235, 235, 235);
-  color: rgb(95, 95, 95);
+  color: #323b44;
+  border-bottom: 2px solid #f7f8fb;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.class-actual-body-active-body:hover {
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 8px 30px 0px rgba(75, 100, 116, 0.1);
+  transition: 0.1s ease-in-out;
 }
 
 .class-error-message-green {

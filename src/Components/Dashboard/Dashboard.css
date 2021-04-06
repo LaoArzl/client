@@ -1,7 +1,7 @@
 .sidebar {
   width: 5%;
   height: 100vh;
-  background: #f2f4f7;
+  background: #1f2532;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 .extra-sidebar {
   width: 17%;
   height: 100vh;
-  background: #f2f4f7;
+  background: #1f2532;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -53,30 +53,27 @@
 
 .router-link {
   list-style: none;
-  color: #9096a1;
+  color: #6a768f;
   text-decoration: none;
   width: 100%;
-  height: 10%;
+  height: 11%;
   font-weight: 500;
   transition: 0.1s ease-out;
   position: relative;
 }
 
 #link-active::after {
-  width: 2px;
-  height: 50%;
+  width: 80%;
+  height: 60%;
   content: "";
   position: absolute;
-  right: 0;
+  right: 50%;
   top: 50%;
-  transform: translateY(-50%);
-  background: #0464fc;
-  border-radius: 50px;
 }
 
 .dashboard-links li:hover,
 .dashboard-extra-links li:hover {
-  color: #0464fc;
+  color: #01cb63;
   transition: 0.1s ease-in;
 }
 
@@ -95,24 +92,23 @@
 }
 
 #link-active {
-  color: #0464fc;
+  color: #ffffff;
   width: 100%;
   transition: 0.1s ease-in;
   align-items: center;
-  position: relative;
   font-weight: 500;
 }
 
 #link-active .dashboard-icon,
 #link-active .dashboard-extra-icon {
-  color: #0464fc;
+  color: #01cb63;
 }
 
 .dashboard-menu-section {
   width: 100%;
   height: 10%;
-  color: #323b44;
-  background: #f2f4f7;
+  color: #ffffff;
+  background: #1f2532;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,8 +117,8 @@
 .dashboard-extra-menu-section {
   width: 100%;
   height: 10%;
-  color: #323b44;
-  background: #f2f4f7;
+  color: #ffffff;
+  background: #1f2532;
   display: flex;
   align-items: center;
   justify-content: center;

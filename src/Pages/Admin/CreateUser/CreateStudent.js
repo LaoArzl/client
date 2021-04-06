@@ -10,6 +10,7 @@ const CreateStudent = (props) => {
       year: props.regStudent.year,
       password: props.regStudent.password,
       rePassword: props.regStudent.rePassword,
+      gender: props.regStudent.gender,
       lastname: props.regStudent.lastname,
       firstname: props.regStudent.firstname,
       middlename: props.regStudent.middlename,
@@ -34,6 +35,7 @@ const CreateStudent = (props) => {
           lastname: "",
           firstname: "",
           middlename: "",
+          gnder: "",
         });
         props.setStudents([
           ...props.students,
@@ -50,6 +52,7 @@ const CreateStudent = (props) => {
               " " +
               props.regStudent.lastname,
             year: props.regStudent.year,
+            gender: props.regStudent.gender,
           },
         ]);
       }
@@ -86,6 +89,7 @@ const CreateStudent = (props) => {
                     year: props.regStudent.year,
                     password: props.regStudent.password,
                     rePassword: props.regStudent.rePassword,
+                    gender: props.regStudent.gender,
                     lastname: props.regStudent.lastname,
                     firstname: props.regStudent.firstname,
                     middlename: props.regStudent.middlename,
@@ -106,6 +110,7 @@ const CreateStudent = (props) => {
                     year: value,
                     password: props.regStudent.password,
                     rePassword: props.regStudent.rePassword,
+                    gender: props.regStudent.gender,
                     lastname: props.regStudent.lastname,
                     firstname: props.regStudent.firstname,
                     middlename: props.regStudent.middlename,
@@ -113,7 +118,7 @@ const CreateStudent = (props) => {
                 }}
               >
                 <option disabled value="">
-                  - Select Option -
+                  Select Option
                 </option>
                 <option value="Kinder 1">Kinder 1</option>
                 <option value="Kinder 2">Kinder 2</option>
@@ -139,6 +144,7 @@ const CreateStudent = (props) => {
                     year: props.regStudent.year,
                     password: value,
                     rePassword: props.regStudent.rePassword,
+                    gender: props.regStudent.gender,
                     lastname: props.regStudent.lastname,
                     firstname: props.regStudent.firstname,
                     middlename: props.regStudent.middlename,
@@ -160,6 +166,7 @@ const CreateStudent = (props) => {
                     year: props.regStudent.year,
                     password: props.regStudent.password,
                     rePassword: value,
+                    gender: props.regStudent.gender,
                     lastname: props.regStudent.lastname,
                     firstname: props.regStudent.firstname,
                     middlename: props.regStudent.middlename,
@@ -169,6 +176,34 @@ const CreateStudent = (props) => {
             </div>
           </div>
           <div className="user-wrapper-right">
+            <div>
+              <label>Gender *</label>
+              <select
+                value={props.regStudent.gender}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  props.setRegStudent({
+                    id: props.regStudent.id,
+                    userType: props.regStudent.userType,
+                    year: props.regStudent.year,
+                    password: props.regStudent.password,
+                    rePassword: props.regStudent.rePassword,
+                    lastname: props.regStudent.lastname,
+                    firstname: props.regStudent.firstname,
+                    middlename: props.regStudent.middlename,
+                    gender: value,
+                  });
+                }}
+              >
+                <option value="" disabled>
+                  Select Option
+                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
             <div>
               <label>Last Name *</label>
               <input
@@ -182,6 +217,7 @@ const CreateStudent = (props) => {
                     year: props.regStudent.year,
                     password: props.regStudent.password,
                     rePassword: props.regStudent.rePassword,
+                    gender: props.regStudent.gender,
                     lastname: value,
                     firstname: props.regStudent.firstname,
                     middlename: props.regStudent.middlename,
@@ -203,6 +239,7 @@ const CreateStudent = (props) => {
                     year: props.regStudent.year,
                     password: props.regStudent.password,
                     rePassword: props.regStudent.rePassword,
+                    gender: props.regStudent.gender,
                     lastname: props.regStudent.lastname,
                     firstname: value,
                     middlename: props.regStudent.middlename,
@@ -223,6 +260,7 @@ const CreateStudent = (props) => {
                     year: props.regStudent.year,
                     password: props.regStudent.password,
                     rePassword: props.regStudent.rePassword,
+                    gender: props.regStudent.gender,
                     lastname: props.regStudent.lastname,
                     firstname: props.regStudent.firstname,
                     middlename: value,

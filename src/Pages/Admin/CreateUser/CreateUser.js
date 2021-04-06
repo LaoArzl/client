@@ -34,6 +34,7 @@ const CreateUser = () => {
       lastname: "",
       firstname: "",
       middlename: "",
+      gender: "",
     });
   }, []);
 
@@ -45,6 +46,7 @@ const CreateUser = () => {
       lastname: "",
       firstname: "",
       middlename: "",
+      gender: "",
     });
   }, []);
 
@@ -60,26 +62,28 @@ const CreateUser = () => {
           <div className="create-user-content">
             <DashboardHeader />
             <div className="create-user-content-header">
-              <span
-                onClick={() => setButtonState(false)}
-                className={
-                  buttonState === false
-                    ? "create-student-btn"
-                    : "create-btn-diactive"
-                }
-              >
-                Student
-              </span>
-              <span
-                onClick={() => setButtonState(true)}
-                className={
-                  buttonState === true
-                    ? "create-teacher-btn"
-                    : "create-btn-diactive"
-                }
-              >
-                Teacher
-              </span>
+              <div className="create-user-content-header-wrapper">
+                <span
+                  onClick={() => setButtonState(false)}
+                  className={
+                    buttonState === false
+                      ? "create-student-btn"
+                      : "create-btn-diactive"
+                  }
+                >
+                  Student
+                </span>
+                <span
+                  onClick={() => setButtonState(true)}
+                  className={
+                    buttonState === true
+                      ? "create-teacher-btn"
+                      : "create-btn-diactive"
+                  }
+                >
+                  Teacher
+                </span>
+              </div>
             </div>
             <div className="create-user-content-body">
               {buttonState === false && (

@@ -32,9 +32,7 @@ const DashboardHeader = () => {
           </div>
           <div className="middle-separator"></div>
           <div onClick={logoutMenu} className="dashboard-admin-profile">
-            <div className="dashboard-header-profile">
-              <i className="fas fa-user-shield"></i>
-            </div>
+            <div className="dashboard-header-profile"></div>
             <div className="dashboard-header-profile-name">
               <i className="fas fa-chevron-down"></i>
             </div>

@@ -24,42 +24,35 @@ const Teachers = () => {
           <Dashboard />
           <div className="students-content">
             <DashboardHeader />
-            <div className="students-content-lists-header">
-              <h2>Teachers</h2>
+            <div className="students-content-lists-body-header">
+              <div className="div-class-search">
+                <i class="fas fa-search"></i>
+                <input type="search" placeholder="Search for a class"></input>
+              </div>
+              <div className="add-student-span-wrapper">
+                <span
+                  onClick={() => setShowExport(!showExport)}
+                  className="add-students-span-two"
+                >
+                  Export <i class="fas fa-caret-square-down"></i>
+                  <ul
+                    className={
+                      showExport ? "add-students-span-two-after" : "hidinger"
+                    }
+                  >
+                    <li>.CSV</li>
+                    <li>.pdf</li>
+                    <li>.docx</li>
+                  </ul>
+                </span>
+              </div>
             </div>
             <div className="students-content-lists-body">
-              <div className="students-content-lists-body-header">
-                <input
-                  type="search"
-                  className="students-content-search"
-                  placeholder="Type to Search"
-                  onChange={(e) => setSearchTeacher(e.target.value)}
-                  value={searchTeacher}
-                />
-                <div className="add-student-span-wrapper">
-                  <span
-                    onClick={() => setShowExport(!showExport)}
-                    className="add-students-span-two"
-                  >
-                    Export <i class="fas fa-caret-square-down"></i>
-                    <ul
-                      className={
-                        showExport ? "add-students-span-two-after" : "hidinger"
-                      }
-                    >
-                      <li>.CSV</li>
-                      <li>.pdf</li>
-                      <li>.docx</li>
-                    </ul>
-                  </span>
-                </div>
-              </div>
               <div className="student-list-header">
-                <div className="student-list-number">#</div>
                 <div className="student-list-id">Teacher ID</div>
                 <div className="student-list-name">Name</div>
-                <div className="student-list-gender">Gender</div>
-                <div className="student-list-gradelevel">Advising</div>
+
+                <div className="student-list-gradelevel">Gender</div>
                 <div className="student-list-action">Action</div>
               </div>
               {teachers
@@ -79,19 +72,13 @@ const Teachers = () => {
                 .map((value, key) => {
                   return (
                     <>
-                      <div className="student-list-body">
-                        <div className="student-list-number-span">
-                          {key + 1}
-                        </div>
+                      <div key={value._id} className="student-list-body">
                         <div className="student-list-id-span">{value._id}</div>
                         <div className="student-list-name-span">
                           {value.fullname}
                         </div>
-                        <div className="student-list-gender-span">
-                          {value.gender}
-                        </div>
                         <div className="student-list-gradelevel-span">
-                          {value.username}
+                          {value.gender}
                         </div>
                         <div className="student-list-action-span">
                           <Link

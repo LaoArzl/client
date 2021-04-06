@@ -120,7 +120,7 @@ const Class = () => {
                     value={classYear}
                   >
                     <option disabled value="">
-                      -Select Option-
+                      Select Option
                     </option>
                     <option value="Kinder 1">Kinder 1</option>
                     <option value="Kinder 2">Kinder 2</option>
@@ -140,7 +140,7 @@ const Class = () => {
                     value={classAdviser}
                   >
                     <option disabled value="">
-                      -Select Option-
+                      Select Option
                     </option>
                     {teachers.map((value, key) => {
                       return (
@@ -177,46 +177,43 @@ const Class = () => {
           ></div>
           <div className="class-content">
             <DashboardHeader />
-            <div className="class-actual-header">
-              <h2>Classroom</h2>
-            </div>
-            <div className="class-actual-body">
-              <div className="class-actual-body-header">
-                <div className="class-actual-body-header-nav">
-                  <div
-                    onClick={() => setActiveArch(false)}
-                    className={
-                      activeArch === false
-                        ? "class-actual-body-header-1-active"
-                        : "class-actual-body-header-1"
-                    }
-                  >
-                    Active
-                  </div>
-                  <div
-                    onClick={() => setActiveArch(true)}
-                    className={
-                      activeArch === true
-                        ? "class-actual-body-header-2-active"
-                        : "class-actual-body-header-2"
-                    }
-                  >
-                    Archived
-                  </div>
-                </div>
+            <div className="class-actual-body-header">
+              <div className="div-class-search">
+                <i class="fas fa-search"></i>
+                <input type="search" placeholder="Search for a class"></input>
+              </div>
+              <div className="div-class-active">
                 <span
-                  onClick={() => setShowCreate(true)}
-                  className="add-class-button"
+                  className={
+                    activeArch === false
+                      ? "class-actual-body-header-1-active"
+                      : "class-actual-body-header-1"
+                  }
                 >
-                  <i className="fas fa-plus"></i>
-                  Create Class
+                  Active
+                </span>
+                <span
+                  className={
+                    activeArch === true
+                      ? "class-actual-body-header-2-active"
+                      : "class-actual-body-header-1"
+                  }
+                >
+                  Archive
                 </span>
               </div>
-
+              <span
+                onClick={() => setShowCreate(true)}
+                className="add-class-button"
+              >
+                <i className="fas fa-plus"></i>
+                Create Class
+              </span>
+            </div>
+            <div className="class-actual-body">
               {activeArch === false ? (
                 <div className="class-actual-body-active">
                   <div className="class-actual-body-active-header">
-                    <div className="class-actual-body-active-number">#</div>
                     <div className="class-actual-body-active-name">
                       Class name
                     </div>
@@ -236,9 +233,6 @@ const Class = () => {
                         key={key._id}
                         className="class-actual-body-active-body"
                       >
-                        <div className="class-actual-body-active-number">
-                          {value + 1}
-                        </div>
                         <div className="class-actual-body-active-name">
                           {key.className}
                         </div>
