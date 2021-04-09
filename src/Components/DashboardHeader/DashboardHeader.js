@@ -1,23 +1,40 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./DashboardHeader.css";
 import Logo from "./logo.png";
 import { LogoutContext } from "../../ContextFiles/LogoutContext";
+import { LoginContext } from "../../ContextFiles/LoginContext";
 import Axios from "axios";
 
 const DashboardHeader = () => {
   const [logout, setLogout] = useContext(LogoutContext);
+  const [currUser, setCurrUser] = useState([]);
   const logoutMenu = () => {
     setLogout(!logout);
   };
 
   const submitLogout = () => {
-    Axios.get("http://localhost:3001/logout").then((response) => {
+    Axios.get("https://ecplcsms.herokuapp.com/logout").then((response) => {
       if (response) {
         localStorage.clear();
         window.location.reload();
       }
     });
   };
+
+  useEffect(() => {
+    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+      if (response.data.length === 0) {
+        setCurrUser([]);
+      } else if (
+        response.data.loggedIn === "true" ||
+        response.data.loggedIn === true
+      ) {
+        setCurrUser(response.data.session.user[0]);
+      } else {
+        setCurrUser([]);
+      }
+    });
+  }, []);
 
   return (
     <div className="dashboard-header">
@@ -45,7 +62,8 @@ const DashboardHeader = () => {
             >
               <span className="dashboard-profile-span1">
                 <p>
-                  <i className="fas fa-user-circle"></i>Profile
+                  <i className="fas fa-user-circle"></i>
+                  {currUser.fullname}
                 </p>
               </span>
               <span onClick={submitLogout} className="dashboard-profile-span2">
@@ -56,7 +74,6 @@ const DashboardHeader = () => {
             </div>
           </div>
         </div>
-        {/* <i className="far fa-question-circle"></i> Help */}
       </div>
     </div>
   );

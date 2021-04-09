@@ -14,27 +14,31 @@ export const StudentListProvider = (props) => {
   const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/student-list").then((response) => {
-      if (response.data.length == 0) {
-        setStudents([]);
-      } else {
-        setStudents(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
+      (response) => {
+        if (response.data.length == 0) {
+          setStudents([]);
+        } else {
+          setStudents(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/teacher-list").then((response) => {
-      if (response.data.length == 0) {
-        setTeachers([]);
-      } else {
-        setTeachers(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/teacher-list").then(
+      (response) => {
+        if (response.data.length == 0) {
+          setTeachers([]);
+        } else {
+          setTeachers(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/populate-teacher").then(
+    Axios.get("https://ecplcsms.herokuapp.com/class/populate-teacher").then(
       (response) => {
         if (response.data.length === 0) {
           setClassroom([]);
@@ -46,7 +50,7 @@ export const StudentListProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/all-users").then((response) => {
+    Axios.get("https://ecplcsms.herokuapp.com/all-users").then((response) => {
       if (response.data.length == 0) {
         setAllUsers([]);
       } else {

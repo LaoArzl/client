@@ -1,0 +1,42 @@
+.edit-class-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.edit-class-content {
+  width: 95%;
+  height: 100vh;
+  overflow-y: scroll;
+  background: white;
+}
+
+.edit-class-body {
+  width: 95%;
+  min-height: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-class-left {
+  width: 25%;
+  height: 30vh;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgb(235, 235, 235);
+}
+
+.edit-class-right {
+  width: 73%;
+  height: auto;
+  min-height: 200px;
+  background: white;
+  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(235, 235, 235);
+}

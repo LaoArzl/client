@@ -13,7 +13,7 @@ const TeacherClass = (props) => {
   const [yourClass, setYourClass] = useState([]);
   const [userID, setUserID] = valueID;
 
-  const url = `http://localhost:3001/class/${props.id}`;
+  const url = `https://ecplcsms.herokuapp.com/class/${props.id}`;
 
   useEffect(() => {
     Axios.get(url).then((response) => {
@@ -52,7 +52,7 @@ const TeacherClass = (props) => {
           <div className="user-class-content">
             <DashboardHeader />
             <div className="user-class-content-header">
-              <p>Your Class {userID}</p>
+              <h3>Your Class </h3>
             </div>
             <div className="user-class-content-body">
               {yourClass === null ? (

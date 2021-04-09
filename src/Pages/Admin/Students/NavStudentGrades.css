@@ -1,0 +1,77 @@
+.report-card-wrapper {
+  width: 95%;
+  min-height: 50px;
+  background: rgb(255, 255, 255);
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.report-card-wrapper-header {
+  width: 100%;
+  height: 6vh;
+  background: #323b4436;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  font-size: 0.85rem;
+}
+
+.report-card-wrapper-body-header {
+  width: 100%;
+  height: 6vh;
+  background: #ffffff;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  border: 1px solid rgb(235, 235, 235);
+  font-size: 15px;
+  font-weight: 500;
+  color: #323b44;
+}
+
+.report-card-wrapper-body {
+  width: 100%;
+  height: 6vh;
+  background: #ffffff;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  border: 1px solid rgb(235, 235, 235);
+  font-size: 14px;
+  color: #7a7a7a;
+}
+.card-subject {
+  width: 35%;
+  height: 100%;
+  border-right: 1px solid rgb(235, 235, 235);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+.card-q,
+.card-final {
+  width: 8%;
+  height: 100%;
+  border-right: 1px solid rgb(235, 235, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-remarks {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

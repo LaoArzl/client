@@ -8,7 +8,7 @@
 .class-content {
   width: 95%;
   height: 100vh;
-  background: #f7f8fb;
+  background: #ffffff;
   overflow-y: scroll;
 }
 
@@ -256,21 +256,6 @@
   color: #707983;
 
   font-size: 15px;
-}
-
-.people-wrapper-add-student-body-last {
-  width: 100%;
-  height: 10%;
-  position: sticky;
-  bottom: 0;
-}
-
-.people-wrapper-add-student-body-last button {
-  width: 100px;
-  height: 50px;
-  cursor: pointer;
-  background: pink;
-  z-index: 2;
 }
 
 /*Class*/

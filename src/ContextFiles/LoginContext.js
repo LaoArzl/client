@@ -11,8 +11,8 @@ export const LoginProvider = (props) => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
-      if (response.data.length == 0) {
+    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+      if (response.data.length === 0) {
         console.log("No User");
         setRole("");
         setAccessToken("MockValueToken");

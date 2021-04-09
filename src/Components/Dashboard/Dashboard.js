@@ -12,10 +12,6 @@ const Dashboard = () => {
     setShowName(!showName);
   };
 
-  useEffect(() => {
-    console.log(window.location.pathname.replace(/[0-9]/g, "."));
-  }, []);
-
   return (
     <>
       <div className={showName ? "extra-sidebar" : "sidebar"}>
@@ -35,13 +31,7 @@ const Dashboard = () => {
                     className="li-middle"
                     key={key}
                     id={
-                      window.location.pathname === val.link ||
-                      window.location.pathname.replace(/[0-9]/g, ".") ===
-                        val.links ||
-                      window.location.pathname.replace(/[0-9]/g, ",") ===
-                        val.links
-                        ? "link-active"
-                        : ""
+                      window.location.pathname === val.link ? "link-active" : ""
                     }
                   >
                     <div
@@ -49,16 +39,14 @@ const Dashboard = () => {
                         showName ? "dashboard-extra-icon" : "dashboard-icon"
                       }
                       id={
-                        window.location.pathname === val.link ||
-                        window.location.pathname.replace(/[0-9]/g, ".") ===
-                          val.links ||
-                        window.location.pathname.replace(/[0-9]/g, ",") ===
-                          val.links
+                        window.location.pathname === val.link
                           ? "icon-active"
-                          : "icon-inactive"
+                          : ""
                       }
                     >
-                      {val.icon}
+                      {window.location.pathname === val.link
+                        ? val.icons
+                        : val.icon}
                     </div>
                     <div
                       className={

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import "./Class.css";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
@@ -23,27 +23,32 @@ const Class = () => {
   const [classroom, setClassroom] = valueAllClass;
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/class-active").then((response) => {
-      if (response.data.length === 0) {
-        setActiveClass(0);
-      } else {
-        setActiveClass(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/class/class-active").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActiveClass(0);
+        } else {
+          setActiveClass(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/class-archived").then((response) => {
-      if (response.data.length === 0) {
-        setArchivedClass(0);
-      } else {
-        setArchivedClass(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/class/class-archived").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setArchivedClass(0);
+        } else {
+          setArchivedClass(response.data);
+        }
       }
-    });
+    );
   });
 
   const makeFalse = () => {
     setShowCreate(false);
+    setErrMsg("");
   };
 
   const [className, setClassName] = useState("");
@@ -53,7 +58,7 @@ const Class = () => {
   const [errMsg, setErrMsg] = useState("");
 
   const submitCreate = () => {
-    Axios.post("http://localhost:3001/class/create-class", {
+    Axios.post("https://ecplcsms.herokuapp.com/class/create-class", {
       className: className,
       classCapacity: classCapacity,
       classYear: classYear,
@@ -68,6 +73,14 @@ const Class = () => {
         setClassAdviser("");
         setErrMsg(response.data.success);
         setTimeout(() => setErrMsg(""), 5000);
+        setClassroom([
+          ...classroom,
+          {
+            className: className,
+            adviser_id: classAdviser,
+            capacity: classCapacity,
+          },
+        ]);
       }
     });
   };
@@ -93,6 +106,7 @@ const Class = () => {
                       : "class-error-message-red"
                   }
                 >
+                  <i className="fas fa-exclamation-circle"></i>
                   {errMsg}
                 </div>
                 <div className="create-class-div">
@@ -154,7 +168,7 @@ const Class = () => {
                 <div className="create-class-div-submit">
                   <input
                     onClick={makeFalse}
-                    type="reset"
+                    type="button"
                     className="create-class-reset-btn"
                     value="Cancel"
                   />
@@ -179,7 +193,7 @@ const Class = () => {
             <DashboardHeader />
             <div className="class-actual-body-header">
               <div className="div-class-search">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
                 <input type="search" placeholder="Search for a class"></input>
               </div>
               <div className="div-class-active">
@@ -207,7 +221,7 @@ const Class = () => {
                 className="add-class-button"
               >
                 <i className="fas fa-plus"></i>
-                Create Class
+                Create
               </span>
             </div>
             <div className="class-actual-body">
@@ -221,13 +235,13 @@ const Class = () => {
                       Class adviser
                     </div>
                     <div className="class-actual-body-active-capacity">
-                      Capacity
+                      Size
                     </div>
                     <div className="class-actual-body-active-action">
                       Action
                     </div>
                   </div>
-                  {classroom.map((key, value) => {
+                  {classroom.map((key) => {
                     return (
                       <div
                         key={key._id}
@@ -243,7 +257,12 @@ const Class = () => {
                           {key.capacity}
                         </div>
                         <div className="class-actual-body-active-action">
-                          <i class="fas fa-pen"></i>
+                          <Link
+                            className="router"
+                            to={"/admin/class/edit/" + key._id}
+                          >
+                            <i className="fas fa-pen"></i>
+                          </Link>
                         </div>
                       </div>
                     );

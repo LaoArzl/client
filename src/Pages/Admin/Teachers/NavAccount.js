@@ -13,15 +13,17 @@ const NavAccount = () => {
   const [changeError, setChangeError] = useState("");
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/student/${tempId}`).then((response) => {
-      if (response.data.length == 0) {
-        setStudentUsername("");
-        setStudentPassword("");
-      } else {
-        setStudentUsername(response.data.username);
-        setStudentPassword(response.data.password);
+    Axios.get(`https://ecplcsms.herokuapp.com/student/${tempId}`).then(
+      (response) => {
+        if (response.data.length == 0) {
+          setStudentUsername("");
+          setStudentPassword("");
+        } else {
+          setStudentUsername(response.data.username);
+          setStudentPassword(response.data.password);
+        }
       }
-    });
+    );
   }, []);
 
   const changingPassword = () => {

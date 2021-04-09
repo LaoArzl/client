@@ -5,6 +5,7 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import "../Teachers/UserProfile.css";
 import NavStudProfile from "./NavStudProfile";
 import NavStudAccount from "./NavStudAccount";
+import NavStudentGraddes from "./NavStudentGrades";
 
 const UserStudent = () => {
   const [userNav, setUserNav] = useState("");
@@ -42,7 +43,7 @@ const UserStudent = () => {
                     : "user-navigation-profile"
                 }
               >
-                Password and Security{" "}
+                Password and Security
                 <i
                   class={userNav === "Account" ? "fas fa-chevron-right" : ""}
                 ></i>
@@ -55,7 +56,7 @@ const UserStudent = () => {
                     : "user-navigation-profile"
                 }
               >
-                Grades{" "}
+                Grades
                 <i
                   class={userNav === "Grades" ? "fas fa-chevron-right" : ""}
                 ></i>
@@ -64,7 +65,7 @@ const UserStudent = () => {
             <div className="user-profile-content-actual">
               {userNav === "Profile" && <NavStudProfile />}
               {userNav === "Account" && <NavStudAccount />}
-              {/* {userNav === "Advising" && <NavAdvising />} */}
+              {userNav === "Grades" && <NavStudentGraddes />}
             </div>
           </div>
         </div>

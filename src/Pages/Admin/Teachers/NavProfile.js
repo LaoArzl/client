@@ -6,27 +6,29 @@ const Navprofile = () => {
   const tempId = window.location.pathname.replace("/admin/edit-user/", "");
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/teacher/${tempId}`).then((response) => {
-      if (response.data.length === 0) {
-        setUserState({});
-      } else {
-        let user = response.data;
-        setUserState({
-          id: user._id,
-          firstname: user.firstname,
-          middlename: user.middlename,
-          lastname: user.lastname,
-          gender: user.gender,
-          contact: user.contact,
-          address: user.address,
-          email: user.email,
-        });
+    Axios.get(`https://ecplcsms.herokuapp.com/teacher/${tempId}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setUserState({});
+        } else {
+          let user = response.data;
+          setUserState({
+            id: user._id,
+            firstname: user.firstname,
+            middlename: user.middlename,
+            lastname: user.lastname,
+            gender: user.gender,
+            contact: user.contact,
+            address: user.address,
+            email: user.email,
+          });
+        }
       }
-    });
+    );
   }, []);
 
   const updateSubmit = () => {
-    Axios.put(`http://localhost:3001/update/user/${tempId}`, {
+    Axios.put(`https://ecplcsms.herokuapp.com/update/user/${tempId}`, {
       lastname: userState.lastname,
       firstname: userState.firstname,
       middlename: userState.middlename,

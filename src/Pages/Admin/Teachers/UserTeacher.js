@@ -4,8 +4,8 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import "./UserProfile.css";
 import NavProfile from "./NavProfile";
-import NavAdvising from "./NavAdvising";
 import NavAccount from "./NavAccount";
+import NavDelete from "./NavDelete";
 
 const UserTeacher = (props) => {
   const [userNav, setUserNav] = useState("");
@@ -56,7 +56,7 @@ const UserTeacher = (props) => {
                     : "user-navigation-profile"
                 }
               >
-                Class Advising{" "}
+                Delete Account
                 <i
                   class={userNav === "Advising" ? "fas fa-chevron-right" : ""}
                 ></i>
@@ -65,7 +65,7 @@ const UserTeacher = (props) => {
             <div className="user-profile-content-actual">
               {userNav === "Profile" && <NavProfile />}
               {userNav === "Account" && <NavAccount />}
-              {userNav === "Advising" && <NavAdvising />}
+              {userNav === "Advising" && <NavDelete />}
             </div>
           </div>
         </div>

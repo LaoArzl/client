@@ -15,13 +15,15 @@ const TeacherProfile = (props) => {
   const [teacherData, setTeacherData] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/teacher/${pops}`).then((response) => {
-      if (response.data.length === 0) {
-        setTeacherData([]);
-      } else {
-        setTeacherData(response.data);
+    Axios.get(`https://ecplcsms.herokuapp.com/teacher/${pops}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTeacherData([]);
+        } else {
+          setTeacherData(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   return (

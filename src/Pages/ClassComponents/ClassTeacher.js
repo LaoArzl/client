@@ -10,7 +10,7 @@ import Class from "./Class";
 
 const ClassTeacher = (props) => {
   const classId = window.location.pathname.replace("/teacher-class/", "");
-  const url = `http://localhost:3001/class/class/${props.id}`;
+  const url = `https://ecplcsms.herokuapp.com/class/class/${props.id}`;
   const [classData, setClassData] = useState([]);
   const { loginRole, valueID } = useContext(LoginContext);
   const [role, setRole] = loginRole;
@@ -119,8 +119,8 @@ const ClassTeacher = (props) => {
                 {navOption === "students" && (
                   <People id={classId} name={teacherName} />
                 )}
-                {navOption === "assignments" && <p>ass</p>}
-                {navOption === "grades" && <p>grades</p>}
+                {navOption === "assignments" && <p>Assignment Section</p>}
+                {navOption === "grades" && <p>Grades Section</p>}
               </div>
             </div>
           </div>

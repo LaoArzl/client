@@ -27,7 +27,7 @@ const Teachers = () => {
             <div className="students-content-lists-body-header">
               <div className="div-class-search">
                 <i class="fas fa-search"></i>
-                <input type="search" placeholder="Search for a class"></input>
+                <input type="search" placeholder="Search for a teacher"></input>
               </div>
               <div className="add-student-span-wrapper">
                 <span

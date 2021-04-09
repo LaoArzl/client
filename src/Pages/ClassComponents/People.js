@@ -5,7 +5,7 @@ import AddPeople from "./AddPeople";
 
 const People = (props) => {
   const [teacher, setTeacher] = useState("");
-  const url = `http://localhost:3001/class/class${props.id}`;
+  const url = `https://ecplcsms.herokuapp.com/class/class${props.id}`;
   const [showStudents, setShowStudents] = useState(false);
   const [studentData, setStudentData] = useState([]);
   const [studentState, setStudentState] = useState([]);
@@ -15,18 +15,20 @@ const People = (props) => {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/add-class-student").then((response) => {
-      let customer = response.data;
-      setStudentState(
-        customer.map((d) => {
-          return {
-            select: false,
-            id: d._id,
-            name: d.fullname,
-          };
-        })
-      );
-    });
+    Axios.get("https://ecplcsms.herokuapp.com/add-class-student").then(
+      (response) => {
+        let customer = response.data;
+        setStudentState(
+          customer.map((d) => {
+            return {
+              select: false,
+              id: d._id,
+              name: d.fullname,
+            };
+          })
+        );
+      }
+    );
   }, []);
 
   const sendSubmit = () => {
@@ -37,7 +39,7 @@ const People = (props) => {
       }
     });
 
-    Axios.put("http://localhost:3001/class/update-class", {
+    Axios.put("https://ecplcsms.herokuapp.com/class/update-class", {
       id: props.id,
       studentState: arr,
     }).then((response) => {
@@ -89,9 +91,6 @@ const People = (props) => {
             studentState={studentState}
             setStudentState={setStudentState}
           />
-        </div>
-        <div className="people-wrapper-add-student-body-last">
-          <button onClick={sendSubmit}></button>
         </div>
       </div>
     </>

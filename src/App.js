@@ -30,6 +30,7 @@ import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
 import AdminFees from "./Pages/Admin/Fees/AdminFees";
 import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
+import EditClass from "./Pages/Admin/Classroom/EditClass";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -59,33 +60,39 @@ function App() {
   const [classData, setClassData] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/student-list").then((response) => {
-      if (response.data.length === 0) {
-        setStudentUser([]);
-      } else {
-        setStudentUser(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setStudentUser([]);
+        } else {
+          setStudentUser(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/teacher-list").then((response) => {
-      if (response.data.length === 0) {
-        setTeacherUser([]);
-      } else {
-        setTeacherUser(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/teacher-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTeacherUser([]);
+        } else {
+          setTeacherUser(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/classroom-list").then((response) => {
-      if (response.data.length === 0) {
-        setClassData([]);
-      } else {
-        setClassData(response.data);
+    Axios.get("https://ecplcsms.herokuapp.com/class/classroom-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setClassData([]);
+        } else {
+          setClassData(response.data);
+        }
       }
-    });
+    );
   }, []);
   return (
     <>
@@ -128,24 +135,16 @@ function App() {
                         <Route path="/contact" exact component={Contact} />
                         <Route path="/login" exact component={PortalLogin} />
 
-                        {/* <ProtectedAdmin
-                            path="/admin/dashboard"
-                            isAuth={isAuth}
-                            exact
-                            component={DashboardHome}
-                          /> */}
-
                         <Route
                           path="/admin/dashboard"
                           exact
                           component={DashboardHome}
                         />
 
-                        <Route
-                          path="/admin/class"
-                          exact
-                          component={Classroom}
-                        />
+                        <Route path="/admin/class" exact>
+                          <Classroom />
+                        </Route>
+
                         <Route
                           path="/admin/announcement"
                           exact
@@ -156,17 +155,6 @@ function App() {
                           exact
                           component={Message}
                         />
-
-                        {/* <ProtectedAdmin
-                            path={studentUser.map((value) => {
-                              return (
-                                "/admin/users/student-profile/" + value.user_id
-                              );
-                            })}
-                            exact
-                            component={UserStudent}
-                            isAuth={isAuth}
-                          />  */}
 
                         {teacherUser.map((value) => {
                           return (
@@ -183,6 +171,7 @@ function App() {
                         {studentUser.map((value) => {
                           return (
                             <Route
+                              key={value._id}
                               path={"/admin/edit-user/" + value._id}
                               id={value._id}
                               exact
@@ -213,7 +202,11 @@ function App() {
 
                         {teacherUser.map((value) => {
                           return (
-                            <Route path={"/user/teacher/" + value._id} exact>
+                            <Route
+                              key={value._id}
+                              path={"/user/teacher/" + value._id}
+                              exact
+                            >
                               <TeacherProfile id={value._id} />
                             </Route>
                           );
@@ -222,6 +215,7 @@ function App() {
                         {teacherUser.map((value) => {
                           return (
                             <Route
+                              key={value._id}
                               path={"/user/teacher/grades/" + value._id}
                               exact
                             >
@@ -233,6 +227,7 @@ function App() {
                         {teacherUser.map((value) => {
                           return (
                             <Route
+                              key={value._id}
                               path={"/user/teacher/class/" + value._id}
                               exact
                             >
@@ -244,6 +239,7 @@ function App() {
                         {teacherUser.map((value) => {
                           return (
                             <Route
+                              key={value._id}
                               path={"/user/teacher/message/" + value._id}
                               exact
                             >
@@ -279,10 +275,22 @@ function App() {
                           component={Fees}
                         />
 
+                        {classData.map((value) => {
+                          return (
+                            <Route
+                              key={value._id}
+                              path={"/admin/class/edit/" + value._id}
+                              exact
+                            >
+                              <EditClass id={value._id} />
+                            </Route>
+                          );
+                        })}
+
                         {classData.map((key, value) => {
                           return (
                             <Route
-                              key={key}
+                              key={key._id}
                               path={"/teacher-class/" + key._id}
                               exact
                             >

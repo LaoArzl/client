@@ -212,7 +212,7 @@
 .update-user-profile-submit input {
   width: 25%;
   height: 45px;
-  background: #1dbc60;
+  background: #2ab56f;
   color: white;
   border-style: none;
   outline-style: none;
@@ -228,7 +228,7 @@
 }
 
 .update-user-profile-submit input:hover {
-  background: #17974c;
+  background: #23975d;
   transition: 0.2s ease-in;
 }
 
@@ -364,7 +364,7 @@
 .change-password-span1 {
   width: 11%;
   height: 40px;
-  background: #0464fc;
+  background: #2ab56f;
   border-radius: 5px;
   color: white;
   display: flex;
@@ -399,7 +399,7 @@
 }
 
 .change-password-span1:hover {
-  background: #044ec7;
+  background: #23975d;
 
   transition: 0.2s ease-in;
 }

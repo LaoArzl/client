@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   display: flex;
-  background: #f7f8fb;
+  background: #ffffff;
 }
 
 .create-user-content {
@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1dbc60;
+  color: #2ab56f;
   cursor: pointer;
   font-weight: 500;
   transition: 0.2s ease-out;
@@ -65,60 +65,46 @@
 
 .create-user-content-body {
   width: 95%;
-  height: 80vh;
+  min-height: 400px;
   margin: 0 auto;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 /*Children Component */
 .user-wrapper {
-  width: 100%;
-  height: 100%;
-  background: white;
+  width: 60%;
+  height: auto;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
+  border: 1px solid rgb(235, 235, 235);
   border-radius: 10px;
-}
-
-.left-right-wrapper {
-  width: 100%;
-
   display: flex;
-}
-.user-wrapper-left {
-  width: 50%;
-  height: 100%;
-  padding-top: 40px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  padding-left: 40px;
-  height: 70vh;
-}
-
-.user-wrapper-right {
-  width: 50%;
-  height: 100%;
-  padding-top: 40px;
-  padding-right: 40px;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 70vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.user-wrapper-left div,
-.user-wrapper-right div {
+.user-wrapper div {
   display: flex;
   flex-direction: column;
   width: 80%;
   margin-bottom: 25px;
 }
 
-.user-wrapper-left div input,
-.user-wrapper-right div input {
+.user-wrapper span {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-bottom: 25px;
+  align-items: flex-end;
+}
+
+.user-wrapper input {
   width: 100%;
-  height: 35px;
-  border-radius: 5px;
+  height: 40px;
+  border-radius: 2px;
   border-style: none;
   outline-style: none;
   background: rgb(244, 246, 248);
@@ -126,10 +112,13 @@
   padding-left: 10px;
 }
 
-.user-wrapper-left div select,
-.user-wrapper-right div select {
+.user-wrapper div span {
+  color: rgb(221, 53, 53);
+  background: pink;
+}
+.user-wrapper div select {
   width: 100%;
-  height: 35px;
+  height: 40px;
   border-radius: 5px;
   border-style: none;
   outline-style: none;
@@ -139,51 +128,41 @@
   padding-right: 10px;
 }
 
-.user-wrapper-left div input:focus,
-.user-wrapper-right div input:focus,
-.user-wrapper-left div select:focus,
-.user-wrapper-right div select:focus {
+.user-wrapper div input:focus,
+.user-wrapper div select:focus {
   border: 1px solid rgb(184, 198, 214);
 }
 
-.user-wrapper-left div label,
-.user-wrapper-right div label {
+.user-wrapper div label {
   font-size: 13px;
   margin-bottom: 5px;
   color: #7a7a7a;
   font-weight: 500;
 }
 
-.user-wrapper-right span {
-  width: 80%;
-  height: auto;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
 #submit-btn {
-  width: 23%;
+  width: 20%;
   height: 45px;
-  background: #1dbc60;
+  background: #2ab56f;
   outline-style: none;
   border-style: none;
   border-radius: 8px;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-out;
+  font-weight: 500;
+  padding: 0;
 }
 
 #submit-btn:hover {
-  background: #17974c;
+  background: #23975d;
   transition: 0.2s ease-in;
 }
 
 .error-prompt {
   width: 85%;
   margin: 0 auto;
-  height: 10vh;
-  display: flex;
+  height: 0vh;
   justify-content: center;
   align-items: center;
   font-size: 15px;
@@ -199,15 +178,73 @@
   justify-content: center;
   align-items: center;
   font-size: 15px;
+  position: sticky;
+  top: 0;
+  background: #26ce821c;
 }
 
 .error-prompt-red {
   color: red;
   width: 85%;
-  margin: 0 auto;
   height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 15px;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 3px;
+  flex-direction: row;
+}
+
+.create-student-info {
+  width: 37%;
+  min-height: 50px;
+}
+
+.student-personal-information {
+  margin-top: 30px;
+  color: #323b44;
+}
+
+.student-account-information {
+  color: #323b44;
+}
+
+.create-student-info1 {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+.create-student-info1-img {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-student-info1-img div {
+  width: 55px;
+  height: 55px;
+  border: 1px solid #7a7a7a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a7a7a;
+  font-size: 1rem;
+}
+
+.create-student-info1-msg {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #7a7a7a;
 }

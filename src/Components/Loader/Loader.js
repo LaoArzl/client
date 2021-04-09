@@ -6,7 +6,7 @@ const Loader = () => {
   return (
     <>
       <div className="div-loader-spinner-wrapper">
-        <PulseLoader color={`#0464fc`} size={5} loading />
+        <PulseLoader color={`#2ab56f`} size={5} loading />
       </div>
     </>
   );

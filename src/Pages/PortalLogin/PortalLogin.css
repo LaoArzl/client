@@ -6,28 +6,49 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  flex-direction: column;
 }
 
 .portal-login-wrapper {
-  width: 30%;
-  height: 60%;
+  width: 70%;
+  height: 70%;
   background: rgb(255, 255, 255);
   border-radius: 10px;
-  box-shadow: 0px 8px 20px 0px rgba(63, 61, 61, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0px 8px 30px 0px rgba(43, 59, 70, 0.1);
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.portal-left-wrapper {
+  width: 55%;
+  height: 100%;
+  background: #f7fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-right-wrapper {
+  width: 45%;
+  height: 100%;
+  background: #f7fafb;
+  display: flex;
+  align-items: center;
+}
+
+.portal-left-wrapper img {
+  width: 75%;
 }
 
 .portal-login-header {
   width: 100%;
-  height: 20%;
+  height: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
-  font-size: 25px;
+  font-size: 1.4rem;
   color: #323b44;
 }
 
@@ -70,12 +91,13 @@
   color: rgb(109, 109, 109);
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .portal-login-input {
   width: 75%;
-  height: 13%;
-  margin-bottom: 10px;
+  height: 38px;
+  margin-bottom: 15px;
   position: relative;
 }
 
@@ -85,8 +107,9 @@
   border-radius: 5px;
   outline: none;
   border: none;
-  border: 1px solid rgb(206, 206, 206);
+  border: 1px solid rgb(227, 230, 233);
   padding-left: 10px;
+  background: #f7fafb;
 }
 
 .portal-login-input input:focus {
@@ -127,9 +150,9 @@
 
 .portal-login-login {
   width: 75%;
-  height: 14%;
+  height: 38px;
   margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .portal-login-login input {
@@ -138,7 +161,7 @@
   border-radius: 5px;
   outline: none;
   border: none;
-  background: #08a04f;
+  background: #2ab56f;
   color: rgb(255, 255, 255);
   font-weight: 500;
   cursor: pointer;
@@ -150,7 +173,7 @@
 }
 
 .portal-login-login input:hover {
-  background: #05803e;
+  background: #22925a;
   transition: 0.2s ease-in;
 }
 
