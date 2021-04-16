@@ -12,7 +12,7 @@ const BrokenPage = () => {
   return (
     <>
       {toLogin ? (
-        <Redirect to="/login" />
+        <Redirect to="/" />
       ) : (
         <div className="broken-page-wrapper">
           <PuffLoader color={`#0D8B33`} size={45} loading />

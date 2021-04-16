@@ -52,11 +52,13 @@ const TeacherClass = (props) => {
           <div className="user-class-content">
             <DashboardHeader />
             <div className="user-class-content-header">
-              <h3>Your Class </h3>
+              <b>Your Class </b>
             </div>
             <div className="user-class-content-body">
               {yourClass === null ? (
-                <p>Null</p>
+                <p className="sorry-no-class">
+                  Sorry but there is no class assigned to you.
+                </p>
               ) : (
                 <>
                   {yourClass.map((value, key) => {
@@ -66,14 +68,14 @@ const TeacherClass = (props) => {
                         key={key}
                         className="user-class-class-wrapper"
                       >
-                        <div className="user-class-class-wrapper-upper"></div>
+                        <div className="user-class-class-wrapper-upper">
+                          <p>Adviser</p>
+                          <b>{value.adviser_id.fullname}</b>
+                        </div>
                         <div className="user-class-class-wrapper-lower">
                           <h3>{value.className}</h3>
-                          <p>{value.adviser_id.fullname}</p>
-                          <span className="total-students">
-                            <i className="fas fa-user"></i>
-                            {value.students.length}
-                          </span>
+                          <p>Total Students: {value.students.length}</p>
+                          <span>See more</span>
                         </div>
                       </Link>
                     );

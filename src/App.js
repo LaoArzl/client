@@ -16,6 +16,9 @@ import BoardTrustees from "./Pages/Portal/Administration/BoardTrustees";
 import TeachersStaff from "./Pages/Portal/Administration/TeachersStaff";
 import Contact from "./Pages/Portal/Contact/Contact";
 
+//landing Page
+import Login from "./Pages/Login/Login";
+
 //Login Page
 import PortalLogin from "./Pages/PortalLogin/PortalLogin";
 
@@ -28,7 +31,6 @@ import Students from "./Pages/Admin/Students/Students";
 import Teachers from "./Pages/Admin/Teachers/Teachers";
 import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
-import AdminFees from "./Pages/Admin/Fees/AdminFees";
 import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
 import EditClass from "./Pages/Admin/Classroom/EditClass";
 
@@ -110,7 +112,7 @@ function App() {
                           exact={true}
                           component={NoPermisison}
                         />
-                        <Route path="/" exact component={HomePage} />
+                        <Route path="/" exact component={Login} />
                         <Route path="/about" exact component={About} />
                         <Route
                           path="/enrollment-procedure"
@@ -197,8 +199,6 @@ function App() {
                           exact
                           component={Teachers}
                         />
-
-                        <Route path="/admin/fees" exact component={AdminFees} />
 
                         {teacherUser.map((value) => {
                           return (

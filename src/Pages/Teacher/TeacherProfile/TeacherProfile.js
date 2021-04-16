@@ -2,9 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 import "./TeacherProfile.css";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
-import ProfileHeader from "../../../Components/ProfileHeader/ProfileHeader";
-import ProfileCard from "../../../Components/ProfileCard/ProfileCard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import TeacherDashboard from "../TeacherDashboard/TeacherDashboard";
 
@@ -13,6 +12,19 @@ const TeacherProfile = (props) => {
   const [role, setRole] = loginRole;
   const pops = props.id;
   const [teacherData, setTeacherData] = useState([]);
+  const [yourClass, setYourClass] = useState([]);
+
+  const url = `https://ecplcsms.herokuapp.com/class/${props.id}`;
+
+  useEffect(() => {
+    Axios.get(url).then((response) => {
+      if (response.data.length === 0) {
+        setYourClass(null);
+      } else {
+        setYourClass(response.data);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     Axios.get(`https://ecplcsms.herokuapp.com/teacher/${pops}`).then(
@@ -37,6 +49,27 @@ const TeacherProfile = (props) => {
             <DashboardHeader />
             <div className="user-content-header">
               <h2>Teacher {teacherData.firstname}</h2>
+            </div>
+            <div className="user-content-body">
+              {yourClass.map((value, key) => {
+                return (
+                  <Link
+                    to={"/teacher-class/" + value._id}
+                    key={key}
+                    className="user-class-class-wrapper"
+                  >
+                    <div className="user-class-class-wrapper-upper">
+                      <p>Adviser</p>
+                      <b>{value.adviser_id.fullname}</b>
+                    </div>
+                    <div className="user-class-class-wrapper-lower">
+                      <h3>{value.className}</h3>
+                      <p>Total Students: {value.students.length}</p>
+                      <span>See more</span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

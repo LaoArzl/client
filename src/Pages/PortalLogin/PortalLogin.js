@@ -18,7 +18,6 @@ const PortalLogin = () => {
   const { value01 } = useContext(StudentListContext);
   const [teachers, setTeachers] = value01;
   const [role, setRole] = loginRole;
-  const [loadingLog, setLoadingLog] = useState(false);
 
   const submitLogin = () => {
     Axios.post("https://ecplcsms.herokuapp.com/user-login", {
@@ -36,7 +35,6 @@ const PortalLogin = () => {
       } else if (response.data.auth) {
         localStorage.setItem("id", response.data._id);
 
-        localStorage.setItem("token", response.data.token);
         setRole(response.data.userType);
       }
     });
@@ -55,18 +53,6 @@ const PortalLogin = () => {
     setShowPassword(!showPassword);
   };
 
-  const [tempData, setTempData] = useState([]);
-
-  useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
-      (response) => {
-        if (response.data) {
-          setTempData(response.data);
-        }
-      }
-    );
-  }, []);
-
   const id = localStorage.getItem("id");
 
   return (
@@ -77,7 +63,7 @@ const PortalLogin = () => {
         </>
       ) : role === "Student" ? (
         <>
-          <Redirect to="/user/student" />
+          <Redirect to={"/user/student/" + id} />
         </>
       ) : role === "Admin" ? (
         <Redirect to="/admin/dashboard" />

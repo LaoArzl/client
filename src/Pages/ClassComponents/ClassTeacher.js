@@ -35,7 +35,7 @@ const ClassTeacher = (props) => {
         <BrokenPage />
       ) : props.adviser !== tempId ? (
         <>
-          <div className="class-wrapper">
+          <div className="teacher-class-wrapper">
             <TeacherDashboard />
             <div className="class-content">
               <DashboardHeader />

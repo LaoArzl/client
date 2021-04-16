@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://cdn.syncfusion.com/ej2/material.css");
 
+:root {
+  --main: #2ab56f;
+  --font: #323b44;
+  --sub-font: #7a7a7a;
+  --main-hover: #23975d;
+  --border: solid rgb(235, 235, 235);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -10,12 +18,12 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f100;
+  background: #f1f1f1;
 }
 
 /* Handle */

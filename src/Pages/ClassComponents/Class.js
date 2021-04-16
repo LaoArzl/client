@@ -5,7 +5,7 @@ import Axios from "axios";
 const Class = (props) => {
   return (
     <>
-      <div className="class-wrapper"></div>
+      <div className="classes-wrapper"></div>
     </>
   );
 };

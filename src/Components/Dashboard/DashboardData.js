@@ -6,8 +6,6 @@ import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
 import EventIcon from "@material-ui/icons/Event";
 import ForumOutlinedIcon from "@material-ui/icons/ForumOutlined";
 import ForumIcon from "@material-ui/icons/Forum";
-import AccountBalanceWalletOutlinedIcon from "@material-ui/icons/AccountBalanceWalletOutlined";
-import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import PersonIcon from "@material-ui/icons/Person";
@@ -41,12 +39,6 @@ export const DashboardData = [
     icon: <LocalLibraryOutlinedIcon fontSize="small" />,
     icons: <LocalLibraryIcon fontSize="small" />,
     link: "/admin/class",
-  },
-  {
-    name: "Fees",
-    icon: <AccountBalanceWalletOutlinedIcon fontSize="small" />,
-    icons: <AccountBalanceWalletIcon fontSize="small" />,
-    link: "/admin/fees",
   },
 
   {

@@ -1,19 +1,23 @@
 import React from "react";
-import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
 import LocalLibraryOutlinedIcon from "@material-ui/icons/LocalLibraryOutlined";
-import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
+import ForumOutlinedIcon from "@material-ui/icons/ForumOutlined";
+import ForumIcon from "@material-ui/icons/Forum";
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
-import PaymentOutlinedIcon from "@material-ui/icons/PaymentOutlined";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import HomeIcon from "@material-ui/icons/Home";
 
 export const TeacherDashboardData = [
   {
-    name: "Profile",
-    icon: <AccountBoxOutlinedIcon fontSize="small" />,
+    name: "Home",
+    icon: <HomeOutlinedIcon fontSize="small" />,
+    icons: <HomeIcon fontSize="small" />,
     link: "/user/teacher/",
   },
   {
     name: "Class",
     icon: <LocalLibraryOutlinedIcon fontSize="small" />,
+    icons: <LocalLibraryIcon fontSize="small" />,
     link: "/user/teacher/class/",
   },
 
@@ -24,7 +28,8 @@ export const TeacherDashboardData = [
   },
   {
     name: "Message",
-    icon: <SendOutlinedIcon fontSize="small" />,
+    icon: <ForumOutlinedIcon fontSize="small" />,
+    icons: <ForumIcon fontSize="small" />,
     link: "/user/teacher/message/",
   },
 ];

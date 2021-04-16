@@ -50,7 +50,9 @@ const TeacherDashboard = (props) => {
                           : "icon-inactive"
                       }
                     >
-                      {val.icon}
+                      {window.location.pathname === val.link + id
+                        ? val.icons
+                        : val.icon}
                     </div>
                     <div
                       className={
