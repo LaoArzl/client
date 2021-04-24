@@ -8,7 +8,6 @@
 .dashboard-content {
   width: 95%;
   height: 100vh;
-  background: #ffffff;
   overflow-y: scroll;
 }
 

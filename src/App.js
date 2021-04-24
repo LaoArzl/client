@@ -44,8 +44,6 @@ import { CreateTeacherState } from "./ContextFiles/CreateTeacherContext";
 
 //Teacher Pages
 import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
-import TeacherGrades from "./Pages/Teacher/TeacherGrades/TeacherGrades";
-import TeacherClass from "./Pages/Teacher/TeacherClass/TeacherClass";
 import TeacherMessage from "./Pages/Teacher/TeacherMessage/TeacherMessage";
 import ClassTeacher from "./Pages/ClassComponents/ClassTeacher";
 
@@ -60,6 +58,7 @@ function App() {
   const [studentUser, setStudentUser] = useState([]);
   const [teacherUser, setTeacherUser] = useState([]);
   const [classData, setClassData] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
@@ -96,6 +95,7 @@ function App() {
       }
     );
   }, []);
+
   return (
     <>
       <div className="app">
@@ -200,6 +200,18 @@ function App() {
                           component={Teachers}
                         />
 
+                        {studentUser.map((value) => {
+                          return (
+                            <Route
+                              key={value._id}
+                              path={"/user/student/" + value._id}
+                              exact
+                            >
+                              <StudentProfile id={value._id} />
+                            </Route>
+                          );
+                        })}
+
                         {teacherUser.map((value) => {
                           return (
                             <Route
@@ -208,30 +220,6 @@ function App() {
                               exact
                             >
                               <TeacherProfile id={value._id} />
-                            </Route>
-                          );
-                        })}
-
-                        {teacherUser.map((value) => {
-                          return (
-                            <Route
-                              key={value._id}
-                              path={"/user/teacher/grades/" + value._id}
-                              exact
-                            >
-                              <TeacherGrades />
-                            </Route>
-                          );
-                        })}
-
-                        {teacherUser.map((value) => {
-                          return (
-                            <Route
-                              key={value._id}
-                              path={"/user/teacher/class/" + value._id}
-                              exact
-                            >
-                              <TeacherClass id={value._id} />
                             </Route>
                           );
                         })}

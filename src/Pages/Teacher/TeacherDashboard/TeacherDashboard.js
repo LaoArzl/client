@@ -30,7 +30,7 @@ const TeacherDashboard = (props) => {
         <ul className={showName ? "dashboard-extra-links" : "dashboard-links"}>
           {TeacherDashboardData.map((val, key) => {
             return (
-              <Link className="router-link" to={val.link + id} key={key}>
+              <Link className="router-link-extra" to={val.link + id} key={key}>
                 <Tippy content={val.name} arrow={false} placement="right">
                   <li
                     className="li-middle"

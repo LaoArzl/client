@@ -29,63 +29,45 @@ const TeacherClass = (props) => {
 
   return (
     <>
-      {role !== "Teacher" ? (
-        <BrokenPage />
-      ) : props.id !== id ? (
-        <>
-          <div className="user-class">
-            <TeacherDashboard />
-            <div className="user-class-content">
-              <DashboardHeader />
-              <div className="user-class-content-header">
-                <p>Your Class {userID}</p>
-              </div>
-              <div className="user-class-content-body">
-                <p>You cannot access the class of other teachers.</p>
-              </div>
-            </div>
+      {role !== "Teacher" && <BrokenPage />}
+      <div className="user-class">
+        <TeacherDashboard />
+        <div className="user-class-content">
+          <DashboardHeader />
+          <div className="user-class-content-header">
+            <b>Your Class </b>
           </div>
-        </>
-      ) : (
-        <div className="user-class">
-          <TeacherDashboard />
-          <div className="user-class-content">
-            <DashboardHeader />
-            <div className="user-class-content-header">
-              <b>Your Class </b>
-            </div>
-            <div className="user-class-content-body">
-              {yourClass === null ? (
-                <p className="sorry-no-class">
-                  Sorry but there is no class assigned to you.
-                </p>
-              ) : (
-                <>
-                  {yourClass.map((value, key) => {
-                    return (
-                      <Link
-                        to={"/teacher-class/" + value._id}
-                        key={key}
-                        className="user-class-class-wrapper"
-                      >
-                        <div className="user-class-class-wrapper-upper">
-                          <p>Adviser</p>
-                          <b>{value.adviser_id.fullname}</b>
-                        </div>
-                        <div className="user-class-class-wrapper-lower">
-                          <h3>{value.className}</h3>
-                          <p>Total Students: {value.students.length}</p>
-                          <span>See more</span>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </>
-              )}
-            </div>
+          <div className="user-class-content-body">
+            {yourClass === null ? (
+              <p className="sorry-no-class">
+                Sorry but there is no class assigned to you.
+              </p>
+            ) : (
+              <>
+                {yourClass.map((value, key) => {
+                  return (
+                    <Link
+                      to={"/teacher-class/" + value._id}
+                      key={key}
+                      className="user-class-class-wrapper"
+                    >
+                      <div className="user-class-class-wrapper-upper">
+                        <p>Adviser</p>
+                        <b>{value.adviser_id.fullname}</b>
+                      </div>
+                      <div className="user-class-class-wrapper-lower">
+                        <h3>{value.className}</h3>
+                        <p>Total Students: {value.students.length}</p>
+                        <span>See more</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

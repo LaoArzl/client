@@ -7,6 +7,15 @@
   --sub-font: #7a7a7a;
   --main-hover: #23975d;
   --border: solid rgb(235, 235, 235);
+  --font20: 1.25rem;
+  --font19: 1.1875rem;
+  --font18: 1.125rem;
+  --font17: 1.0625rem;
+  --font16: 1rem;
+  --font15: 0.9375rem;
+  --font14: 0.875rem;
+  --font13: 0.8125rem;
+  --font12: 0.75rem;
 }
 
 * {
@@ -23,7 +32,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f100;
 }
 
 /* Handle */
@@ -35,6 +44,10 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(156, 156, 156);
+}
+
+html {
+  font-size: 16px;
 }
 
 .app {

@@ -1,6 +1,7 @@
 .dashboard-header {
   width: 100%;
   height: 10%;
+  min-height: 50px;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -12,6 +13,7 @@
   top: 0;
   box-shadow: 0px 8px 30px 0px rgba(82, 112, 131, 0.1);
   border-bottom: 1px solid rgb(235, 235, 235);
+  border-top-left-radius: 20px;
 }
 .dashboard-header-wrapper {
   width: 96%;
@@ -23,7 +25,7 @@
 }
 
 .dashboard-header-wrapper img {
-  width: 8%;
+  width: 7%;
   margin-right: 5px;
 }
 
@@ -32,7 +34,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: var(--font16);
 }
 
 .dashboard-spanner-right {
@@ -41,11 +43,25 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  position: relative;
 }
 
-.dashboard-header-profile {
-  width: 38px;
-  height: 38px;
+.dashboard-header-profile1 {
+  width: 35px;
+  height: 35px;
+  background: #e8e9eb;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(206, 206, 206);
+  color: white;
+}
+
+.dashboard-header-profile2 {
+  width: 45px;
+  height: 45px;
   background: #e8e9eb;
   border-radius: 50%;
   position: relative;
@@ -57,27 +73,35 @@
 }
 
 .dashboard-header-profile-name {
-  font-size: 15px;
   display: flex;
   align-items: Center;
   margin-left: 10px;
   font-weight: 500;
-  color: rgb(90, 90, 90);
-}
-
-.dashboard-header-profile-name i {
-  font-size: 10px;
-  margin-left: 5px;
+  color: var(--font);
+  font-size: var(--font18);
 }
 
 .dashboard-admin-profile {
   width: auto;
-  height: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
   margin-left: 20px;
+  border-radius: 100px;
+  padding: 5px;
+  transition: 0.2s ease-out;
+  padding-right: 15px;
+}
+
+.dashboard-admin-profile:hover {
+  transition: 0.2s ease-in;
+  background: rgb(237, 240, 241);
+}
+
+.dashboard-admin-profile i {
+  margin-left: 5px;
 }
 
 .administrator-div-after-hidden {
@@ -86,11 +110,11 @@
 
 .administrator-div-after {
   position: absolute;
-  top: 100%;
-  min-width: 275px;
-  width: 200%;
+  top: 102%;
+  min-width: 255px;
+  width: 30%;
   right: 0;
-  height: 220%;
+  height: 260%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -109,11 +133,11 @@
   align-items: center;
   border-radius: 5px;
   padding-left: 10%;
-  font-size: 14px;
+  font-size: var(--font15);
   transition: 0.2s ease-out;
   color: #323b44;
-  font-weight: 500;
   position: relative;
+  cursor: pointer;
 }
 
 .dashboard-profile-span1 {
@@ -123,11 +147,27 @@
   align-items: center;
   border-radius: 5px;
   padding-left: 10%;
-  font-size: 14px;
+  font-size: var(--font16);
   transition: 0.2s ease-out;
   color: #323b44;
   font-weight: 500;
   position: relative;
+  cursor: pointer;
+}
+
+.dashboard-profile-name-wrapper1 {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-profile-name-wrapper2 {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .dashboard-profile-span1::after {
@@ -138,45 +178,32 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: lightgrey;
+  background: rgb(233, 233, 233);
 }
 
-.dashboard-profile-span1 i,
+.view-profile {
+  font-size: var(--font13);
+  font-weight: 400;
+  color: var(--sub-font);
+}
+
+.dashboard-profile-span1 p {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-profile-span1 p div {
+  margin-right: 15px;
+}
+
 .dashboard-profile-span2 i {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: var(--font16);
 }
 
 .dashboard-profile-span1:hover,
 .dashboard-profile-span2:hover {
-  background: rgb(238, 238, 238);
+  background: rgb(237, 240, 241);
   transition: 0.2s ease-in;
   color: rgb(58, 58, 58);
-}
-
-.dashboard-header-help {
-  width: auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  color: rgb(102, 102, 102);
-  font-size: 14px;
-  cursor: pointer;
-  position: relative;
-}
-
-.dashboard-header-help:hover {
-  text-decoration: underline;
-}
-
-.dashboard-header-help i {
-  margin-right: 5px;
-}
-
-.middle-separator {
-  width: 1px;
-  height: 50%;
-  border-radius: 100px;
-  background: lightgrey;
-  margin-left: 20px;
 }

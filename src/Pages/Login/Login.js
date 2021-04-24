@@ -7,6 +7,9 @@ import Axios from "axios";
 
 const Login = () => {
   Axios.defaults.withCredentials = true;
+  const instance = Axios.create({
+    withCredentials: true,
+  });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -35,6 +38,7 @@ const Login = () => {
       } else if (response.data.auth) {
         localStorage.setItem("id", response.data._id);
         setRole(response.data.userType);
+        console.log("er");
       }
     });
   };
@@ -43,6 +47,7 @@ const Login = () => {
     <>
       {role === "Admin" && <Redirect to="/admin/dashboard" />}
       {role === "Teacher" && <Redirect to={"/user/teacher/" + id} />}
+      {role === "Student" && <Redirect to={"/user/student/" + id} />}
       <div className="login-wrapper">
         <div className="login-wrapper-left">
           <div className="login-after-wrapper">
