@@ -1,0 +1,114 @@
+.year-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: #f3f6f7;
+  position: relative;
+}
+
+.year-wrapper-after {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 4;
+}
+
+.year-wrapper form {
+  width: 30%;
+  height: 50%;
+  background: white;
+  z-index: 4;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.year-form-header {
+  width: 100%;
+  height: 15%;
+  border-bottom: 1px var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--font);
+  position: relative;
+  transition: 0.2s ease-out;
+}
+
+.year-form-header i:hover {
+  transition: 0.2s ease-in;
+  background: rgb(224, 226, 228);
+  color: var(--font);
+}
+
+.year-form-header i {
+  position: absolute;
+  right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 8px 11px;
+  transition: 0.2s ease-out;
+  background: rgb(236, 238, 240);
+  color: var(--sub-font);
+}
+
+.year-content {
+  width: 95%;
+  height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.year-content-header {
+  width: 95%;
+  margin: 0 auto;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  color: var(--font);
+  justify-content: space-between;
+}
+
+.year-content-body-empty {
+  width: 95%;
+  margin: 0 auto;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font14);
+  color: var(--sub-font);
+  flex-direction: column;
+}
+
+.year-content-body-empty p {
+  margin-bottom: 20px;
+}
+
+.create-year i {
+  margin-right: 5px;
+}
+
+.create-year {
+  width: 120px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sub-font);
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: var(--font15);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  border: 1px var(--border);
+}
+
+.create-year:hover {
+  transition: 0.2s ease-in;
+  background: rgb(224, 226, 228);
+}

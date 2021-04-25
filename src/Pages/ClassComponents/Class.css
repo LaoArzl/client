@@ -391,6 +391,7 @@
   transition: 0.2s ease-out;
   background: rgb(236, 238, 240);
   color: var(--sub-font);
+  transition: 0.2s ease-out;
 }
 
 .create-stream-post-header i:hover {

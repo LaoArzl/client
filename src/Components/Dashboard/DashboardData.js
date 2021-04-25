@@ -37,7 +37,7 @@ export const DashboardData = [
     name: "Subjects",
     icon: <LibraryBooksOutlinedIcon fontSize="small" />,
     icons: <LibraryBooksIcon fontSize="small" />,
-    link: "/admin/subjects",
+    link: "/admin/subject",
   },
   {
     name: "Year",

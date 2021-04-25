@@ -24,7 +24,6 @@ import PortalLogin from "./Pages/PortalLogin/PortalLogin";
 
 //Admin Components and Pages
 import DashboardHome from "./Pages/Admin/DashboardHome/DashboardHome";
-import Announcement from "./Pages/Admin/Announcement/Announcement";
 import Classroom from "./Pages/Admin/Classroom/Class";
 import Message from "./Pages/Admin/Message/Message";
 import Students from "./Pages/Admin/Students/Students";
@@ -33,6 +32,8 @@ import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
 import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
 import EditClass from "./Pages/Admin/Classroom/EditClass";
+import Subject from "./Pages/Admin/Subject/Subject";
+import Year from "./Pages/Admin/Year/Year";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -146,12 +147,7 @@ function App() {
                         <Route path="/admin/class" exact>
                           <Classroom />
                         </Route>
-
-                        <Route
-                          path="/admin/announcement"
-                          exact
-                          component={Announcement}
-                        />
+               
                         <Route
                           path="/admin/message"
                           exact
@@ -198,6 +194,18 @@ function App() {
                           path="/admin/teachers"
                           exact
                           component={Teachers}
+                        />
+
+                        <Route
+                          path="/admin/year"
+                          exact
+                          component={Year}
+                        />
+
+                        <Route
+                          path="/admin/subject"
+                          exact
+                          component={Subject}
                         />
 
                         {studentUser.map((value) => {
