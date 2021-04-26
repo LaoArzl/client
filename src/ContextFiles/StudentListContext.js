@@ -12,6 +12,7 @@ export const StudentListProvider = (props) => {
   const [accessToken, setAccessToken] = useState("");
   const [searchTeacher, setSearchTeacher] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [yearList, setYearList] = useState([]);
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
@@ -50,6 +51,18 @@ export const StudentListProvider = (props) => {
   }, []);
 
   useEffect(() => {
+    Axios.get("https://ecplcsms.herokuapp.com/year/create").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setYearList([]);
+        } else {
+          setYearList(response.data);
+        }
+      }
+    );
+  }, [])
+
+  useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/all-users").then((response) => {
       if (response.data.length == 0) {
         setAllUsers([]);
@@ -69,6 +82,7 @@ export const StudentListProvider = (props) => {
         value04: [searchTeacher, setSearchTeacher],
         valueAllUsers: [allUsers, setAllUsers],
         valueAllClass: [classroom, setClassroom],
+        valueAllYear: [yearList, setYearList],
       }}
     >
       {props.children}

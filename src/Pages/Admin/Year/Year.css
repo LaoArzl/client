@@ -16,7 +16,7 @@
 
 .year-wrapper form {
   width: 30%;
-  height: 50%;
+  height: 40%;
   background: white;
   z-index: 4;
   position: absolute;
@@ -55,6 +55,13 @@
   background: rgb(236, 238, 240);
   color: var(--sub-font);
 }
+.year-form-body {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .year-content {
   width: 95%;
@@ -71,6 +78,7 @@
   align-items: center;
   color: var(--font);
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .year-content-body-empty {
@@ -83,10 +91,6 @@
   font-size: var(--font14);
   color: var(--sub-font);
   flex-direction: column;
-}
-
-.year-content-body-empty p {
-  margin-bottom: 20px;
 }
 
 .create-year i {
@@ -111,4 +115,216 @@
 .create-year:hover {
   transition: 0.2s ease-in;
   background: rgb(224, 226, 228);
+}
+
+.no-grade-level {
+  width: 95%;
+  height: 30vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  background: white;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.no-grade-level p {
+  margin-bottom: 20px;
+  color: var(--sub-font);
+  font-size: var(--font14);
+}
+
+.list-grade-level-header {
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.year-form-div {
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.year-form-div label {
+  font-weight: 500;
+  font-size: var(--font13);
+  color: #7a7a7a;
+  margin-bottom: 5px;
+}
+
+.year-form-div select,
+.year-form-div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.year-form-div select:focus,
+.year-form-div input:focus {
+  border: 1px solid rgb(170, 183, 192);
+}
+
+.year-form-div-submit {
+  width: 90%;
+  height: 40px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.year-form-submit-submit {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: var(--main);
+  border: 1px solid rgb(230, 230, 236);
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease-out;
+  margin-left: 15px;
+}
+
+.year-form-submit-cancel {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(229, 231, 238);
+  border: 1px solid rgb(230, 230, 236);
+  cursor: pointer;
+  color: var(--font);
+  transition: 0.2s ease-out;
+}
+
+.year-form-submit-cancel:hover {
+  transition: 0.2s ease-in;
+  background: rgb(207, 208, 214);
+}
+
+.year-form-submit-submit:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}
+
+.year-list-header {
+  width: 100%;
+  margin: 0 auto;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--sub-font);
+  border-radius: 2px;
+  text-transform: uppercase;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 5px solid #f3f6f7;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: white;
+  min-height: 50px;
+}
+.year-list-body {
+  margin: 0 auto;
+  width: 100%;
+  height: 10vh;
+  min-height: 50px;
+  display: flex;
+  font-size: 14px;
+  position: relative;
+  border-radius: 5px;
+  color: var(--font);
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 2px solid #f7f8fb;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  background: white;
+}
+
+.year-list-body:hover {
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 8px 30px 0px rgba(75, 100, 116, 0.1);
+  transition: 0.1s ease-in-out;
+}
+
+.year-id {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.year-content-header-header {
+  width: 95%;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.year-content-header-header div:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}
+
+.year-content-header-header div {
+  width: 10%;
+  min-width: 100px;
+  height: 65%;
+  background: #2ab56f;
+  color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font15);
+  transition: 0.2s ease-out;
+  font-weight: 500;
+  max-height: 50px;
+  min-height: 40px;
+}
+
+.year-list-wrapper {
+  width: 95%;
+  height: auto;
+  background: rgb(255, 255, 255);
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(235, 235, 235);
 }

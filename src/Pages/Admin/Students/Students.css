@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   display: flex;
-  background: #ffffff;
+  background: #f3f6f7;
 }
 
 .students-content {
@@ -94,12 +94,10 @@
   width: 95%;
   height: auto;
   min-height: 150px;
-  background: white;
   margin: 0 auto;
   border-radius: 20px;
   margin-bottom: 40px;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
-  border: 1px solid rgb(235, 235, 235);
 }
 
 .students-content-lists-body-header {
@@ -134,14 +132,16 @@
   justify-content: space-between;
   font-weight: 500;
   font-size: 13px;
-  color: #7a7a7a;
+  color: var(--sub-font);
   border-radius: 2px;
   text-transform: uppercase;
   padding-left: 20px;
   padding-right: 20px;
-  border-bottom: 5px solid #f7f8fb;
+  border-bottom: 5px solid #f3f6f7;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  background: white;
+  min-height: 50px;
 }
 
 .student-list-number,
@@ -210,17 +210,19 @@
   margin: 0 auto;
   width: 100%;
   height: 10vh;
+  min-height: 50px;
   display: flex;
   font-size: 14px;
   position: relative;
   border-radius: 5px;
-  color: #323b44;
+  color: var(--font);
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
   border-bottom: 2px solid #f7f8fb;
   cursor: pointer;
   transition: 0.1s ease-in-out;
+  background: white;
 }
 
 .student-list-body:hover {

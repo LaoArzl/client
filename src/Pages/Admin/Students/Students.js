@@ -37,7 +37,7 @@ const Students = () => {
             <DashboardHeader />
             <div className="students-content-lists-body-header">
               <div className="div-class-search">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
                 <input type="search" placeholder="Search for a student"></input>
               </div>
               <div className="add-student-span-wrapper">
@@ -61,7 +61,7 @@ const Students = () => {
 
             <div className="students-content-lists-body">
               <div className="student-list-header">
-                <div className="student-list-id">Student ID</div>
+                <div className="student-list-id">ID No.</div>
                 <div className="student-list-name">Name</div>
                 <div className="student-list-gender">Gender</div>
                 <div className="student-list-gradelevel">Year</div>

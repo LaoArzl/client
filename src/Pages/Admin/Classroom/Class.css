@@ -1,12 +1,12 @@
-.class-wrapper {
+.classs-wrapper {
   display: flex;
   width: 100%;
   height: auto;
   position: relative;
-  background: #ffffff;
+  background: #f3f6f7;
 }
 
-.class-wrapper-active {
+.classs-wrapper-active {
   display: flex;
   width: 100%;
   height: 100vh;
@@ -17,22 +17,21 @@
   top: 0;
 }
 
-.class-content {
+.classs-content {
   width: 95%;
   height: 100vh;
   overflow-y: scroll;
-  background: #f7f8fb;
+  background: #f3f6f7;
 }
 
 .class-actual-body {
   width: 95%;
   height: auto;
   min-height: 200px;
-  background: white;
+  background: rgb(255, 255, 255);
   margin: 0 auto;
   border-radius: 20px;
   margin-bottom: 20px;
-  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
   border: 1px solid rgb(235, 235, 235);
 }
 
@@ -79,7 +78,9 @@
   padding-left: 40px;
   border: 1px solid rgb(235, 235, 235);
   padding-right: 10px;
-  background: rgb(243, 245, 247);
+  background: rgb(255, 255, 255);
+  max-height: 50px;
+  min-height: 40px;
 }
 
 .div-class-search input:focus {
@@ -142,7 +143,7 @@
 
 .add-class-button {
   width: 10%;
-  min-width: 125px;
+  min-width: 100px;
   height: 65%;
   background: #2ab56f;
   color: #ffffff;
@@ -154,6 +155,8 @@
   font-size: var(--font15);
   transition: 0.2s ease-out;
   font-weight: 500;
+  max-height: 50px;
+  min-height: 40px;
 }
 
 .add-class-button:hover {
@@ -218,7 +221,7 @@
 
 .create-class-div label {
   font-size: var(--font13);
-  margin-bottom: 15px;
+  margin-bottom: 100px;
   color: #7a7a7a;
   font-weight: 500;
 }

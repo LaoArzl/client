@@ -104,8 +104,9 @@
   height: 350px;
   border-radius: 10px;
   border: 1px solid rgb(235, 235, 235);
-  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.1);
   color: #323b44;
+  background: white;
 }
 
 .calendar-section-header {

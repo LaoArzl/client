@@ -90,7 +90,7 @@ const Class = () => {
       {role !== "Admin" ? (
         <BrokenPage />
       ) : (
-        <div className="class-wrapper">
+        <div className="classs-wrapper">
           {showCreate ? (
             <>
               <form
@@ -187,10 +187,13 @@ const Class = () => {
           <Dashboard />
           <div
             onClick={() => setShowCreate(!showCreate)}
-            className={showCreate ? "class-wrapper-active" : ""}
+            className={showCreate ? "classs-wrapper-active" : ""}
           ></div>
-          <div className="class-content">
+          <div className="classs-content">
             <DashboardHeader />
+            <div className="year-content-header">
+            <h3>Class List</h3>
+          </div>
             <div className="class-actual-body-header">
               <div className="div-class-search">
                 <i className="fas fa-search"></i>

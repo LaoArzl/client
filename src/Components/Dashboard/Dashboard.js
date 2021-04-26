@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Dashboard.css";
 import { DashboardData } from "./DashboardData";
 import { UsersData } from "./UsersData";
@@ -16,6 +16,7 @@ const Dashboard = () => {
     setShowName(!showName);
   };
 
+
   return (
     <>
       <div className={showName ? "extra-sidebar" : "sidebar"}>
@@ -31,7 +32,7 @@ const Dashboard = () => {
             className={showName ? "router-link" : "router-link-extra"}
             to="/admin/dashboard"
           >
-            <Tippy content={"Dashboard"} arrow={false} placement="right">
+            <Tippy enabled={showName ? false : true} content={"Dashboard"} arrow={false} placement="right">
               <li
                 className="li-middle"
                 id={
@@ -80,7 +81,7 @@ const Dashboard = () => {
                 to={val.link}
                 key={key}
               >
-                <Tippy content={val.name} arrow={false} placement="right">
+                <Tippy enabled={showName ? false : true} content={val.name} arrow={false} placement="right">
                   <li
                     className="li-middle"
                     key={key}
@@ -130,7 +131,7 @@ const Dashboard = () => {
                 to={val.link}
                 key={key}
               >
-                <Tippy content={val.name} arrow={false} placement="right">
+                <Tippy enabled={showName ? false : true} content={val.name} arrow={false} placement="right">
                   <li
                     className="li-middle"
                     key={key}
