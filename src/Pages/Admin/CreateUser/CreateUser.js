@@ -61,9 +61,6 @@ const CreateUser = () => {
           <Dashboard />
           <div className="create-user-content">
             <DashboardHeader />
-            <div className="year-content-header">
-              <h3>Admission</h3>
-            </div>
             <div className="create-user-content-header">
               <div className="create-user-content-header-wrapper">
                 <span

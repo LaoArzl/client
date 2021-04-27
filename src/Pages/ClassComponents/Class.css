@@ -126,6 +126,7 @@
   font-weight: 500;
   border-bottom: 1px var(--border);
   color: #323b44;
+  background: pink;
 }
 
 .class-content-body-left-body {

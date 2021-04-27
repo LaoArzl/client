@@ -34,6 +34,7 @@ import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
 import EditClass from "./Pages/Admin/Classroom/EditClass";
 import Subject from "./Pages/Admin/Subject/Subject";
 import Year from "./Pages/Admin/Year/Year";
+import EditYear from "./Pages/Admin/Year/EditYear";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -60,6 +61,7 @@ function App() {
   const [teacherUser, setTeacherUser] = useState([]);
   const [classData, setClassData] = useState([]);
   const [username, setUsername] = useState("");
+  const [yearId, setYearId] = useState([]);
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
@@ -95,6 +97,16 @@ function App() {
         }
       }
     );
+  }, []);
+
+  useEffect(() => {
+    Axios.get("https://ecplcsms.herokuapp.com/year/create").then((response) => {
+      if (response.data.length === 0) {
+        setYearId([]);
+      } else {
+        setYearId(response.data);
+      }
+    });
   }, []);
 
   return (
@@ -147,7 +159,7 @@ function App() {
                         <Route path="/admin/class" exact>
                           <Classroom />
                         </Route>
-               
+
                         <Route
                           path="/admin/message"
                           exact
@@ -196,11 +208,19 @@ function App() {
                           component={Teachers}
                         />
 
-                        <Route
-                          path="/admin/year"
-                          exact
-                          component={Year}
-                        />
+                        <Route path="/admin/year" exact component={Year} />
+
+                        {yearId.map((value) => {
+                          return (
+                            <Route
+                              key={value._id}
+                              path={"/admin/edit-year/" + value._id}
+                              exact
+                            >
+                              <EditYear id={value._id} />
+                            </Route>
+                          );
+                        })}
 
                         <Route
                           path="/admin/subject"

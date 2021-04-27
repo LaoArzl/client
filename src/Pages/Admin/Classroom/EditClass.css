@@ -2,13 +2,14 @@
   width: 100%;
   height: auto;
   display: flex;
+  background: #f3f6f7;
 }
 
 .edit-class-content {
   width: 95%;
   height: 100vh;
   overflow-y: scroll;
-  background: white;
+  background: #f3f6f7;
 }
 
 .edit-class-body {
@@ -28,6 +29,9 @@
   justify-content: center;
   flex-direction: column;
   border: 1px solid rgb(235, 235, 235);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  min-height: 150px;
+  max-height: 200px;
 }
 
 .edit-class-right {
@@ -35,7 +39,7 @@
   height: auto;
   min-height: 200px;
   background: white;
-  box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
   border-radius: 20px;
   margin-bottom: 20px;
   border: 1px solid rgb(235, 235, 235);

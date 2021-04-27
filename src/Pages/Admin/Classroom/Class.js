@@ -191,9 +191,6 @@ const Class = () => {
           ></div>
           <div className="classs-content">
             <DashboardHeader />
-            <div className="year-content-header">
-            <h3>Class List</h3>
-          </div>
             <div className="class-actual-body-header">
               <div className="div-class-search">
                 <i className="fas fa-search"></i>
@@ -223,7 +220,6 @@ const Class = () => {
                 onClick={() => setShowCreate(true)}
                 className="add-class-button"
               >
-                <i className="fas fa-plus"></i>
                 Create
               </span>
             </div>

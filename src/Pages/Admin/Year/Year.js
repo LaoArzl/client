@@ -4,9 +4,11 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import Axios from "axios";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
+import { Link } from "react-router-dom";
 
 const Year = () => {
-  const [year, setYear] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [grade, setGrade] = useState("");
   const [number, setNumber] = useState("");
@@ -24,6 +26,8 @@ const Year = () => {
         setErrMsg(response.data.err);
       } else {
         setErrMsg(response.data.success);
+        setGrade("");
+        setNumber("");
         setYearList([
           ...yearList,
           {
@@ -43,18 +47,36 @@ const Year = () => {
           className={showForm ? "year-wrapper-after" : ""}
         ></div>
         {showForm && (
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="year-wrapper-form"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <div className="year-form-header">
               <h3>Add Level</h3>
               <i
-                onClick={() => setShowForm(false)}
+                onClick={() => {
+                  setShowForm(false);
+                  setErrMsg("");
+                }}
                 className="fas fa-times"
               ></i>
             </div>
             <div className="year-form-body">
+              <div
+                className={
+                  errMsg === "Successfully added."
+                    ? "error-year-msg-green"
+                    : "error-year-msg-red"
+                }
+              >
+                {errMsg}
+              </div>
               <div className="year-form-div">
-                <label>Grade</label>
-                <select onChange={(e) => setGrade(e.target.value)}>
+                <label>Grade Level</label>
+                <select
+                  value={grade}
+                  onChange={(e) => setGrade(e.target.value)}
+                >
                   <option disabled value="">
                     Select option
                   </option>
@@ -66,6 +88,7 @@ const Year = () => {
               <div className="year-form-div">
                 <input
                   onChange={(e) => setNumber(e.target.value)}
+                  value={number}
                   type="number"
                   min="1"
                   max="10"
@@ -75,7 +98,10 @@ const Year = () => {
 
               <div className="year-form-div-submit">
                 <input
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setShowForm(false);
+                    setErrMsg("");
+                  }}
                   type="reset"
                   className="year-form-submit-cancel"
                   value="Cancel"
@@ -98,21 +124,36 @@ const Year = () => {
           </div>
           <div className="year-list-wrapper">
             <div className="year-list-header">
-              <div className="list-grade-level-header">Grade Level</div>
+              <div className="list-grade-level-header">
+                <p>Grade Level</p>
+                <Tippy
+                  content={
+                    "You can add different subjects for each grade level in edit section."
+                  }
+                  arrow={true}
+                  placement="bottom"
+                >
+                  <i class="far fa-question-circle"></i>
+                </Tippy>
+              </div>
             </div>
             {yearList.length === 0 ? (
               <div className="no-grade-level">
                 <p>There is no grade level yet. Create one. </p>
-                {/* <div onClick={() => setShowForm(true)} className="create-year">
-                  <i class="far fa-plus-square"></i> Create
-                </div> */}
               </div>
             ) : (
               yearList.map((value) => {
                 return (
                   <div id={value._id} className="year-list-body">
                     <div className="year-id">{value._id}</div>
-                    <div className="year-action"></div>
+                    <div className="year-action">
+                      <Link
+                        className="router"
+                        to={"/admin/edit-year/" + value._id}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </Link>
+                    </div>
                   </div>
                 );
               })

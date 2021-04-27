@@ -8,7 +8,6 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import BlurOnOutlinedIcon from "@material-ui/icons/BlurOnOutlined";
 
 const Dashboard = () => {
   const [showName, setShowName] = useContext(DashboardContext);

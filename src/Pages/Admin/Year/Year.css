@@ -14,10 +14,10 @@
   z-index: 4;
 }
 
-.year-wrapper form {
+.year-wrapper-form {
   width: 30%;
   height: 40%;
-  background: white;
+  background: rgb(255, 255, 255);
   z-index: 4;
   position: absolute;
   top: 50%;
@@ -144,6 +144,14 @@
   align-items: center;
 }
 
+.list-grade-level-header p {
+  margin-right: 5px;
+}
+
+.list-grade-level-header i {
+  cursor: pointer;
+}
+
 .year-form-div {
   width: 90%;
   height: auto;
@@ -254,9 +262,10 @@
   margin: 0 auto;
   width: 100%;
   height: 10vh;
-  min-height: 50px;
+  min-height: 30px;
+  max-height: 50px;
   display: flex;
-  font-size: 14px;
+  font-size: var(--font13);
   position: relative;
   border-radius: 5px;
   color: var(--font);
@@ -294,6 +303,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  max-height: 50px;
+  min-height: 40px;
 }
 
 .year-content-header-header div:hover {
@@ -304,7 +315,7 @@
 .year-content-header-header div {
   width: 10%;
   min-width: 100px;
-  height: 65%;
+  height: 100%;
   background: #2ab56f;
   color: #ffffff;
   border-radius: 8px;
@@ -315,8 +326,6 @@
   font-size: var(--font15);
   transition: 0.2s ease-out;
   font-weight: 500;
-  max-height: 50px;
-  min-height: 40px;
 }
 
 .year-list-wrapper {
@@ -326,5 +335,59 @@
   margin: 0 auto;
   border-radius: 20px;
   margin-bottom: 20px;
-  border: 1px solid rgb(235, 235, 235);
+  border-right: 1px solid rgb(235, 235, 235);
+  border-top: 1px solid rgb(235, 235, 235);
+  border-left: 1px solid rgb(235, 235, 235);
+  border-bottom: 1px solid rgb(235, 235, 235);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.year-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.year-action i {
+  cursor: pointer;
+  font-size: var(--font15);
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.1s ease-out;
+  color: grey;
+}
+
+.year-action i:hover {
+  color: #323b44;
+  box-shadow: 0px 8px 30px 0px rgba(49, 68, 80, 0.2);
+  transition: 0.1s ease-in;
+}
+
+.error-year-msg-red {
+  width: 100%;
+  height: auto;
+  font-weight: 300;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font13);
+  margin-bottom: 10px;
+}
+
+.error-year-msg-green {
+  width: 100%;
+  height: auto;
+  font-weight: 300;
+  color: rgb(30, 197, 66);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font13);
+  margin-bottom: 10px;
 }
