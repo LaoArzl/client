@@ -21,7 +21,7 @@
 
 .edit-year-right {
   width: 73%;
-  height: 40vh;
+  height: 45vh;
   min-height: 300px;
   background: rgb(255, 255, 255);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
@@ -153,6 +153,7 @@
   align-items: center;
   justify-content: center;
   color: var(--font);
+  border-bottom: 1px var(--border);
 }
 
 .edit-grade-level-wrapper-after-body {
@@ -169,19 +170,75 @@
   width: 50%;
   text-align: center;
   font-size: var(--font15);
+  color: var(--font);
   margin-bottom: 20px;
 }
 
-.edit-grade-level-wrapper-after-body input {
+.grade-level-edit-input-btn {
   width: 50%;
   height: 35px;
   border-radius: 3px;
   border-style: none;
   outline-style: none;
-  background: rgb(246, 248, 250);
   border: 1px solid rgb(230, 230, 236);
   padding-left: 10px;
   margin-bottom: 20px;
+}
+
+.grade-level-edit-input-btn:focus {
+  border: 1px solid rgb(255, 38, 38);
+  box-shadow: 0px 8px 30px 0px rgba(255, 46, 46, 0.1);
+}
+
+.grade-level-edit-btn-wrapper {
+  width: 50%;
+  height: 35px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.grade-level-edit-btn-delete-btn {
+  border-style: none;
+  outline-style: none;
+  width: 20%;
+  height: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 15px;
+  background: rgb(255, 38, 38);
+  color: white;
+  pointer-events: auto;
+}
+
+.grade-level-edit-btn-delete-btn-false {
+  border-style: none;
+  outline-style: none;
+  width: 20%;
+  height: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 15px;
+  background: rgb(255, 38, 38, 1);
+  color: white;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.grade-level-edit-btn-cancel-btn {
+  border-style: none;
+  outline-style: none;
+  width: 20%;
+  height: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  background: rgb(229, 231, 238);
+  border: 1px solid rgb(230, 230, 236);
+  transition: 0.2s ease-out;
+}
+
+.grade-level-edit-btn-cancel-btn:hover {
+  transition: 0.2s ease-in;
+  background: rgb(207, 208, 214);
 }
 
 .edit-grade-level-wrapper-after-hidden {
@@ -228,6 +285,11 @@
   margin-bottom: 15px;
 }
 
+.edit-grade-level-div input:focus,
+.edit-grade-level-div select:focus {
+  border: 1px solid rgb(184, 198, 214);
+}
+
 .edit-grade-level-div-submit {
   width: 50%;
   height: 40px;
@@ -244,6 +306,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--font);
+  border-bottom: 1px var(--border);
 }
 
 .edit-grade-level-form-body {
@@ -286,4 +350,158 @@
   border-radius: 3px;
   cursor: pointer;
   transition: 0.2s ease-out;
+}
+
+/*Subject Year */
+.subject-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.subject-wrapper-header {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--font);
+  border-bottom: 1px var(--border);
+}
+
+.subject-wrapper-body {
+  width: 100%;
+  height: 80%;
+  position: relative;
+}
+
+.empty-year-subjects {
+  width: 100%;
+  height: 100%;
+  color: var(--sub-font);
+  font-size: var(--font14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.empty-year-subjects p {
+  margin-bottom: 10px;
+}
+
+.add-subject-btn {
+  width: 10%;
+  min-width: 100px;
+  height: 40px;
+  border-style: none;
+  outline-style: none;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  background: var(--main);
+  border-radius: 3px;
+  color: white;
+}
+
+.add-subject-btn:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}
+
+.add-subject-form-after {
+  width: 100%;
+  height: 100%;
+}
+
+.add-subject-form-after-hidden {
+  display: none;
+}
+
+.add-subject-form-after-header {
+  width: 100%;
+  height: 20%;
+  border-bottom: 1px var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--font);
+}
+
+.add-subject-form-after-body {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-subject-div {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-width: 300px;
+  margin-bottom: 20px;
+}
+
+.add-subject-div label {
+  font-weight: 500;
+  font-size: var(--font13);
+  color: #7a7a7a;
+  margin-bottom: 5px;
+}
+
+.add-subject-div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-bottom: 15px;
+}
+
+.add-subject-div input:focus {
+  border: 1px solid rgb(184, 198, 214);
+}
+
+.add-subject-div-submit {
+  width: 50%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 300px;
+}
+
+.add-subject-cancel-btn {
+  width: 10%;
+  min-width: 100px;
+  height: 40px;
+  border-style: none;
+  outline-style: none;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  background: rgb(229, 231, 238);
+  border-radius: 3px;
+  color: white;
+  margin-right: 15px;
+  color: var(--font);
+  font-weight: 500;
+}
+
+.add-subject-cancel-btn:hover {
+  transition: 0.2s ease-in;
+  background: rgb(207, 208, 214);
+  font-weight: 500;
+}
+
+.add-subject-response {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

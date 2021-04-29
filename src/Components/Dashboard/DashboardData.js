@@ -7,8 +7,6 @@ import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import LocalLibraryOutlinedIcon from "@material-ui/icons/LocalLibraryOutlined";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
-import LibraryBooksOutlinedIcon from "@material-ui/icons/LibraryBooksOutlined";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import DnsOutlinedIcon from "@material-ui/icons/DnsOutlined";
 import DnsIcon from "@material-ui/icons/Dns";
 
@@ -32,12 +30,6 @@ export const DashboardData = [
     icon: <ForumOutlinedIcon fontSize="small" />,
     icons: <ForumIcon fontSize="small" />,
     link: "/admin/message",
-  },
-  {
-    name: "Subjects",
-    icon: <LibraryBooksOutlinedIcon fontSize="small" />,
-    icons: <LibraryBooksIcon fontSize="small" />,
-    link: "/admin/subject",
   },
   {
     name: "Year",

@@ -7,6 +7,7 @@ import Subject from "./Subject";
 
 const EditYear = (props) => {
   const [status, setStatus] = useState("grade");
+  const [success, setSuccess] = useState(false);
 
   return (
     <>
@@ -42,7 +43,13 @@ const EditYear = (props) => {
               </div>
             </div>
             <div className="edit-year-right">
-              {status === "grade" && <GradeLevel id={props.id} />}
+              {status === "grade" && (
+                <GradeLevel
+                  success={success}
+                  setSuccess={setSuccess}
+                  id={props.id}
+                />
+              )}
               {status === "subject" && <Subject id={props.id} />}
             </div>
           </div>

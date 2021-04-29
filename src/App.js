@@ -32,9 +32,9 @@ import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
 import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
 import EditClass from "./Pages/Admin/Classroom/EditClass";
-import Subject from "./Pages/Admin/Subject/Subject";
 import Year from "./Pages/Admin/Year/Year";
 import EditYear from "./Pages/Admin/Year/EditYear";
+import Admission from "./Pages/Admin/Admission/Admission";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -199,7 +199,7 @@ function App() {
                         <Route
                           path="/admin/admission"
                           exact
-                          component={CreateUser}
+                          component={Admission}
                         />
 
                         <Route
@@ -222,11 +222,7 @@ function App() {
                           );
                         })}
 
-                        <Route
-                          path="/admin/subject"
-                          exact
-                          component={Subject}
-                        />
+                      
 
                         {studentUser.map((value) => {
                           return (

@@ -1,0 +1,372 @@
+.admission-wrapper {
+  display: flex;
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #f3f6f7;
+}
+
+.admission-content {
+  width: 95%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.admission-content-body {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admission-navigation {
+  width: 25%;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgb(235, 235, 235);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.admission-nav-student {
+  width: 100%;
+  height: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #bac1d1;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+}
+
+.admission-nav-student:hover {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: #323b44;
+  transition: 0.1s ease-in;
+  background: #f5f6fa;
+}
+
+.admission-nav-teacher {
+  width: 100%;
+  height: 50%;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #bac1d1;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+}
+
+.admission-nav-teacher:hover {
+  width: 100%;
+  transition: 0.2s ease-in;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #323b44;
+  transition: 0.1s ease-in;
+  background: #f5f6fa;
+}
+
+.admission-nav-student-active {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #323b44;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+  background: #f5f6fa;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.admission-nav-student-active i,
+.admission-nav-teacher-active i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10%;
+}
+.admission-nav-teacher-active {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #323b44;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+  background: #f5f6fa;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.admission-right {
+  width: 73%;
+  height: auto;
+}
+
+.user-admission-personal {
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  background: white;
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  border-radius: 20px;
+  margin-bottom: 15px;
+  border: 1px solid rgb(235, 235, 235);
+}
+
+.personal-info-header {
+  width: 100%;
+  height: 10vh;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px var(--border);
+  color: var(--font);
+}
+
+.personal-info-body {
+  width: 100%;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.multi-admission-div {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.one-multi-admission-div {
+  width: 31%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.one-multi-admission-div label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.one-multi-admission-div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.two-multi-admission-div {
+  width: 31%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.two-multi-admission-div label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.two-multi-admission-div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.three-multi-admission-div {
+  width: 31%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.three-multi-admission-div label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.three-multi-admission-div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.admission-div {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.admission-div label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+#file-upload {
+  height: 35px;
+  background: rgb(255, 255, 255);
+  padding-left: 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.dual-admission-div {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
+
+.dual-admission-div-div {
+  width: 48%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dual-admission-div-div label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.dual-admission-div-div input {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.admission-div label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.admission-div label i {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.admission-div input,
+.admission-div select {
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.admission-div textarea {
+  width: 100%;
+  height: 70px;
+  border-radius: 3px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid rgb(230, 230, 236);
+  padding: 10px;
+  margin-top: 5px;
+  resize: none;
+}
+
+.admission-div-submit {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.admission-submit-btn {
+  width: 15%;
+  max-width: 110px;
+  height: 40px;
+  min-width: 100px;
+  background: var(--main);
+  outline-style: none;
+  border-style: none;
+  color: white;
+  border-radius: 3px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  margin-top: 15px;
+}
+
+.admission-submit-btn:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}
