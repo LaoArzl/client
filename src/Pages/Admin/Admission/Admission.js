@@ -8,6 +8,8 @@ import TeacherAdmission from "./TeacherAdmission";
 
 const Admission = () => {
   const [typeUser, setTypeUser] = useState("student");
+  const [studentMsg, setStudentMsg] = useState("");
+  const [teacherMsg, setTeacherMsg] = useState("");
   return (
     <>
       <div className="admission-wrapper">
@@ -44,8 +46,18 @@ const Admission = () => {
               </div>
             </div>
             <div className="admission-right">
-              {typeUser === "student" && <StudentAdmission />}
-              {typeUser === "teacher" && <TeacherAdmission />}
+              {typeUser === "student" && (
+                <StudentAdmission
+                  studentMsg={studentMsg}
+                  setStudentMsg={setStudentMsg}
+                />
+              )}
+              {typeUser === "teacher" && (
+                <TeacherAdmission
+                  teacherMsg={teacherMsg}
+                  setTeacherMsg={setTeacherMsg}
+                />
+              )}
             </div>
           </div>
         </div>

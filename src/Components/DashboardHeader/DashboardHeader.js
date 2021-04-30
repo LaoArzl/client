@@ -46,7 +46,7 @@ const DashboardHeader = () => {
               <div className="dashboard-header-profile1"></div>
               <div className="dashboard-header-profile-name">
                 {/* {currUser.firstname} */}
-                <i class="fas fa-caret-down"></i>
+                <i className="fas fa-caret-down"></i>
               </div>
             </div>
             <div

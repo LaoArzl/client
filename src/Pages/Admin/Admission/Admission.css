@@ -6,6 +6,26 @@
   background: #f3f6f7;
 }
 
+.admission-wrapper-active {
+  display: flex;
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #f3f6f7;
+  position: relative;
+}
+
+.admission-wrapper-active::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .admission-content {
   width: 95%;
   height: 100vh;
@@ -22,6 +42,7 @@
 
 .admission-navigation {
   width: 25%;
+  height: 20vh;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -29,8 +50,8 @@
   flex-direction: column;
   border: 1px solid rgb(235, 235, 235);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  max-height: 200px;
   min-height: 100px;
-  max-height: 150px;
 }
 
 .admission-nav-student {
@@ -139,7 +160,7 @@
   min-height: 200px;
   background: white;
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  border-radius: 20px;
+  border-radius: 10px;
   margin-bottom: 15px;
   border: 1px solid rgb(235, 235, 235);
 }
@@ -148,6 +169,7 @@
   width: 100%;
   height: 10vh;
   min-height: 50px;
+  max-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,6 +204,7 @@
   font-size: var(--font13);
   color: #7a7a7a;
   font-weight: 500;
+  display: flex;
 }
 
 .one-multi-admission-div input {
@@ -194,6 +217,7 @@
   border: 1px solid rgb(230, 230, 236);
   padding-left: 10px;
   margin-top: 5px;
+  color: var(--font);
 }
 
 .two-multi-admission-div {
@@ -207,6 +231,7 @@
   font-size: var(--font13);
   color: #7a7a7a;
   font-weight: 500;
+  display: flex;
 }
 
 .two-multi-admission-div input {
@@ -219,6 +244,12 @@
   border: 1px solid rgb(230, 230, 236);
   padding-left: 10px;
   margin-top: 5px;
+  color: var(--font);
+}
+
+.two-multi-admission-div label div {
+  color: rgb(255, 28, 28);
+  margin-left: 3px;
 }
 
 .three-multi-admission-div {
@@ -228,10 +259,16 @@
   flex-direction: column;
 }
 
+.three-multi-admission-div label div {
+  color: rgb(255, 28, 28);
+  margin-left: 3px;
+}
+
 .three-multi-admission-div label {
   font-size: var(--font13);
   color: #7a7a7a;
   font-weight: 500;
+  display: flex;
 }
 
 .three-multi-admission-div input {
@@ -244,6 +281,7 @@
   border: 1px solid rgb(230, 230, 236);
   padding-left: 10px;
   margin-top: 5px;
+  color: var(--font);
 }
 
 .admission-div {
@@ -259,6 +297,13 @@
   font-size: var(--font13);
   color: #7a7a7a;
   font-weight: 500;
+  display: flex;
+  flex-direction: row;
+}
+
+.admission-div label div {
+  color: rgb(255, 28, 28);
+  margin-left: 3px;
 }
 
 #file-upload {
@@ -268,7 +313,6 @@
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-top: 10px;
 }
 
 .dual-admission-div {
@@ -291,6 +335,17 @@
   font-size: var(--font13);
   color: #7a7a7a;
   font-weight: 500;
+  display: flex;
+}
+
+.dual-admission-div label div {
+  color: rgb(255, 28, 28);
+  margin-left: 3px;
+}
+
+.multi-admission-div label div {
+  color: rgb(255, 28, 28);
+  margin-left: 3px;
 }
 
 .dual-admission-div-div input {
@@ -303,12 +358,7 @@
   border: 1px solid rgb(230, 230, 236);
   padding-left: 10px;
   margin-top: 5px;
-}
-
-.admission-div label {
-  font-size: var(--font13);
-  color: #7a7a7a;
-  font-weight: 500;
+  color: var(--font);
 }
 
 .admission-div label i {
@@ -327,6 +377,7 @@
   border: 1px solid rgb(230, 230, 236);
   padding-left: 10px;
   margin-top: 5px;
+  color: var(--font);
 }
 
 .admission-div textarea {
@@ -369,4 +420,76 @@
 .admission-submit-btn:hover {
   transition: 0.2s ease-in;
   background: var(--main-hover);
+}
+
+.teacher-admission-err-msg {
+  width: 100%;
+  height: 10vh;
+  min-height: 60px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background: rgb(255, 228, 233);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font14);
+  font-weight: 300;
+  color: red;
+  border: 1px solid rgb(255, 207, 207);
+  position: relative;
+  text-align: center;
+  padding-right: 2%;
+}
+
+.teacher-admission-err-msg i {
+  position: absolute;
+  right: 1%;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 50%;
+  transition: 0.1s ease-in;
+  color: rgb(255, 47, 47);
+}
+
+.teacher-admission-err-msg i:hover {
+  background: rgb(255, 164, 164);
+  transition: 0.1s ease-out;
+  color: red;
+}
+
+.teacher-admission-succ-msg {
+  width: 100%;
+  height: 10vh;
+  min-height: 60px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background: rgb(228, 255, 240);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font14);
+  font-weight: 300;
+  color: rgb(14, 158, 74);
+  border: 1px solid rgb(255, 207, 207);
+  position: relative;
+  text-align: center;
+  padding-right: 2%;
+}
+
+.teacher-admission-succ-msg i {
+  position: absolute;
+  right: 1%;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 50%;
+  transition: 0.1s ease-in;
+  color: rgb(255, 47, 47);
+}
+
+.teacher-admission-succ-msg i:hover {
+  background: rgb(255, 164, 164);
+  transition: 0.1s ease-out;
+  color: red;
 }

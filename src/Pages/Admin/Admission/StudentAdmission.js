@@ -1,39 +1,176 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admission.css";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import Axios from "axios";
 
-const StudentAdmission = () => {
-  const [account, setAccount] = useState({});
-  const [personal, setPersonal] = useState({});
-  const [address, setAdress] = useState({});
-  const [parent, setParent] = useState({});
+const StudentAdmission = (props) => {
+  const [account, setAccount] = useState({
+    id: "",
+    password: "",
+    year: "",
+    lastname: "",
+    firstname: "",
+    middlename: "",
+    gender: "",
+    birthday: "",
+    picture: "",
+  });
+  const [address, setAdress] = useState({
+    street: "",
+    barangay: "",
+    city: "",
+    postal: "",
+    email: "",
+    contact: "",
+  });
+  const [parent, setParent] = useState({
+    parentfullname: "",
+    relation: "",
+    parentEmail: "",
+    parentContact: "",
+  });
+
   const [gradeLevel, setGradeLevel] = useState([]);
 
-  Axios.get("http://ecplcsms.herokuapp.com/year/create").then((response) => {
-    if (response.data.length === 0) {
-      setGradeLevel([]);
-    } else {
-      setGradeLevel(response.data);
-    }
-  });
+  useEffect(() => {
+    Axios.get("http://ecplcsms.herokuapp.com/year/create").then((response) => {
+      if (response.data.length === 0) {
+        setGradeLevel([]);
+      } else {
+        setGradeLevel(response.data);
+      }
+    });
+  }, []);
+
+  const submitStudent = () => {
+    Axios.post("https://ecplcsms.herokuapp.com/register-student", {
+      id: account.id,
+      password: account.password,
+      year: account.year,
+      lastname: account.lastname,
+      firstname: account.firstname,
+      middlename: account.middlename,
+      fullname:
+        account.firstname +
+        " " +
+        account.middlename[0] +
+        "." +
+        " " +
+        account.lastname,
+      gender: account.gender,
+      birthday: account.birthday,
+      picture: account.picture,
+      street: address.street,
+      barangay: address.barangay,
+      city: address.city,
+      postal: address.postal,
+      email: address.email,
+      contact: address.contact,
+      parentFullname: parent.parentFullname,
+      relation: parent.relation,
+      parentEmail: parent.parentEmail,
+      parentContact: parent.parentContact,
+    }).then((response) => {
+      if (response.data.err) {
+        props.setStudentMsg(response.data.err);
+      } else {
+        props.setStudentMsg(response.data.success);
+      }
+    });
+  };
   return (
     <>
       {/* Account details*/}
+      <div
+        className={
+          props.studentMsg ===
+            "You have successfully admitted an account (1)." ||
+          props.studentMsg === ""
+            ? ""
+            : "teacher-admission-err-msg"
+        }
+      >
+        {props.studentMsg}
+        <i
+          onClick={() => props.setStudentMsg("")}
+          className={props.studentMsg === "" ? "" : "fas fa-times"}
+        ></i>
+      </div>
       <div className="user-admission-personal">
         <div className="personal-info-header">
-          <h3>Account Details</h3>
+          <h3>Student Account Details</h3>
         </div>
         <div className="personal-info-body">
           <div className="admission-div">
-            <label>Student I.D.</label>
-            <input type="text" />
+            <label>
+              Student I.D. <div>*</div>
+            </label>
+            <input
+              value={account.id}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAccount({
+                  id: value,
+                  password: account.password,
+                  year: account.year,
+                  lastname: account.lastname,
+                  firstname: account.firstname,
+                  middlename: account.middlename,
+                  gender: account.gender,
+                  birthday: account.birthday,
+                  picture: account.picture,
+                });
+              }}
+              type="text"
+            />
           </div>
 
           <div className="admission-div">
-            <label>Grade</label>
-            <select>
+            <label>
+              Password <div>*</div>
+            </label>
+            <input
+              value={account.password}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAccount({
+                  id: account.id,
+                  password: value,
+                  year: account.year,
+                  lastname: account.lastname,
+                  firstname: account.firstname,
+                  middlename: account.middlename,
+                  gender: account.gender,
+                  birthday: account.birthday,
+                  picture: account.picture,
+                });
+              }}
+              type="password"
+            />
+          </div>
+
+          <div className="admission-div">
+            <label>
+              Grade <div>*</div>
+            </label>
+            <select
+              value={account.year}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAccount({
+                  id: account.id,
+                  password: account.password,
+                  year: value,
+                  lastname: account.lastname,
+                  firstname: account.firstname,
+                  middlename: account.middlename,
+                  gender: account.gender,
+                  birthday: account.birthday,
+                  picture: account.picture,
+                });
+              }}
+            >
               <option value="" disabled>
                 Select Option
               </option>
@@ -47,34 +184,99 @@ const StudentAdmission = () => {
             </select>
           </div>
 
-          <div className="admission-div">
-            <label>Username</label>
-            <input type="text" />
-          </div>
-
-          <div className="admission-div">
-            <label>Password</label>
-            <input type="password" />
-          </div>
-
           <div className="multi-admission-div">
             <div className="one-multi-admission-div">
-              <label>Last Name</label>
-              <input type="text" />
+              <label>
+                Last Name <div>*</div>
+              </label>
+              <input
+                value={account.lastname}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: account.id,
+                    password: account.password,
+                    year: account.year,
+                    lastname: value,
+                    firstname: account.firstname,
+                    middlename: account.middlename,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type="text"
+              />
             </div>
             <div className="two-multi-admission-div">
-              <label>First Name</label>
-              <input type="text" />
+              <label>
+                First Name <div>*</div>
+              </label>
+              <input
+                value={account.firstname}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: account.id,
+                    password: account.password,
+                    year: account.year,
+                    lastname: account.lastname,
+                    firstname: value,
+                    middlename: account.middlename,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type="text"
+              />
             </div>
             <div className="three-multi-admission-div">
-              <label>Middle Name</label>
-              <input type="text" />
+              <label>
+                Middle Name <div>*</div>
+              </label>
+              <input
+                value={account.middlename}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: account.id,
+                    password: account.password,
+                    year: account.year,
+                    lastname: account.lastname,
+                    firstname: account.firstname,
+                    middlename: value,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type="text"
+              />
             </div>
           </div>
 
           <div className="admission-div">
-            <label>Gender</label>
-            <select>
+            <label>
+              Gender <div>*</div>
+            </label>
+            <select
+              value={account.gender}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAccount({
+                  id: account.id,
+                  password: account.password,
+                  year: account.year,
+                  lastname: account.lastname,
+                  firstname: account.firstname,
+                  middlename: account.middlename,
+                  gender: value,
+                  birthday: account.birthday,
+                  picture: account.picture,
+                });
+              }}
+            >
               <option value="" disabled>
                 Select option
               </option>
@@ -85,14 +287,50 @@ const StudentAdmission = () => {
           </div>
 
           <div className="admission-div">
-            <label>Birth Date</label>
-            <input type="date" />
+            <label>
+              Birth Date <div>*</div>
+            </label>
+            <input
+              value={account.birthday}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAccount({
+                  id: account.id,
+                  password: account.password,
+                  year: account.year,
+                  lastname: account.lastname,
+                  firstname: account.firstname,
+                  middlename: account.middlename,
+                  gender: account.gender,
+                  birthday: value,
+                  picture: account.picture,
+                });
+              }}
+              type="date"
+            />
           </div>
-        </div>
-
-        <div className="admission-div">
-          <label>Profile Picture</label>
-          <input type="file" id="file-upload"></input>
+          <div className="admission-div">
+            <label>Profile Picture</label>
+            <input
+              value={account.picture}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAccount({
+                  id: account.id,
+                  password: account.password,
+                  year: account.year,
+                  lastname: account.lastname,
+                  firstname: account.firstname,
+                  middlename: account.middlename,
+                  gender: account.gender,
+                  birthday: account.birthday,
+                  picture: value,
+                });
+              }}
+              type="file"
+              id="file-upload"
+            ></input>
+          </div>
         </div>
       </div>
 
@@ -104,35 +342,129 @@ const StudentAdmission = () => {
         <div className="personal-info-body">
           <div className="dual-admission-div">
             <div className="dual-admission-div-div">
-              <label>Street</label>
-              <input type="text"></input>
+              <label>
+                Street <div>*</div>
+              </label>
+              <input
+                value={address.street}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAdress({
+                    street: value,
+                    barangay: address.barangay,
+                    city: address.city,
+                    postal: address.postal,
+                    email: address.email,
+                    contact: address.contact,
+                  });
+                }}
+                type="text"
+              ></input>
             </div>
 
             <div className="dual-admission-div-div">
-              <label>Brgy.</label>
-              <input type="text"></input>
+              <label>
+                Brgy. <div>*</div>
+              </label>
+              <input
+                value={address.barangay}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAdress({
+                    street: address.street,
+                    barangay: value,
+                    city: address.city,
+                    postal: address.postal,
+                    email: address.email,
+                    contact: address.contact,
+                  });
+                }}
+                type="text"
+              ></input>
             </div>
           </div>
           <div className="dual-admission-div">
             <div className="dual-admission-div-div">
-              <label>City</label>
-              <input type="text"></input>
+              <label>
+                City <div>*</div>
+              </label>
+              <input
+                value={address.city}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAdress({
+                    street: address.street,
+                    barangay: address.barangay,
+                    city: value,
+                    postal: address.postal,
+                    email: address.email,
+                    contact: address.contact,
+                  });
+                }}
+                type="text"
+              ></input>
             </div>
 
             <div className="dual-admission-div-div">
-              <label>Postal Code</label>
-              <input type="number"></input>
+              <label>
+                Postal Code <div>*</div>
+              </label>
+              <input
+                value={address.postal}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAdress({
+                    street: address.street,
+                    barangay: address.barangay,
+                    city: address.city,
+                    postal: value,
+                    email: address.email,
+                    contact: address.contact,
+                  });
+                }}
+                type="number"
+              ></input>
             </div>
           </div>
 
           <div className="admission-div">
             <label>Email Address</label>
-            <input type="text" placeholder="Optional" />
+            <input
+              value={address.email}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAdress({
+                  street: address.street,
+                  barangay: address.barangay,
+                  city: address.city,
+                  postal: address.postal,
+                  email: value,
+                  contact: address.contact,
+                });
+              }}
+              type="text"
+              placeholder="Optional"
+            />
           </div>
 
           <div className="admission-div">
             <label>Contact No.</label>
-            <input type="text" placeholder="Optional" />
+            <input
+              value={address.contact}
+              onChange={(e) => {
+                let value = e.target.value;
+                setAdress({
+                  street: address.street,
+                  barangay: address.barangay,
+                  city: address.city,
+                  postal: address.postal,
+                  email: address.email,
+                  contact: value,
+                });
+              }}
+              type="text"
+              placeholder="Optional"
+            />
           </div>
         </div>
       </div>
@@ -144,13 +476,39 @@ const StudentAdmission = () => {
         </div>
         <div className="personal-info-body">
           <div className="admission-div">
-            <label>Fullname</label>
-            <input type="text" />
+            <label>
+              Fullname<div>*</div>
+            </label>
+            <input
+              value={parent.parentFullname}
+              onChange={(e) => {
+                let value = e.target.value;
+                setParent({
+                  parentFullname: value,
+                  relation: parent.relation,
+                  parentEmail: parent.parentEmail,
+                  parentContact: parent.parentContact,
+                });
+              }}
+              type="text"
+            />
           </div>
 
           <div className="admission-div">
-            <label>Relation</label>
+            <label>
+              Relation<div>*</div>
+            </label>
             <input
+              value={parent.relation}
+              onChange={(e) => {
+                let value = e.target.value;
+                setParent({
+                  parentfullname: parent.parentfullname,
+                  relation: value,
+                  parentEmail: parent.parentEmail,
+                  parentContact: parent.parentContact,
+                });
+              }}
               type="text"
               placeholder="Mother, Father, Relatives, etc..."
             />
@@ -158,38 +516,67 @@ const StudentAdmission = () => {
 
           <div className="admission-div">
             <label>
-              Email Address
+              Email Address <div>*</div>
               <Tippy
                 content={
-                  "Contact information from parents or guardians is important. All information of the student including username and password will be sent via email or text messages."
+                  "Contact address from parents or guardians is important. All information of the student including username and password will be sent via email and text messages."
                 }
                 placement="top"
               >
                 <i class="fas fa-info-circle"></i>
               </Tippy>
             </label>
-            <input type="text" />
+            <input
+              value={parent.parentEmail}
+              onChange={(e) => {
+                let value = e.target.value;
+                setParent({
+                  parentfullname: parent.parentfullname,
+                  relation: parent.relation,
+                  parentEmail: value,
+                  parentContact: parent.parentContact,
+                });
+              }}
+              type="text"
+            />
           </div>
 
           <div className="admission-div">
             <label>
-              Contact No.{" "}
+              Contact No.<div>*</div>
               <Tippy
                 content={
-                  "Contact information from parents or guardians is important. All information of the student including username and password will be sent via email or text messages."
+                  "Contact address from parents or guardians is important. All information of the student including username and password will be sent via email and text messages."
                 }
                 placement="top"
               >
                 <i class="fas fa-info-circle"></i>
               </Tippy>
             </label>
-            <input type="text" />
+            <input
+              value={parent.parentContact}
+              onChange={(e) => {
+                let value = e.target.value;
+                setParent({
+                  parentfullname: parent.parentfullname,
+                  relation: parent.email,
+                  parentEmail: parent.parentEmail,
+                  parentContact: value,
+                });
+              }}
+              type="text"
+            />
           </div>
         </div>
       </div>
 
       <div className="admission-div-submit">
-        <input type="submit" className="admission-submit-btn" value="Create" />
+        <input
+          onClick={submitStudent}
+          type="submit"
+          className="admission-submit-btn"
+          value="Create"
+        />
       </div>
     </>
   );

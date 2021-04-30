@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Admission.css";
-import Tippy from "@tippy.js/react";
-import "tippy.js/dist/tippy.css";
 import Axios from "axios";
 
-const TeacherAdmission = () => {
+const TeacherAdmission = (props) => {
   const [account, setAccount] = useState({});
   const [address, setAddress] = useState({});
 
   useEffect(() => {
     setAccount({
       id: "",
-      username: "",
       password: "",
       lastname: "",
       firstname: "",
@@ -33,46 +30,91 @@ const TeacherAdmission = () => {
     });
   }, []);
 
+  const submitTeacher = () => {
+    Axios.post("https://ecplcsms.herokuapp.com/register-teacher", {
+      id: account.id,
+      password: account.password,
+      lastname: account.lastname,
+      firstname: account.firstname,
+      middlename: account.middlename,
+      fullname:
+        account.firstname +
+        " " +
+        account.middlename[0] +
+        "." +
+        " " +
+        account.lastname,
+      gender: account.gender,
+      birthday: account.birthday,
+      picture: account.picture,
+      street: address.street,
+      barangay: address.barangay,
+      city: address.city,
+      postal: address.postal,
+      email: address.email,
+      contact: address.contact,
+    }).then((response) => {
+      if (response.data.err) {
+        props.setTeacherMsg(response.data.err);
+      } else {
+        props.setTeacherMsg(response.data.success);
+        setAccount({
+          id: "",
+          password: "",
+          lastname: "",
+          firstname: "",
+          middlename: "",
+          gender: "",
+          birthday: "",
+          picture: "",
+        });
+        setAddress({
+          street: "",
+          barangay: "",
+          city: "",
+          postal: "",
+          email: "",
+          contact: "",
+        });
+      }
+    });
+  };
+
   return (
     <>
       {/* Account details*/}
+      <div
+        className={
+          props.teacherMsg !== "You have successfully admitted an account (1)."
+            ? "teacher-admission-err-msg"
+            : props.teacherMsg ===
+              "You have successfully admitted an account (1)."
+            ? "teacher-admission-succ-msg"
+            : ""
+        }
+      >
+        {props.teacherMsg}{" "}
+        <i
+          onClick={() => props.setTeacherMsg("")}
+          className={props.teacherMsg === "" ? "" : "fas fa-times"}
+        ></i>
+      </div>
       <div className="user-admission-personal">
         <div className="personal-info-header">
-          <h3>Account Details</h3>
+          <h3>Teacher Account Details</h3>
         </div>
         <div className="personal-info-body">
           <div className="admission-div">
-            <label>Teacher I.D.</label>
+            <label>
+              Teacher I.D.<div>*</div>
+            </label>
             <input
               value={account.id}
               onChange={(e) => {
                 let value = e.target.value;
                 setAccount({
                   id: value,
-                  username: account.username,
-                  pasword: account.password,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: account.gender,
-                  birthday: account.birthday,
-                  picture: account.picture,
-                });
-              }}
-              type="text"
-            />
-          </div>
-
-          <div className="admission-div">
-            <label>Username</label>
-            <input
-              value={account.username}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: account.id,
-                  username: value,
-                  pasword: account.password,
+                  password: account.password,
                   lastname: account.lastname,
                   firstname: account.firstname,
                   middlename: account.middlename,
@@ -86,15 +128,16 @@ const TeacherAdmission = () => {
           </div>
 
           <div className="admission-div admission-div-password">
-            <label>Password</label>
+            <label>
+              Password<div>*</div>
+            </label>
             <input
               value={account.password}
               onChange={(e) => {
                 let value = e.target.value;
                 setAccount({
                   id: account.id,
-                  username: account.username,
-                  pasword: value,
+                  password: value,
                   lastname: account.lastname,
                   firstname: account.firstname,
                   middlename: account.middlename,
@@ -109,15 +152,16 @@ const TeacherAdmission = () => {
 
           <div className="multi-admission-div">
             <div className="one-multi-admission-div">
-              <label>Last Name</label>
+              <label>
+                Last Name<div>*</div>
+              </label>
               <input
                 value={account.lastname}
                 onChange={(e) => {
                   let value = e.target.value;
                   setAccount({
                     id: account.id,
-                    username: account.username,
-                    pasword: account.password,
+                    password: account.password,
                     lastname: value,
                     firstname: account.firstname,
                     middlename: account.middlename,
@@ -130,15 +174,16 @@ const TeacherAdmission = () => {
               />
             </div>
             <div className="two-multi-admission-div">
-              <label>First Name</label>
+              <label>
+                First Name<div>*</div>
+              </label>
               <input
                 value={account.firstname}
                 onChange={(e) => {
                   let value = e.target.value;
                   setAccount({
                     id: account.id,
-                    username: account.username,
-                    pasword: account.password,
+                    password: account.password,
                     lastname: account.lastname,
                     firstname: value,
                     middlename: account.middlename,
@@ -151,15 +196,16 @@ const TeacherAdmission = () => {
               />
             </div>
             <div className="three-multi-admission-div">
-              <label>Middle Name</label>
+              <label>
+                Middle Name <div>*</div>
+              </label>
               <input
                 value={account.middlename}
                 onChange={(e) => {
                   let value = e.target.value;
                   setAccount({
                     id: account.id,
-                    username: account.username,
-                    pasword: account.password,
+                    password: account.password,
                     lastname: account.lastname,
                     firstname: account.firstname,
                     middlename: value,
@@ -175,15 +221,16 @@ const TeacherAdmission = () => {
           </div>
 
           <div className="admission-div">
-            <label>Gender</label>
+            <label>
+              Gender <div>*</div>
+            </label>
             <select
               value={account.gender}
               onChange={(e) => {
                 let value = e.target.value;
                 setAccount({
                   id: account.id,
-                  username: account.username,
-                  pasword: account.password,
+                  password: account.password,
                   lastname: account.lastname,
                   firstname: account.firstname,
                   middlename: account.middlename,
@@ -203,15 +250,16 @@ const TeacherAdmission = () => {
           </div>
 
           <div className="admission-div">
-            <label>Birth Date</label>
+            <label>
+              Birth Date <div>*</div>
+            </label>
             <input
               value={account.birthday}
               onChange={(e) => {
                 let value = e.target.value;
                 setAccount({
                   id: account.id,
-                  username: account.username,
-                  pasword: account.password,
+                  password: account.password,
                   lastname: account.lastname,
                   firstname: account.firstname,
                   middlename: account.middlename,
@@ -232,8 +280,7 @@ const TeacherAdmission = () => {
                 let value = e.target.value;
                 setAccount({
                   id: account.id,
-                  username: account.username,
-                  pasword: account.password,
+                  password: account.password,
                   lastname: account.lastname,
                   firstname: account.firstname,
                   middlename: account.middlename,
@@ -248,16 +295,17 @@ const TeacherAdmission = () => {
           </div>
         </div>
       </div>
-
       {/* Contact Address*/}
       <div className="user-admission-personal">
         <div className="personal-info-header">
-          <h3>Contact Address</h3>
+          <h3>Contact Address </h3>
         </div>
         <div className="personal-info-body">
           <div className="dual-admission-div">
             <div className="dual-admission-div-div">
-              <label>Street</label>
+              <label>
+                Street <div>*</div>
+              </label>
               <input
                 value={address.street}
                 onChange={(e) => {
@@ -276,7 +324,9 @@ const TeacherAdmission = () => {
             </div>
 
             <div className="dual-admission-div-div">
-              <label>Brgy.</label>
+              <label>
+                Brgy. <div>*</div>
+              </label>
               <input
                 value={address.barangay}
                 onChange={(e) => {
@@ -296,7 +346,9 @@ const TeacherAdmission = () => {
           </div>
           <div className="dual-admission-div">
             <div className="dual-admission-div-div">
-              <label>City</label>
+              <label>
+                City <div>*</div>
+              </label>
               <input
                 value={address.city}
                 onChange={(e) => {
@@ -315,7 +367,9 @@ const TeacherAdmission = () => {
             </div>
 
             <div className="dual-admission-div-div">
-              <label>Postal Code</label>
+              <label>
+                Postal Code<div>*</div>
+              </label>
               <input
                 value={address.postal}
                 onChange={(e) => {
@@ -373,9 +427,13 @@ const TeacherAdmission = () => {
           </div>
         </div>
       </div>
-
       <div className="admission-div-submit">
-        <input type="submit" className="admission-submit-btn" value="Create" />
+        <input
+          onClick={submitTeacher}
+          type="submit"
+          className="admission-submit-btn"
+          value="Create"
+        />
       </div>
     </>
   );

@@ -61,7 +61,7 @@ const Students = () => {
 
             <div className="students-content-lists-body">
               <div className="student-list-header">
-                <div className="student-list-id">ID No.</div>
+                <div className="student-list-id">Student ID</div>
                 <div className="student-list-name">Name</div>
                 <div className="student-list-gender">Gender</div>
                 <div className="student-list-gradelevel">Year</div>

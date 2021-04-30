@@ -97,87 +97,91 @@ const Class = () => {
                 onSubmit={(e) => e.preventDefault()}
                 className="create-subject-form"
               >
-                <div
-                  className={
-                    errMsg === ""
-                      ? "class-error-message"
-                      : errMsg === "Successfully created"
-                      ? "class-error-message-green"
-                      : "class-error-message-red"
-                  }
-                >
-                  <i className="fas fa-exclamation-circle"></i>
-                  {errMsg}
+                <div className="create-subject-form-header">
+                  <h3>Create Class</h3>
                 </div>
-                <div className="create-class-div">
-                  <label>Class Name</label>
-                  <input
-                    onChange={(e) => setClassName(e.target.value)}
-                    value={className}
-                    type="text"
-                  ></input>
-                </div>
-                <div className="create-class-div">
-                  <label>Capacity</label>
-                  <input
-                    onChange={(e) => setClassCapacity(e.target.value)}
-                    value={classCapacity}
-                    type="number"
-                    min="1"
-                    max="40"
-                  ></input>
-                </div>
-                <div className="create-class-div">
-                  <label>Grade Year</label>
-                  <select
-                    onChange={(e) => setClassYear(e.target.value)}
-                    value={classYear}
+                <div className="create-subject-form-body">
+                  <div
+                    className={
+                      errMsg === ""
+                        ? "class-error-message"
+                        : errMsg === "Successfully created"
+                        ? "class-error-message-green"
+                        : "class-error-message-red"
+                    }
                   >
-                    <option disabled value="">
-                      Select Option
-                    </option>
-                    <option value="Kinder 1">Kinder 1</option>
-                    <option value="Kinder 2">Kinder 2</option>
-                    <option value="Grade 1">Grade 1</option>
-                    <option value="Grade 2">Grade 2</option>
-                    <option value="Grade 3">Grade 3</option>
-                    <option value="Grade 4">Grade 4</option>
-                    <option value="Grade 5">Grade 5</option>
-                    <option value="Grade 6">Grade 6</option>
-                  </select>
-                </div>
+                    {errMsg}
+                  </div>
+                  <div className="create-class-div">
+                    <label>Class Name</label>
+                    <input
+                      onChange={(e) => setClassName(e.target.value)}
+                      value={className}
+                      type="text"
+                    ></input>
+                  </div>
+                  <div className="create-class-div">
+                    <label>Capacity</label>
+                    <input
+                      onChange={(e) => setClassCapacity(e.target.value)}
+                      value={classCapacity}
+                      type="number"
+                      min="1"
+                      max="40"
+                    ></input>
+                  </div>
+                  <div className="create-class-div">
+                    <label>Grade Year</label>
+                    <select
+                      onChange={(e) => setClassYear(e.target.value)}
+                      value={classYear}
+                    >
+                      <option disabled value="">
+                        Select Option
+                      </option>
+                      <option value="Kinder 1">Kinder 1</option>
+                      <option value="Kinder 2">Kinder 2</option>
+                      <option value="Grade 1">Grade 1</option>
+                      <option value="Grade 2">Grade 2</option>
+                      <option value="Grade 3">Grade 3</option>
+                      <option value="Grade 4">Grade 4</option>
+                      <option value="Grade 5">Grade 5</option>
+                      <option value="Grade 6">Grade 6</option>
+                    </select>
+                  </div>
 
-                <div className="create-class-div">
-                  <label>Class Adviser</label>
-                  <select
-                    onChange={(e) => setClassAdviser(e.target.value)}
-                    value={classAdviser}
-                  >
-                    <option disabled value="">
-                      Select Option
-                    </option>
-                    {teachers.map((value, key) => {
-                      return (
-                        <option key={key} value={value._id}>
-                          {value.fullname}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                <div className="create-class-div-submit">
-                  <input
-                    onClick={makeFalse}
-                    type="button"
-                    className="create-class-reset-btn"
-                    value="Cancel"
-                  />
-                  <input
-                    onClick={submitCreate}
-                    type="submit"
-                    className="create-class-create-btn"
-                    value="Create"
-                  />
+                  <div className="create-class-div">
+                    <label>Class Adviser</label>
+                    <select
+                      onChange={(e) => setClassAdviser(e.target.value)}
+                      value={classAdviser}
+                    >
+                      <option disabled value="">
+                        Select Option
+                      </option>
+                      {teachers.map((value, key) => {
+                        return (
+                          <option key={key} value={value._id}>
+                            {value.fullname}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <div className="create-class-div-submit">
+                    <input
+                      onClick={makeFalse}
+                      type="button"
+                      className="create-class-reset-btn"
+                      value="Cancel"
+                    />
+                    <input
+                      onClick={submitCreate}
+                      type="submit"
+                      className="create-class-create-btn"
+                      value="Create"
+                    />
+                  </div>
                 </div>
               </form>
             </>
@@ -240,7 +244,8 @@ const Class = () => {
                       Action
                     </div>
                   </div>
-                  {classroom.map((key) => {
+                  {classroom === null ? null : (<>
+                    {classroom.map((key) => {
                     return (
                       <div
                         key={key._id}
@@ -265,7 +270,7 @@ const Class = () => {
                         </div>
                       </div>
                     );
-                  })}
+                  })}</>)}
                 </div>
               ) : (
                 <div className="class-actual-body-archive">

@@ -29,7 +29,7 @@ export const StudentListProvider = (props) => {
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/teacher-list").then(
       (response) => {
-        if (response.data.length == 0) {
+        if (response.data.length === 0) {
           setTeachers([]);
         } else {
           setTeachers(response.data);
@@ -42,7 +42,7 @@ export const StudentListProvider = (props) => {
     Axios.get("https://ecplcsms.herokuapp.com/class/populate-teacher").then(
       (response) => {
         if (response.data.length === 0) {
-          setClassroom([]);
+          setClassroom(null);
         } else {
           setClassroom(response.data);
         }
