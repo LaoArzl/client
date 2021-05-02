@@ -10,9 +10,37 @@ const Admission = () => {
   const [typeUser, setTypeUser] = useState("student");
   const [studentMsg, setStudentMsg] = useState("");
   const [teacherMsg, setTeacherMsg] = useState("");
+
   return (
     <>
       <div className="admission-wrapper">
+        <div
+          className={
+            studentMsg === "Successfully created."
+              ? "successfully-created"
+              : "successfully-created-hidden"
+          }
+        >
+          {studentMsg}
+          <i
+            onClick={() => setStudentMsg("")}
+            className="fas fa-times-circle"
+          ></i>
+        </div>
+
+        <div
+          className={
+            teacherMsg === "Successfully created."
+              ? "successfully-created"
+              : "successfully-created-hidden"
+          }
+        >
+          {teacherMsg}
+          <i
+            onClick={() => setTeacherMsg("")}
+            className="fas fa-times-circle"
+          ></i>
+        </div>
         <Dashboard />
         <div className="admission-content">
           <DashboardHeader />

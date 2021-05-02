@@ -4,6 +4,7 @@
   height: auto;
   position: relative;
   background: #f3f6f7;
+  position: relative;
 }
 
 .admission-wrapper-active {
@@ -194,7 +195,7 @@
 }
 
 .one-multi-admission-div {
-  width: 31%;
+  width: 43%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -221,7 +222,7 @@
 }
 
 .two-multi-admission-div {
-  width: 31%;
+  width: 43%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -253,7 +254,7 @@
 }
 
 .three-multi-admission-div {
-  width: 31%;
+  width: 5%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -453,7 +454,7 @@
 }
 
 .teacher-admission-err-msg i:hover {
-  background: rgb(255, 164, 164);
+  background: rgb(211, 199, 199);
   transition: 0.1s ease-out;
   color: red;
 }
@@ -464,7 +465,7 @@
   min-height: 60px;
   margin: 0 auto;
   margin-bottom: 10px;
-  background: rgb(228, 255, 240);
+  background: rgb(238, 255, 246);
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -472,7 +473,7 @@
   font-size: var(--font14);
   font-weight: 300;
   color: rgb(14, 158, 74);
-  border: 1px solid rgb(255, 207, 207);
+  border: 1px solid rgb(120, 233, 167);
   position: relative;
   text-align: center;
   padding-right: 2%;
@@ -489,7 +490,56 @@
 }
 
 .teacher-admission-succ-msg i:hover {
-  background: rgb(255, 164, 164);
+  background: rgb(233, 224, 224);
   transition: 0.1s ease-out;
   color: red;
+}
+
+.teacher-admission-err-msg-hidden {
+  display: none;
+}
+
+.successfully-created {
+  width: 20%;
+  height: 10%;
+  background: rgb(35, 36, 37);
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 3;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font15);
+  min-width: 250px;
+  min-height: 60px;
+  opacity: 0.95;
+  transition: 0.1s ease-out;
+}
+
+.successfully-created:hover {
+  opacity: 1;
+  transition: 0.1s ease-in;
+}
+
+.successfully-created i {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  cursor: pointer;
+  color: rgb(26, 211, 103);
+  transition: 0.2s ease-out;
+}
+
+.successfully-created i:hover {
+  transition: 0.2s ease-in;
+  color: rgb(23, 184, 90);
+}
+
+.successfully-created-hidden {
+  display: none;
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Class.css";
 import Axios from "axios";
-import Empty from "./empty.png";
 
 const Class = (props) => {
   const [activities, setActivities] = useState([]);
@@ -15,14 +14,13 @@ const Class = (props) => {
           onClick={() => props.showCreateStream(true)}
           className="create-something-right"
         >
-          Hi Teach! Create activities here.
+          Post something or create activites here.
         </div>
       </div>
       <div className="classes-wrapper">
         {activities.length === 0 && (
           <span>
-            <img src={Empty} alt="Empty" />
-            Nothing to show. Create one to reflect here.{" "}
+            Nothing to show. Create one to reflect here.
           </span>
         )}
       </div>

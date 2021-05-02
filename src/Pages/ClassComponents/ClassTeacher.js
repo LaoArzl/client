@@ -7,6 +7,9 @@ import TeacherDashboard from "../Teacher/TeacherDashboard/TeacherDashboard";
 import "./Class.css";
 import People from "./People";
 import Class from "./Class";
+import PostForm from "./PostForm";
+import QuizForm from "./QuizForm";
+import AssignmentForm from "./AssignmentForm";
 
 const ClassTeacher = (props) => {
   const classId = window.location.pathname.replace("/teacher-class/", "");
@@ -19,6 +22,7 @@ const ClassTeacher = (props) => {
 
   const [navOption, setNavOption] = useState("");
   const [createStream, showCreateStream] = useState(false);
+  const [postNav, setPostNav] = useState("post");
 
   useEffect(() => {
     Axios.get(url).then((response) => {
@@ -45,45 +49,22 @@ const ClassTeacher = (props) => {
             createStream ? "create-stream-post" : "create-stream-post-hidden"
           }
         >
-          <div className="create-stream-post-header">
-            <h3>Create Activity</h3>
-            <i
-              onClick={() => showCreateStream(false)}
-              className="fas fa-times"
-            ></i>
-          </div>
-          <div className="create-stream-post-body">
-            <div className="create-stream-post-div-wrapper">
-              <div className="create-stream-post-div1">
-                <label>Subject</label>
-                <select>
-                  <option value="" disabled>
-                    Select option
-                  </option>
-                </select>
-              </div>
-
-              <div className="create-stream-post-div2">
-                <label>Due Date</label>
-                <input type="date"></input>
-              </div>
-            </div>
-
-            <div className="create-stream-post-div">
-              <label>Description</label>
-              <textarea></textarea>
-            </div>
-
-            <div className="create-stream-post-div">
-              <div></div>
-            </div>
-
-            <div className="create-stream-post-divs">
-              <span>
-                <i class="fas fa-paperclip"></i> Upload
+          <div className="create-stream-post-nav">
+            <div className="create-stream-post-nav-header">
+              <span onClick={() => showCreateStream(false)}>
+                <i className="fas fa-arrow-left"></i>Back
               </span>
-              <input type="submit" value="Create" />
             </div>
+            <select onChange={(e) => setPostNav(e.target.value)}>
+              <option value="post">Post</option>
+              <option value="assignment">Assignment</option>
+              <option value="quiz">Quiz</option>
+            </select>
+          </div>
+          <div className="create-stream-right">
+            {postNav === "post" && <PostForm />}
+            {postNav === "assignment" && <AssignmentForm />}
+            {postNav === "quiz" && <QuizForm />}
           </div>
         </form>
         <TeacherDashboard />
@@ -117,7 +98,7 @@ const ClassTeacher = (props) => {
                     : "nav-span-diactive"
                 }
               >
-                Assignments
+                Activities
               </div>
               <div
                 onClick={() => setNavOption("grades")}
@@ -141,6 +122,7 @@ const ClassTeacher = (props) => {
               </div>
             </div>
           </div>
+
           <div className="class-content-body">
             <div className="class-content-body-left">
               <div className="class-content-body-left-header">

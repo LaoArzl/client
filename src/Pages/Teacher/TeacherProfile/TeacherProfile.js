@@ -7,6 +7,8 @@ import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import TeacherDashboard from "../TeacherDashboard/TeacherDashboard";
 import MainLoader from "../../../Components/Loader/MainLoader";
+import LibraryBooksOutlinedIcon from "@material-ui/icons/LibraryBooksOutlined";
+import Logo from "./logo.png";
 
 const TeacherProfile = (props) => {
   const { loginRole, valueID } = useContext(LoginContext);
@@ -55,7 +57,9 @@ const TeacherProfile = (props) => {
             <p onClick={() => setShowClass(!showClass)}>
               Your Class
               <i
-                class={showClass ? "fas fa-caret-down" : "fas fa-caret-right"}
+                className={
+                  showClass ? "fas fa-caret-down" : "fas fa-caret-right"
+                }
               ></i>
             </p>
             <span></span>
@@ -73,13 +77,14 @@ const TeacherProfile = (props) => {
                   className="user-class-class-wrapper"
                 >
                   <div className="user-class-class-wrapper-upper">
-                    <p>Adviser</p>
-                    <b>{value.adviser_id.fullname}</b>
+                    <span>
+                      {/* <LibraryBooksOutlinedIcon fontSize="large" /> */}
+                    </span>
                   </div>
                   <div className="user-class-class-wrapper-lower">
                     <h3>{value.className}</h3>
-                    <p>Total Students: {value.students.length}</p>
-                    <span>See more</span>
+                    <b>{value.adviser_id.fullname}</b>
+                    <span> {value.students.length}</span>
                   </div>
                 </Link>
               );

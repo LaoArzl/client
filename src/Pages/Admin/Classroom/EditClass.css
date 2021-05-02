@@ -30,8 +30,134 @@
   flex-direction: column;
   border: 1px solid rgb(235, 235, 235);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  max-height: 300px;
   min-height: 150px;
-  max-height: 200px;
+}
+
+.edit-class-left1 {
+  width: 100%;
+  height: 33.33%;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #bac1d1;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+}
+
+.edit-class-left2 {
+  width: 100%;
+  height: 33.33%;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #bac1d1;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+}
+
+.edit-class-left3 {
+  width: 100%;
+  height: 33.33%;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #bac1d1;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+}
+
+.edit-class-left1:hover {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: #323b44;
+  transition: 0.1s ease-in;
+  background: #f5f6fa;
+}
+
+.edit-class-left2:hover {
+  width: 100%;
+  color: #323b44;
+  transition: 0.1s ease-in;
+  background: #f5f6fa;
+}
+
+.edit-class-left3:hover {
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #323b44;
+  transition: 0.1s ease-in;
+  background: #f5f6fa;
+}
+
+.edit-class-left1-active {
+  width: 100%;
+  height: 33.33%;
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #323b44;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+  background: #f5f6fa;
+}
+
+.edit-class-left2-active {
+  width: 100%;
+  height: 33.33%;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #323b44;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+  background: #f5f6fa;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.edit-class-left3-active {
+  width: 100%;
+  height: 33.33%;
+  align-items: center;
+  padding-left: 15%;
+  cursor: pointer;
+  color: #323b44;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.1s ease-out;
+  background: #f5f6fa;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .edit-class-right {

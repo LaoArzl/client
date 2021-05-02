@@ -58,6 +58,7 @@ const TeacherAdmission = (props) => {
         props.setTeacherMsg(response.data.err);
       } else {
         props.setTeacherMsg(response.data.success);
+        setTimeout(() => props.setTeacherMsg(""), 10000);
         setAccount({
           id: "",
           password: "",
@@ -85,12 +86,10 @@ const TeacherAdmission = (props) => {
       {/* Account details*/}
       <div
         className={
-          props.teacherMsg !== "You have successfully admitted an account (1)."
-            ? "teacher-admission-err-msg"
-            : props.teacherMsg ===
-              "You have successfully admitted an account (1)."
-            ? "teacher-admission-succ-msg"
-            : ""
+          props.teacherMsg === "" ||
+          props.teacherMsg === "Successfully created."
+            ? "teacher-admission-err-msg-hidden"
+            : "teacher-admission-err-msg"
         }
       >
         {props.teacherMsg}{" "}
@@ -197,7 +196,7 @@ const TeacherAdmission = (props) => {
             </div>
             <div className="three-multi-admission-div">
               <label>
-                Middle Name <div>*</div>
+                M.I <div>*</div>
               </label>
               <input
                 value={account.middlename}

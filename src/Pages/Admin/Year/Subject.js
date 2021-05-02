@@ -64,7 +64,7 @@ const Subject = (props) => {
         <div className="subject-wrapper-header">
           <h3>Subjects for {props.id}</h3>
         </div>
-        <div className="add-subject-response">d</div>
+        <div className="add-subject-response"></div>
         <div className="subject-wrapper-body">
           {!yearList.subjects ? (
             <div className="empty-year-subjects">

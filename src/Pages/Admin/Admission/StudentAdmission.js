@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Admission.css";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import Axios from "axios";
+import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 
 const StudentAdmission = (props) => {
+  const { value00 } = useContext(StudentListContext);
+  const [students, setStudents] = value00;
+
   const [account, setAccount] = useState({
     id: "",
     password: "",
@@ -25,7 +29,7 @@ const StudentAdmission = (props) => {
     contact: "",
   });
   const [parent, setParent] = useState({
-    parentfullname: "",
+    parentFullname: "",
     relation: "",
     parentEmail: "",
     parentContact: "",
@@ -76,18 +80,44 @@ const StudentAdmission = (props) => {
         props.setStudentMsg(response.data.err);
       } else {
         props.setStudentMsg(response.data.success);
+        setTimeout(() => props.setStudentMsg(""), 10000);
+        setAccount({
+          id: "",
+          password: "",
+          year: "",
+          lastname: "",
+          firstname: "",
+          middlename: "",
+          gender: "",
+          birthday: "",
+          picture: "",
+        });
+        setAdress({
+          street: "",
+          barangay: "",
+          city: "",
+          postal: "",
+          email: "",
+          contact: "",
+        });
+        setParent({
+          parentFullname: "",
+          relation: "",
+          parentEmail: "",
+          parentContact: "",
+        });
       }
     });
   };
+
   return (
     <>
       {/* Account details*/}
       <div
         className={
-          props.studentMsg ===
-            "You have successfully admitted an account (1)." ||
-          props.studentMsg === ""
-            ? ""
+          props.studentMsg === "" ||
+          props.studentMsg === "Successfully created."
+            ? "teacher-admission-err-msg-hidden"
             : "teacher-admission-err-msg"
         }
       >
@@ -130,6 +160,7 @@ const StudentAdmission = (props) => {
             <label>
               Password <div>*</div>
             </label>
+
             <input
               value={account.password}
               onChange={(e) => {
@@ -233,7 +264,7 @@ const StudentAdmission = (props) => {
             </div>
             <div className="three-multi-admission-div">
               <label>
-                Middle Name <div>*</div>
+                M.I. <div>*</div>
               </label>
               <input
                 value={account.middlename}
@@ -503,7 +534,7 @@ const StudentAdmission = (props) => {
               onChange={(e) => {
                 let value = e.target.value;
                 setParent({
-                  parentfullname: parent.parentfullname,
+                  parentFullname: parent.parentFullname,
                   relation: value,
                   parentEmail: parent.parentEmail,
                   parentContact: parent.parentContact,
@@ -531,7 +562,7 @@ const StudentAdmission = (props) => {
               onChange={(e) => {
                 let value = e.target.value;
                 setParent({
-                  parentfullname: parent.parentfullname,
+                  parentFullname: parent.parentFullname,
                   relation: parent.relation,
                   parentEmail: value,
                   parentContact: parent.parentContact,
@@ -558,8 +589,8 @@ const StudentAdmission = (props) => {
               onChange={(e) => {
                 let value = e.target.value;
                 setParent({
-                  parentfullname: parent.parentfullname,
-                  relation: parent.email,
+                  parentFullname: parent.parentFullname,
+                  relation: parent.relation,
                   parentEmail: parent.parentEmail,
                   parentContact: value,
                 });

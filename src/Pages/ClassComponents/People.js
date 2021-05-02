@@ -54,7 +54,7 @@ const People = (props) => {
           <h3>Teacher</h3>
         </div>
         <div className="people-teacher-body">
-          <p>{props.name}</p> (You)
+          <p>{props.name}</p> (Adviser)
         </div>
         <div className="people-teacher-header">
           <h3>Student</h3>

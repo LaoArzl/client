@@ -73,14 +73,7 @@ const Class = () => {
         setClassAdviser("");
         setErrMsg(response.data.success);
         setTimeout(() => setErrMsg(""), 5000);
-        setClassroom([
-          ...classroom,
-          {
-            className: className,
-            adviser_id: classAdviser,
-            capacity: classCapacity,
-          },
-        ]);
+        
       }
     });
   };
