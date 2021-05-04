@@ -78,7 +78,7 @@ const TeacherProfile = (props) => {
                 >
                   <div className="user-class-class-wrapper-upper">
                     <span>
-                      {/* <LibraryBooksOutlinedIcon fontSize="large" /> */}
+                      <LibraryBooksOutlinedIcon fontSize="large" />
                     </span>
                   </div>
                   <div className="user-class-class-wrapper-lower">

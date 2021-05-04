@@ -7,6 +7,10 @@ import TeacherDashboard from "../Teacher/TeacherDashboard/TeacherDashboard";
 import "./Class.css";
 import People from "./People";
 import Class from "./Class";
+import Activity from "./Activity";
+
+
+//Create Activity Components
 import PostForm from "./PostForm";
 import QuizForm from "./QuizForm";
 import AssignmentForm from "./AssignmentForm";
@@ -15,7 +19,8 @@ const ClassTeacher = (props) => {
   const classId = window.location.pathname.replace("/teacher-class/", "");
   const url = `https://ecplcsms.herokuapp.com/class/class/${props.id}`;
   const [classData, setClassData] = useState([]);
-  const { loginRole, valueID } = useContext(LoginContext);
+  const { loginRole, valueID, valueFirstname } = useContext(LoginContext);
+  const [firstname, setFirstname] = valueFirstname;
   const [role, setRole] = loginRole;
   const tempId = localStorage.getItem("id");
   const [teacherName, setTeacherName] = useState("");
@@ -34,6 +39,18 @@ const ClassTeacher = (props) => {
       }
     });
   }, []);
+
+  const [activities, setActivities] = useState([]);
+  useEffect(() => {
+    Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then((response) => {
+      if(!response.data.post[0]) {
+        setActivities([])
+      } else {
+        setActivities(response.data.post)
+        console.log(response.data)
+      }
+    })
+  }, [])
 
   return (
     <>
@@ -62,7 +79,7 @@ const ClassTeacher = (props) => {
             </select>
           </div>
           <div className="create-stream-right">
-            {postNav === "post" && <PostForm />}
+            {postNav === "post" && <PostForm firstname={firstname} id={props.id} showCreateStream={showCreateStream} activities={activities} setActivities={setActivities}/> }
             {postNav === "assignment" && <AssignmentForm />}
             {postNav === "quiz" && <QuizForm />}
           </div>
@@ -91,9 +108,9 @@ const ClassTeacher = (props) => {
                 Class
               </div>
               <div
-                onClick={() => setNavOption("assignments")}
+                onClick={() => setNavOption("activity")}
                 className={
-                  navOption === "assignments"
+                  navOption === "activity"
                     ? "nav-span-active"
                     : "nav-span-diactive"
                 }
@@ -136,12 +153,12 @@ const ClassTeacher = (props) => {
             </div>
             <div className="class-content-body-right">
               {navOption === "" && (
-                <Class showCreateStream={showCreateStream} />
+                <Class id={props.id} showCreateStream={showCreateStream} activities={activities} setActivities={setActivities}/>
               )}
               {navOption === "students" && (
                 <People id={classId} name={teacherName} />
               )}
-              {navOption === "assignments" && <p>Assignment Section</p>}
+              {navOption === "activity" && <Activity />}
               {navOption === "grades" && <p>Grades Section</p>}
             </div>
           </div>

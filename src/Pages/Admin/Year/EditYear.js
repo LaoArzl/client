@@ -26,7 +26,7 @@ const EditYear = (props) => {
                 }
               >
                 Grade Level
-                <i class={status === "grade" ? "fas fa-chevron-right" : ""}></i>
+                <i className={status === "grade" ? "fas fa-chevron-right" : ""}></i>
               </div>
               <div
                 onClick={() => setStatus("subject")}
@@ -38,7 +38,7 @@ const EditYear = (props) => {
               >
                 Subjects
                 <i
-                  class={status === "subject" ? "fas fa-chevron-right" : ""}
+                  className={status === "subject" ? "fas fa-chevron-right" : ""}
                 ></i>
               </div>
             </div>

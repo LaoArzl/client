@@ -16,6 +16,7 @@ import BoardTrustees from "./Pages/Portal/Administration/BoardTrustees";
 import TeachersStaff from "./Pages/Portal/Administration/TeachersStaff";
 import Contact from "./Pages/Portal/Contact/Contact";
 
+
 //landing Page
 import Login from "./Pages/Login/Login";
 
@@ -60,8 +61,8 @@ function App() {
   const [studentUser, setStudentUser] = useState([]);
   const [teacherUser, setTeacherUser] = useState([]);
   const [classData, setClassData] = useState([]);
-  const [username, setUsername] = useState("");
   const [yearId, setYearId] = useState([]);
+
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
@@ -98,6 +99,7 @@ function App() {
       }
     );
   }, []);
+
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/year/create").then((response) => {
@@ -247,6 +249,7 @@ function App() {
                             </Route>
                           );
                         })}
+                        
 
                         {teacherUser.map((value) => {
                           return (

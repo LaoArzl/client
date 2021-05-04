@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AssignmentForm = () => {
+  const [points, setPoints] = useState(100);
   return (
     <>
       <div className="create-stream-post-header">
         <h3>Create Assignment</h3>
       </div>
+
       <div className="create-stream-post-body">
         <div className="create-stream-post-div0">
-          <label>Title</label>
+          <label>Points</label>
+          <div className="create-stream-post-div-points">
+            <input
+              value={points}
+              onChange={(e) => setPoints(e.target.value)}
+              type="number"
+              id="create-stream-post-div-points-input"
+              min="1"
+            />
+          </div>
+        </div>
+        <div className="create-stream-post-div0">
+          <label>Topic</label>
           <input type="text" />
         </div>
         <div className="create-stream-post-div-wrapper">
@@ -25,11 +39,16 @@ const AssignmentForm = () => {
             <label>Due Date</label>
             <input type="date"></input>
           </div>
+
+          <div className="create-stream-post-div3">
+            <label>Time</label>
+            <input type="time"></input>
+          </div>
         </div>
 
         <div className="create-stream-post-div">
           <label>Description</label>
-          <textarea placeholder="Optional"></textarea>
+          <textarea placeholder="Instruction or description about the activity (Optional)"></textarea>
         </div>
 
         <div className="create-stream-post-divs">

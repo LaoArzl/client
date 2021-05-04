@@ -21,13 +21,8 @@
 
 .edit-year-right {
   width: 73%;
-  height: 45vh;
+  height: auto;
   min-height: 300px;
-  background: rgb(255, 255, 255);
-  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  border-radius: 20px;
-  margin-bottom: 20px;
-  border: 1px solid rgb(235, 235, 235);
 }
 
 .edit-year-left-1 {
@@ -132,6 +127,10 @@
   width: 100%;
   height: 100%;
   position: relative;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgb(235, 235, 235);
 }
 
 .edit-grade-level-wrapper-after {
@@ -356,6 +355,10 @@
 .subject-wrapper {
   width: 100%;
   height: 100%;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgb(235, 235, 235);
 }
 
 .subject-wrapper-header {
@@ -386,7 +389,7 @@
 }
 
 .empty-year-subjects p {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .add-subject-btn {
@@ -397,19 +400,43 @@
   outline-style: none;
   cursor: pointer;
   transition: 0.2s ease-out;
+  background: #e5e7ee;
+  border-radius: 3px;
+  color: var(--font);
+  font-weight: 500;
+}
+
+.add-subject-btn-2 {
+  width: 10%;
+  min-width: 100px;
+  height: 40px;
+  border-style: none;
+  outline-style: none;
+  cursor: pointer;
+  transition: 0.2s ease-out;
   background: var(--main);
   border-radius: 3px;
   color: white;
+  font-weight: 500;
 }
 
 .add-subject-btn:hover {
+  transition: 0.2s ease-in;
+  background: rgb(207, 208, 214);
+}
+
+.add-subject-btn-2:hover {
   transition: 0.2s ease-in;
   background: var(--main-hover);
 }
 
 .add-subject-form-after {
   width: 100%;
-  height: 100%;
+  height: auto;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgb(235, 235, 235);
 }
 
 .add-subject-form-after-hidden {
@@ -418,7 +445,8 @@
 
 .add-subject-form-after-header {
   width: 100%;
-  height: 20%;
+  height: 10vh;
+  max-height: 60px;
   border-bottom: 1px var(--border);
   display: flex;
   align-items: center;
@@ -428,21 +456,23 @@
 
 .add-subject-form-after-body {
   width: 100%;
-  height: 80%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .add-subject-div {
-  width: 50%;
+  width: 80%;
   height: auto;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   min-width: 300px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .add-subject-div label {
@@ -455,13 +485,22 @@
 .add-subject-div input {
   width: 100%;
   height: 35px;
-  border-radius: 3px;
+  border-radius: 2px;
   border-style: none;
   outline-style: none;
-  background: rgb(246, 248, 250);
-  border: 1px solid rgb(230, 230, 236);
+  border: 1px solid lightgrey;
   padding-left: 10px;
-  margin-bottom: 15px;
+}
+
+.add-subject-div textarea {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  outline-style: none;
+  border-style: none;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  border-radius: 2px;
 }
 
 .add-subject-div input:focus {
@@ -469,11 +508,12 @@
 }
 
 .add-subject-div-submit {
-  width: 50%;
+  width: 80%;
   height: 40px;
   display: flex;
   justify-content: flex-end;
   min-width: 300px;
+  margin-top: 15px;
 }
 
 .add-subject-cancel-btn {
@@ -498,10 +538,19 @@
   font-weight: 500;
 }
 
-.add-subject-response {
-  width: 100%;
-  height: 30px;
+.add-subject-form-status {
+  width: 80%;
+  height: auto;
+  /* background: pink; */
+  font-weight: 300;
+  font-size: var(--font14);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: red;
+  border: 1px solid rgb(255, 207, 207);
+  background: rgb(255, 228, 233);
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 3px;
 }

@@ -1,19 +1,42 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Axios from "axios";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 
 const Subject = (props) => {
   const [subject, setSubject] = useState([]);
-  const { valueAllYear } = useContext(StudentListContext);
-  const [yearList, setYearList] = valueAllYear;
+  // const { valueAllYear } = useContext(StudentListContext);
+  const [yearList, setYearList] = useState([]);
   const [addSubject, setAddSubject] = useState(false);
-  const [subjectName, setSubjectName] = useState([]);
+
+  // Updating/Adding subjects to class
+  const [subjectName, setSubjectName] = useState("");
+  const [subjectDescription, setSubjectDescription] = useState("");
+  const [statusMsg, setStatusMsg] = useState("");
+
+  useEffect(() => {
+    Axios.get(`https://ecplcsms.herokuapp.com/year/${props.id}`).then(
+      (response) => {
+        if (response.data.subjects.length === 0) {
+          setYearList([]);
+        } else {
+          setYearList(response.data.subjects[0]);
+          console.log(response.data.subjects[0]);
+        }
+      }
+    );
+  }, []);
 
   const submitAdd = () => {
     Axios.put(`https://ecplcsms.herokuapp.com/year/add/${props.id}`, {
       subjectName: subjectName,
+      subjectDescription: subjectDescription,
     }).then((response) => {
-      if (response) {
+      if (response.data.err) {
+        setStatusMsg(response.data.err);
+      } else {
+        setStatusMsg(response.data.success);
+        setSubjectName("");
+        setSubjectDescription("");
       }
     });
   };
@@ -32,6 +55,9 @@ const Subject = (props) => {
         </div>
 
         <div className="add-subject-form-after-body">
+          <div className={statusMsg !== "" && "add-subject-form-status"}>
+            {statusMsg}
+          </div>
           <div className="add-subject-div">
             <label>Subject Name</label>
             <input
@@ -39,6 +65,15 @@ const Subject = (props) => {
               onChange={(e) => setSubjectName(e.target.value)}
               type="text"
             />
+          </div>
+
+          <div className="add-subject-div">
+            <label>Description</label>
+            <textarea
+              value={subjectDescription}
+              onChange={(e) => setSubjectDescription(e.target.value)}
+              placeholder="Optional"
+            ></textarea>
           </div>
 
           <div className="add-subject-div-submit">
@@ -51,7 +86,7 @@ const Subject = (props) => {
             <input
               onClick={submitAdd}
               type="submit"
-              className="add-subject-btn"
+              className="add-subject-btn-2"
             />
           </div>
         </div>
@@ -64,9 +99,8 @@ const Subject = (props) => {
         <div className="subject-wrapper-header">
           <h3>Subjects for {props.id}</h3>
         </div>
-        <div className="add-subject-response"></div>
         <div className="subject-wrapper-body">
-          {!yearList.subjects ? (
+          {yearList.length === 0 ? (
             <div className="empty-year-subjects">
               <p>There's currently no subject.</p>
               <input
@@ -78,13 +112,14 @@ const Subject = (props) => {
             </div>
           ) : (
             <>
-              {yearList.map((value) => {
+              {/* {yearList.map((value) => {
                 return (
                   <div key={value._id} className="yearlist-body-wrapper">
                     {value.subjects}
                   </div>
                 );
-              })}
+              })} */}
+              {yearList.subjects}
             </>
           )}
         </div>

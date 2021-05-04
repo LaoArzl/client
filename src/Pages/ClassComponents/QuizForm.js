@@ -37,10 +37,13 @@ const QuizForm = () => {
               </select>
             </div>
             <div className="quiz-form-div-answer">
-              {typeAnswer === "essay" && <textarea disabled></textarea>}
-              {typeAnswer === "multiple" && (
+              {typeAnswer === "essay" ? (
+                <textarea disabled></textarea>
+              ) : (
                 <>
-                  <label></label> <input type="radio" />
+                  <input type="text" placeholder="Option 1" />
+                  <input type="text" placeholder="Option 2" />
+                  <input type="text" placeholder="Option 3" />
                 </>
               )}
             </div>
