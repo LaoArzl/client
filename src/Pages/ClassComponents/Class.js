@@ -15,9 +15,29 @@ const Class = (props) => {
   //   })
   // }, [])
 
+  const commentPost = (id) => {};
+
   const { valueID, valueFirstname } = useContext(LoginContext);
   const [userID, setUserID] = valueID;
   const [firstname, setFirstname] = valueFirstname;
+  const [comment, setComment] = useState("");
+  const [real, setReal] = useState([
+    {
+      comment: "",
+    },
+  ]);
+
+  const submitComment = (commentId) => {
+    Axios.put(
+      `https://ecplcsms.herokuapp.com/class/comment/${props.id}/${commentId}`,
+      {
+        comment: comment,
+        commentor: firstname,
+      }
+    ).then((response) => {
+      console.log(response);
+    });
+  };
   return (
     <>
       <div className="create-something">
@@ -39,7 +59,9 @@ const Class = (props) => {
             {props.activities.map((value) => {
               return (
                 <div key={value._id} className="class-posts">
-                  <div className="class-posts-header">
+                  <div
+                    className={value.title === "" ? "" : "class-posts-header"}
+                  >
                     <h4>{value.title}</h4>
                   </div>
                   <div className="class-posts-body">
@@ -52,17 +74,45 @@ const Class = (props) => {
                     </div>
                     <div className="class-posts-body-body">{value.body}</div>
                     <div className="class-posts-body-comment">
-                      <div className="class-posts-body-comment-upper">
+                      <form
+                        onSubmit={(e) => e.preventDefault()}
+                        className="class-posts-body-comment-upper"
+                      >
                         <div className="class-posts-body-header-left"></div>
-                        <input type="text" placeholder="Write a comment" />
-                        <i className="fas fa-share"></i>
-                      </div>
+                        <input
+                          className="commentBtn"
+                          type="text"
+                          onChange={(e) => setComment(e.target.value)}
+                          placeholder="Write a comment"
+                        />
+                        {/* <i className="fas fa-share"></i> */}
+                        <input
+                          onClick={() => {
+                            submitComment(value._id);
+                            setComment("");
+                          }}
+                          className="comment-submit-btn"
+                          type="submit"
+                        />
+                      </form>
 
-                      <div className="class-posts-body-comment-lower">
+                      <div
+                        className={
+                          value.comments === 0
+                            ? "class-posts-body-comment-lower-hidden"
+                            : "class-posts-body-comment-lower"
+                        }
+                      >
                         <div className="class-posts-body-header-left"></div>
-                        <div className="class-posts-body-comment-user">
-                          Noted Ma'am! Thank You
-                        </div>
+
+                        {value.comments.map((comment) => {
+                          return (
+                            <div className="class-posts-body-comment-user">
+                              {comment.comment}
+                              {comment.commentor}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

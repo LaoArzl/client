@@ -47,7 +47,6 @@ const ClassTeacher = (props) => {
         setActivities([])
       } else {
         setActivities(response.data.post)
-        console.log(response.data)
       }
     })
   }, [])
@@ -143,12 +142,9 @@ const ClassTeacher = (props) => {
           <div className="class-content-body">
             <div className="class-content-body-left">
               <div className="class-content-body-left-header">
-                <p>Announcement</p>
+                <p>Upcoming work</p>
               </div>
-              <div className="class-content-body-left-body">
-                <span>
-                  <i className="fas fa-plus"></i> Create
-                </span>
+              <div className="class-content-body-left-body">  
               </div>
             </div>
             <div className="class-content-body-right">
