@@ -101,7 +101,7 @@ const GradeLevel = (props) => {
               <div className="edit-grade-level-form-body">
                 <div className="edit-grade-level-div">
                   <label>Grade Level</label>
-                  <input ty="text" value={grade} />
+                  <input type="text" value={grade} />
                 </div>
                 <div className="edit-grade-level-div">
                   <input value={number} type="text" />

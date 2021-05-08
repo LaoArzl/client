@@ -1,26 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Login.css";
 import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../ContextFiles/LoginContext";
-import { StudentListContext } from "../../ContextFiles/StudentListContext";
 import Axios from "axios";
 
 const Login = () => {
   Axios.defaults.withCredentials = true;
-  const instance = Axios.create({
-    withCredentials: true,
-  });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+
+  const { loginRole } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
+
+  // useEffect(() => {
+  //   Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+  //     if(response.data.loggedIn === false) {
+  //       setRole("")
+  //     } else {
+  //       setRole(response.data.user)
+  //     }
+  //   })
+  // }, [])
+
   const id = localStorage.getItem("id");
 
-  const { loginRole, valueID } = useContext(LoginContext);
-  const [userID, setUserID] = valueID;
-  const { value01 } = useContext(StudentListContext);
-  const [teachers, setTeachers] = value01;
-  const [role, setRole] = loginRole;
 
   const submitLogin = () => {
     Axios.post("https://ecplcsms.herokuapp.com/user-login", {
@@ -38,7 +44,7 @@ const Login = () => {
       } else if (response.data.auth) {
         localStorage.setItem("id", response.data._id);
         setRole(response.data.userType);
-        console.log("er");
+        setPassword("");
       }
     });
   };
@@ -48,7 +54,7 @@ const Login = () => {
       {role === "Admin" && <Redirect to="/admin/dashboard" />}
       {role === "Teacher" && <Redirect to={"/user/teacher/" + id} />}
       {role === "Student" && <Redirect to={"/user/student/" + id} />}
-      <div className="login-wrapper">
+      <div data-testid="login" className="login-wrapper">
         <div className="login-wrapper-left">
           <div className="login-after-wrapper">
             <div className="first-login-div">
@@ -96,7 +102,7 @@ const Login = () => {
           </div>
 
           <div className="login-input-login">
-            <input onClick={submitLogin} type="submit" value="Sign In" />
+            <input className={username === "" && password === "" ? "login-btn-disabled" : "login-btn"} disabled={username === "" && password === "" ? true : false} onClick={submitLogin} type="submit" value="Sign In" />
           </div>
           <span>Forgot your password?</span>
         </form>

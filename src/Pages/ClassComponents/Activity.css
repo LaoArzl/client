@@ -1,4 +1,88 @@
 .activity-wrapper {
   width: 100%;
-  height: 100%;
+  height: auto;
+  background: white;
+  border-radius: 10px;
+  border: 1px var(--border);
+}
+
+.activity-body {
+  width: 100%;
+  height: auto;
+  padding-top: 20px;
+}
+
+.activity-body-active {
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  margin-bottom: 20px;
+}
+
+.activity-body-active-header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+
+.activity-body-active-header1 {
+  width: auto;
+  height: auto;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  color: var(--font);
+  cursor: pointer;
+  font-size: var(--font15);
+  font-weight: 500;
+}
+
+.activity-body-active-header1 i {
+  margin-left: 5px;
+}
+
+.activity-body-active-header2 {
+  width: 100%;
+  height: 1px;
+  background: rgba(230, 230, 230, 0);
+}
+
+.activity-body-active-body {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+.complete-1 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  color: var(--sub-font);
+  font-weight: 300;
+  font-size: var(--font13);
+}
+
+.activity-1 {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid rgb(230, 230, 230);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.acitivity-1 h5 {
+  color: var(--font);
+}
+
+.activity-1 p {
+  color: var(--sub-font);
+  font-size: var(--font13);
 }

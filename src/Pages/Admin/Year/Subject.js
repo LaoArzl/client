@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Axios from "axios";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
+import "./EditYear.css";
 
 const Subject = (props) => {
   const [subject, setSubject] = useState([]);
@@ -19,8 +20,7 @@ const Subject = (props) => {
         if (response.data.subjects.length === 0) {
           setYearList([]);
         } else {
-          setYearList(response.data.subjects[0]);
-          console.log(response.data.subjects[0]);
+          setYearList(response.data.subjects);
         }
       }
     );
@@ -55,7 +55,15 @@ const Subject = (props) => {
         </div>
 
         <div className="add-subject-form-after-body">
-          <div className={statusMsg !== "" && "add-subject-form-status"}>
+          <div
+            className={
+              statusMsg === ""
+                ? "add-subject-form-status-hidden"
+                : statusMsg === "Successfully added subject (1)."
+                ? "add-subject-form-status-green"
+                : "add-subject-form-status"
+            }
+          >
             {statusMsg}
           </div>
           <div className="add-subject-div">
@@ -112,14 +120,24 @@ const Subject = (props) => {
             </div>
           ) : (
             <>
-              {/* {yearList.map((value) => {
-                return (
-                  <div key={value._id} className="yearlist-body-wrapper">
-                    {value.subjects}
-                  </div>
-                );
-              })} */}
-              {yearList.subjects}
+              <div className="yearlist-body-wrapper">
+                {yearList.map((value) => {
+                  return (
+                    <div
+                      key={value._id}
+                      className="yearlist-body-wrapper-subject"
+                    >
+                      {value.subjectName}
+                    </div>
+                  );
+                })}
+                <input
+                  onClick={() => setAddSubject(true)}
+                  type="submit"
+                  value="Add"
+                  className="add-subject-btn-front"
+                />
+              </div>
             </>
           )}
         </div>

@@ -1,0 +1,14 @@
+.subject-class-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  background: #f3f6f7;
+}
+
+.subject-class-content {
+  width: 95%;
+  height: 100vh;
+  background: #f3f6f7;
+  overflow-y: scroll;
+}

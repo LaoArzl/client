@@ -16,11 +16,10 @@ export const LoginProvider = (props) => {
       if (response.data.length === 0) {
         console.log("No User");
         setRole("");
-        setAccessToken("MockValueToken");
+        setUserID("")
       } else if (response.data.loggedIn) {
         setRole(response.data.user);
         setUserID(response.data.id);
-        setAccessToken(response.data.token);
         setFirstname(response.data.firstname);
       }
     });

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./My404Component.css";
-import Error from "./error.svg";
 
 const NoPermission = () => {
   return (

@@ -17,6 +17,8 @@ const Year = () => {
 
   const [yearList, setYearList] = valueAllYear;
 
+  
+
   const submitCreate = () => {
     Axios.post("https://ecplcsms.herokuapp.com/year/create", {
       grade: grade,
@@ -53,13 +55,6 @@ const Year = () => {
           >
             <div className="year-form-header">
               <h3>Add Level</h3>
-              <i
-                onClick={() => {
-                  setShowForm(false);
-                  setErrMsg("");
-                }}
-                className="fas fa-times"
-              ></i>
             </div>
             <div className="year-form-body">
               <div

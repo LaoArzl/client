@@ -19,13 +19,11 @@ const Class = (props) => {
 
   const { valueID, valueFirstname } = useContext(LoginContext);
   const [userID, setUserID] = valueID;
-  const [firstname, setFirstname] = valueFirstname;
+  const [firstname, setFirstname] = useState("");
   const [comment, setComment] = useState("");
-  const [real, setReal] = useState([
-    {
-      comment: "",
-    },
-  ]);
+  const [write, setWrite] = useState(false);
+  const [post, setPost] = useState("");
+  const date = new Date().toLocaleDateString();
 
   const submitComment = (commentId) => {
     Axios.put(
@@ -38,17 +36,74 @@ const Class = (props) => {
       console.log(response);
     });
   };
+
+  useEffect(() => {
+    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+      if (response.data.length === 0) {
+        setFirstname("");
+      } else if (response.data.loggedIn) {
+        setFirstname(response.data.firstname);
+      }
+    });
+  }, []);
+
+  const addPost = () => {
+    Axios.put(`https://ecplcsms.herokuapp.com/class/post/${props.id}`, {
+      body: post,
+      date: date,
+      poster: firstname,
+    }).then((response) => {
+      if (response.data.err) {
+        props.setMsg(response.data.err);
+      } else {
+        props.setMsg(response.data.success);
+        setPost("");
+        props.setActivities([
+          ...props.activities,
+          {
+            poster: firstname,
+            body: post,
+            date: date,
+          },
+        ]);
+      }
+    });
+  };
   return (
     <>
       <div className="create-something">
-        <div className="create-something-left">
-          <div></div>
+        <div className="create-something-body-wrapper">
+          <div className="create-something-left">
+            <div></div>
+          </div>
+
+          <textarea
+            type="text"
+            value={post}
+            onChange={(e) => setPost(e.target.value)}
+            onClick={() => setWrite(true)}
+            className={
+              write ? "create-something-textarea" : "create-something-input"
+            }
+            placeholder="Write something to the class"
+          ></textarea>
         </div>
-        <div
-          onClick={() => props.showCreateStream(true)}
-          className="create-something-right"
-        >
-          Post something or create activites here.
+
+        <div className={write ? "write-btns-div" : "write-btns-div-hidden"}>
+          <input
+            onClick={() => setWrite(false)}
+            type="submit"
+            value="Cancel"
+            className="write-cancel-btn"
+          />
+          <input
+            onClick={addPost}
+            type="submit"
+            value="Post"
+            className={
+              post === "" ? "write-post-btn-opacity" : "write-post-btn"
+            }
+          />
         </div>
       </div>
       <div className="classes-wrapper">
@@ -59,11 +114,6 @@ const Class = (props) => {
             {props.activities.map((value) => {
               return (
                 <div key={value._id} className="class-posts">
-                  <div
-                    className={value.title === "" ? "" : "class-posts-header"}
-                  >
-                    <h4>{value.title}</h4>
-                  </div>
                   <div className="class-posts-body">
                     <div className="class-posts-body-header">
                       <div className="class-posts-body-header-left"></div>
@@ -96,7 +146,7 @@ const Class = (props) => {
                         />
                       </form>
 
-                      <div
+                      {/* <div
                         className={
                           value.comments === 0
                             ? "class-posts-body-comment-lower-hidden"
@@ -113,7 +163,7 @@ const Class = (props) => {
                             </div>
                           );
                         })}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

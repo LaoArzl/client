@@ -55,12 +55,14 @@ const Class = () => {
   const [classCapacity, setClassCapacity] = useState(0);
   const [classYear, setClassYear] = useState("");
   const [classAdviser, setClassAdviser] = useState("");
+  const [section, setSection] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   const submitCreate = () => {
     Axios.post("https://ecplcsms.herokuapp.com/class/create-class", {
-      className: className,
+      className: classYear + "-" + section,
       classCapacity: classCapacity,
+      section: section,
       classYear: classYear,
       classAdviser: classAdviser,
     }).then((response) => {
@@ -71,9 +73,9 @@ const Class = () => {
         setClassCapacity("");
         setClassYear("");
         setClassAdviser("");
+        setSection("");
         setErrMsg(response.data.success);
         setTimeout(() => setErrMsg(""), 5000);
-        
       }
     });
   };
@@ -105,24 +107,7 @@ const Class = () => {
                   >
                     {errMsg}
                   </div>
-                  <div className="create-class-div">
-                    <label>Class Name</label>
-                    <input
-                      onChange={(e) => setClassName(e.target.value)}
-                      value={className}
-                      type="text"
-                    ></input>
-                  </div>
-                  <div className="create-class-div">
-                    <label>Capacity</label>
-                    <input
-                      onChange={(e) => setClassCapacity(e.target.value)}
-                      value={classCapacity}
-                      type="number"
-                      min="1"
-                      max="40"
-                    ></input>
-                  </div>
+
                   <div className="create-class-div">
                     <label>Grade Year</label>
                     <select
@@ -141,6 +126,26 @@ const Class = () => {
                       <option value="Grade 5">Grade 5</option>
                       <option value="Grade 6">Grade 6</option>
                     </select>
+                  </div>
+
+                  <div className="create-class-div">
+                    <label>Section</label>
+                    <input
+                      onChange={(e) => setSection(e.target.value)}
+                      value={section}
+                      type="text"
+                    ></input>
+                  </div>
+
+                  <div className="create-class-div">
+                    <label>Size</label>
+                    <input
+                      onChange={(e) => setClassCapacity(e.target.value)}
+                      value={classCapacity}
+                      type="number"
+                      min="1"
+                      max="40"
+                    ></input>
                   </div>
 
                   <div className="create-class-div">
@@ -227,6 +232,10 @@ const Class = () => {
                     <div className="class-actual-body-active-name">
                       Class name
                     </div>
+
+                    <div className="class-actual-body-active-capacity">
+                      Section
+                    </div>
                     <div className="class-actual-body-active-adviser">
                       Class adviser
                     </div>
@@ -237,33 +246,39 @@ const Class = () => {
                       Action
                     </div>
                   </div>
-                  {classroom === null ? null : (<>
-                    {classroom.map((key) => {
-                    return (
-                      <div
-                        key={key._id}
-                        className="class-actual-body-active-body"
-                      >
-                        <div className="class-actual-body-active-name">
-                          {key.className}
-                        </div>
-                        <div className="class-actual-body-active-adviser">
-                          {key.adviser_id.fullname}
-                        </div>
-                        <div className="class-actual-body-active-capacity">
-                          {key.capacity}
-                        </div>
-                        <div className="class-actual-body-active-action">
-                          <Link
-                            className="router"
-                            to={"/admin/class/edit/" + key._id}
+                  {classroom === null ? null : (
+                    <>
+                      {classroom.map((key) => {
+                        return (
+                          <div
+                            key={key._id}
+                            className="class-actual-body-active-body"
                           >
-                            <i className="fas fa-pen"></i>
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })}</>)}
+                            <div className="class-actual-body-active-name">
+                              {key.className}
+                            </div>
+                            <div className="class-actual-body-active-capacity">
+                              {key.section}
+                            </div>
+                            <div className="class-actual-body-active-adviser">
+                              {key.adviser_id.fullname}
+                            </div>
+                            <div className="class-actual-body-active-capacity">
+                              {key.capacity}
+                            </div>
+                            <div className="class-actual-body-active-action">
+                              <Link
+                                className="router"
+                                to={"/admin/class/edit/" + key._id}
+                              >
+                                <i className="fas fa-pen"></i>
+                              </Link>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
                 </div>
               ) : (
                 <div className="class-actual-body-archive">

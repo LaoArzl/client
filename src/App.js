@@ -7,21 +7,8 @@ import Axios from "axios";
 import My404ErrorComponent from "./Components/My404Component/My404Component";
 import NoPermisison from "./Components/My404Component/NoPermission";
 
-//Public Pages
-import HomePage from "./Pages/Portal/HomePage/HomePage";
-import About from "./Pages/Portal/About/About";
-import EnrollmentProcedure from "./Pages/Portal/Admission/EnrollmentProcedure";
-import TuitionFess from "./Pages/Portal/Admission/TuitionFees";
-import BoardTrustees from "./Pages/Portal/Administration/BoardTrustees";
-import TeachersStaff from "./Pages/Portal/Administration/TeachersStaff";
-import Contact from "./Pages/Portal/Contact/Contact";
-
-
 //landing Page
 import Login from "./Pages/Login/Login";
-
-//Login Page
-import PortalLogin from "./Pages/PortalLogin/PortalLogin";
 
 //Admin Components and Pages
 import DashboardHome from "./Pages/Admin/DashboardHome/DashboardHome";
@@ -31,11 +18,11 @@ import Students from "./Pages/Admin/Students/Students";
 import Teachers from "./Pages/Admin/Teachers/Teachers";
 import UserTeacher from "./Pages/Admin/Teachers/UserTeacher";
 import UserStudent from "./Pages/Admin/Students/UserStudent";
-import CreateUser from "./Pages/Admin/CreateUser/CreateUser";
 import EditClass from "./Pages/Admin/Classroom/EditClass";
 import Year from "./Pages/Admin/Year/Year";
 import EditYear from "./Pages/Admin/Year/EditYear";
 import Admission from "./Pages/Admin/Admission/Admission";
+import SchoolYear from "./Pages/Admin/SchoolYear/SchoolYear";
 
 //Context Files
 import { DashboardStatus } from "./ContextFiles/DashboardContext";
@@ -47,22 +34,17 @@ import { CreateTeacherState } from "./ContextFiles/CreateTeacherContext";
 
 //Teacher Pages
 import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
-import TeacherMessage from "./Pages/Teacher/TeacherMessage/TeacherMessage";
 import ClassTeacher from "./Pages/ClassComponents/ClassTeacher";
+import SubjectClass from "./Pages/ClassComponents/SubjectClass/SubjectClass";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
-import StudentGrades from "./Pages/Student/StudentGrades/StudentGrades";
-import StudentClass from "./Pages/Student/StudentClass/StudentClass";
-import StudentMessage from "./Pages/Student/StudentMessage/StudentMessage";
-import Fees from "./Pages/Student/Fees/Fees";
 
 function App() {
   const [studentUser, setStudentUser] = useState([]);
   const [teacherUser, setTeacherUser] = useState([]);
   const [classData, setClassData] = useState([]);
   const [yearId, setYearId] = useState([]);
-
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
@@ -100,7 +82,6 @@ function App() {
     );
   }, []);
 
-
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/year/create").then((response) => {
       if (response.data.length === 0) {
@@ -128,29 +109,6 @@ function App() {
                           component={NoPermisison}
                         />
                         <Route path="/" exact component={Login} />
-                        <Route path="/about" exact component={About} />
-                        <Route
-                          path="/enrollment-procedure"
-                          exact
-                          component={EnrollmentProcedure}
-                        />
-                        <Route
-                          path="/tuition-fees"
-                          exact
-                          component={TuitionFess}
-                        />
-                        <Route
-                          path="/board-of-trustees"
-                          exact
-                          component={BoardTrustees}
-                        />
-                        <Route
-                          path="/teaching-and-non-teaching-staff"
-                          exact
-                          component={TeachersStaff}
-                        />
-                        <Route path="/contact" exact component={Contact} />
-                        <Route path="/login" exact component={PortalLogin} />
 
                         <Route
                           path="/admin/dashboard"
@@ -212,6 +170,12 @@ function App() {
 
                         <Route path="/admin/year" exact component={Year} />
 
+                        <Route
+                          path="/admin/school-year"
+                          exact
+                          component={SchoolYear}
+                        />
+
                         {yearId.map((value) => {
                           return (
                             <Route
@@ -223,8 +187,6 @@ function App() {
                             </Route>
                           );
                         })}
-
-                      
 
                         {studentUser.map((value) => {
                           return (
@@ -249,45 +211,11 @@ function App() {
                             </Route>
                           );
                         })}
-                        
-
-                        {teacherUser.map((value) => {
-                          return (
-                            <Route
-                              key={value._id}
-                              path={"/user/teacher/message/" + value._id}
-                              exact
-                            >
-                              <TeacherMessage />
-                            </Route>
-                          );
-                        })}
 
                         <Route
                           path="/user/student/"
                           exact
                           component={StudentProfile}
-                        />
-                        <Route
-                          path="/user/student/grades"
-                          exact
-                          component={StudentGrades}
-                        />
-                        <Route
-                          path="/user/student/class"
-                          exact
-                          component={StudentClass}
-                        />
-                        <Route
-                          path="/user/student/message"
-                          exact
-                          component={StudentMessage}
-                        />
-
-                        <Route
-                          path="/user/student/fees"
-                          exact
-                          component={Fees}
                         />
 
                         {classData.map((value) => {
@@ -314,6 +242,18 @@ function App() {
                                 name={key.className}
                                 adviser={key.adviser_id}
                               />
+                            </Route>
+                          );
+                        })}
+
+                        {classData.map((value) => {
+                          return (
+                            <Route
+                              key={value._id}
+                              path={"/teacher-class/" + value._id + "/subjects"}
+                              exact
+                            >
+                              <SubjectClass id={value._id} />
                             </Route>
                           );
                         })}

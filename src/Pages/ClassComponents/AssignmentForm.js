@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 
-const AssignmentForm = () => {
+const AssignmentForm = (props) => {
   const [points, setPoints] = useState(100);
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(() => {
+    Axios.get(`https://ecplcsms.herokuapp.com/class/populate-subjects/${props.id}`).then((response) => {
+      setSubjects(response.data.year.subjects);
+    })
+  }, [])
   return (
     <>
       <div className="create-stream-post-header">
@@ -32,6 +40,9 @@ const AssignmentForm = () => {
               <option value="" disabled>
                 Select option
               </option>
+              {subjects.map((value) => {
+                return <option key={value._id} value={value.subjectName}>{value.subjectName}</option>
+              })}
             </select>
           </div>
 
@@ -48,7 +59,7 @@ const AssignmentForm = () => {
 
         <div className="create-stream-post-div">
           <label>Description</label>
-          <textarea placeholder="Instruction or description about the activity (Optional)"></textarea>
+          <textarea placeholder="Instruction or description about the activity"></textarea>
         </div>
 
         <div className="create-stream-post-divs">

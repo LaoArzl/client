@@ -1,0 +1,14 @@
+.schoolyear-wrapper {
+  display: flex;
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #f3f6f7;
+}
+
+.schoolyear-content {
+  width: 95%;
+  height: 100vh;
+  overflow-y: scroll;
+  background: #f3f6f7;
+}

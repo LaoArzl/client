@@ -32,9 +32,15 @@ const PostForm = (props) => {
       }
     });
   };
+
+  
   return (
     <>
-      <div className="post-msg">
+      <div
+        className={
+          msg !== "Successfully posted." ? "post-msg-hidden" : "post-msg"
+        }
+      >
         {msg}{" "}
         <span
           onClick={() => {
@@ -46,6 +52,13 @@ const PostForm = (props) => {
       </div>
       <div className="create-stream-post-header">
         <h3>Create Post</h3>
+      </div>
+      <div
+        className={
+          msg === "Successfully posted." ? "post-msg-hidden" : "post-err-msg"
+        }
+      >
+        {msg}
       </div>
       <div className="create-stream-post-body">
         <div className="create-stream-post-div0">

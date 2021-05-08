@@ -1,21 +1,30 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { TeacherDashboardData } from "./TeacherDashboardData";
 import { Link } from "react-router-dom";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { DashboardContext } from "../../../ContextFiles/DashboardContext";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
+import Axios from "axios"
 
 const TeacherDashboard = (props) => {
   const [showName, setShowName] = useContext(DashboardContext);
-  const { valueID } = useContext(LoginContext);
-  const [userID, setUserID] = valueID;
+  const [userID, setUserID] = useState("");
 
   const dashboardMenu = () => {
     setShowName(!showName);
   };
 
-  const id = localStorage.getItem("id");
+  useEffect(() => {
+    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+      if (response.data.length === 0) {
+        setUserID("")
+      } else if (response.data.loggedIn) {
+        setUserID(response.data.id);
+      }
+    });
+  }, []);
+
 
   return (
     <>
@@ -30,12 +39,12 @@ const TeacherDashboard = (props) => {
         <ul className={showName ? "dashboard-extra-links" : "dashboard-links"}>
           {TeacherDashboardData.map((val, key) => {
             return (
-              <Link className="router-link-extra" to={val.link + id} key={key}>
-                <Tippy content={val.name} arrow={false} placement="right">
+              <Link className="router-link-extra" to={val.link + userID} key={key}>
+                <Tippy content={val.name} enabled={showName ? false : true} arrow={false} placement="right">
                   <li
                     className="li-middle"
                     id={
-                      window.location.pathname === val.link + id
+                      window.location.pathname === val.link + userID
                         ? "link-active"
                         : ""
                     }
@@ -45,12 +54,12 @@ const TeacherDashboard = (props) => {
                         showName ? "dashboard-extra-icon" : "dashboard-icon"
                       }
                       id={
-                        window.location.pathname === val.link + id
+                        window.location.pathname === val.link + userID
                           ? "icon-active"
                           : "icon-inactive"
                       }
                     >
-                      {window.location.pathname === val.link + id
+                      {window.location.pathname === val.link + userID
                         ? val.icons
                         : val.icon}
                     </div>

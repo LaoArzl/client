@@ -199,7 +199,7 @@
   margin-bottom: 30px;
 }
 
-.login-input-login input {
+.login-btn {
   width: 100%;
   border-radius: 5px;
   outline-style: none;
@@ -212,6 +212,23 @@
   transition: 0.2s ease-out;
   margin-top: 10px;
   font-size: var(--font16);
+}
+
+.login-btn-disabled {
+  width: 100%;
+  border-radius: 5px;
+  outline-style: none;
+  border-style: none;
+  height: 40px;
+  background: var(--main);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  margin-top: 10px;
+  font-size: var(--font16);
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .login-input input:hover {
@@ -227,7 +244,7 @@
   background: white;
 }
 
-.login-input-login input:hover {
+.login-btn:hover {
   transition: 0.2s ease-in;
   background: var(--main-hover);
 }

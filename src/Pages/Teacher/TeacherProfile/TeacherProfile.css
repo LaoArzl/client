@@ -1,20 +1,19 @@
 .user-profile {
   width: 100%;
   height: auto;
-  background: #ffffff;
+  background: f3f6f7;
   display: flex;
 }
 
 .user-content {
   width: 95%;
   height: 100vh;
-  background: #ffffff;
+  background: f3f6f7;
   overflow-y: scroll;
 }
 
 .user-content-header {
   height: 20vh;
-  background: rgb(255, 255, 255);
   width: 95%;
   border-radius: 20px;
   margin: 0 auto;
@@ -60,7 +59,6 @@
   width: 95%;
   height: 50vh;
   min-height: 250px;
-  background: white;
   margin: 0 auto;
   border-radius: 10px;
   margin-bottom: 40px;

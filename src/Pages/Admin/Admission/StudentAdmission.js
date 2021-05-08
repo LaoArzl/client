@@ -313,7 +313,7 @@ const StudentAdmission = (props) => {
               </option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-              <option value="Others">Others</option>
+              <option value="Other">Others</option>
             </select>
           </div>
 
@@ -529,9 +529,7 @@ const StudentAdmission = (props) => {
             <label>
               Relation<div>*</div>
             </label>
-            <input
-              value={parent.relation}
-              onChange={(e) => {
+            <select value={parent.relation} onChange={(e) => {
                 let value = e.target.value;
                 setParent({
                   parentFullname: parent.parentFullname,
@@ -539,11 +537,25 @@ const StudentAdmission = (props) => {
                   parentEmail: parent.parentEmail,
                   parentContact: parent.parentContact,
                 });
-              }}
-              type="text"
-              placeholder="Mother, Father, Relatives, etc..."
-            />
+              }}>
+              <option value="" disabled>Select Option</option>
+              <option value="Mother">Mother</option>
+              <option value="Father">Father</option>
+              <option value="Grand Mother">Grand Mother</option>
+              <option value="Grand Father">Grand Father</option>
+              <option value="Aunt">Aunt</option>
+              <option value="Uncle">Uncle</option>
+              <option value="Older Brother">Older Brother</option>
+              <option value="Older Sister">Older Sister</option>
+              <option value="Cousin">Cousin</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
+
+
+        
+
+         
 
           <div className="admission-div">
             <label>

@@ -8,7 +8,7 @@ import "./Class.css";
 import People from "./People";
 import Class from "./Class";
 import Activity from "./Activity";
-
+import {Link} from "react-router-dom";
 
 //Create Activity Components
 import PostForm from "./PostForm";
@@ -29,6 +29,8 @@ const ClassTeacher = (props) => {
   const [createStream, showCreateStream] = useState(false);
   const [postNav, setPostNav] = useState("post");
 
+  const [msg, setMsg] = useState("");
+
   useEffect(() => {
     Axios.get(url).then((response) => {
       if (response.data.length === 0) {
@@ -42,14 +44,16 @@ const ClassTeacher = (props) => {
 
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then((response) => {
-      if(!response.data.post[0]) {
-        setActivities([])
-      } else {
-        setActivities(response.data.post)
+    Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then(
+      (response) => {
+        if (!response.data.post[0]) {
+          setActivities([]);
+        } else {
+          setActivities(response.data.post);
+        }
       }
-    })
-  }, [])
+    );
+  }, []);
 
   return (
     <>
@@ -78,12 +82,21 @@ const ClassTeacher = (props) => {
             </select>
           </div>
           <div className="create-stream-right">
-            {postNav === "post" && <PostForm firstname={firstname} id={props.id} showCreateStream={showCreateStream} activities={activities} setActivities={setActivities}/> }
-            {postNav === "assignment" && <AssignmentForm />}
+            {postNav === "post" && (
+              <PostForm
+                firstname={firstname}
+                id={props.id}
+                showCreateStream={showCreateStream}
+                activities={activities}
+                setActivities={setActivities}
+              />
+            )}
+            {postNav === "assignment" &&  <AssignmentForm id={props.id} />}
             {postNav === "quiz" && <QuizForm />}
           </div>
         </form>
         <TeacherDashboard />
+        <div className={msg === "" ? "post-msg-hidden" : "post-msg"}>{msg}</div>
         <div className="class-content">
           <DashboardHeader />
           <div className="class-content-header">
@@ -104,28 +117,19 @@ const ClassTeacher = (props) => {
                   navOption === "" ? "nav-span-active" : "nav-span-diactive"
                 }
               >
-                Class
+                Stream
               </div>
               <div
-                onClick={() => setNavOption("activity")}
+                // onClick={() => setNavOption("activity")}
                 className={
                   navOption === "activity"
                     ? "nav-span-active"
                     : "nav-span-diactive"
                 }
               >
-                Activities
+                <Link to={"/teacher-class/" + props.id + "/subjects"}>Subjects </Link>
               </div>
-              <div
-                onClick={() => setNavOption("grades")}
-                className={
-                  navOption === "grades"
-                    ? "nav-span-active"
-                    : "nav-span-diactive"
-                }
-              >
-                Grades
-              </div>
+  
               <div
                 onClick={() => setNavOption("students")}
                 className={
@@ -134,7 +138,7 @@ const ClassTeacher = (props) => {
                     : "nav-span-diactive"
                 }
               >
-                Students
+                People
               </div>
             </div>
           </div>
@@ -142,20 +146,30 @@ const ClassTeacher = (props) => {
           <div className="class-content-body">
             <div className="class-content-body-left">
               <div className="class-content-body-left-header">
-                <p>Upcoming work</p>
+                <p>Bulletin Board</p>
               </div>
-              <div className="class-content-body-left-body">  
+              <div className="class-content-body-left-body">
+                <p>Nothing to Show</p>
+                <span>
+                  <i className="fas fa-plus-square"></i>Add
+                </span>
               </div>
             </div>
             <div className="class-content-body-right">
               {navOption === "" && (
-                <Class id={props.id} showCreateStream={showCreateStream} activities={activities} setActivities={setActivities}/>
+                <Class
+                  id={props.id}
+                  showCreateStream={showCreateStream}
+                  activities={activities}
+                  setActivities={setActivities}
+                  msg={msg}
+                  setMsg={setMsg}
+                />
               )}
               {navOption === "students" && (
                 <People id={classId} name={teacherName} />
               )}
               {navOption === "activity" && <Activity />}
-              {navOption === "grades" && <p>Grades Section</p>}
             </div>
           </div>
         </div>

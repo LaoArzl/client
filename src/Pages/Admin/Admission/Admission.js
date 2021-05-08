@@ -11,6 +11,9 @@ const Admission = () => {
   const [studentMsg, setStudentMsg] = useState("");
   const [teacherMsg, setTeacherMsg] = useState("");
 
+
+  
+
   return (
     <>
       <div className="admission-wrapper">
