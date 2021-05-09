@@ -7,7 +7,7 @@ import { DashboardContext } from "../../../ContextFiles/DashboardContext";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 import Axios from "axios"
 
-const TeacherDashboard = (props) => {
+const TeacherDashboard = () => {
   const [showName, setShowName] = useContext(DashboardContext);
   const [userID, setUserID] = useState("");
 

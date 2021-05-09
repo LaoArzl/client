@@ -36,6 +36,8 @@ import { CreateTeacherState } from "./ContextFiles/CreateTeacherContext";
 import TeacherProfile from "./Pages/Teacher/TeacherProfile/TeacherProfile";
 import ClassTeacher from "./Pages/ClassComponents/ClassTeacher";
 import SubjectClass from "./Pages/ClassComponents/SubjectClass/SubjectClass";
+import People from "./Pages/ClassComponents/People/People";
+import Subjects from "./Pages/ClassComponents/SubjectClass/Subjects";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
@@ -44,6 +46,7 @@ function App() {
   const [studentUser, setStudentUser] = useState([]);
   const [teacherUser, setTeacherUser] = useState([]);
   const [classData, setClassData] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [yearId, setYearId] = useState([]);
 
   useEffect(() => {
@@ -71,7 +74,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/class/classroom-list").then(
+    Axios.get("https://ecplcsms.herokuapp.com/class/populate-teacher").then(
       (response) => {
         if (response.data.length === 0) {
           setClassData([]);
@@ -230,17 +233,17 @@ function App() {
                           );
                         })}
 
-                        {classData.map((key, value) => {
+                        {classData.map((value) => {
                           return (
                             <Route
-                              key={key._id}
-                              path={"/teacher-class/" + key._id}
+                              key={value._id}
+                              path={"/teacher-class/" + value._id}
                               exact
                             >
                               <ClassTeacher
-                                id={key._id}
-                                name={key.className}
-                                adviser={key.adviser_id}
+                                id={value._id}
+                                adviser={value.adviser_id.fullname}
+                                name={value.className}
                               />
                             </Route>
                           );
@@ -253,7 +256,47 @@ function App() {
                               path={"/teacher-class/" + value._id + "/subjects"}
                               exact
                             >
-                              <SubjectClass id={value._id} />
+                              <SubjectClass
+                                id={value._id}
+                                adviser={value.adviser_id.fullname}
+                                name={value.className}
+                              />
+                            </Route>
+                          );
+                        })}
+
+                        {classData.map((value) => {
+                          return value.year.subjects.map((key) => {
+                            return (
+                              <Route
+                                key={value._id}
+                                path={
+                                  "/teacher-class/" +
+                                  value._id +
+                                  "/subjects/" +
+                                  key.subjectName
+                                }
+                                exact
+                              >
+                                <Subjects
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  subject={key.subjectName}
+                                />
+                              </Route>
+                            );
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return (
+                            <Route
+                              key={value._id}
+                              path={"/teacher-class/" + value._id + "/people"}
+                              exact
+                            >
+                              <People id={value._id} />
                             </Route>
                           );
                         })}

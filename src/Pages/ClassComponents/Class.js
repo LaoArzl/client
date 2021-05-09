@@ -33,7 +33,7 @@ const Class = (props) => {
         commentor: firstname,
       }
     ).then((response) => {
-      console.log(response);
+      console.log(response.data.success);
     });
   };
 
@@ -124,6 +124,23 @@ const Class = (props) => {
                     </div>
                     <div className="class-posts-body-body">{value.body}</div>
                     <div className="class-posts-body-comment">
+                      {value.comments.map((comment) => {
+                        return (
+                          <div
+                            className={
+                              value.comments === 0
+                                ? "class-posts-body-comment-lower-hidden"
+                                : "class-posts-body-comment-lower"
+                            }
+                          >
+                            <div className="class-posts-body-header-left"></div>
+                            <div className="class-posts-body-comment-user">
+                              <h5>{comment.commentor}</h5>
+                              {comment.comment}
+                            </div>
+                          </div>
+                        );
+                      })}
                       <form
                         onSubmit={(e) => e.preventDefault()}
                         className="class-posts-body-comment-upper"
@@ -145,25 +162,6 @@ const Class = (props) => {
                           type="submit"
                         />
                       </form>
-
-                      {/* <div
-                        className={
-                          value.comments === 0
-                            ? "class-posts-body-comment-lower-hidden"
-                            : "class-posts-body-comment-lower"
-                        }
-                      >
-                        <div className="class-posts-body-header-left"></div>
-
-                        {value.comments.map((comment) => {
-                          return (
-                            <div className="class-posts-body-comment-user">
-                              {comment.comment}
-                              {comment.commentor}
-                            </div>
-                          );
-                        })}
-                      </div> */}
                     </div>
                   </div>
                 </div>

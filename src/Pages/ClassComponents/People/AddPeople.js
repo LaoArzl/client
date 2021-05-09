@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Class.css";
+import "./People.css";
 import Axios from "axios";
 
 const AddPeople = (props) => {

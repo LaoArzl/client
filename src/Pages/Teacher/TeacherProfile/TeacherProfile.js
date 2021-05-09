@@ -48,7 +48,7 @@ const TeacherProfile = (props) => {
         <BrokenPage />
       ) : (
         <div className="user-profile">
-          <TeacherDashboard id={pops} />
+          <TeacherDashboard />
           <div className="user-content">
             <DashboardHeader />
             <div className="user-content-header">
