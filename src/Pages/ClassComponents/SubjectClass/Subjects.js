@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "./Subject.css";
 import "./Assignment";
 import Assignment from "./Assignment";
+import Quiz from "./Quiz";
 
 const Subjects = (props) => {
   const [showAssigned, setShowAssigned] = useState(false);
@@ -13,10 +14,16 @@ const Subjects = (props) => {
   const [dropdown, setDropdown] = useState(false);
   const [nav, setNav] = useState("activity");
   const [assignment, setAssignment] = useState(false);
+  const [quiz, setQuiz] = useState(false);
+  const [material, setMaterial] = useState(false);
   return (
     <>
       <div className="subject-class-wrapper">
-        {assignment && <Assignment setAssignment={setAssignment} />}
+        {assignment && (
+          <Assignment setAssignment={setAssignment} id={props.id} />
+        )}
+        {quiz && <Quiz setQuiz={setQuiz} />}
+
         <TeacherDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
@@ -79,14 +86,19 @@ const Subjects = (props) => {
                   onClick={() => setDropdown(!dropdown)}
                   className="create-activity-dropdown"
                 >
-                  <i className="fas fa-plus"></i>Create
+                  Create
+                  <i
+                    className={
+                      dropdown ? "fas fa-angle-up" : "fas fa-angle-down"
+                    }
+                  ></i>
                   <div
                     className={
                       dropdown ? "create-activity-dropdown-after" : "hidden"
                     }
                   >
                     <div onClick={() => setAssignment(true)}>Assignment</div>
-                    <div>Quiz</div>
+                    <div onClick={() => setQuiz(true)}>Quiz</div>
                   </div>
                 </div>
               </div>

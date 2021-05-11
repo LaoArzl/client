@@ -163,7 +163,7 @@
   align-items: center;
   padding-left: 15px;
   transition: 0.2s ease-in;
-  font-size: var(--font14);
+  font-size: var(--font13);
   font-weight: 400;
 }
 
@@ -173,7 +173,7 @@
 }
 
 .create-activity-dropdown i {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .create-activity-dropdown:hover {
@@ -254,6 +254,8 @@
   position: absolute;
   z-index: 4;
   left: 0;
+  padding-bottom: 20px;
+  overflow-y: scroll;
 }
 
 .assignment-header {
@@ -266,4 +268,212 @@
   justify-content: center;
   border-bottom: 1px var(--border);
   color: var(--font);
+}
+
+.assignment-body {
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+  min-width: 400px;
+}
+
+.back-div-btn {
+  width: 90px;
+  height: 40px;
+  background: rgb(233, 233, 233);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font15);
+  color: var(--font);
+  border-radius: 3px;
+  transition: 0.2s ease-out;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.back-div-btn:hover {
+  transition: 0.2s ease-in;
+  background: rgb(218, 218, 218);
+}
+
+.back-div-btn i {
+  margin-right: 10px;
+}
+
+.assignment-div-points,
+.assignment-div-topic {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.assignment-div-due {
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.assignment-div-date {
+  width: 46%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.assignment-div-date input {
+  width: 100%;
+  height: 35px;
+  border-style: none;
+  border: 1px solid lightgrey;
+  outline-style: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.assignment-div-points label,
+.assignment-div-topic label,
+.assignment-div-date label {
+  font-size: var(--font13);
+  font-weight: 500;
+  color: #7a7a7a;
+  margin-bottom: 5px;
+  pointer-events: none;
+}
+.assignment-div-points input {
+  width: 15%;
+  height: 30px;
+  border-style: none;
+  outline-style: none;
+  border-bottom: 1px solid lightgrey;
+  min-width: 70px;
+  padding-left: 10px;
+  color: var(--font);
+}
+
+.assignment-div-points input:focus {
+  border-bottom: 1px solid grey;
+}
+
+.assignment-div-topic input:focus,
+.assignment-div-date input:focus {
+  border: 1px solid grey;
+}
+
+.assignment-div-topic textarea:focus {
+  border-bottom: 1px solid grey;
+}
+
+.assignment-div-topic input {
+  width: 100%;
+  height: 35px;
+  border-style: none;
+  outline-style: none;
+  border: 1px solid lightgrey;
+  color: var(--font);
+  padding-left: 10px;
+  border-radius: 2px;
+}
+
+.assignment-div-topic textarea {
+  width: 100%;
+  height: 100px;
+  border-style: none;
+  outline-style: none;
+  border-bottom: 1px solid lightgrey;
+  color: var(--font);
+  padding: 10px;
+  border-radius: 2px;
+  resize: none;
+  background: rgb(249, 251, 253);
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "Upload File";
+  display: inline-block;
+  background: rgb(228, 228, 228);
+  border: 1px solid rgb(228, 228, 228);
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  cursor: pointer;
+  font-size: var(--font10);
+  transition: 0.2s ease-out;
+  color: var(--font);
+  font-weight: border;
+}
+.custom-file-input:hover::before {
+  border-color: rgb(190, 190, 190);
+  background: rgb(212, 212, 212);
+  transition: 0.2s ease-in;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.create-stream-post-divs {
+  width: 100%;
+  height: auto;
+  display: flex;
+  font-weight: 500;
+  margin-top: 15px;
+  border: 1px solid lightgrey;
+  margin: 0 auto;
+  padding: 5px;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+.assignment-div-submit {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-assignment-btn {
+  width: 90px;
+  height: 40px;
+  border-style: none;
+  outline-style: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background: var(--main);
+  transition: 0.2s ease-out;
+  color: white;
+  margin-left: 20px;
+}
+
+.submit-assignment-btn:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}
+
+.cancel-assignment-btn {
+  width: 90px;
+  height: 40px;
+  border-style: none;
+  outline-style: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  color: var(--font);
+  background: rgb(226, 226, 226);
+}
+
+.cancel-assignment-btn:hover {
+  transition: 0.2s ease-in;
+  background: lightgrey;
 }
