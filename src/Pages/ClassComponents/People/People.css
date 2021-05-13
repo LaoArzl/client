@@ -11,64 +11,49 @@
   height: 100vh;
   background: #f3f6f7;
   overflow-y: scroll;
-}
-
-.people-wrapper-add-after-active {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  margin-bottom: 20px;
-  overflow-y: scroll;
-  display: flex;
-  background: white;
-  flex-direction: column;
-}
-
-.people-wrapper-add-student-header {
-  width: 100%;
-  height: 10%;
-  display: flex;
-  align-items: center;
-  padding-right: 20px;
-  justify-content: flex-end;
-  font-size: 20px;
-}
-
-.people-wrapper-add-student-body,
-.people-wrapper-add-student-body-0 {
-  width: 100%;
-  height: 7%;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  font-size: 15px;
-  color: #707983;
+  padding-bottom: 20px;
 }
 
 #input-checkbox {
   margin-right: 10px;
 }
 
-.people-wrapper-add-student-header i {
-  padding: 10px 13px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.2s ease-out;
+.people-content-body {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+  position: relative;
 }
 
-.people-wrapper-add-student-header i:hover {
-  background: rgb(224, 227, 228);
-  transition: 0.2s ease-in;
+.people-content-body-wrapper {
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
 }
 
-.people-wrapper-add-inactive {
-  display: none;
+.people-people-teacher-body {
+  width: 100%;
+  height: auto;
+  background: rgb(255, 255, 255);
+  border: 1px var(--border);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.people-people-student-body {
+  width: 100%;
+  height: auto;
+  background: rgb(255, 255, 255);
+  border: 1px var(--border);
+  border-radius: 10px;
 }
 
 .people-teacher-header {
   width: 100%;
   height: 10vh;
+  max-height: 60px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   padding-left: 20px;
@@ -116,4 +101,69 @@
   color: #707983;
 
   font-size: 15px;
+}
+
+/* Add people */
+
+.add-people {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: 1px var(--border);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.add-people-header {
+  width: 100%;
+  height: 10vh;
+  max-height: 60px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  justify-content: flex-end;
+  font-size: 20px;
+  color: var(--font);
+}
+
+.add-people-header i {
+  padding: 10px 13px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.add-people-header i:hover {
+  background: rgb(224, 227, 228);
+  transition: 0.2s ease-in;
+}
+
+.addpeople-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.people-wrapper-add-student-body {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-size: var(--font14);
+  color: var(--sub-font);
+}
+
+.people-wrapper-add-student-body-0 {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-size: var(--font15);
+  color: var(--font);
+  font-weight: 500;
 }

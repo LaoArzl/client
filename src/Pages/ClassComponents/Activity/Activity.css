@@ -1,0 +1,68 @@
+.actual-activity-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  background: #f3f6f7;
+}
+
+.actual-activity-content {
+  width: 95%;
+  height: 100vh;
+  background: #f3f6f7;
+  overflow-y: scroll;
+}
+
+.actual-activity-header {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.actual-activity-header div {
+  cursor: pointer;
+  color: var(--font);
+  width: 80px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: 0.2s ease-out;
+}
+.actual-activity-header div:hover {
+  background: rgb(226, 226, 226);
+  transition: 0.2s ease-in;
+}
+
+.actual-activity-header div i {
+  margin-right: 5px;
+}
+.actual-activity-body {
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.actual-activity-body-left span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: var(--font13);
+}
+
+.actual-activity-body-left {
+  width: 60%;
+  height: auto;
+  padding: 10px;
+  position: relative;
+}
+
+.actual-activity-body-left-header h3 {
+  color: var(--font);
+}
+
+.actual-activity-body-left-header p {
+  color: var(--font);
+}

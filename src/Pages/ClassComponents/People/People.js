@@ -80,50 +80,61 @@ const People = (props) => {
             </div>
           </div>
 
-          <div className="people-teacher-header">
-            <h3>Teacher</h3>
-          </div>
-          <div className="people-teacher-body">
-            <p>{props.name}</p> (Adviser)
-          </div>
-          <div className="people-teacher-header">
-            <h3>Student</h3>
-            <span onClick={setStudent}>Add Students</span>
-          </div>
-          <div className="people-student-body"></div>
-          <div
-            className={
-              showStudents === true
-                ? "people-wrapper-add-after-active"
-                : "people-wrapper-add-inactive"
-            }
-          >
-            <div className="people-wrapper-add-student-header">
-              <i
-                onClick={() => setShowStudents(false)}
-                class="fas fa-times"
-              ></i>
-            </div>
-            <div className="people-wrapper-add-student-body-0">
-              <input
-                type="checkbox"
-                id="input-checkbox"
-                onChange={(e) => {
-                  let value = e.target.checked;
-                  setStudentState(
-                    studentState.map((d) => {
-                      d.select = value;
-                      return d;
-                    })
-                  );
-                }}
-              />
-              <p>Select All</p>
-            </div>
-            <AddPeople
-              studentState={studentState}
-              setStudentState={setStudentState}
-            />
+          <div className="people-content-body">
+            {showStudents ? (
+              <>
+                <div className="add-people">
+                  <div className="add-people-header">
+                    <i
+                      onClick={() => setShowStudents(false)}
+                      class="fas fa-times"
+                    ></i>
+                  </div>
+                  <div className="people-wrapper-add-student-body-0">
+                    <input
+                      type="checkbox"
+                      id="input-checkbox"
+                      onChange={(e) => {
+                        let value = e.target.checked;
+                        setStudentState(
+                          studentState.map((d) => {
+                            d.select = value;
+                            return d;
+                          })
+                        );
+                      }}
+                    />
+                    <p>Select All</p>
+                  </div>
+                  <AddPeople
+                    studentState={studentState}
+                    setStudentState={setStudentState}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="people-content-body-wrapper">
+                  <div className="people-people-teacher-body">
+                    <div className="people-teacher-header">
+                      <h3>Teacher</h3>
+                    </div>
+                    <div className="people-teacher-body">
+                      <p>{props.adviser}</p> (Adviser)
+                    </div>
+                  </div>
+                  <div className="people-people-student-body">
+                    <div className="people-teacher-header">
+                      <h3>Student</h3>
+                      <span onClick={() => setShowStudents(true)}>
+                        Add Students
+                      </span>
+                    </div>
+                    <div className="people-student-body"></div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

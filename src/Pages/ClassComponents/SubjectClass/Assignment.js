@@ -1,38 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Subject.css";
 import Axios from "axios";
 
 const Assignment = (props) => {
   const [message, setMessage] = useState("");
-  const [activity, setActivity] = useState({
-    type: "Assignment",
-    points: 100,
-    due: "",
-    time: "",
-    topic: "",
-    instructions: "",
-    file: "",
-  });
+  const [activity, setActivity] = useState([]);
+
+  useEffect(() => {
+    setActivity({
+      type: "Assignment",
+      points: 100,
+      due: "",
+      time: "",
+      topic: "",
+      instructions: "",
+      file: "",
+    })
+  }, [])
 
   const submitAssignment = () => {
-    Axios.put(
-      `http://ecplcsms.herokuapp.com/class/create-assignment/${props.id}`,
-      {
-        type: activity.type,
-        points: activity.points,
-        datetime: new Date().toLocaleDateString(),
-        due: activity.due,
-        time: activity.time,
-        topic: activity.topic,
-        instructions: activity.instructions,
-        file: activity.file,
-        active: true,
-      }
-    ).then((response) => {
+    Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
+      type: activity.type,
+      points: activity.points,
+      datetime: new Date().toLocaleDateString(),
+      due: activity.due,
+      time: activity.time,
+      topic: activity.topic,
+      instructions: activity.instructions,
+      file: activity.file,
+      active: true,
+      subject: props.subject,
+    }).then((response) => {
       if (response.data.err) {
         setMessage(response.data.err);
       } else {
         setMessage(response.data.success);
+        props.setActivity([...props.activity], {
+          type: props.activity.type,
+          points: props.activity.points,
+          datetime: new Date().toLocaleDateString(),
+          due: props.activity.due,
+          time: props.activity.time,
+          topic: props.activity.topic,
+          instructions: props.activity.instructions,
+          file: props.activity.file,
+          active: true,
+          subject: props.subject,
+        })
       }
     });
   };
@@ -161,9 +175,11 @@ const Assignment = (props) => {
                   instructions: activity.instructions,
                   file: value,
                 });
+
+                console.log(activity.file);
               }}
               type="file"
-              class="custom-file-input"
+              className="custom-file-input"
             />
           </div>
 

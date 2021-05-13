@@ -38,6 +38,7 @@ import ClassTeacher from "./Pages/ClassComponents/ClassTeacher";
 import SubjectClass from "./Pages/ClassComponents/SubjectClass/SubjectClass";
 import People from "./Pages/ClassComponents/People/People";
 import Subjects from "./Pages/ClassComponents/SubjectClass/Subjects";
+import Activity from "./Pages/ClassComponents/Activity/Activity";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
@@ -112,23 +113,19 @@ function App() {
                           component={NoPermisison}
                         />
                         <Route path="/" exact component={Login} />
-
                         <Route
                           path="/admin/dashboard"
                           exact
                           component={DashboardHome}
                         />
-
                         <Route path="/admin/class" exact>
                           <Classroom />
                         </Route>
-
                         <Route
                           path="/admin/message"
                           exact
                           component={Message}
                         />
-
                         {teacherUser.map((value) => {
                           return (
                             <Route
@@ -140,7 +137,6 @@ function App() {
                             />
                           );
                         })}
-
                         {studentUser.map((value) => {
                           return (
                             <Route
@@ -152,33 +148,27 @@ function App() {
                             />
                           );
                         })}
-
                         <Route
                           path="/admin/students"
                           exact
                           component={Students}
                         />
-
                         <Route
                           path="/admin/admission"
                           exact
                           component={Admission}
                         />
-
                         <Route
                           path="/admin/teachers"
                           exact
                           component={Teachers}
                         />
-
                         <Route path="/admin/year" exact component={Year} />
-
                         <Route
                           path="/admin/school-year"
                           exact
                           component={SchoolYear}
                         />
-
                         {yearId.map((value) => {
                           return (
                             <Route
@@ -190,7 +180,6 @@ function App() {
                             </Route>
                           );
                         })}
-
                         {studentUser.map((value) => {
                           return (
                             <Route
@@ -202,7 +191,6 @@ function App() {
                             </Route>
                           );
                         })}
-
                         {teacherUser.map((value) => {
                           return (
                             <Route
@@ -214,13 +202,11 @@ function App() {
                             </Route>
                           );
                         })}
-
                         <Route
                           path="/user/student/"
                           exact
                           component={StudentProfile}
                         />
-
                         {classData.map((value) => {
                           return (
                             <Route
@@ -232,7 +218,6 @@ function App() {
                             </Route>
                           );
                         })}
-
                         {classData.map((value) => {
                           return (
                             <Route
@@ -248,7 +233,6 @@ function App() {
                             </Route>
                           );
                         })}
-
                         {classData.map((value) => {
                           return (
                             <Route
@@ -264,7 +248,6 @@ function App() {
                             </Route>
                           );
                         })}
-
                         {classData.map((value) => {
                           return value.year.subjects.map((key) => {
                             return (
@@ -290,17 +273,42 @@ function App() {
                         })}
 
                         {classData.map((value) => {
+                          return value.activity.map((key) => {
+                            return (
+                              <Route
+                                key={value._id}
+                                path={"/activity/" + key._id}
+                                exact
+                              >
+                                <Activity
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  subject={key.subject}
+                                  topic={key.topic}
+                                  activityType={key.activityType}
+                                  points={key.points}
+                                />
+                              </Route>
+                            );
+                          });
+                        })}
+
+                        {classData.map((value) => {
                           return (
                             <Route
                               key={value._id}
                               path={"/teacher-class/" + value._id + "/people"}
                               exact
                             >
-                              <People id={value._id} />
+                              <People
+                                id={value._id}
+                                adviser={value.adviser_id.fullname}
+                                name={value.className}
+                              />
                             </Route>
                           );
                         })}
-
                         <Route
                           path="*"
                           exact={true}

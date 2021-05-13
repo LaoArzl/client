@@ -88,7 +88,6 @@ const Class = (props) => {
             placeholder="Write something to the class"
           ></textarea>
         </div>
-
         <div className={write ? "write-btns-div" : "write-btns-div-hidden"}>
           <input
             onClick={() => setWrite(false)}
@@ -152,7 +151,6 @@ const Class = (props) => {
                           onChange={(e) => setComment(e.target.value)}
                           placeholder="Write a comment"
                         />
-                        {/* <i className="fas fa-share"></i> */}
                         <input
                           onClick={() => {
                             submitComment(value._id);

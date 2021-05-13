@@ -89,10 +89,7 @@ const ClassTeacher = (props) => {
                 <p>Bulletin Board</p>
               </div>
               <div className="class-content-body-left-body">
-                <p>Nothing to Show</p>
-                <span>
-                  <i className="fas fa-plus-square"></i>Add
-                </span>
+                <p>No upcoming work</p>
               </div>
             </div>
             <div className="class-content-body-right">

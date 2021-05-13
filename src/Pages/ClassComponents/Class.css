@@ -208,11 +208,6 @@
   margin-bottom: 10px;
 }
 
-.addpeople-wrapper {
-  width: 100%;
-  height: 100%;
-}
-
 .create-something {
   width: 100%;
   height: auto;
@@ -250,10 +245,8 @@
 }
 
 .create-something-input {
-  width: 90%;
-  height: 10vh;
-  max-height: 50px;
-  min-height: 40px;
+  width: 100%;
+  height: 45px;
   outline-style: none;
   border-style: none;
   background: rgb(245, 245, 245);
