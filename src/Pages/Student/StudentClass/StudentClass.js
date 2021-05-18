@@ -1,32 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { LoginContext } from "../../ContextFiles/LoginContext";
+import { LoginContext } from "../../../ContextFiles/LoginContext";
 import Axios from "axios";
-import BrokenPage from "../../Components/My404Component/BrokenPage";
-import DashboardHeader from "../../Components/DashboardHeader/DashboardHeader";
-import TeacherDashboard from "../Teacher/TeacherDashboard/TeacherDashboard";
-import "./Class.css";
-import Class from "./Class";
+import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
+import StudentDashboard from "../StudentDashboard/StudentDashboard";
 import { Link, Redirect } from "react-router-dom";
 
-const ClassTeacher = (props) => {
-  const { valueID, } = useContext(LoginContext);
+const StudentClass = (props) => {
+  const { valueID } = useContext(LoginContext);
   const [userId, setUserId] = valueID;
   const [createStream, showCreateStream] = useState(false);
   const [postNav, setPostNav] = useState("post");
   const [msg, setMsg] = useState("");
-
-  // useEffect(() => {
-  //   Axios.get(`https://ecplcsms.herokuapp.com/class/class/${props.id}`).then(
-  //     (response) => {
-  //       if (response.data.length === 0) {
-  //         setClassData([]);
-  //       } else {
-  //         setClassData(response.data);
-  //         setTeacherName(response.data[0].adviser_id.fullname);
-  //       }
-  //     }
-  //   );
-  // }, []);
 
   const [activities, setActivities] = useState([]);
   useEffect(() => {
@@ -48,7 +32,7 @@ const ClassTeacher = (props) => {
           onClick={() => showCreateStream(false)}
           className={createStream ? "teacher-class-wrapper-after" : ""}
         ></div>
-        <TeacherDashboard />
+        <StudentDashboard />
         <div className={msg === "" ? "post-msg-hidden" : "post-msg"}>{msg}</div>
         <div className="class-content">
           <DashboardHeader />
@@ -85,20 +69,11 @@ const ClassTeacher = (props) => {
                 <p>No upcoming work</p>
               </div>
             </div>
-            <div className="class-content-body-right">
-              <Class
-                id={props.id}
-                showCreateStream={showCreateStream}
-                activities={activities}
-                setActivities={setActivities}
-                msg={msg}
-                setMsg={setMsg}
-              />
-            </div>
+            <div className="class-content-body-right"></div>
           </div>
         </div>
       </div>
     </>
   );
 };
-export default ClassTeacher;
+export default StudentClass;

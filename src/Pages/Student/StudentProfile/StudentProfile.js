@@ -18,7 +18,7 @@ const StudentProfile = (props) => {
   const [showClass, setShowClass] = useState(true);
   const [studentData, setStudentData] = useState([]);
 
-  const url = `https://ecplcsms.herokuapp.com/class/${props.id}`;
+  const url = `https://ecplcsms.herokuapp.com/class/student/${props.id}`;
 
   useEffect(() => {
     Axios.get(url).then((response) => {
@@ -26,6 +26,7 @@ const StudentProfile = (props) => {
         setYourClass([]);
       } else {
         setYourClass(response.data);
+        console.log(response.data)
       }
     });
   }, []);
@@ -74,7 +75,7 @@ const StudentProfile = (props) => {
               {yourClass.map((value, key) => {
                 return (
                   <Link
-                    to={"/teacher-class/" + value._id}
+                    to={"/student-class/" + value._id}
                     key={key}
                     className="user-class-class-wrapper"
                   >

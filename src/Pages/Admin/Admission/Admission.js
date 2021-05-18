@@ -6,7 +6,7 @@ import "./Admission.css";
 import StudentAdmission from "./StudentAdmission";
 import TeacherAdmission from "./TeacherAdmission";
 
-const Admission = () => {
+const Admission = (props) => {
   const [typeUser, setTypeUser] = useState("student");
   const [studentMsg, setStudentMsg] = useState("");
   const [teacherMsg, setTeacherMsg] = useState("");
@@ -81,12 +81,15 @@ const Admission = () => {
                 <StudentAdmission
                   studentMsg={studentMsg}
                   setStudentMsg={setStudentMsg}
+                  setInitial={props.setInitial}
+                 
                 />
               )}
               {typeUser === "teacher" && (
                 <TeacherAdmission
                   teacherMsg={teacherMsg}
                   setTeacherMsg={setTeacherMsg}
+                  setInitial={props.setInitial}
                 />
               )}
             </div>

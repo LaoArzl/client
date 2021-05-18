@@ -7,9 +7,11 @@ import "./Subject.css";
 import "./Assignment";
 import Assignment from "./Assignment";
 import Quiz from "./Quiz";
+import Material from "./Material";
 import Axios from "axios";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
+import { useHistory } from "react-router-dom";
 
 const Subjects = (props) => {
   const [showAssigned, setShowAssigned] = useState(false);
@@ -18,11 +20,15 @@ const Subjects = (props) => {
   const [nav, setNav] = useState("activity");
   const [assignment, setAssignment] = useState(false);
   const [quiz, setQuiz] = useState(false);
-  const [material, setMaterial] = useState(false);
+  const [lecture, setLecture] = useState(false);
+
+  const history = useHistory();
+  const goBack = () => {
+    history.goBack();
+  };
 
   //Activity List
   const [activity, setActivity] = useState([]);
-  let newA;
 
   useEffect(() => {
     Axios.get(
@@ -34,7 +40,7 @@ const Subjects = (props) => {
         setActivity(response.data.activity);
       }
     });
-  }, [activity]);
+  }, [props.initial]);
 
   return (
     <>
@@ -46,195 +52,168 @@ const Subjects = (props) => {
             subject={props.subject}
             setActivity={setActivity}
             activity={activity}
+            setInitial={props.setInitial}
           />
         )}
         {quiz && <Quiz setQuiz={setQuiz} />}
+        {lecture && <Material setLecture={setLecture} />}
 
         <TeacherDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
-          <div className="class-content-header">
-            <div className="class-content-upper-header">
-              <h2>{props.name}</h2>
-              <p>{props.adviser}</p>
-            </div>
-            <div className="class-content-lower-header">
-              <Link
-                to={"/teacher-class/" + props.id}
-                className="nav-span-diactive"
-              >
-                Posts
-              </Link>
 
-              <Link
-                to={"/teacher-class/" + props.id + "/subjects"}
-                className="nav-span-active"
+          <div className="actual-activity-header">
+            <Link to={props.goBack} className="go-back-btn">
+              <i className="fas fa-angle-left"></i>Back
+            </Link>
+            <div
+              onClick={() => setDropdown(!dropdown)}
+              className="create-activity-dropdown"
+            >
+              Create
+              <i
+                className={dropdown ? "fas fa-angle-up" : "fas fa-angle-down"}
+              ></i>
+              <div
+                className={
+                  dropdown ? "create-activity-dropdown-after" : "hidden"
+                }
               >
-                Subjects
-              </Link>
-
-              <Link
-                className="nav-span-diactive"
-                to={"/teacher-class/" + props.id + "/people"}
-              >
-                People
-              </Link>
+                <div onClick={() => setAssignment(true)}>Assignment</div>
+                <div onClick={() => setLecture(true)}>Lecture</div>
+                <div onClick={() => setQuiz(true)}>Quiz</div>
+              </div>
             </div>
           </div>
 
           <div className="subject-content-body">
-            <div className="subject-content-body-left">
-              <div
-                onClick={() => setNav("activity")}
-                className={
-                  nav === "activity"
-                    ? "subject-content-body-left1-active"
-                    : "subject-content-body-left1"
-                }
-              >
-                Activities
-              </div>
-              <div
-                onClick={() => setNav("grade")}
-                className={
-                  nav === "grade"
-                    ? "subject-content-body-left2-active"
-                    : "subject-content-body-left2"
-                }
-              >
-                Grades
-              </div>
-            </div>
             <div className="subject-content-body-right">
               <div className="subject-content-body-right-header">
                 <b>{props.subject}</b>
-                <div
-                  onClick={() => setDropdown(!dropdown)}
-                  className="create-activity-dropdown"
-                >
-                  Create
-                  <i
-                    className={
-                      dropdown ? "fas fa-angle-up" : "fas fa-angle-down"
-                    }
-                  ></i>
-                  <div
-                    className={
-                      dropdown ? "create-activity-dropdown-after" : "hidden"
-                    }
+                <div className="subject-content-body-right-header-nav">
+                  <Link className="subject-content-body-right-header-nav-link-active">
+                    Activities
+                  </Link>
+                  <Link
+                    to={props.lectureLink}
+                    className="subject-content-body-right-header-nav-link-inactive"
                   >
-                    <div onClick={() => setAssignment(true)}>Assignment</div>
-                    <div onClick={() => setQuiz(true)}>Quiz</div>
-                  </div>
+                    Lectures
+                  </Link>
                 </div>
               </div>
-              {nav === "activity" ? (
-                <>
-                  <div className="subject-content-body-right-body">
-                    <div className="subject-content-assigned-header">
-                      <p onClick={() => setShowAssigned(!showAssigned)}>
-                        Assigned
-                        <i
+              <div className="subject-content-body-right-body">
+                <div className="subject-content-assigned-header">
+                  <p onClick={() => setShowAssigned(!showAssigned)}>
+                    Assigned
+                    <i
+                      className={
+                        showAssigned
+                          ? "fas fa-caret-right"
+                          : "fas fa-caret-down"
+                      }
+                    ></i>
+                  </p>
+                </div>
+                <div className="subject-content-assigned-body-wrapper">
+                  {activity
+                    .filter((subject) => subject.subject === props.subject)
+                    .filter((active) => active.active === true)
+                    .map((value) => {
+                      return (
+                        <Link
+                          to={"/activity/" + value._id}
                           className={
                             showAssigned
-                              ? "fas fa-caret-right"
-                              : "fas fa-caret-down"
+                              ? "hidden"
+                              : "subject-content-assigned-body"
                           }
-                        ></i>
-                      </p>
-                    </div>
-                    {activity
-                      .filter((subject) => subject.subject === props.subject)
-                      .filter((active) => active.active === true)
-                      .map((value) => {
-                        return (
-                          <Link
-                            to={"/activity/" + value._id}
-                            className={
-                              showAssigned
-                                ? "hidden"
-                                : "subject-content-assigned-body"
-                            }
-                          >
-                            <span>
-                              <LibraryBooksIcon fontSize="small" />
-                            </span>
-                            <div className="subject-content-assigned-body-right">
-                              <b>{value.activityType}</b>
-                              <div className="sub-subject-content-assigned-body-right">
-                                <div className="activity-topic-value">
-                                  <p>{value.topic} |</p>
-                                </div>
-                                <div className="activity-due-value">
-                                  <p>Due {value.due}</p>
-                                </div>
-                                <div className="activity-time-value">
-                                  <p>{value.time}</p>
-                                </div>
+                        >
+                          <span>
+                            <LibraryBooksIcon fontSize="small" />
+                          </span>
+                          <div className="subject-content-assigned-body-right">
+                            <b>{value.topic}</b>
+                            <div className="sub-subject-content-assigned-body-right">
+                              <div className="activity-topic-value">
+                                <p>{value.activityType} |</p>
                               </div>
-                            </div>
-
-                            <div className="activity-points-after">
-                              {value.points} points
-                            </div>
-                          </Link>
-                        );
-                      })}
-
-                    <div className="subject-content-completed-header">
-                      <p onClick={() => setShowCompleted(!showCompleted)}>
-                        Completed
-                        <i
-                          className={
-                            showCompleted
-                              ? "fas fa-caret-right"
-                              : "fas fa-caret-down"
-                          }
-                        ></i>
-                      </p>
-                    </div>
-
-                    {activity
-                      .filter((subject) => subject.subject === props.subject)
-                      .filter((active) => active.active === false)
-                      .map((value) => {
-                        return (
-                          <div
-                            className={
-                              showCompleted
-                                ? "hidden"
-                                : "subject-content-completed-body"
-                            }
-                          >
-                            <span>
-                              <LibraryAddCheckIcon fontSize="small" />
-                            </span>
-                            <div className="subject-content-assigned-body-right">
-                              <b>{value.activityType}</b>
-                              <div className="sub-subject-content-assigned-body-right">
-                                <div className="activity-topic-value">
-                                  <p>{value.topic} |</p>
-                                </div>
-                                <div className="activity-due-value">
-                                  <p>Due {value.due}</p>
-                                </div>
-                                <div className="activity-time-value">
-                                  <p>{value.time}</p>
-                                </div>
+                              <div className="activity-due-value">
+                                {value.due === "" ? "" : <p>Due {value.due}</p>}
                               </div>
-                            </div>
-
-                            <div className="activity-points-after">
-                              {value.points} points
+                              <div className="activity-time-value">
+                                {value.due === "" ? "" : <p>{value.time}</p>}
+                              </div>
                             </div>
                           </div>
-                        );
-                      })}
-                  </div>
-                </>
-              ) : (
-                <p>Grade</p>
-              )}
+
+                          <div className="activity-points-after">
+                            {value.points < 0 ? (
+                              "No points"
+                            ) : (
+                              <>{value.points + " points"} </>
+                            )}
+                          </div>
+                        </Link>
+                      );
+                    })}
+                </div>
+
+                <div className="subject-content-completed-header">
+                  <p onClick={() => setShowCompleted(!showCompleted)}>
+                    Completed
+                    <i
+                      className={
+                        showCompleted
+                          ? "fas fa-caret-right"
+                          : "fas fa-caret-down"
+                      }
+                    ></i>
+                  </p>
+                </div>
+
+                {activity
+                  .filter((subject) => subject.subject === props.subject)
+                  .filter((active) => active.active === false)
+                  .map((value) => {
+                    return (
+                      <Link
+                        to={"/activity/" + value._id}
+                        className={
+                          showCompleted
+                            ? "hidden"
+                            : "subject-content-completed-body"
+                        }
+                      >
+                        <span>
+                          <LibraryAddCheckIcon fontSize="small" />
+                        </span>
+                        <div className="subject-content-assigned-body-right">
+                          <b>{value.topic}</b>
+                          <div className="sub-subject-content-assigned-body-right">
+                            <div className="activity-topic-value">
+                              <p>{value.activityType} |</p>
+                            </div>
+                            <div className="activity-due-value">
+                              {value.due === "" ? "" : <p>Due {value.due}</p>}
+                            </div>
+                            <div className="activity-time-value">
+                              {value.due === "" ? "" : <p>{value.time}</p>}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="activity-points-after">
+                          {value.points < 0 ? (
+                            "No points"
+                          ) : (
+                            <>{value.points + " points"} </>
+                          )}
+                        </div>
+                      </Link>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>

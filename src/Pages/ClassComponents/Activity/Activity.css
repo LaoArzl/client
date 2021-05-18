@@ -6,6 +6,33 @@
   background: #f3f6f7;
 }
 
+.actual-activity-wrapper-after {
+  width: 20%;
+  height: 10%;
+  background: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 3;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font13);
+  min-width: 275px;
+  min-height: 50px;
+  max-height: 50px;
+  opacity: 0.95;
+  transition: 0.1s ease-out;
+  font-weight: 300;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
 .actual-activity-content {
   width: 95%;
   height: 100vh;
@@ -18,9 +45,10 @@
   height: auto;
   margin: 0 auto;
   margin-bottom: 20px;
+  position: relative;
 }
 
-.actual-activity-header div {
+.go-back-btn {
   cursor: pointer;
   color: var(--font);
   width: 80px;
@@ -30,33 +58,53 @@
   justify-content: center;
   border-radius: 3px;
   transition: 0.2s ease-out;
+  text-decoration: none;
 }
-.actual-activity-header div:hover {
+.go-back-btn:hover {
   background: rgb(226, 226, 226);
   transition: 0.2s ease-in;
 }
 
-.actual-activity-header div i {
+.go-back-btn i {
   margin-right: 5px;
 }
 .actual-activity-body {
   width: 95%;
   height: auto;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .actual-activity-body-left span {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 25px;
+  right: 25px;
   font-size: var(--font13);
+  color: var(--font);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.actual-activity-body-left span i {
+  color: var(--sub-font);
+  margin-top: 5px;
 }
 
 .actual-activity-body-left {
-  width: 60%;
+  width: 65%;
   height: auto;
-  padding: 10px;
+  padding: 25px;
   position: relative;
+  background: white;
+  border-radius: 5px;
+  border: 1px var(--border);
+  box-shadow: 0px 1px 1px 0px rgba(46, 64, 75, 0.2);
+}
+
+.actual-activity-body-left-header {
+  margin-bottom: 25px;
 }
 
 .actual-activity-body-left-header h3 {
@@ -64,5 +112,105 @@
 }
 
 .actual-activity-body-left-header p {
+  color: var(--sub-font);
+  font-size: var(--font14);
+}
+
+.actual-activity-body-left-body {
+  width: 100%;
+  height: auto;
+  font-size: var(--font14);
   color: var(--font);
+  white-space: pre-wrap;
+  margin-bottom: 25px;
+}
+
+.actual-activity-body-left-attach {
+  width: 100%;
+  height: auto;
+  font-size: var(--font13);
+  color: var(--font);
+  margin-bottom: 10px;
+  font-weight: 400;
+  color: var(--sub-font);
+}
+
+.actual-activity-body-left-footer {
+  width: 100%;
+  height: 50px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.actual-activity-body-right {
+  background: white;
+  border-radius: 10px;
+  border: 1px var(--border);
+  width: 20%;
+  height: 200px;
+  box-shadow: 0px 1px 1px 0px rgba(46, 64, 75, 0.2);
+  padding: 25px;
+}
+
+.activity-done {
+  color: var(--font);
+  font-size: var(--font15);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 20px;
+}
+
+.activity-done p {
+  font-weight: 500;
+}
+
+.activity-done span {
+  padding: 5px 8px;
+  border-radius: 2px;
+  color: var(--font);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  font-size: var(--font13);
+  margin-left: 5px;
+  background: rgb(235, 235, 235);
+  transition: 0.1s ease-out;
+}
+
+.activity-done span:hover {
+  background: rgb(221, 221, 221);
+  transition: 0.1s ease-in;
+}
+
+.activity-turned-in {
+  color: var(--font);
+  font-size: var(--font15);
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.activity-turned-in p {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 982px) {
+  .actual-activity-body {
+    flex-direction: column;
+  }
+
+  .actual-activity-body-right {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+
+  .actual-activity-body-left {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    min-height: 200px;
+  }
 }

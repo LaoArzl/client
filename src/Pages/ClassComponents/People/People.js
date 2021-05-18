@@ -22,13 +22,15 @@ const People = (props) => {
       (response) => {
         let customer = response.data;
         setStudentState(
-          customer.map((d) => {
-            return {
-              select: false,
-              id: d._id,
-              name: d.fullname,
-            };
-          })
+          customer
+            .filter((g) => g.year === props.year)
+            .map((d) => {
+              return {
+                select: false,
+                id: d._id,
+                name: d.fullname,
+              };
+            })
         );
       }
     );
@@ -40,6 +42,15 @@ const People = (props) => {
       if (d.select) {
         arr.push(d.id);
       }
+
+      Axios.put(
+        `https://ecplcsms.herokuapp.com/class/add-student/${props.id}`,
+        {
+          studentId: arr,
+        }
+      ).then((response) => {
+        console.log(response);
+      });
     });
 
     Axios.put("https://ecplcsms.herokuapp.com/class/update-class", {
@@ -107,6 +118,7 @@ const People = (props) => {
                     <p>Select All</p>
                   </div>
                   <AddPeople
+                    sendSubmit={sendSubmit}
                     studentState={studentState}
                     setStudentState={setStudentState}
                   />

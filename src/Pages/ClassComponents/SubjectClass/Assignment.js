@@ -35,18 +35,7 @@ const Assignment = (props) => {
         setMessage(response.data.err);
       } else {
         setMessage(response.data.success);
-        props.setActivity([...props.activity], {
-          type: props.activity.type,
-          points: props.activity.points,
-          datetime: new Date().toLocaleDateString(),
-          due: props.activity.due,
-          time: props.activity.time,
-          topic: props.activity.topic,
-          instructions: props.activity.instructions,
-          file: props.activity.file,
-          active: true,
-          subject: props.subject,
-        })
+        props.setInitial([])
       }
     });
   };

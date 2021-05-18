@@ -31,6 +31,16 @@ const AddPeople = (props) => {
             </>
           );
         })}
+        <input
+          type="submit"
+          onClick={props.sendSubmit}
+          value="Add"
+          className={
+            props.studentState.length === 0
+              ? "add-people-btn-opacity"
+              : "add-people-btn"
+          }
+        />
       </div>
     </>
   );

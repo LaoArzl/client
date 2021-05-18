@@ -1,0 +1,11 @@
+.studentclass-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.studentclass-content {
+  width: 95%;
+  height: auto;
+  overflow-y: scroll;
+}

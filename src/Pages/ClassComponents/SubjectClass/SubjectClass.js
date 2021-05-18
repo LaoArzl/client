@@ -21,7 +21,12 @@ const SubjectClass = (props) => {
     Axios.get(
       `https://ecplcsms.herokuapp.com/class/populate-subjects/${props.id}`
     ).then((response) => {
-      setSubjects(response.data.year.subjects);
+      let tempSub = response.data.year;
+      setSubjects(
+        tempSub.map((sub) => {
+          return sub.subjects;
+        })
+      );
     });
   }, []);
 
@@ -67,11 +72,11 @@ const SubjectClass = (props) => {
               </>
             ) : (
               <>
-                {subjects.map((value) => {
+                {subjects[0].map((value) => {
                   return (
                     <Link
                       className="class-by-subject"
-                      to={window.location.pathname + "/" + value.subjectName}
+                      to={props.activityLink}
                     >
                       <i className="far fa-folder"></i>
                       {value.subjectName}

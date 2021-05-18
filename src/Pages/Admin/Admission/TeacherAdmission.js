@@ -57,6 +57,7 @@ const TeacherAdmission = (props) => {
       if (response.data.err) {
         props.setTeacherMsg(response.data.err);
       } else {
+        props.setInitial(response.data.success);
         props.setTeacherMsg(response.data.success);
         setTimeout(() => props.setTeacherMsg(""), 10000);
         setAccount({

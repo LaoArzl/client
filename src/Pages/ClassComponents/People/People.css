@@ -167,3 +167,12 @@
   color: var(--font);
   font-weight: 500;
 }
+
+.add-people-btn {
+  background: var(--main);
+  width: 60px;
+}
+
+.add-people-btn-opacity {
+  background: red;
+}

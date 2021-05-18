@@ -80,6 +80,7 @@ const StudentAdmission = (props) => {
         props.setStudentMsg(response.data.err);
       } else {
         props.setStudentMsg(response.data.success);
+        props.setInitial(response.data.success);
         setTimeout(() => props.setStudentMsg(""), 10000);
         setAccount({
           id: "",
