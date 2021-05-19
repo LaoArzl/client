@@ -43,7 +43,12 @@ const Quiz = (props) => {
                     </select>
                   </div>
                   <div className="quiz-question-question">
-                    Question: <input type="text" value={value.question} />
+                    Question:{" "}
+                    <input
+                      type="text"
+                      value={value.question}
+                      onChange={(e) => setQuestion()}
+                    />
                   </div>
                 </div>
               </>

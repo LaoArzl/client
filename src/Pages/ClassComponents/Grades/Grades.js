@@ -4,14 +4,14 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import "../../ClassComponents/SubjectClass/SubjectClass.css";
 import { Link } from "react-router-dom";
 import "../../ClassComponents/SubjectClass/Subject.css";
-import Assignment from "../SubjectClass/Assignment";
-import Quiz from "../SubjectClass/Quiz";
-import Material from "../SubjectClass/Material";
+import Assignment from "../../ClassComponents/SubjectClass/Assignment";
+import Quiz from "../../ClassComponents/SubjectClass/Quiz";
+import Material from "../../ClassComponents/SubjectClass/Material";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
+import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
 
-const Lecture = (props) => {
+const Grades = (props) => {
   const [showAssigned, setShowAssigned] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
   const [dropdown, setDropdown] = useState(false);
@@ -19,12 +19,6 @@ const Lecture = (props) => {
   const [assignment, setAssignment] = useState(false);
   const [quiz, setQuiz] = useState(false);
   const [lecture, setLecture] = useState(false);
-
-  /*Quarter state*/
-  const [first, setFirst] = useState(false);
-  const [second, setSecond] = useState(false);
-  const [third, setThird] = useState(false);
-  const [fourth, setFourth] = useState(false);
 
   const history = useHistory();
   const goBack = () => {
@@ -41,10 +35,16 @@ const Lecture = (props) => {
       if (response.data.length === 0) {
         setActivity([]);
       } else {
-        setActivity(response.data.lecture);
+        setActivity(response.data.activity);
       }
     });
   }, [props.initial]);
+
+  /*Quarter state*/
+  const [first, setFirst] = useState(false);
+  const [second, setSecond] = useState(false);
+  const [third, setThird] = useState(false);
+  const [fourth, setFourth] = useState(false);
 
   return (
     <>
@@ -108,13 +108,13 @@ const Lecture = (props) => {
                   >
                     Activities
                   </Link>
-                  <Link className="subject-content-body-right-header-nav-link-active">
-                    Lectures
-                  </Link>
                   <Link
-                    to={props.gradeLink}
+                    to={props.lectureLink}
                     className="subject-content-body-right-header-nav-link-inactive"
                   >
+                    Lectures
+                  </Link>
+                  <Link className="subject-content-body-right-header-nav-link-active">
                     Grades
                   </Link>
                 </div>
@@ -142,7 +142,7 @@ const Lecture = (props) => {
                         }
                       >
                         <span>
-                          <MenuBookIcon fontSize="small" />
+                          <LibraryAddCheckIcon fontSize="small" />
                         </span>
                         <div className="subject-content-assigned-body-right">
                           <b>{value.topic}</b>
@@ -178,13 +178,13 @@ const Lecture = (props) => {
                         }
                       >
                         <span>
-                          <MenuBookIcon fontSize="small" />
+                          <LibraryAddCheckIcon fontSize="small" />
                         </span>
                         <div className="subject-content-assigned-body-right">
                           <b>{value.topic}</b>
                           <div className="sub-subject-content-assigned-body-right">
                             <div className="activity-topic-value">
-                              <p>Lecture</p>
+                              <p>{value.activityType}</p>
                             </div>
                           </div>
                         </div>
@@ -214,7 +214,7 @@ const Lecture = (props) => {
                         }
                       >
                         <span>
-                          <MenuBookIcon fontSize="small" />
+                          <LibraryAddCheckIcon fontSize="small" />
                         </span>
                         <div className="subject-content-assigned-body-right">
                           <b>{value.topic}</b>
@@ -250,7 +250,7 @@ const Lecture = (props) => {
                         }
                       >
                         <span>
-                          <MenuBookIcon fontSize="small" />
+                          <LibraryAddCheckIcon fontSize="small" />
                         </span>
                         <div className="subject-content-assigned-body-right">
                           <b>{value.topic}</b>
@@ -272,4 +272,4 @@ const Lecture = (props) => {
   );
 };
 
-export default Lecture;
+export default Grades;

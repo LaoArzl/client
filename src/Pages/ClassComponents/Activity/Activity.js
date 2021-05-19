@@ -77,10 +77,9 @@ const Activity = (props) => {
               </span>
               <div className="actual-activity-body-left-header">
                 <h3>
-                  {props.activityType}
-                  {": "}
                   {props.topic}
                 </h3>
+                <p>{props.activityType}</p>
                 <p>
                   {!props.due ? (
                     "No due date "

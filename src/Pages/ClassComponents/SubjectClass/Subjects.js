@@ -56,7 +56,14 @@ const Subjects = (props) => {
           />
         )}
         {quiz && <Quiz setQuiz={setQuiz} />}
-        {lecture && <Material setLecture={setLecture} />}
+        {lecture && (
+          <Material
+            id={props.id}
+            subject={props.subject}
+            setInitial={props.setInitial}
+            setLecture={setLecture}
+          />
+        )}
 
         <TeacherDashboard />
         <div className="subject-class-content">
@@ -100,6 +107,12 @@ const Subjects = (props) => {
                   >
                     Lectures
                   </Link>
+                  <Link
+                    to={props.gradeLink}
+                    className="subject-content-body-right-header-nav-link-inactive"
+                  >
+                    Grades
+                  </Link>
                 </div>
               </div>
               <div className="subject-content-body-right-body">
@@ -136,7 +149,7 @@ const Subjects = (props) => {
                             <b>{value.topic}</b>
                             <div className="sub-subject-content-assigned-body-right">
                               <div className="activity-topic-value">
-                                <p>{value.activityType} |</p>
+                                <p>{value.activityType}</p>
                               </div>
                               <div className="activity-due-value">
                                 {value.due === "" ? "" : <p>Due {value.due}</p>}
@@ -192,7 +205,7 @@ const Subjects = (props) => {
                           <b>{value.topic}</b>
                           <div className="sub-subject-content-assigned-body-right">
                             <div className="activity-topic-value">
-                              <p>{value.activityType} |</p>
+                              <p>{value.activityType}</p>
                             </div>
                             <div className="activity-due-value">
                               {value.due === "" ? "" : <p>Due {value.due}</p>}

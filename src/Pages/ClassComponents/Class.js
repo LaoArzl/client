@@ -15,7 +15,6 @@ const Class = (props) => {
   //   })
   // }, [])
 
-  const commentPost = (id) => {};
 
   const { valueID, valueFirstname } = useContext(LoginContext);
   const [userID, setUserID] = valueID;
@@ -33,7 +32,10 @@ const Class = (props) => {
         commentor: firstname,
       }
     ).then((response) => {
-      console.log(response.data.success);
+      if(response.data.success) {
+        props.setInitial([]);
+      setComment("");
+      }
     });
   };
 
@@ -58,14 +60,9 @@ const Class = (props) => {
       } else {
         props.setMsg(response.data.success);
         setPost("");
-        props.setActivities([
-          ...props.activities,
-          {
-            poster: firstname,
-            body: post,
-            date: date,
-          },
-        ]);
+        props.setInitial([]);
+        setTimeout(() =>   props.setMsg(""), 5000)
+        
       }
     });
   };

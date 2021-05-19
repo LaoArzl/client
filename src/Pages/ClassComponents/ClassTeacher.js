@@ -39,7 +39,7 @@ const ClassTeacher = (props) => {
         }
       }
     );
-  }, []);
+  }, [props.initial]);
 
   return (
     <>
@@ -93,6 +93,7 @@ const ClassTeacher = (props) => {
                 setActivities={setActivities}
                 msg={msg}
                 setMsg={setMsg}
+                setInitial={props.setInitial}
               />
             </div>
           </div>

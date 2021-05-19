@@ -15,8 +15,9 @@ const Assignment = (props) => {
       topic: "",
       instructions: "",
       file: "",
-    })
-  }, [])
+      quarter: "",
+    });
+  }, []);
 
   const submitAssignment = () => {
     Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
@@ -30,24 +31,53 @@ const Assignment = (props) => {
       file: activity.file,
       active: true,
       subject: props.subject,
+      quarter: activity.quarter,
     }).then((response) => {
       if (response.data.err) {
         setMessage(response.data.err);
       } else {
         setMessage(response.data.success);
-        props.setInitial([])
+        props.setInitial([]);
+        setTimeout(() => setMessage(""), 5000);
+        setActivity({
+          type: "Assignment",
+          points: 100,
+          due: "",
+          time: "",
+          topic: "",
+          instructions: "",
+          file: "",
+          quarter: "",
+        });
       }
     });
   };
   return (
     <>
       <div className="assignment-wrapper">
+        <div
+          className={
+            message === "" || message !== "Successfully created activity."
+              ? "hidden"
+              : "assignment-wrapper-after"
+          }
+        >
+          {message}
+        </div>
         <div className="assignment-header">
           <h3>Create Assignment</h3>
         </div>
-        {message}
 
         <form onSubmit={(e) => e.preventDefault()} className="assignment-body">
+          <div
+            className={
+              message === "" || message === "Successfully created activity."
+                ? "hidden"
+                : "assignment-div-topic-err"
+            }
+          >
+            {message}
+          </div>
           <div className="assignment-div-points">
             <label>Points</label>
             <input
@@ -62,6 +92,7 @@ const Assignment = (props) => {
                   topic: activity.topic,
                   instructions: activity.instructions,
                   file: activity.file,
+                  quarter: activity.quarter,
                 });
               }}
               type="number"
@@ -84,6 +115,7 @@ const Assignment = (props) => {
                     topic: activity.topic,
                     instructions: activity.instructions,
                     file: activity.file,
+                    quarter: activity.quarter,
                   });
                 }}
               />
@@ -104,14 +136,40 @@ const Assignment = (props) => {
                     topic: activity.topic,
                     instructions: activity.instructions,
                     file: activity.file,
+                    quarter: activity.quarter,
                   });
                 }}
               />
             </div>
           </div>
+          <div className="assignment-div-topic">
+            <label>Quarter *</label>
+            <select
+              value={activity.quarter}
+              onChange={(e) => {
+                let value = e.target.value;
+                setActivity({
+                  type: activity.type,
+                  points: activity.points,
+                  due: activity.due,
+                  time: activity.time,
+                  topic: activity.topic,
+                  instructions: activity.instructions,
+                  file: activity.file,
+                  quarter: value,
+                });
+              }}
+            >
+              <option value="">Select Quarter</option>
+              <option value="1st Quarter">1st Quarter</option>
+              <option value="2nd Quarter">2nd Quarter</option>
+              <option value="3rd Quarter">3rd Quarter</option>
+              <option value="4th Quarter">4th Quarter</option>
+            </select>
+          </div>
 
           <div className="assignment-div-topic">
-            <label>Topic</label>
+            <label>Topic *</label>
             <input
               type="text"
               value={activity.topic}
@@ -125,6 +183,7 @@ const Assignment = (props) => {
                   topic: value,
                   instructions: activity.instructions,
                   file: activity.file,
+                  quarter: activity.quarter,
                 });
               }}
             />
@@ -144,6 +203,7 @@ const Assignment = (props) => {
                   topic: activity.topic,
                   instructions: value,
                   file: activity.file,
+                  quarter: activity.quarter,
                 });
               }}
               placeholder="Additional Instruction (Optional)"
@@ -163,9 +223,8 @@ const Assignment = (props) => {
                   topic: activity.topic,
                   instructions: activity.instructions,
                   file: value,
+                  quarter: activity.quarter,
                 });
-
-                console.log(activity.file);
               }}
               type="file"
               className="custom-file-input"

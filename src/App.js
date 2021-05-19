@@ -40,10 +40,13 @@ import People from "./Pages/ClassComponents/People/People";
 import Subjects from "./Pages/ClassComponents/SubjectClass/Subjects";
 import Activity from "./Pages/ClassComponents/Activity/Activity";
 import Lecture from "./Pages/ClassComponents/Lecture/Lecture";
+import Grades from "./Pages/ClassComponents/Grades/Grades";
+import MaterialLecture from "./Pages/ClassComponents/Activity/MaterialLecture";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
 import StudentClass from "./Pages/Student/StudentClass/StudentClass";
+import Prototype from "./Components/Prototype";
 
 function App() {
   const [studentUser, setStudentUser] = useState([]);
@@ -161,6 +164,8 @@ function App() {
                           exact
                           component={Students}
                         />
+
+                        <Route path="/prototype" exact component={Prototype} />
                         <Route path="/admin/admission" exact>
                           <Admission
                             initial={initial}
@@ -239,6 +244,8 @@ function App() {
                                 adviser={value.adviser_id.fullname}
                                 adviserId={value.adviser_id._id}
                                 name={value.className}
+                                setInitial={setInitial}
+                                initial={initial}
                               />
                             </Route>
                           );
@@ -325,6 +332,13 @@ function App() {
                                       sub.subjectName +
                                       "/lectures"
                                     }
+                                    gradeLink={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/grades"
+                                    }
                                     goBack={
                                       "/teacher-class/" +
                                       value._id +
@@ -373,6 +387,68 @@ function App() {
                                       sub.subjectName +
                                       "/lectures"
                                     }
+                                    gradeLink={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/grades"
+                                    }
+                                    goBack={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects"
+                                    }
+                                  />
+                                </Route>
+                              );
+                            });
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.year.map((key) => {
+                            return key.subjects.map((sub) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={
+                                    "/teacher-class/" +
+                                    value._id +
+                                    "/subjects/" +
+                                    sub.subjectName +
+                                    "/grades"
+                                  }
+                                  exact
+                                >
+                                  <Grades
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    name={value.className}
+                                    subject={sub.subjectName}
+                                    setInitial={setInitial}
+                                    initial={initial}
+                                    activityLink={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/activities"
+                                    }
+                                    lectureLink={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/lectures"
+                                    }
+                                    gradeLink={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/grades"
+                                    }
                                     goBack={
                                       "/teacher-class/" +
                                       value._id +
@@ -394,6 +470,35 @@ function App() {
                                 exact
                               >
                                 <Activity
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  subject={key.subject}
+                                  topic={key.topic}
+                                  activityType={key.activityType}
+                                  points={key.points}
+                                  instructions={key.instructions}
+                                  due={key.due}
+                                  time={key.time}
+                                  activityId={key._id}
+                                  active={key.active}
+                                  setInitial={setInitial}
+                                  quarter={key.quarter}
+                                />
+                              </Route>
+                            );
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.lecture.map((key) => {
+                            return (
+                              <Route
+                                key={value._id}
+                                path={"/lecture/" + key._id}
+                                exact
+                              >
+                                <MaterialLecture
                                   id={value._id}
                                   adviser={value.adviser_id.fullname}
                                   name={value.className}
