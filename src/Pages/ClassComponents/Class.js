@@ -4,8 +4,6 @@ import Axios from "axios";
 import { LoginContext } from "../../ContextFiles/LoginContext";
 
 const Class = (props) => {
-
-
   const { valueID, valueFirstname } = useContext(LoginContext);
   const [userID, setUserID] = valueID;
   const [firstname, setFirstname] = useState("");
@@ -22,9 +20,9 @@ const Class = (props) => {
         commentor: firstname,
       }
     ).then((response) => {
-      if(response.data.success) {
+      if (response.data.success) {
         props.setInitial([]);
-      setComment("");
+        setComment("");
       }
     });
   };
@@ -51,8 +49,7 @@ const Class = (props) => {
         props.setMsg(response.data.success);
         setPost("");
         props.setInitial([]);
-        setTimeout(() =>   props.setMsg(""), 5000)
-        
+        setTimeout(() => props.setMsg(""), 5000);
       }
     });
   };
@@ -74,6 +71,9 @@ const Class = (props) => {
             }
             placeholder="Write something to the class"
           ></textarea>
+        </div>
+        <div className={write ? "create-something-file" : "hidden"}>
+          <input type="file" className="custom-file-input" />
         </div>
         <div className={write ? "write-btns-div" : "write-btns-div-hidden"}>
           <input

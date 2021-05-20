@@ -59,12 +59,6 @@ const StudentLecture = (props) => {
                   <Link className="subject-content-body-right-header-nav-link-active">
                     Lectures
                   </Link>
-                  <Link
-                    to={props.gradeLink}
-                    className="subject-content-body-right-header-nav-link-inactive"
-                  >
-                    Grades
-                  </Link>
                 </div>
               </div>
               <div className="subject-content-body-right-body">

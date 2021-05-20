@@ -57,6 +57,21 @@ const StudentClass = (props) => {
     });
   }, [props.initial]);
 
+  //Activity List
+  const [activity, setActivity] = useState([]);
+
+  useEffect(() => {
+    Axios.get(
+      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
+    ).then((response) => {
+      if (response.data.length === 0) {
+        setActivity([]);
+      } else {
+        setActivity(response.data.activity);
+      }
+    });
+  }, [props.initial]);
+
   return (
     <>
       <div className="teacher-class-wrapper">
@@ -95,10 +110,28 @@ const StudentClass = (props) => {
           <div className="class-content-body">
             <div className="class-content-body-left">
               <div className="class-content-body-left-header">
-                <p>Bulletin Board</p>
+                <p>Upcoming Work</p>
               </div>
               <div className="class-content-body-left-body">
-                <p>No upcoming work</p>
+                {activity
+                  .filter((active) => active.active === true)
+                  .map((value) => {
+                    return (
+                      <Link
+                        className="link"
+                        to={"/student/activity/" + value._id}
+                      >
+                        {value.topic}
+                      </Link>
+                    );
+                  })}
+
+                <Link
+                  to="/student/activity/all"
+                  className={activity.length === 0 ? "hidden" : "view-all-link"}
+                >
+                  View All
+                </Link>
               </div>
             </div>
             <div className="class-content-body-right">
@@ -139,7 +172,9 @@ const StudentClass = (props) => {
                             onSubmit={(e) => e.preventDefault()}
                             className="class-posts-body-comment-upper"
                           >
-                            <div className="class-posts-body-header-left"></div>
+                            <div className="class-posts-body-header-left">
+                              <img src={props.picture} />
+                            </div>
                             <input
                               value={comment}
                               className="commentBtn"

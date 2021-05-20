@@ -272,27 +272,8 @@ const TeacherAdmission = (props) => {
             />
           </div>
 
-          <div className="admission-div">
-            <label>Profile Picture</label>
-            <input
-              value={account.picture}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: account.id,
-                  password: account.password,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: account.gender,
-                  birthday: account.birthday,
-                  picture: value,
-                });
-              }}
-              type="file"
-              id="file-upload"
-            ></input>
-          </div>
+         
+         
         </div>
       </div>
       {/* Contact Address*/}

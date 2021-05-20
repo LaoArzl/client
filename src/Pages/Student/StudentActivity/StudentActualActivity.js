@@ -1,43 +1,17 @@
-import React, { useState } from "react";
-import "./Activity.css";
-import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
+import React, { useState, useEffect } from "react";
+import StudentDashboard from "../../Student/StudentDashboard/StudentDashboard";
 import { useHistory } from "react-router-dom";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import Axios from "axios";
 
-const Activity = (props) => {
+const StudentActualActivity = (props) => {
   const history = useHistory();
   const goBack = () => {
     history.goBack();
   };
 
-  const markDone = () => {
-    Axios.put(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}/${props.activityId}`,
-      { active: false }
-    ).then((response) => {
-      props.setInitial([]);
-      if (response.data.success) {
-        setActivityStatus("You mark this activity done.");
-        setTimeout(() => setActivityStatus(""), 5000);
-      }
-    });
-  };
-
-  const markUndone = () => {
-    Axios.put(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}/${props.activityId}`,
-      { active: true }
-    ).then((response) => {
-      props.setInitial([]);
-      if (response.data.success) {
-        setActivityStatus("You reopen this activity.");
-        setTimeout(() => setActivityStatus(""), 5000);
-      }
-    });
-  };
-
   const [activityStatus, setActivityStatus] = useState("");
+
   return (
     <>
       <div className="actual-activity-wrapper">
@@ -48,7 +22,7 @@ const Activity = (props) => {
         >
           {activityStatus}
         </div>
-        <TeacherDashboard />
+        <StudentDashboard />
         <div className="actual-activity-content">
           <DashboardHeader />
           <div className="actual-activity-header">
@@ -64,21 +38,10 @@ const Activity = (props) => {
                 ) : (
                   <>{props.points + " points"} </>
                 )}
-                {props.active.toString() === "true" ? (
-                  <i>Assigned</i>
-                ) : (
-                  <>
-                    <i>
-                      Done {"  "}
-                      <i className="fas fa-check"></i>
-                    </i>
-                  </>
-                )}
+                <input type="submit" value="Turn in"></input>
               </span>
               <div className="actual-activity-body-left-header">
-                <h3>
-                  {props.topic}
-                </h3>
+                <h3>{props.topic}</h3>
                 <p>
                   {!props.due ? (
                     "No due date "
@@ -101,30 +64,21 @@ const Activity = (props) => {
               </div>
 
               <div className="actual-activity-body-left-attach">
-                <p>Attached file
-                </p>
+                <p>Attached file</p>
               </div>
 
               <div className="actual-activity-body-left-footer">
                 <div className="footer-add-word">{props.file}</div>
               </div>
-            </div>
 
-            <div className="actual-activity-body-right">
-              <div className="activity-done">
-                <p>Mark Activity:</p>{" "}
-                {props.active.toString() === "true" ? (
-                  <span onClick={markDone}>Done</span>
-                ) : (
-                  <span onClick={markUndone}>Undone</span>
-                )}
-              </div>
-              <div className="activity-turned-in">
-                <p>Turned in:</p> 0
+              <div className="actual-activity-body-left-attach">
+                <p>
+                  <i class="fas fa-paperclip"></i> My work
+                </p>
               </div>
 
-              <div className="activity-turned-in">
-                <p>Assigned:</p> 0
+              <div className="actual-activity-body-left-attach">
+                <input type="file" className="custom-file-input" />
               </div>
             </div>
           </div>
@@ -134,4 +88,4 @@ const Activity = (props) => {
   );
 };
 
-export default Activity;
+export default StudentActualActivity;

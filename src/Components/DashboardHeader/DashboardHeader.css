@@ -74,6 +74,12 @@
   justify-content: center;
   border: 1px solid rgb(206, 206, 206);
   color: white;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.dashboard-header-profile1 img {
+  width: 110%;
 }
 
 .dashboard-header-profile2 {
@@ -87,6 +93,11 @@
   justify-content: center;
   border: 1px solid rgb(206, 206, 206);
   color: white;
+  overflow: hidden;
+}
+
+.dashboard-header-profile2 img {
+  width: 110%;
 }
 
 .dashboard-header-profile-name {

@@ -16,6 +16,8 @@ const StudentActivity = (props) => {
   const [quiz, setQuiz] = useState(false);
   const [lecture, setLecture] = useState(false);
 
+
+
   const history = useHistory();
   const goBack = () => {
     history.goBack();
@@ -35,6 +37,9 @@ const StudentActivity = (props) => {
       }
     });
   }, [props.initial]);
+
+
+  
 
   return (
     <>
@@ -64,12 +69,6 @@ const StudentActivity = (props) => {
                   >
                     Lectures
                   </Link>
-                  <Link
-                    to={props.gradeLink}
-                    className="subject-content-body-right-header-nav-link-inactive"
-                  >
-                    Grades
-                  </Link>
                 </div>
               </div>
               <div className="subject-content-body-right-body">
@@ -92,7 +91,7 @@ const StudentActivity = (props) => {
                     .map((value) => {
                       return (
                         <Link
-                          to={"/activity/" + value._id}
+                          to={"/student/activity/" + value._id}
                           className={
                             showAssigned
                               ? "hidden"
@@ -131,7 +130,7 @@ const StudentActivity = (props) => {
 
                 <div className="subject-content-completed-header">
                   <p onClick={() => setShowCompleted(!showCompleted)}>
-                    Completed
+                    Completed 
                     <i
                       className={
                         showCompleted
@@ -148,7 +147,7 @@ const StudentActivity = (props) => {
                   .map((value) => {
                     return (
                       <Link
-                        to={"/activity/" + value._id}
+                        to={"/student/activity/" + value._id}
                         className={
                           showCompleted
                             ? "hidden"

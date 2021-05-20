@@ -76,7 +76,7 @@ const StudentSubject = (props) => {
                   return (
                     <Link
                       className="class-by-subject"
-                      to={props.activityLink}
+                      to={props.activeLink + "/" + value.subjectName + "/activities"}
                     >
                       <i className="far fa-folder"></i>
                       {value.subjectName}

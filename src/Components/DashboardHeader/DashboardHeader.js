@@ -11,6 +11,7 @@ const DashboardHeader = () => {
   const [firstname, setFirstname] = useState("");
   const [chat, setChat] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
+  const [picture, setPicture] = useState("");
   const logoutMenu = () => {
     setLogout(!logout);
   };
@@ -31,6 +32,7 @@ const DashboardHeader = () => {
         setFirstname("");
       } else if (response.data.loggedIn) {
         setFirstname(response.data.firstname);
+       setPicture(response.data.picture)
       }
     });
   }, []);
@@ -45,8 +47,11 @@ const DashboardHeader = () => {
           </div>
           <div className="dashboard-spanner-right">
             <div onClick={logoutMenu} className="dashboard-admin-profile">
-              <div className="dashboard-header-profile1"></div>
+              <div className="dashboard-header-profile1">
+               <img src={picture} />
+              </div>
               <div className="dashboard-header-profile-name">
+                
                 <i className="fas fa-caret-down"></i>
               </div>
             </div>
@@ -59,7 +64,9 @@ const DashboardHeader = () => {
             >
               <span className="dashboard-profile-span1">
                 <div className="dashboard-profile-name-wrapper1">
-                  <div className="dashboard-header-profile2"></div>
+                  <div className="dashboard-header-profile2">
+                  <img src={picture} />
+                  </div>
                 </div>
                 <div className="dashboard-profile-name-wrapper2">
                   {firstname}

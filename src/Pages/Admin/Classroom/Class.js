@@ -76,6 +76,7 @@ const Class = () => {
         setSection("");
         setErrMsg(response.data.success);
         setTimeout(() => setErrMsg(""), 5000);
+        setShowCreate(false);
       }
     });
   };
@@ -86,6 +87,9 @@ const Class = () => {
         <BrokenPage />
       ) : (
         <div className="classs-wrapper">
+          <div className={errMsg === "" ? "hidden" : "classs-wrapper-after"}>
+            {errMsg}
+          </div>
           {showCreate ? (
             <>
               <form
@@ -101,7 +105,7 @@ const Class = () => {
                       errMsg === ""
                         ? "class-error-message"
                         : errMsg === "Successfully created"
-                        ? "class-error-message-green"
+                        ? "hidden"
                         : "class-error-message-red"
                     }
                   >

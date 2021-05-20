@@ -41,7 +41,7 @@ const MaterialLecture = (props) => {
 
               <div className="actual-activity-body-left-attach">
                 <p>
-                  <i className="fas fa-paperclip"></i> Attached file
+                  Attached file
                 </p>
               </div>
 

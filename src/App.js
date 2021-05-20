@@ -51,7 +51,7 @@ import StudentSubject from "./Pages/Student/StudentClass/StudentSubject";
 import StudentPeople from "./Pages/Student/StudentPeople/StudentPeople";
 import StudentActivity from "./Pages/Student/StudentActivity/StudentActivity";
 import StudentLecture from "./Pages/Student/StudentLecture/StudentLecture";
-import StudentGrade from "./Pages/Student/StudentGrade/StudentGrade";
+import StudentActualActivity from "./Pages/Student/StudentActivity/StudentActualActivity";
 
 function App() {
   const [studentUser, setStudentUser] = useState([]);
@@ -72,7 +72,7 @@ function App() {
       }
     );
 
-    return console.log("student");
+    return console.log("Unmounting");
   }, [initial]);
 
   useEffect(() => {
@@ -86,8 +86,8 @@ function App() {
       }
     );
 
-    return console.log("teacher");
-  }, []);
+    return console.log("Unmounting");
+  }, [initial]);
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/class/populate-teacher").then(
@@ -257,6 +257,9 @@ function App() {
                         })}
 
                         {classData.map((value) => {
+                          return value.students.map((stud) => {
+
+                         
                           return (
                             <Route
                               key={value._id}
@@ -270,9 +273,11 @@ function App() {
                                 name={value.className}
                                 initial={initial}
                                 setInitial={setInitial}
+                                picture={stud.picture}
                               />
                             </Route>
                           );
+                        })
                         })}
 
                         {classData.map((value) => {
@@ -297,6 +302,11 @@ function App() {
                                       sub.subjectName +
                                       "/activities"
                                     }
+                                    activeLink={
+                                      "/teacher-class/" +
+                                      value._id +
+                                      "/subjects"
+                                    }
                                   />
                                 </Route>
                               );
@@ -311,7 +321,7 @@ function App() {
                                 <Route
                                   key={value._id}
                                   path={
-                                    "/student-class/" + value._id + "/subjects"
+                                    "/student-class/" + value._id + "/subjects/"
                                   }
                                   exact
                                 >
@@ -322,9 +332,12 @@ function App() {
                                     activityLink={
                                       "/student-class/" +
                                       value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/activities"
+                                      "/subjects"
+                                    }
+                                    activeLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects"
                                     }
                                   />
                                 </Route>
@@ -423,13 +436,6 @@ function App() {
                                       "/subjects/" +
                                       sub.subjectName +
                                       "/lectures"
-                                    }
-                                    gradeLink={
-                                      "/student-class/" +
-                                      value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/grades"
                                     }
                                     goBack={
                                       "/student-class/" +
@@ -534,13 +540,6 @@ function App() {
                                       sub.subjectName +
                                       "/lectures"
                                     }
-                                    gradeLink={
-                                      "/student-class/" +
-                                      value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/grades"
-                                    }
                                     goBack={
                                       "/student-class/" +
                                       value._id +
@@ -609,61 +608,6 @@ function App() {
                         })}
 
                         {classData.map((value) => {
-                          return value.year.map((key) => {
-                            return key.subjects.map((sub) => {
-                              return (
-                                <Route
-                                  key={value._id}
-                                  path={
-                                    "/student-class/" +
-                                    value._id +
-                                    "/subjects/" +
-                                    sub.subjectName +
-                                    "/grades"
-                                  }
-                                  exact
-                                >
-                                  <StudentGrade
-                                    id={value._id}
-                                    adviser={value.adviser_id.fullname}
-                                    name={value.className}
-                                    subject={sub.subjectName}
-                                    setInitial={setInitial}
-                                    initial={initial}
-                                    activityLink={
-                                      "/student-class/" +
-                                      value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/activities"
-                                    }
-                                    lectureLink={
-                                      "/student-class/" +
-                                      value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/lectures"
-                                    }
-                                    gradeLink={
-                                      "/student-class/" +
-                                      value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/grades"
-                                    }
-                                    goBack={
-                                      "/student-class/" +
-                                      value._id +
-                                      "/subjects"
-                                    }
-                                  />
-                                </Route>
-                              );
-                            });
-                          });
-                        })}
-
-                        {classData.map((value) => {
                           return value.activity.map((key) => {
                             return (
                               <Route
@@ -689,6 +633,38 @@ function App() {
                                 />
                               </Route>
                             );
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.students.map((stud) => {
+                            return value.activity.map((key) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={"/student/activity/" + key._id}
+                                  exact
+                                >
+                                  <StudentActualActivity
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    fullname={stud.fullname}
+                                    name={value.className}
+                                    subject={key.subject}
+                                    topic={key.topic}
+                                    activityType={key.activityType}
+                                    points={key.points}
+                                    instructions={key.instructions}
+                                    due={key.due}
+                                    time={key.time}
+                                    activityId={key._id}
+                                    active={key.active}
+                                    setInitial={setInitial}
+                                    quarter={key.quarter}
+                                  />
+                                </Route>
+                              );
+                            });
                           });
                         })}
 

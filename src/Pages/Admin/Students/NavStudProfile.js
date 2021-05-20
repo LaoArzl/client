@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import { Image } from "cloudinary-react";
 
 const NavStudProfile = () => {
   const [userState, setUserState] = useState({});
@@ -46,6 +47,22 @@ const NavStudProfile = () => {
       console.log(response);
     });
   };
+  Axios.defaults.withCredentials = true;
+
+  const [image, setImage] = useState([]);
+
+  const upload = () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "ayivjexe");
+
+    Axios.post(
+      "https://api.cloudinary.com/v1_1/defutech-inc/image/upload",
+      formData
+    ).then((response) => {
+      console.log(response);
+    });
+  };
   return (
     <>
       <div className="user-nav-wrapper">
@@ -57,10 +74,16 @@ const NavStudProfile = () => {
             <p>Personal Information</p>
           </div>
           <div className="user-profile-photo">
-            <span>
-              <i className="fas fa-pen"></i>
-            </span>
+            <img src="https://res.cloudinary.com/defutech-inc/image/upload/v1621536900/pv54oaklyjoxyftnuufv.jpg" />
           </div>
+          <div className="create-stream-post-divs">
+            <input
+              onChange={(e) => setImage(e.target.files[0])}
+              type="file"
+              className="custom-file-input"
+            />
+          </div>
+          <button onClick={upload}>Upload</button>
           <div className="update-user-profile">
             <label>Last Name</label>
             <input
