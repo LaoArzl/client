@@ -13,6 +13,8 @@ const People = (props) => {
   const [studentData, setStudentData] = useState([]);
   const [studentState, setStudentState] = useState([]);
 
+  const [msg, setMsg] = useState("");
+
   const setStudent = () => {
     setShowStudents(true);
   };
@@ -36,6 +38,14 @@ const People = (props) => {
     );
   }, []);
 
+  useEffect(() => {
+    Axios.get(`https://ecplcsms.herokuapp.com/class/class/${props.id}`).then(
+      (response) => {
+        setStudentData(response.data[0].students);
+      }
+    );
+  }, [props.initial]);
+
   const sendSubmit = () => {
     const arr = [];
     studentState.forEach((d) => {
@@ -49,21 +59,28 @@ const People = (props) => {
           studentId: arr,
         }
       ).then((response) => {
-        console.log(response);
+        if (response.data.success) {
+          setMsg("Successfully added students");
+          setTimeout(() => setMsg(""), 5000);
+          props.setInitial([]);
+        }
       });
     });
 
-    Axios.put("https://ecplcsms.herokuapp.com/class/update-class", {
-      id: props.id,
-      studentState: arr,
-    }).then((response) => {
-      console.log(response);
-    });
+    // Axios.put("https://ecplcsms.herokuapp.com/class/update-class", {
+    //   id: props.id,
+    //   studentState: arr,
+    // }).then((response) => {
+    //   console.log(response);
+    // });
   };
 
   return (
     <>
       <div className="people-wrapper">
+        <div className={msg === "" ? "hidden" : "people-wrapper-after"}>
+          {msg}
+        </div>
         <TeacherDashboard />
         <div className="people-content">
           <DashboardHeader />
@@ -142,7 +159,18 @@ const People = (props) => {
                         Add Students
                       </span>
                     </div>
-                    <div className="people-student-body"></div>
+                    <div className="people-student-body">
+                      {studentData.map((value) => {
+                        return (
+                          <div
+                            key={value._id}
+                            className="people-student-body-wrapper"
+                          >
+                            {value.fullname}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </>

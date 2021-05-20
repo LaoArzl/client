@@ -65,9 +65,7 @@ const Material = (props) => {
     .then(Axios.spread((data1, data2) => {
       if (data2.data.err) {
         setMessage(data2.data.err);
-      } else if(data1.data.err) {
-        setMessage(data1.data.err);
-      }
+      } 
       else {
         setMessage(data2.data.success);
         props.setInitial([]);

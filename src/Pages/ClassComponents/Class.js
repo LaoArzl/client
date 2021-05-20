@@ -4,16 +4,6 @@ import Axios from "axios";
 import { LoginContext } from "../../ContextFiles/LoginContext";
 
 const Class = (props) => {
-  // const [activities, setActivities] = useState([]);
-  // useEffect(() => {
-  //   Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then((response) => {
-  //     if(response.data.length === 0) {
-  //       setActivities([])
-  //     } else {
-  //       setActivities(response.data.post)
-  //     }
-  //   })
-  // }, [])
 
 
   const { valueID, valueFirstname } = useContext(LoginContext);
@@ -47,7 +37,7 @@ const Class = (props) => {
         setFirstname(response.data.firstname);
       }
     });
-  }, []);
+  }, [props.initial]);
 
   const addPost = () => {
     Axios.put(`https://ecplcsms.herokuapp.com/class/post/${props.id}`, {

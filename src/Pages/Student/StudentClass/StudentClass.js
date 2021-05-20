@@ -12,6 +12,13 @@ const StudentClass = (props) => {
   const [postNav, setPostNav] = useState("post");
   const [msg, setMsg] = useState("");
 
+  const [userID, setUserID] = valueID;
+  const [firstname, setFirstname] = useState("");
+  const [comment, setComment] = useState("");
+  const [write, setWrite] = useState(false);
+  const [post, setPost] = useState("");
+  const date = new Date().toLocaleDateString();
+
   const [activities, setActivities] = useState([]);
   useEffect(() => {
     Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then(
@@ -23,7 +30,32 @@ const StudentClass = (props) => {
         }
       }
     );
-  }, []);
+  }, [props.initial]);
+
+  const submitComment = (commentId) => {
+    Axios.put(
+      `https://ecplcsms.herokuapp.com/class/comment/${props.id}/${commentId}`,
+      {
+        comment: comment,
+        commentor: firstname,
+      }
+    ).then((response) => {
+      if (response.data.success) {
+        props.setInitial([]);
+        setComment("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+      if (response.data.length === 0) {
+        setFirstname("");
+      } else if (response.data.loggedIn) {
+        setFirstname(response.data.firstname);
+      }
+    });
+  }, [props.initial]);
 
   return (
     <>
@@ -46,14 +78,14 @@ const StudentClass = (props) => {
 
               <Link
                 className="nav-span-diactive"
-                to={"/teacher-class/" + props.id + "/subjects"}
+                to={"/student-class/" + props.id + "/subjects"}
               >
                 Subjects
               </Link>
 
               <Link
                 className="nav-span-diactive"
-                to={"/teacher-class/" + props.id + "/people"}
+                to={"/student-class/" + props.id + "/people"}
               >
                 People
               </Link>
@@ -69,7 +101,67 @@ const StudentClass = (props) => {
                 <p>No upcoming work</p>
               </div>
             </div>
-            <div className="class-content-body-right"></div>
+            <div className="class-content-body-right">
+              <div className="classes-wrapper">
+                {activities.map((value) => {
+                  return (
+                    <div key={value._id} className="class-posts">
+                      <div className="class-posts-body">
+                        <div className="class-posts-body-header">
+                          <div className="class-posts-body-header-left"></div>
+                          <div className="class-posts-body-header-right">
+                            <h5>{value.poster}</h5>
+                            <p>{value.date}</p>
+                          </div>
+                        </div>
+                        <div className="class-posts-body-body">
+                          {value.body}
+                        </div>
+                        <div className="class-posts-body-comment">
+                          {value.comments.map((comment) => {
+                            return (
+                              <div
+                                className={
+                                  value.comments === 0
+                                    ? "class-posts-body-comment-lower-hidden"
+                                    : "class-posts-body-comment-lower"
+                                }
+                              >
+                                <div className="class-posts-body-header-left"></div>
+                                <div className="class-posts-body-comment-user">
+                                  <h5>{comment.commentor}</h5>
+                                  {comment.comment}
+                                </div>
+                              </div>
+                            );
+                          })}
+                          <form
+                            onSubmit={(e) => e.preventDefault()}
+                            className="class-posts-body-comment-upper"
+                          >
+                            <div className="class-posts-body-header-left"></div>
+                            <input
+                              value={comment}
+                              className="commentBtn"
+                              type="text"
+                              onChange={(e) => setComment(e.target.value)}
+                              placeholder="Write a comment"
+                            />
+                            <input
+                              onClick={() => {
+                                submitComment(value._id);
+                              }}
+                              className="comment-submit-btn"
+                              type="submit"
+                            />
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

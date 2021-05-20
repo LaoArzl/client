@@ -1,31 +1,15 @@
 import React, { useState, useEffect } from "react";
-import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
+import StudentDashboard from "../../Student/StudentDashboard/StudentDashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
-import "../../ClassComponents/SubjectClass/SubjectClass.css";
 import { Link } from "react-router-dom";
-import "../../ClassComponents/SubjectClass/Subject.css";
-import Assignment from "../SubjectClass/Assignment";
-import Quiz from "../SubjectClass/Quiz";
-import Material from "../SubjectClass/Material";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 
-const Lecture = (props) => {
-  const [showAssigned, setShowAssigned] = useState(false);
-  const [showCompleted, setShowCompleted] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
+const StudentLecture = (props) => {
   const [dropdown2, setDropdown2] = useState(false);
-  const [nav, setNav] = useState("activity");
-  const [assignment, setAssignment] = useState(false);
-  const [quiz, setQuiz] = useState(false);
-  const [lecture, setLecture] = useState(false);
 
   /*Quarter state*/
-  const [first, setFirst] = useState(false);
-  const [second, setSecond] = useState(false);
-  const [third, setThird] = useState(false);
-  const [fourth, setFourth] = useState(false);
   const [filtered, setFiltered] = useState("All");
 
   const history = useHistory();
@@ -51,27 +35,7 @@ const Lecture = (props) => {
   return (
     <>
       <div className="subject-class-wrapper">
-        {assignment && (
-          <Assignment
-            setAssignment={setAssignment}
-            id={props.id}
-            subject={props.subject}
-            setActivity={setActivity}
-            activity={activity}
-            setInitial={props.setInitial}
-          />
-        )}
-        {quiz && <Quiz setQuiz={setQuiz} />}
-        {lecture && (
-          <Material
-            id={props.id}
-            subject={props.subject}
-            setInitial={props.setInitial}
-            setLecture={setLecture}
-          />
-        )}
-
-        <TeacherDashboard />
+        <StudentDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
 
@@ -79,24 +43,6 @@ const Lecture = (props) => {
             <Link to={props.goBack} className="go-back-btn">
               <i className="fas fa-angle-left"></i>Back
             </Link>
-            <div
-              onClick={() => setDropdown(!dropdown)}
-              className="create-activity-dropdown"
-            >
-              Create
-              <i
-                className={dropdown ? "fas fa-angle-up" : "fas fa-angle-down"}
-              ></i>
-              <div
-                className={
-                  dropdown ? "create-activity-dropdown-after" : "hidden"
-                }
-              >
-                <div onClick={() => setAssignment(true)}>Assignment</div>
-                <div onClick={() => setLecture(true)}>Lecture</div>
-                <div onClick={() => setQuiz(true)}>Quiz</div>
-              </div>
-            </div>
           </div>
 
           <div className="subject-content-body">
@@ -193,9 +139,7 @@ const Lecture = (props) => {
                       return (
                         <Link
                           to={"/lecture/" + value._id}
-                          className={
-                            first ? "hidden" : "subject-content-assigned-body"
-                          }
+                          className="subject-content-assigned-body"
                         >
                           <span>
                             <MenuBookIcon fontSize="small" />
@@ -220,9 +164,7 @@ const Lecture = (props) => {
                         return (
                           <Link
                             to={"/lecture/" + value._id}
-                            className={
-                              first ? "hidden" : "subject-content-assigned-body"
-                            }
+                            className="subject-content-assigned-body"
                           >
                             <span>
                               <MenuBookIcon fontSize="small" />
@@ -249,4 +191,4 @@ const Lecture = (props) => {
   );
 };
 
-export default Lecture;
+export default StudentLecture;

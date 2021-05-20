@@ -47,6 +47,11 @@ import MaterialLecture from "./Pages/ClassComponents/Activity/MaterialLecture";
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
 import StudentClass from "./Pages/Student/StudentClass/StudentClass";
 import Prototype from "./Components/Prototype";
+import StudentSubject from "./Pages/Student/StudentClass/StudentSubject";
+import StudentPeople from "./Pages/Student/StudentPeople/StudentPeople";
+import StudentActivity from "./Pages/Student/StudentActivity/StudentActivity";
+import StudentLecture from "./Pages/Student/StudentLecture/StudentLecture";
+import StudentGrade from "./Pages/Student/StudentGrade/StudentGrade";
 
 function App() {
   const [studentUser, setStudentUser] = useState([]);
@@ -263,6 +268,8 @@ function App() {
                                 adviser={value.adviser_id.fullname}
                                 adviserId={value.adviser_id._id}
                                 name={value.className}
+                                initial={initial}
+                                setInitial={setInitial}
                               />
                             </Route>
                           );
@@ -296,6 +303,36 @@ function App() {
                             });
                           });
                         })}
+
+                        {classData.map((value) => {
+                          return value.year.map((key) => {
+                            return key.subjects.map((sub) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={
+                                    "/student-class/" + value._id + "/subjects"
+                                  }
+                                  exact
+                                >
+                                  <StudentSubject
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    name={value.className}
+                                    activityLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/activities"
+                                    }
+                                  />
+                                </Route>
+                              );
+                            });
+                          });
+                        })}
+
                         {classData.map((value) => {
                           return value.year.map((key) => {
                             return key.subjects.map((sub) => {
@@ -341,6 +378,61 @@ function App() {
                                     }
                                     goBack={
                                       "/teacher-class/" +
+                                      value._id +
+                                      "/subjects"
+                                    }
+                                  />
+                                </Route>
+                              );
+                            });
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.year.map((key) => {
+                            return key.subjects.map((sub) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={
+                                    "/student-class/" +
+                                    value._id +
+                                    "/subjects/" +
+                                    sub.subjectName +
+                                    "/activities"
+                                  }
+                                  exact
+                                >
+                                  <StudentActivity
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    name={value.className}
+                                    subject={sub.subjectName}
+                                    setInitial={setInitial}
+                                    initial={initial}
+                                    activityLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/activities"
+                                    }
+                                    lectureLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/lectures"
+                                    }
+                                    gradeLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/grades"
+                                    }
+                                    goBack={
+                                      "/student-class/" +
                                       value._id +
                                       "/subjects"
                                     }
@@ -413,6 +505,61 @@ function App() {
                                 <Route
                                   key={value._id}
                                   path={
+                                    "/student-class/" +
+                                    value._id +
+                                    "/subjects/" +
+                                    sub.subjectName +
+                                    "/lectures"
+                                  }
+                                  exact
+                                >
+                                  <StudentLecture
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    name={value.className}
+                                    subject={sub.subjectName}
+                                    setInitial={setInitial}
+                                    initial={initial}
+                                    activityLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/activities"
+                                    }
+                                    lectureLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/lectures"
+                                    }
+                                    gradeLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/grades"
+                                    }
+                                    goBack={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects"
+                                    }
+                                  />
+                                </Route>
+                              );
+                            });
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.year.map((key) => {
+                            return key.subjects.map((sub) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={
                                     "/teacher-class/" +
                                     value._id +
                                     "/subjects/" +
@@ -451,6 +598,61 @@ function App() {
                                     }
                                     goBack={
                                       "/teacher-class/" +
+                                      value._id +
+                                      "/subjects"
+                                    }
+                                  />
+                                </Route>
+                              );
+                            });
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.year.map((key) => {
+                            return key.subjects.map((sub) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={
+                                    "/student-class/" +
+                                    value._id +
+                                    "/subjects/" +
+                                    sub.subjectName +
+                                    "/grades"
+                                  }
+                                  exact
+                                >
+                                  <StudentGrade
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    name={value.className}
+                                    subject={sub.subjectName}
+                                    setInitial={setInitial}
+                                    initial={initial}
+                                    activityLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/activities"
+                                    }
+                                    lectureLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/lectures"
+                                    }
+                                    gradeLink={
+                                      "/student-class/" +
+                                      value._id +
+                                      "/subjects/" +
+                                      sub.subjectName +
+                                      "/grades"
+                                    }
+                                    goBack={
+                                      "/student-class/" +
                                       value._id +
                                       "/subjects"
                                     }
@@ -531,11 +733,35 @@ function App() {
                                   adviser={value.adviser_id.fullname}
                                   name={value.className}
                                   year={key._id}
+                                  initial={initial}
+                                  setInitial={setInitial}
                                 />
                               </Route>
                             );
                           });
                         })}
+
+                        {classData.map((value) => {
+                          return value.year.map((key) => {
+                            return (
+                              <Route
+                                key={value._id}
+                                path={"/student-class/" + value._id + "/people"}
+                                exact
+                              >
+                                <StudentPeople
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  year={key._id}
+                                  initial={initial}
+                                  setInitial={setInitial}
+                                />
+                              </Route>
+                            );
+                          });
+                        })}
+
                         <Route
                           path="*"
                           exact={true}
