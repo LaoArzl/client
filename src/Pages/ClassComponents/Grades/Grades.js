@@ -91,8 +91,10 @@ const Grades = (props) => {
                 }
               >
                 <div onClick={() => setAssignment(true)}>Assignment</div>
-                <div onClick={() => setLecture(true)}>Lecture</div>
                 <div onClick={() => setQuiz(true)}>Quiz</div>
+                <div className="material-item" onClick={() => setLecture(true)}>
+                  Material
+                </div>
               </div>
             </div>
           </div>

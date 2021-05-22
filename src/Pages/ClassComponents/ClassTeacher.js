@@ -82,7 +82,6 @@ const ClassTeacher = (props) => {
                 <p>Bulletin Board</p>
               </div>
               <div className="class-content-body-left-body">
-                <p>No upcoming work</p>
               </div>
             </div>
             <div className="class-content-body-right">

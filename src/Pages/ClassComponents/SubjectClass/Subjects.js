@@ -9,18 +9,20 @@ import Assignment from "./Assignment";
 import Quiz from "./Quiz";
 import Material from "./Material";
 import Axios from "axios";
+import Draft from "./Draft";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
 import { useHistory } from "react-router-dom";
 
 const Subjects = (props) => {
   const [showAssigned, setShowAssigned] = useState(false);
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(true);
   const [dropdown, setDropdown] = useState(false);
   const [nav, setNav] = useState("activity");
   const [assignment, setAssignment] = useState(false);
   const [quiz, setQuiz] = useState(false);
   const [lecture, setLecture] = useState(false);
+  const [draft, setDraft] = useState(false);
 
   const history = useHistory();
   const goBack = () => {
@@ -65,6 +67,8 @@ const Subjects = (props) => {
           />
         )}
 
+        {draft && <Draft setInitial={props.setInitial} setDraft={setDraft} />}
+
         <TeacherDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
@@ -87,8 +91,10 @@ const Subjects = (props) => {
                 }
               >
                 <div onClick={() => setAssignment(true)}>Assignment</div>
-                <div onClick={() => setLecture(true)}>Lecture</div>
                 <div onClick={() => setQuiz(true)}>Quiz</div>
+                <div className="material-item" onClick={() => setLecture(true)}>
+                  Material
+                </div>
               </div>
             </div>
           </div>
@@ -135,10 +141,16 @@ const Subjects = (props) => {
                     .map((value) => {
                       return (
                         <Link
-                          to={"/activity/" + value._id}
+                          to={
+                            value.activityType === "Draft"
+                              ? "/draft/" + value._id
+                              : "/activity/" + value._id
+                          }
                           className={
                             showAssigned
                               ? "hidden"
+                              : value.activityType === "Draft"
+                              ? "subject-content-assigned-body-draft"
                               : "subject-content-assigned-body"
                           }
                         >
@@ -146,8 +158,23 @@ const Subjects = (props) => {
                             <LibraryBooksIcon fontSize="small" />
                           </span>
                           <div className="subject-content-assigned-body-right">
-                            <b>{value.topic}</b>
-                            <div className="sub-subject-content-assigned-body-right">
+                            <div
+                              className={
+                                value.activityType === "Draft"
+                                  ? "subject-content-assigned-body-draft-title"
+                                  : "subject-content-assigned-body-right-title"
+                              }
+                            >
+                              <b>{value.topic}</b>{" "}
+                              {value.activityType === "Draft" && <p>(Draft)</p>}
+                            </div>
+                            <div
+                              className={
+                                value.activityType === "Draft"
+                                  ? "hidden"
+                                  : "sub-subject-content-assigned-body-right"
+                              }
+                            >
                               <div className="activity-topic-value">
                                 <p>{value.activityType}</p>
                               </div>
@@ -160,7 +187,13 @@ const Subjects = (props) => {
                             </div>
                           </div>
 
-                          <div className="activity-points-after">
+                          <div
+                            className={
+                              value.activityType === "Draft"
+                                ? "hidden"
+                                : "activity-points-after"
+                            }
+                          >
                             {value.points < 0 ? (
                               "No points"
                             ) : (

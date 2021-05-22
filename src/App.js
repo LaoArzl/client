@@ -42,6 +42,7 @@ import Activity from "./Pages/ClassComponents/Activity/Activity";
 import Lecture from "./Pages/ClassComponents/Lecture/Lecture";
 import Grades from "./Pages/ClassComponents/Grades/Grades";
 import MaterialLecture from "./Pages/ClassComponents/Activity/MaterialLecture";
+import Draft from "./Pages/ClassComponents/SubjectClass/Draft";
 
 //Student Pages
 import StudentProfile from "./Pages/Student/StudentProfile/StudentProfile";
@@ -258,26 +259,24 @@ function App() {
 
                         {classData.map((value) => {
                           return value.students.map((stud) => {
-
-                         
-                          return (
-                            <Route
-                              key={value._id}
-                              path={"/student-class/" + value._id}
-                              exact
-                            >
-                              <StudentClass
-                                id={value._id}
-                                adviser={value.adviser_id.fullname}
-                                adviserId={value.adviser_id._id}
-                                name={value.className}
-                                initial={initial}
-                                setInitial={setInitial}
-                                picture={stud.picture}
-                              />
-                            </Route>
-                          );
-                        })
+                            return (
+                              <Route
+                                key={value._id}
+                                path={"/student-class/" + value._id}
+                                exact
+                              >
+                                <StudentClass
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  adviserId={value.adviser_id._id}
+                                  name={value.className}
+                                  initial={initial}
+                                  setInitial={setInitial}
+                                  picture={stud.picture}
+                                />
+                              </Route>
+                            );
+                          });
                         })}
 
                         {classData.map((value) => {
@@ -661,6 +660,36 @@ function App() {
                                     active={key.active}
                                     setInitial={setInitial}
                                     quarter={key.quarter}
+                                  />
+                                </Route>
+                              );
+                            });
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.students.map((stud) => {
+                            return value.activity.map((key) => {
+                              return (
+                                <Route
+                                  key={value._id}
+                                  path={"/draft/" + key._id}
+                                  exact
+                                >
+                                  <Draft
+                                    id={value._id}
+                                    adviser={value.adviser_id.fullname}
+                                    name={value.className}
+                                    subject={key.subject}
+                                    topic={key.topic}
+                                    activityType={key.activityType}
+                                    points={key.points}
+                                    instructions={key.instructions}
+                                    due={key.due}
+                                    time={key.time}
+                                    activityId={key._id}
+                                    active={key.active}
+                                    setInitial={setInitial}
                                   />
                                 </Route>
                               );

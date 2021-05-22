@@ -217,6 +217,10 @@
   font-weight: 400;
 }
 
+.material-item {
+  border-top: 1px solid lightgrey;
+}
+
 .create-activity-dropdown-after div:hover {
   background: rgb(238, 241, 241);
   transition: 0.1s ease-out;
@@ -377,6 +381,52 @@
   text-decoration: none;
 }
 
+.subject-content-assigned-body-draft {
+  width: 100%;
+  height: 70px;
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  position: relative;
+  transition: 0.2s ease-out;
+  text-decoration: none;
+}
+
+.subject-content-assigned-body-draft:hover {
+  transition: 0.2s ease-in;
+  border: 1px solid rgb(179, 179, 179);
+  background: rgb(247, 247, 247);
+}
+
+.subject-content-assigned-body-draft span {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-hover);
+  margin-right: 10px;
+}
+
+.subject-content-assigned-body-draft-title {
+  display: flex;
+  align-items: center;
+  font-size: var(--font13);
+
+  opacity: 1;
+}
+
+.subject-content-assigned-body-draft-title p {
+  margin-left: 5px;
+  font-style: italic;
+  color: grey;
+}
+
 .subject-content-assigned-body:hover,
 .subject-content-completed-body:hover {
   transition: 0.2s ease-in;
@@ -390,6 +440,12 @@
   right: 10px;
   font-size: var(--font12);
   color: var(--sub-font);
+}
+.subject-content-assigned-body-right-title {
+  display: flex;
+  align-items: center;
+  font-size: var(--font13);
+  color: var(--font);
 }
 
 .subject-content-assigned-body-right b {
@@ -584,13 +640,14 @@
 }
 .assignment-div-points input {
   width: 15%;
-  height: 30px;
+  height: 35px;
   border-style: none;
   outline-style: none;
   border-bottom: 1px solid lightgrey;
   min-width: 70px;
   padding-left: 10px;
   color: var(--font);
+  background: rgb(249, 251, 253);
 }
 
 .assignment-div-points input:focus {
@@ -684,12 +741,68 @@
   justify-content: flex-end;
 }
 
+.submit-btn-dropdown {
+  width: 30px;
+  height: 40px;
+  background: var(--main);
+  margin-left: 2px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease-out;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.submit-btn-dropdown:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}
+
+.submit-btn-dropdown-after {
+  width: 122px;
+  height: 260%;
+  position: absolute;
+  top: 105%;
+  background: rgb(255, 255, 255);
+  right: 0;
+  margin-bottom: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  color: var(--font);
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  box-shadow: 0px 8px 30px 0px rgba(82, 112, 131, 0.2);
+}
+
+.submit-btn-dropdown-after-item {
+  display: flex;
+  width: 100%;
+  height: 33.33%;
+  align-items: center;
+  padding-left: 20px;
+  font-size: var(--font13);
+  transition: 0.1s ease-out;
+}
+
+.submit-btn-dropdown-after-item:hover {
+  transition: 0.1s ease-in;
+  background: rgb(238, 241, 241);
+}
+
 .submit-assignment-btn {
   width: 90px;
   height: 40px;
   border-style: none;
   outline-style: none;
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
   cursor: pointer;
   background: var(--main);
   transition: 0.2s ease-out;
@@ -702,13 +815,14 @@
   height: 40px;
   border-style: none;
   outline-style: none;
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
   cursor: pointer;
   background: var(--main);
   transition: 0.2s ease-out;
   color: white;
   margin-left: 20px;
-  opacity: 0.5;
+  opacity: 0.4;
   pointer-events: none;
 }
 

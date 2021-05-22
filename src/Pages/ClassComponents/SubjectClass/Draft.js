@@ -1,39 +1,68 @@
 import React, { useState, useEffect } from "react";
 import "./Subject.css";
 import Axios from "axios";
-import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
+import { useHistory } from "react-router-dom";
 
-const Assignment = (props) => {
+const Draft = (props) => {
   const [message, setMessage] = useState("");
-  const [activity, setActivity] = useState([]);
+  const [activity, setActivity] = useState({
+    type: "",
+    points: "",
+    due: "",
+    time: "",
+    topic: "",
+    instructions: "",
+    file: "",
+  });
   const [dropdown, setDropdown] = useState(false);
-  const [type, setType] = useState("Assign");
+  const [type, setType] = useState("Draft");
+
+  let history = useHistory();
 
   useEffect(() => {
-    setActivity({
-      type: "",
-      points: 100,
-      due: "",
-      time: "",
-      topic: "",
-      instructions: "",
-      file: "",
+    Axios.get(
+      `http://ecplcsms.herokuapp.com/class/find-activity/${props.id}/${props.activityId}`
+    ).then((response) => {
+      if (response.data.length === 0) {
+        setActivity({
+          type: "",
+          points: "",
+          due: "",
+          time: "",
+          topic: "",
+          instructions: "",
+          file: "",
+        });
+      } else {
+        setActivity({
+          type: response.data.activityType,
+          points: response.data.points,
+          due: response.data.due,
+          time: response.data.time,
+          topic: response.data.topic,
+          instructions: response.data.instructions,
+          file: response.data.file,
+        });
+      }
     });
-  }, []);
+  }, [props.initial]);
 
   const submitAssignment = () => {
-    Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
-      type: "Assignment",
-      points: activity.points,
-      datetime: new Date().toLocaleDateString(),
-      due: activity.due,
-      time: activity.time,
-      topic: activity.topic,
-      instructions: activity.instructions,
-      file: activity.file,
-      active: true,
-      subject: props.subject,
-    }).then((response) => {
+    Axios.put(
+      `http://ecplcsms.herokuapp.com/class/update-activity/${props.id}/${props.activityId}`,
+      {
+        type: "Assignment",
+        points: activity.points,
+        datetime: new Date().toLocaleDateString(),
+        due: activity.due,
+        time: activity.time,
+        topic: activity.topic,
+        instructions: activity.instructions,
+        file: activity.file,
+        active: true,
+        subject: props.subject,
+      }
+    ).then((response) => {
       if (response.data.err) {
         setMessage(response.data.err);
       } else {
@@ -49,24 +78,26 @@ const Assignment = (props) => {
           instructions: "",
           file: "",
         });
-        props.setAssignment(false);
       }
     });
   };
 
   const submitDraft = () => {
-    Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
-      type: "Draft",
-      points: activity.points,
-      datetime: new Date().toLocaleDateString(),
-      due: activity.due,
-      time: activity.time,
-      topic: activity.topic,
-      instructions: activity.instructions,
-      file: activity.file,
-      active: true,
-      subject: props.subject,
-    }).then((response) => {
+    Axios.put(
+      `http://ecplcsms.herokuapp.com/class/update-activity/${props.id}/${props.activityId}`,
+      {
+        type: "Draft",
+        points: activity.points,
+        datetime: new Date().toLocaleDateString(),
+        due: activity.due,
+        time: activity.time,
+        topic: activity.topic,
+        instructions: activity.instructions,
+        file: activity.file,
+        active: true,
+        subject: props.subject,
+      }
+    ).then((response) => {
       if (response.data.err) {
         setMessage(response.data.err);
       } else {
@@ -82,7 +113,6 @@ const Assignment = (props) => {
           instructions: "",
           file: "",
         });
-        props.setAssignment(false);
       }
     });
   };
@@ -99,7 +129,7 @@ const Assignment = (props) => {
           {message}
         </div>
         <div className="assignment-header">
-          <h3>Create Assignment</h3>
+          <h3>Create Assignment (Draft)</h3>
         </div>
 
         <form onSubmit={(e) => e.preventDefault()} className="assignment-body">
@@ -200,7 +230,7 @@ const Assignment = (props) => {
 
           <div className="assignment-div-submit">
             <input
-              onClick={() => props.setAssignment(false)}
+              onClick={history.goBack}
               type="submit"
               value="Cancel"
               className="cancel-assignment-btn"
@@ -222,7 +252,7 @@ const Assignment = (props) => {
               <input
                 type="submit"
                 onClick={submitDraft}
-                value={type}
+                value="Save"
                 className={
                   activity.topic === ""
                     ? "submit-assignment-btn-opacity"
@@ -277,4 +307,4 @@ const Assignment = (props) => {
   );
 };
 
-export default Assignment;
+export default Draft;
