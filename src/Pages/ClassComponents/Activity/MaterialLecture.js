@@ -1,15 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Activity.css";
 import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
 import { useHistory } from "react-router-dom";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import Axios from "axios";
+import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
 
 const MaterialLecture = (props) => {
   const history = useHistory();
   const goBack = () => {
     history.goBack();
   };
+
+  const downloadFile = () => {
+    window.open(
+      `https://ecplcsms.herokuapp.com/file/download/${props.filename}`,
+
+      "_blank"
+    );
+  };
+
+  const [activityFile, setActivityFile] = useState([]);
+
+  useEffect(() => {
+    Axios.get(
+      `https://ecplcsms.herokuapp.com/file/filename/${props.filename}`
+    ).then((response) => {
+      console.log(response);
+    });
+  }, [props.initial]);
 
   return (
     <>
@@ -40,13 +59,20 @@ const MaterialLecture = (props) => {
               </div>
 
               <div className="actual-activity-body-left-attach">
-                <p>
-                  Attached file
-                </p>
+                <p>Attached file</p>
               </div>
 
               <div className="actual-activity-body-left-footer">
-                <div className="footer-add-word">{props.file}</div>
+                <p className="footer-add-word">
+                  <InsertDriveFileOutlinedIcon
+                    className="material-document"
+                    fontSize="small"
+                  />
+                  <i>{props.filename}</i>
+                </p>
+                <div onClick={downloadFile}>
+                  Download <i className="fas fa-download"></i>
+                </div>
               </div>
             </div>
           </div>

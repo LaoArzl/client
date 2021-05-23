@@ -126,13 +126,14 @@ const StudentLecture = (props) => {
                     ></i>
                   </div>
                 </div>
+                <div className="subject-content-assigned-body-wrapper">
 
                 {filtered === "All" ? (
                   <>
                     {activity.map((value) => {
                       return (
                         <Link
-                          to={"/lecture/" + value._id}
+                          to={"/student/lecture/" + value._id}
                           className="subject-content-assigned-body"
                         >
                           <span>
@@ -157,7 +158,7 @@ const StudentLecture = (props) => {
                       .map((value) => {
                         return (
                           <Link
-                            to={"/lecture/" + value._id}
+                            to={"/student/lecture/" + value._id}
                             className="subject-content-assigned-body"
                           >
                             <span>
@@ -176,6 +177,7 @@ const StudentLecture = (props) => {
                       })}
                   </>
                 )}
+                </div>
               </div>
             </div>
           </div>

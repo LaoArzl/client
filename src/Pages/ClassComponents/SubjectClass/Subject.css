@@ -394,6 +394,7 @@
   position: relative;
   transition: 0.2s ease-out;
   text-decoration: none;
+  opacity: 0.75;
 }
 
 .subject-content-assigned-body-draft:hover {
@@ -492,6 +493,43 @@
   left: 0;
   padding-bottom: 20px;
   overflow-y: scroll;
+}
+.assignment-wrapper-afters {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.show-discard {
+  width: 30%;
+  height: 30%;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  border-radius: 5px;
+}
+
+.show-discard-header {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid lightgrey;
+  color: var(--font);
+}
+
+.show-discard-body {
+  width: 100%;
+  height: 55%;
+  background: pink;
 }
 
 .assignment-wrapper-after {
@@ -695,8 +733,13 @@
   color: var(--font);
 }
 
+.custom-file-input {
+  width: 80%;
+}
+
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
+  width: 0px;
 }
 .custom-file-input::before {
   content: "Upload File";
@@ -781,6 +824,25 @@
   box-shadow: 0px 8px 30px 0px rgba(82, 112, 131, 0.2);
 }
 
+.submit-btn-dropdown-after-draft {
+  width: 122px;
+  height: 350%;
+  position: absolute;
+  top: 105%;
+  background: rgb(255, 255, 255);
+  right: 0;
+  margin-bottom: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  color: var(--font);
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  box-shadow: 0px 8px 30px 0px rgba(82, 112, 131, 0.2);
+}
+
 .submit-btn-dropdown-after-item {
   display: flex;
   width: 100%;
@@ -789,6 +851,33 @@
   padding-left: 20px;
   font-size: var(--font13);
   transition: 0.1s ease-out;
+}
+
+.submit-btn-dropdown-after-item-draft {
+  display: flex;
+  width: 100%;
+  height: 25%;
+  align-items: center;
+  padding-left: 20px;
+  font-size: var(--font13);
+  transition: 0.1s ease-out;
+}
+
+.submit-btn-dropdown-after-item-draft-discard {
+  border-top: 1px solid lightgrey;
+  display: flex;
+  width: 100%;
+  height: 25%;
+  align-items: center;
+  padding-left: 20px;
+  font-size: var(--font13);
+  transition: 0.1s ease-out;
+}
+
+.submit-btn-dropdown-after-item-draft:hover,
+.submit-btn-dropdown-after-item-draft-discard:hover {
+  transition: 0.1s ease-in;
+  background: rgb(238, 241, 241);
 }
 
 .submit-btn-dropdown-after-item:hover {

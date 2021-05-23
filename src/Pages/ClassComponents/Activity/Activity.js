@@ -3,6 +3,7 @@ import "./Activity.css";
 import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
 import { useHistory } from "react-router-dom";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
+import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
 import Axios from "axios";
 
 const Activity = (props) => {
@@ -22,6 +23,14 @@ const Activity = (props) => {
         setTimeout(() => setActivityStatus(""), 5000);
       }
     });
+  };
+
+  const downloadFile = () => {
+    window.open(
+      `https://ecplcsms.herokuapp.com/file/download/${props.filename}`,
+
+      "_blank"
+    );
   };
 
   const markUndone = () => {
@@ -101,12 +110,20 @@ const Activity = (props) => {
               </div>
 
               <div className="actual-activity-body-left-attach">
-                <p>Attached file
-                </p>
+                <p>Attached file</p>
               </div>
 
               <div className="actual-activity-body-left-footer">
-                <div className="footer-add-word">{props.file}</div>
+                <p className="footer-add-word">
+                  <InsertDriveFileOutlinedIcon
+                    className="material-document"
+                    fontSize="small"
+                  />
+                  {props.filename}
+                </p>
+                <div onClick={downloadFile}>
+                  Download <i className="fas fa-download"></i>
+                </div>
               </div>
             </div>
 

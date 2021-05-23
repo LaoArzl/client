@@ -53,6 +53,7 @@ import StudentPeople from "./Pages/Student/StudentPeople/StudentPeople";
 import StudentActivity from "./Pages/Student/StudentActivity/StudentActivity";
 import StudentLecture from "./Pages/Student/StudentLecture/StudentLecture";
 import StudentActualActivity from "./Pages/Student/StudentActivity/StudentActualActivity";
+import StudentLectureActual from "./Pages/Student/StudentLecture/StudentLectureActual";
 
 function App() {
   const [studentUser, setStudentUser] = useState([]);
@@ -281,35 +282,31 @@ function App() {
 
                         {classData.map((value) => {
                           return value.year.map((key) => {
-                            return key.subjects.map((sub) => {
-                              return (
-                                <Route
-                                  key={value._id}
-                                  path={
+                            return (
+                              <Route
+                                key={value._id}
+                                path={
+                                  "/teacher-class/" + value._id + "/subjects"
+                                }
+                                exact
+                              >
+                                <SubjectClass
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  // activityLink={
+                                  //   "/teacher-class/" +
+                                  //   value._id +
+                                  //   "/subjects/" +
+                                  //   sub.subjectName +
+                                  //   "/activities"
+                                  // }
+                                  activeLink={
                                     "/teacher-class/" + value._id + "/subjects"
                                   }
-                                  exact
-                                >
-                                  <SubjectClass
-                                    id={value._id}
-                                    adviser={value.adviser_id.fullname}
-                                    name={value.className}
-                                    activityLink={
-                                      "/teacher-class/" +
-                                      value._id +
-                                      "/subjects/" +
-                                      sub.subjectName +
-                                      "/activities"
-                                    }
-                                    activeLink={
-                                      "/teacher-class/" +
-                                      value._id +
-                                      "/subjects"
-                                    }
-                                  />
-                                </Route>
-                              );
-                            });
+                                />
+                              </Route>
+                            );
                           });
                         })}
 
@@ -629,6 +626,7 @@ function App() {
                                   active={key.active}
                                   setInitial={setInitial}
                                   quarter={key.quarter}
+                                  filename={key.file}
                                 />
                               </Route>
                             );
@@ -660,6 +658,7 @@ function App() {
                                     active={key.active}
                                     setInitial={setInitial}
                                     quarter={key.quarter}
+                                    filename={key.file}
                                   />
                                 </Route>
                               );
@@ -719,6 +718,38 @@ function App() {
                                   activityId={key._id}
                                   active={key.active}
                                   setInitial={setInitial}
+                                  initial={initial}
+                                  filename={key.file}
+                                />
+                              </Route>
+                            );
+                          });
+                        })}
+
+                        {classData.map((value) => {
+                          return value.lecture.map((key) => {
+                            return (
+                              <Route
+                                key={value._id}
+                                path={"/student/lecture/" + key._id}
+                                exact
+                              >
+                                <StudentLectureActual
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  subject={key.subject}
+                                  topic={key.topic}
+                                  activityType={key.activityType}
+                                  points={key.points}
+                                  instructions={key.instructions}
+                                  due={key.due}
+                                  time={key.time}
+                                  activityId={key._id}
+                                  active={key.active}
+                                  setInitial={setInitial}
+                                  initial={initial}
+                                  filename={key.file}
                                 />
                               </Route>
                             );

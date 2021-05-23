@@ -5,15 +5,13 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import Axios from "axios";
 import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
 
-const StudentActualActivity = (props) => {
+const StudentLectureActual = (props) => {
   const history = useHistory();
-  const [key, setKey] = useState("");
-
   const goBack = () => {
     history.goBack();
   };
 
-  const [activityStatus, setActivityStatus] = useState("");
+  const [activityFile, setActivityFile] = useState([]);
 
   const downloadFile = () => {
     window.open(
@@ -26,13 +24,6 @@ const StudentActualActivity = (props) => {
   return (
     <>
       <div className="actual-activity-wrapper">
-        <div
-          className={
-            activityStatus === "" ? "hidden" : "actual-activity-wrapper-after"
-          }
-        >
-          {activityStatus}
-        </div>
         <StudentDashboard />
         <div className="actual-activity-content">
           <DashboardHeader />
@@ -41,26 +32,11 @@ const StudentActualActivity = (props) => {
               <i className="fas fa-angle-left"></i>Back
             </div>
           </div>
-          <div className="actual-activity-student-body">
-            <div className="actual-activity-student-body-left">
-              <span>
-                {props.points < 0 ? (
-                  "No points"
-                ) : (
-                  <>{props.points + " points"} </>
-                )}
-              </span>
+          <div className="actual-activity-body">
+            <div className="actual-activity-body-left">
               <div className="actual-activity-body-left-header">
                 <h3>{props.topic}</h3>
-                <p>
-                  {!props.due ? (
-                    "No due date "
-                  ) : (
-                    <>
-                      Due: {props.due} {props.time}
-                    </>
-                  )}
-                </p>
+                <p>Lecture</p>
               </div>
 
               <div
@@ -83,39 +59,12 @@ const StudentActualActivity = (props) => {
                     className="material-document"
                     fontSize="small"
                   />
-                  {props.filename}
+                  <i>{props.filename}</i>
                 </p>
                 <div onClick={downloadFile}>
                   Download <i className="fas fa-download"></i>
                 </div>
               </div>
-            </div>
-
-            <div className="actual-activity-body-left-footers">
-              <div className="add-your-work-header">
-                <h4>Add your work</h4>
-              </div>
-              <div className="actual-activity-body-left-attach">
-                <p>
-                  <i className="fas fa-paperclip"></i> My work
-                </p>
-              </div>
-
-              <div className="actual-activity-body-left-attach">
-                <input
-                  type="file"
-                  onChange={(e) => {
-                    setKey(e.target.files[0].name);
-                  }}
-                  className="custom-file-input"
-                />
-              </div>
-
-              <input
-                type="submit"
-                className="actual-activity-body-left-submit-btn"
-                value="Turn in"
-              />
             </div>
           </div>
         </div>
@@ -124,4 +73,4 @@ const StudentActualActivity = (props) => {
   );
 };
 
-export default StudentActualActivity;
+export default StudentLectureActual;

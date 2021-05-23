@@ -8,6 +8,7 @@ const Material = (props) => {
   const [file, setFile] = useState({});
   const [filename, setFileName] = useState("");
 
+
   useEffect(() => {
     setActivity({
       topic: "",
@@ -23,6 +24,7 @@ const Material = (props) => {
       instructions: activity.instructions,
       subject: props.subject,
       quarter: activity.quarter,
+      filename: filename,
     }).then((response) => {
       if (response.data.err) {
         setMessage(response.data.err);
@@ -35,11 +37,12 @@ const Material = (props) => {
           instructions: "",
           quarter: "",
         });
+
       }
     });
   };
 
-  
+
 
   const submitBtn = (e) => {
     let formData = new FormData();
@@ -47,7 +50,7 @@ const Material = (props) => {
     formData.append("file", file);
 
     Axios.all([
-      Axios.post("https://ecplcsms.herokuapp.com/upload-file", formData, {
+      Axios.post("https://ecplcsms.herokuapp.com/file/upload-file", formData, {
       headers: {
         "content-type": "multipart/form-data",
       },

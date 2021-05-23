@@ -188,37 +188,10 @@ const Lecture = (props) => {
                     ></i>
                   </div>
                 </div>
-
-                {filtered === "All" ? (
-                  <>
-                    {activity.map((value) => {
-                      return (
-                        <Link
-                          to={"/lecture/" + value._id}
-                          className={
-                            first ? "hidden" : "subject-content-assigned-body"
-                          }
-                        >
-                          <span>
-                            <MenuBookIcon fontSize="small" />
-                          </span>
-                          <div className="subject-content-assigned-body-right">
-                            <b>{value.topic}</b>
-                            <div className="sub-subject-content-assigned-body-right">
-                              <div className="activity-topic-value">
-                                <p>Lecture</p>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </>
-                ) : (
-                  <>
-                    {activity
-                      .filter((e) => e.quarter === filtered)
-                      .map((value) => {
+                <div className="subject-content-assigned-body-wrapper">
+                  {filtered === "All" ? (
+                    <>
+                      {activity.map((value) => {
                         return (
                           <Link
                             to={"/lecture/" + value._id}
@@ -240,8 +213,38 @@ const Lecture = (props) => {
                           </Link>
                         );
                       })}
-                  </>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      {activity
+                        .filter((e) => e.quarter === filtered)
+                        .map((value) => {
+                          return (
+                            <Link
+                              to={"/lecture/" + value._id}
+                              className={
+                                first
+                                  ? "hidden"
+                                  : "subject-content-assigned-body"
+                              }
+                            >
+                              <span>
+                                <MenuBookIcon fontSize="small" />
+                              </span>
+                              <div className="subject-content-assigned-body-right">
+                                <b>{value.topic}</b>
+                                <div className="sub-subject-content-assigned-body-right">
+                                  <div className="activity-topic-value">
+                                    <p>Lecture</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

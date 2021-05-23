@@ -88,6 +88,7 @@ const StudentActivity = (props) => {
                   {activity
                     .filter((subject) => subject.subject === props.subject)
                     .filter((active) => active.active === true)
+                    .filter((act) => act.activityType !== "Draft")
                     .map((value) => {
                       return (
                         <Link

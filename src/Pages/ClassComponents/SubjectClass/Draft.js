@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Subject.css";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import MainLoader from "../../../Components/Loader/MainLoader";
 
 const Draft = (props) => {
   const [message, setMessage] = useState("");
@@ -16,6 +17,7 @@ const Draft = (props) => {
   });
   const [dropdown, setDropdown] = useState(false);
   const [type, setType] = useState("Draft");
+  const [discard, setDiscard] = useState(false);
 
   let history = useHistory();
 
@@ -118,7 +120,21 @@ const Draft = (props) => {
   };
   return (
     <>
+      {activity.type === "" && <MainLoader />}
+
       <div className="assignment-wrapper">
+        <div
+          onClick={() => setDiscard(false)}
+          className={discard ? "assignment-wrapper-afters" : "hidden"}
+        ></div>
+        <div className={discard ? "show-discard" : "hidden"}>
+          <div className="show-discard-header">
+            <h4>Discard Draft</h4>
+          </div>
+
+          <div className="show-discard-body"></div>
+          <div className="show-discard-footer"></div>
+        </div>
         <div
           className={
             message === "" || message !== "Successfully created activity."
@@ -278,25 +294,33 @@ const Draft = (props) => {
             >
               <i className="fas fa-caret-down"></i>
               <div
-                className={dropdown ? "submit-btn-dropdown-after" : "hidden"}
+                className={
+                  dropdown ? "submit-btn-dropdown-after-draft" : "hidden"
+                }
               >
                 <div
                   onClick={() => setType("Assign")}
-                  className="submit-btn-dropdown-after-item"
+                  className="submit-btn-dropdown-after-item-draft"
                 >
                   Assign
                 </div>
                 <div
                   onClick={() => setType("Draft")}
-                  className="submit-btn-dropdown-after-item"
+                  className="submit-btn-dropdown-after-item-draft"
                 >
                   Draft
                 </div>
                 <div
                   onClick={() => setType("Schedule")}
-                  className="submit-btn-dropdown-after-item"
+                  className="submit-btn-dropdown-after-item-draft"
                 >
                   Schedule
+                </div>
+                <div
+                  onClick={() => setDiscard(true)}
+                  className="submit-btn-dropdown-after-item-draft-discard"
+                >
+                  Discard Draft
                 </div>
               </div>
             </div>
