@@ -9,7 +9,7 @@
 .edit-year-left {
   width: 25%;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -23,6 +23,7 @@
   width: 73%;
   height: auto;
   min-height: 300px;
+  position: relative;
 }
 
 .edit-year-left-1 {
@@ -44,8 +45,8 @@
 
 .edit-year-left-1:hover {
   width: 100%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   color: #323b44;
   transition: 0.1s ease-in;
   background: #f5f6fa;
@@ -54,8 +55,8 @@
 .edit-year-left-2:hover {
   width: 100%;
   transition: 0.2s ease-in;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   color: #323b44;
   transition: 0.1s ease-in;
   background: #f5f6fa;
@@ -100,8 +101,8 @@
   position: relative;
   transition: 0.1s ease-out;
   background: #f5f6fa;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .edit-year-left-2-active {
@@ -118,8 +119,8 @@
   position: relative;
   transition: 0.1s ease-out;
   background: #f5f6fa;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 /* Grade Level Edit */
@@ -129,7 +130,7 @@
   position: relative;
   background: rgb(255, 255, 255);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid rgb(235, 235, 235);
 }
 
@@ -142,7 +143,7 @@
   transform: translate(-50%, -50%);
   background: white;
   z-index: 4;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .edit-grade-level-wrapper-after-header {
@@ -256,7 +257,7 @@
 }
 
 .edit-grade-level-div {
-  width: 50%;
+  width: 80%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -274,12 +275,11 @@
 .edit-grade-level-div input,
 .edit-grade-level-div select {
   width: 100%;
-  height: 35px;
+  height: 40px;
   border-radius: 3px;
   border-style: none;
   outline-style: none;
-  background: rgb(246, 248, 250);
-  border: 1px solid rgb(230, 230, 236);
+  border: 1px solid lightgrey;
   padding-left: 10px;
   margin-bottom: 15px;
 }
@@ -290,13 +290,13 @@
 }
 
 .edit-grade-level-div-submit {
-  width: 50%;
+  width: 80%;
   height: 40px;
   display: flex;
   justify-content: flex-end;
   margin: 0 auto;
   min-width: 300px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .edit-grade-level-form-header {
@@ -322,13 +322,14 @@
   border-style: none;
   outline-style: none;
   width: 20%;
+  max-width: 100px;
+  min-width: 90px;
   height: 100%;
   color: white;
   border: 1px solid rgb(255, 38, 38);
   background: white;
   color: rgb(255, 38, 38);
   border-radius: 3px;
-  margin-right: 15px;
   cursor: pointer;
   transition: 0.2s ease-out;
 }
@@ -357,7 +358,7 @@
   height: auto;
   background: rgb(255, 255, 255);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid rgb(235, 235, 235);
 }
 
@@ -385,7 +386,7 @@
   min-height: 200px;
   max-height: 300px;
   color: var(--sub-font);
-  font-size: var(--font14);
+  font-size: var(--font13);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -393,18 +394,18 @@
 }
 
 .empty-year-subjects p {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .add-subject-btn {
   width: 10%;
-  min-width: 100px;
+  min-width: 90px;
   height: 40px;
   border-style: none;
   outline-style: none;
   cursor: pointer;
   transition: 0.2s ease-out;
-  background: #e5e7ee;
+  background: #e5e7ee77;
   border-radius: 3px;
   color: var(--font);
   font-weight: 500;
@@ -412,7 +413,7 @@
 
 .add-subject-btn-2 {
   width: 10%;
-  min-width: 100px;
+  min-width: 90px;
   height: 40px;
   border-style: none;
   outline-style: none;
@@ -424,9 +425,25 @@
   font-weight: 500;
 }
 
+.add-subject-btn-2-opacity {
+  width: 10%;
+  min-width: 90px;
+  height: 40px;
+  border-style: none;
+  outline-style: none;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  background: var(--main);
+  border-radius: 3px;
+  color: white;
+  font-weight: 500;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .add-subject-btn:hover {
   transition: 0.2s ease-in;
-  background: rgb(207, 208, 214);
+  background: #e5e7ee;
 }
 
 .add-subject-btn-2:hover {
@@ -439,7 +456,7 @@
   height: auto;
   background: rgb(255, 255, 255);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid rgb(235, 235, 235);
 }
 
@@ -488,7 +505,7 @@
 
 .add-subject-div input {
   width: 100%;
-  height: 35px;
+  height: 40px;
   border-radius: 2px;
   border-style: none;
   outline-style: none;
@@ -498,7 +515,7 @@
 
 .add-subject-div textarea {
   width: 100%;
-  height: 80px;
+  height: 90px;
   resize: none;
   outline-style: none;
   border-style: none;
@@ -522,7 +539,7 @@
 
 .add-subject-cancel-btn {
   width: 10%;
-  min-width: 100px;
+  min-width: 90px;
   height: 40px;
   border-style: none;
   outline-style: none;
@@ -545,7 +562,6 @@
 .add-subject-form-status {
   width: 80%;
   height: auto;
-  /* background: pink; */
   font-weight: 300;
   font-size: var(--font14);
   display: flex;
@@ -562,7 +578,6 @@
 .add-subject-form-status-green {
   width: 80%;
   height: auto;
-  /* background: pink; */
   font-weight: 300;
   font-size: var(--font14);
   display: flex;
@@ -595,14 +610,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  padding-bottom: 80px;
 }
 
 .yearlist-body-wrapper-subject {
   width: 100%;
   height: auto;
-  margin-bottom: 5px;
-  font-size: var(--font15);
+  padding-bottom: 5px;
+  font-size: var(--font14);
   color: var(--font);
+  margin-bottom: 5px;
 }
 
 .add-subject-btn-front {

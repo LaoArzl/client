@@ -7,7 +7,7 @@ const BrokenPage = () => {
   const [toLogin, setToLogin] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setToLogin(true), 3000);
+    setTimeout(() => setToLogin(true), 5000);
   }, []);
   return (
     <>

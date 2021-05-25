@@ -17,30 +17,30 @@ const Material = (props) => {
     });
   }, []);
 
-  const submitAssignment = () => {
-    Axios.put(`http://ecplcsms.herokuapp.com/class/lecture/${props.id}`, {
-      datetime: new Date().toLocaleDateString(),
-      topic: activity.topic,
-      instructions: activity.instructions,
-      subject: props.subject,
-      quarter: activity.quarter,
-      filename: filename,
-    }).then((response) => {
-      if (response.data.err) {
-        setMessage(response.data.err);
-      } else {
-        setMessage(response.data.success);
-        props.setInitial([]);
-        setTimeout(() => setMessage(""), 5000);
-        setActivity({
-          topic: "",
-          instructions: "",
-          quarter: "",
-        });
+  // const submitAssignment = () => {
+  //   Axios.put(`http://ecplcsms.herokuapp.com/class/lecture/${props.id}`, {
+  //     datetime: new Date().toLocaleDateString(),
+  //     topic: activity.topic,
+  //     instructions: activity.instructions,
+  //     subject: props.subject,
+  //     quarter: activity.quarter,
+  //     filename: filename,
+  //   }).then((response) => {
+  //     if (response.data.err) {
+  //       setMessage(response.data.err);
+  //     } else {
+  //       setMessage(response.data.success);
+  //       props.setInitial([]);
+  //       setTimeout(() => setMessage(""), 5000);
+  //       setActivity({
+  //         topic: "",
+  //         instructions: "",
+  //         quarter: "",
+  //       });
 
-      }
-    });
-  };
+  //     }
+  //   });
+  // };
 
 
 

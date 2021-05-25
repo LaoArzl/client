@@ -197,7 +197,7 @@ function App() {
                               path={"/admin/edit-year/" + value._id}
                               exact
                             >
-                              <EditYear id={value._id} />
+                              <EditYear id={value._id} initial={initial} setInitial={setInitial}/>
                             </Route>
                           );
                         })}

@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./Subject.css";
 import Axios from "axios";
 import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
+const paths = require("path");
 
 const Assignment = (props) => {
-  const [message, setMessage] = useState("");
   const [activity, setActivity] = useState([]);
   const [dropdown, setDropdown] = useState(false);
   const [type, setType] = useState("Assign");
+
+  const [file, setFile] = useState({});
+  const [filename, setFileName] = useState("");
 
   useEffect(() => {
     setActivity({
@@ -17,87 +20,138 @@ const Assignment = (props) => {
       time: "",
       topic: "",
       instructions: "",
-      file: "",
     });
   }, []);
 
+  // const submitAssignment = () => {
+  //   Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
+  //     type: "Assignment",
+  //     points: activity.points,
+  //     datetime: date,
+  //     due: activity.due,
+  //     time: activity.time,
+  //     topic: activity.topic,
+  //     instructions: activity.instructions,
+  //     file: activity.file,
+  //     active: true,
+  //     subject: props.subject,
+  //   }).then((response) => {
+  //     if (response.data.err) {
+  //       setMessage(response.data.err);
+  //     } else {
+  //       setMessage(response.data.success);
+  //       props.setInitial([]);
+  //       setTimeout(() => setMessage(""), 5000);
+  //       setActivity({
+  //         type: "",
+  //         points: 100,
+  //         due: "",
+  //         time: "",
+  //         topic: "",
+  //         instructions: "",
+  //         file: "",
+  //       });
+  //       props.setAssignment(false);
+  //     }
+  //   });
+  // };
+  const date = new Date().toLocaleDateString();
+
   const submitAssignment = () => {
-    Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
-      type: "Assignment",
-      points: activity.points,
-      datetime: new Date().toLocaleDateString(),
-      due: activity.due,
-      time: activity.time,
-      topic: activity.topic,
-      instructions: activity.instructions,
-      file: activity.file,
-      active: true,
-      subject: props.subject,
-    }).then((response) => {
-      if (response.data.err) {
-        setMessage(response.data.err);
-      } else {
-        setMessage(response.data.success);
-        props.setInitial([]);
-        setTimeout(() => setMessage(""), 5000);
-        setActivity({
-          type: "",
-          points: 100,
-          due: "",
-          time: "",
-          topic: "",
-          instructions: "",
-          file: "",
-        });
-        props.setAssignment(false);
-      }
-    });
+    let formData = new FormData();
+    formData.append("caption", filename);
+    formData.append("file", file);
+
+    Axios.all([
+      Axios.post("https://ecplcsms.herokuapp.com/file/upload-file", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }),
+      Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
+        type: "Assignment",
+        points: activity.points,
+        datetime: date,
+        due: activity.due,
+        time: activity.time,
+        topic: activity.topic,
+        instructions: activity.instructions,
+        active: true,
+        subject: props.subject,
+        filename: filename,
+      }),
+    ]).then(
+      Axios.spread((data1, data2) => {
+        if (data2.data.err) {
+          props.setMessage(data2.data.err);
+        } else {
+          props.setMessage(data2.data.success);
+          props.setInitial([]);
+          setTimeout(() => props.setMessage(""), 5000);
+          setActivity({
+            type: "",
+            points: 100,
+            due: "",
+            time: "",
+            topic: "",
+            instructions: "",
+            filename: "",
+          });
+          props.setAssignment(false);
+        }
+      })
+    );
   };
 
   const submitDraft = () => {
-    Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
-      type: "Draft",
-      points: activity.points,
-      datetime: new Date().toLocaleDateString(),
-      due: activity.due,
-      time: activity.time,
-      topic: activity.topic,
-      instructions: activity.instructions,
-      file: activity.file,
-      active: true,
-      subject: props.subject,
-    }).then((response) => {
-      if (response.data.err) {
-        setMessage(response.data.err);
-      } else {
-        setMessage(response.data.success);
-        props.setInitial([]);
-        setTimeout(() => setMessage(""), 5000);
-        setActivity({
-          type: "",
-          points: 100,
-          due: "",
-          time: "",
-          topic: "",
-          instructions: "",
-          file: "",
-        });
-        props.setAssignment(false);
-      }
-    });
+    let formData = new FormData();
+    formData.append("caption", filename);
+    formData.append("file", file);
+
+    Axios.all([
+      Axios.post("https://ecplcsms.herokuapp.com/file/upload-file", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }),
+      Axios.put(`http://ecplcsms.herokuapp.com/class/assignment/${props.id}`, {
+        type: "Draft",
+        points: activity.points,
+        datetime: date,
+        due: activity.due,
+        time: activity.time,
+        topic: activity.topic,
+        instructions: activity.instructions,
+        file: activity.file,
+        active: true,
+        subject: props.subject,
+        filename: filename,
+      }),
+    ]).then(
+      Axios.spread((data1, data2) => {
+        if (data2.data.err) {
+          props.setMessage(data2.data.err);
+        } else {
+          props.setMessage(data2.data.success);
+          props.setInitial([]);
+          setTimeout(() => props.setMessage(""), 5000);
+          setActivity({
+            type: "",
+            points: 100,
+            due: "",
+            time: "",
+            topic: "",
+            instructions: "",
+            filename: "",
+          });
+          props.setAssignment(false);
+        }
+      })
+    );
   };
   return (
     <>
       <div className="assignment-wrapper">
-        <div
-          className={
-            message === "" || message !== "Successfully created activity."
-              ? "hidden"
-              : "assignment-wrapper-after"
-          }
-        >
-          {message}
-        </div>
         <div className="assignment-header">
           <h3>Create Assignment</h3>
         </div>
@@ -105,12 +159,10 @@ const Assignment = (props) => {
         <form onSubmit={(e) => e.preventDefault()} className="assignment-body">
           <div
             className={
-              message === "" || message === "Successfully created activity."
-                ? "hidden"
-                : "assignment-div-topic-err"
+              props.message === "" ? "hidden" : "assignment-div-topic-err"
             }
           >
-            {message}
+            {props.message}
           </div>
           <div className="assignment-div-points">
             <label>Points</label>
@@ -125,7 +177,6 @@ const Assignment = (props) => {
                   time: activity.time,
                   topic: activity.topic,
                   instructions: activity.instructions,
-                  file: activity.file,
                 });
               }}
               type="number"
@@ -152,7 +203,6 @@ const Assignment = (props) => {
                   time: activity.time,
                   topic: value,
                   instructions: activity.instructions,
-                  file: activity.file,
                 });
               }}
             />
@@ -171,7 +221,6 @@ const Assignment = (props) => {
                   time: activity.time,
                   topic: activity.topic,
                   instructions: value,
-                  file: activity.file,
                 });
               }}
               placeholder="Additional Instruction (Optional)"
@@ -180,18 +229,9 @@ const Assignment = (props) => {
 
           <div className="create-stream-post-divs">
             <input
-              value={activity.file}
               onChange={(e) => {
-                let value = e.target.value;
-                setActivity({
-                  type: activity.type,
-                  points: activity.points,
-                  due: activity.due,
-                  time: activity.time,
-                  topic: activity.topic,
-                  instructions: activity.instructions,
-                  file: value,
-                });
+                setFileName(e.target.files[0].name);
+                setFile(e.target.files[0]);
               }}
               type="file"
               className="custom-file-input"
@@ -211,7 +251,7 @@ const Assignment = (props) => {
                 type="submit"
                 value={type}
                 className={
-                  activity.topic === ""
+                  activity.topic === "" || filename === ""
                     ? "submit-assignment-btn-opacity"
                     : "submit-assignment-btn"
                 }
@@ -236,7 +276,7 @@ const Assignment = (props) => {
                 type="submit"
                 value={type}
                 className={
-                  activity.topic === "" || activity.quarter === ""
+                  activity.topic === ""
                     ? "submit-assignment-btn-opacity"
                     : "submit-assignment-btn"
                 }

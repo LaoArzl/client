@@ -13,6 +13,7 @@ export const StudentListProvider = (props) => {
   const [searchTeacher, setSearchTeacher] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [yearList, setYearList] = useState([]);
+  const [initials, setInitials] = useState("");
 
   useEffect(() => {
     Axios.get("https://ecplcsms.herokuapp.com/student-list").then(
@@ -67,10 +68,11 @@ export const StudentListProvider = (props) => {
           setYearList([]);
         } else {
           setYearList(response.data);
+          console.log(response.data)
         }
       }
     );
-  }, []);
+  }, [initials]);
 
   return (
     <StudentListContext.Provider
@@ -83,6 +85,7 @@ export const StudentListProvider = (props) => {
         valueAllUsers: [allUsers, setAllUsers],
         valueAllClass: [classroom, setClassroom],
         valueAllYear: [yearList, setYearList],
+        valueInitial: [initials, setInitials],
       }}
     >
       {props.children}

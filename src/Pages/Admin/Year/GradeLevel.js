@@ -23,12 +23,14 @@ const GradeLevel = (props) => {
         }
       }
     );
-  }, []);
+  }, [props.initial]);
 
   const submitDelete = () => {
     Axios.put(`https://ecplcsms.herokuapp.com/year/${props.id}`, {}).then(
       (response) => {
         if (response) {
+          props.setStatusMsg(response.data.success)
+          props.setInitial([]);
           history.push("/admin/year");
         }
       }

@@ -4,6 +4,7 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import Axios from "axios";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
+import { Barangay } from "./Barangay";
 
 const StudentAdmission = (props) => {
   const { value00 } = useContext(StudentListContext);
@@ -23,7 +24,7 @@ const StudentAdmission = (props) => {
   const [address, setAdress] = useState({
     street: "",
     barangay: "",
-    city: "",
+    city: "Zamboanga City",
     postal: "",
     email: "",
     contact: "",
@@ -111,6 +112,72 @@ const StudentAdmission = (props) => {
     });
   };
 
+  /*Function to generate random ID string */
+  const generateId = () => {
+    let result1 = [];
+    let result2 = [];
+
+    let characters1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let characters2 = "0123456789";
+    let charactersLength1 = characters1.length;
+    let charactersLength2 = characters2.length;
+
+    for (var i = 0; i < 2; i++) {
+      result1.push(
+        characters1.charAt(Math.floor(Math.random() * charactersLength1))
+      );
+    }
+
+    for (var i = 0; i < 3; i++) {
+      result2.push(
+        characters2.charAt(Math.floor(Math.random() * charactersLength2))
+      );
+    }
+
+    const dateNow = new Date();
+    const getDateNow = dateNow.getFullYear();
+
+    setAccount({
+      id: getDateNow + "-" + result1.join("") + result2.join(""),
+      password: account.passowrd,
+      year: account.year,
+      lastname: account.lastname,
+      firstname: account.firstname,
+      middlename: account.middlename,
+      gender: account.gender,
+      birthday: account.birthday,
+      picture: account.picture,
+    });
+  };
+
+  /*Function to generate random password string */
+  const generatePassword = () => {
+    let result1 = [];
+
+    let characters1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+    let charactersLength1 = characters1.length;
+
+    for (var i = 0; i < 6; i++) {
+      result1.push(
+        characters1.charAt(Math.floor(Math.random() * charactersLength1))
+      );
+    }
+
+    setAccount({
+      id: account.id,
+      password: result1.join(""),
+      year: account.year,
+      lastname: account.lastname,
+      firstname: account.firstname,
+      middlename: account.middlename,
+      gender: account.gender,
+      birthday: account.birthday,
+      picture: account.picture,
+    });
+  };
+
+  const [showpassword, setShowpassword] = useState(false);
+
   return (
     <>
       {/* Account details*/}
@@ -133,53 +200,62 @@ const StudentAdmission = (props) => {
           <h3>Student Account Details</h3>
         </div>
         <div className="personal-info-body">
-          <div className="admission-div">
-            <label>
-              Student I.D. <div>*</div>
-            </label>
-            <input
-              value={account.id}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: value,
-                  password: account.password,
-                  year: account.year,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: account.gender,
-                  birthday: account.birthday,
-                  picture: account.picture,
-                });
-              }}
-              type="text"
-            />
+          <div className="admission-div-user-id">
+            <label>Student I.D *</label>
+            <div className="user-id-div-input">
+              <input
+                onClick={generateId}
+                value={account.id}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: value,
+                    password: account.password,
+                    year: account.year,
+                    lastname: account.lastname,
+                    firstname: account.firstname,
+                    middlename: account.middlename,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type="text"
+              />
+            </div>
           </div>
 
-          <div className="admission-div">
-            <label>
-              Password <div>*</div>
-            </label>
-
-            <input
-              value={account.password}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: account.id,
-                  password: value,
-                  year: account.year,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: account.gender,
-                  birthday: account.birthday,
-                  picture: account.picture,
-                });
-              }}
-              type="password"
-            />
+          <div className="admission-div-user-id">
+            <label>Password *</label>
+            <div className="user-id-div-input">
+              <input
+                onClick={generatePassword}
+                value={account.password}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: account.id,
+                    password: value,
+                    year: account.year,
+                    lastname: account.lastname,
+                    firstname: account.firstname,
+                    middlename: account.middlename,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type={showpassword ? "text" : "password"}
+              />
+              <div
+                onClick={() => setShowpassword(!showpassword)}
+                className="user-id-div-input-div"
+              >
+                <i
+                  className={showpassword ? "far fa-eye" : "far fa-eye-slash"}
+                ></i>
+              </div>
+            </div>
           </div>
 
           <div className="admission-div">
@@ -337,11 +413,11 @@ const StudentAdmission = (props) => {
                   birthday: value,
                   picture: account.picture,
                 });
+                console.log(value);
               }}
               type="date"
             />
           </div>
-          
         </div>
       </div>
 
@@ -377,7 +453,7 @@ const StudentAdmission = (props) => {
               <label>
                 Brgy. <div>*</div>
               </label>
-              <input
+              <select
                 value={address.barangay}
                 onChange={(e) => {
                   let value = e.target.value;
@@ -390,8 +466,11 @@ const StudentAdmission = (props) => {
                     contact: address.contact,
                   });
                 }}
-                type="text"
-              ></input>
+              >
+                {Barangay.map((e) => {
+                  return <option value={e.name}>{e.name}</option>;
+                })}
+              </select>
             </div>
           </div>
           <div className="dual-admission-div">
@@ -509,7 +588,9 @@ const StudentAdmission = (props) => {
             <label>
               Relation<div>*</div>
             </label>
-            <select value={parent.relation} onChange={(e) => {
+            <select
+              value={parent.relation}
+              onChange={(e) => {
                 let value = e.target.value;
                 setParent({
                   parentFullname: parent.parentFullname,
@@ -517,8 +598,11 @@ const StudentAdmission = (props) => {
                   parentEmail: parent.parentEmail,
                   parentContact: parent.parentContact,
                 });
-              }}>
-              <option value="" disabled>Select Option</option>
+              }}
+            >
+              <option value="" disabled>
+                Select Option
+              </option>
               <option value="Mother">Mother</option>
               <option value="Father">Father</option>
               <option value="Grand Mother">Grand Mother</option>
@@ -531,11 +615,6 @@ const StudentAdmission = (props) => {
               <option value="Other">Other</option>
             </select>
           </div>
-
-
-        
-
-         
 
           <div className="admission-div">
             <label>

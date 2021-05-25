@@ -45,7 +45,7 @@
   width: 25%;
   height: 20vh;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -161,8 +161,8 @@
   min-height: 200px;
   background: white;
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  border-radius: 10px;
-  margin-bottom: 25px;
+  border-radius: 5px;
+  margin-bottom: 15px;
   border: 1px solid rgb(235, 235, 235);
 }
 
@@ -191,7 +191,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .one-multi-admission-div {
@@ -300,7 +300,100 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+}
+
+.admission-div-user-id {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.admission-div-user-id label {
+  font-size: var(--font13);
+  color: #7a7a7a;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+}
+
+.user-id-div-input {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.user-id-div-input-div {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 5;
+  bottom: 0;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  color: grey;
+  font-size: var(--font15);
+}
+
+.user-id-div-input input {
+  width: 100%;
+  height: 40px;
+  border-radius: 2px;
+  border-style: none;
+  outline-style: none;
+  background: rgb(246, 248, 250);
+  border: 1px solid lightgrey;
+  padding-left: 10px;
+  margin-top: 5px;
+  color: var(--font);
+}
+
+.auto-generate-btn {
+  width: 15%;
+  height: 40px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: var(--font14);
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  position: relative;
+  overflow: hidden;
+}
+
+.auto-generate-btn:before {
+  content: "";
+  position: absolute;
+  background: #eee;
+  padding: 50%;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
+.auto-generate-btn:active:before {
+  transition: 0s;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(0);
 }
 
 .admission-div label {
@@ -330,7 +423,7 @@
   height: auto;
   margin: 0 auto;
   display: flex;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   justify-content: space-between;
 }
 

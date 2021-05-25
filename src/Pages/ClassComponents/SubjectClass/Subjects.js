@@ -31,6 +31,7 @@ const Subjects = (props) => {
 
   //Activity List
   const [activity, setActivity] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     Axios.get(
@@ -47,6 +48,15 @@ const Subjects = (props) => {
   return (
     <>
       <div className="subject-class-wrapper">
+        <div
+          className={
+            message === "" || message !== "Successfully created activity."
+              ? "hidden"
+              : "assignment-wrapper-after"
+          }
+        >
+          {message}
+        </div>
         {assignment && (
           <Assignment
             setAssignment={setAssignment}
@@ -55,6 +65,8 @@ const Subjects = (props) => {
             setActivity={setActivity}
             activity={activity}
             setInitial={props.setInitial}
+            message={message}
+            setMessage={setMessage}
           />
         )}
         {quiz && <Quiz setQuiz={setQuiz} />}

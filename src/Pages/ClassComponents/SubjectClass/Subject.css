@@ -185,6 +185,25 @@
   height: 40px;
 }
 
+.create-activity-dropdown:before {
+  content: "";
+  position: absolute;
+  background: rgba(238, 238, 238, 0.4);
+  padding: 50%;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  transition: transform 0.8s, opacity 0.8s;
+}
+
+.create-activity-dropdown:active:before {
+  transition: 0s;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(0);
+}
+
 .create-activity-dropdown-after {
   background: white;
   width: 150%;

@@ -119,7 +119,7 @@ const Activity = (props) => {
                     className="material-document"
                     fontSize="small"
                   />
-                  {props.filename}
+                  {props.filename} 
                 </p>
                 <div onClick={downloadFile}>
                   Download <i className="fas fa-download"></i>

@@ -8,10 +8,15 @@ import Subject from "./Subject";
 const EditYear = (props) => {
   const [status, setStatus] = useState("grade");
   const [success, setSuccess] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
+  
 
   return (
     <>
       <div className="year-wrapper">
+        <div className={statusMsg === "" ? "hidden" : "year-wrapper-after-msg"}>
+          {statusMsg}
+        </div>
         <Dashboard />
         <div className="year-content">
           <DashboardHeader />
@@ -26,7 +31,9 @@ const EditYear = (props) => {
                 }
               >
                 Grade Level
-                <i className={status === "grade" ? "fas fa-chevron-right" : ""}></i>
+                <i
+                  className={status === "grade" ? "fas fa-chevron-right" : ""}
+                ></i>
               </div>
               <div
                 onClick={() => setStatus("subject")}
@@ -48,9 +55,21 @@ const EditYear = (props) => {
                   success={success}
                   setSuccess={setSuccess}
                   id={props.id}
+                  initial={props.initial}
+                  setInitial={props.setInitial}
+                  statusMsg={statusMsg}
+                  setStatusMsg={setStatusMsg}
                 />
               )}
-              {status === "subject" && <Subject id={props.id} />}
+              {status === "subject" && (
+                <Subject
+                  id={props.id}
+                  initial={props.initial}
+                  setInitial={props.setInitial}
+                  statusMsg={statusMsg}
+                  setStatusMsg={setStatusMsg}
+                />
+              )}
             </div>
           </div>
         </div>

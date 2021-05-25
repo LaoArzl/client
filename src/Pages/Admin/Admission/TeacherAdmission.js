@@ -82,6 +82,68 @@ const TeacherAdmission = (props) => {
     });
   };
 
+  /*Function to generate random ID string */
+  const generateId = () => {
+    let result1 = [];
+    let result2 = [];
+
+    let characters1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let characters2 = "0123456789";
+    let charactersLength1 = characters1.length;
+    let charactersLength2 = characters2.length;
+
+    for (var i = 0; i < 4; i++) {
+      result2.push(
+        characters2.charAt(Math.floor(Math.random() * charactersLength2))
+      );
+    }
+
+    let strDate = new Date(); // By default Date empty constructor give you Date.now
+    let shortYear = strDate.getFullYear();
+    // Add this line
+    let twoDigitYear = shortYear.toString().substr(-2);
+
+    setAccount({
+      id: "ECPLC" + "-" + result1.join("") + result2.join(""),
+      password: account.passowrd,
+      year: account.year,
+      lastname: account.lastname,
+      firstname: account.firstname,
+      middlename: account.middlename,
+      gender: account.gender,
+      birthday: account.birthday,
+      picture: account.picture,
+    });
+  };
+
+  /*Function to generate random password string */
+  const generatePassword = () => {
+    let result1 = [];
+
+    let characters1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+    let charactersLength1 = characters1.length;
+
+    for (var i = 0; i < 6; i++) {
+      result1.push(
+        characters1.charAt(Math.floor(Math.random() * charactersLength1))
+      );
+    }
+
+    setAccount({
+      id: account.id,
+      password: result1.join(""),
+      year: account.year,
+      lastname: account.lastname,
+      firstname: account.firstname,
+      middlename: account.middlename,
+      gender: account.gender,
+      birthday: account.birthday,
+      picture: account.picture,
+    });
+  };
+
+  const [showpassword, setShowpassword] = useState(false);
+
   return (
     <>
       {/* Account details*/}
@@ -104,50 +166,60 @@ const TeacherAdmission = (props) => {
           <h3>Teacher Account Details</h3>
         </div>
         <div className="personal-info-body">
-          <div className="admission-div">
-            <label>
-              Teacher I.D.<div>*</div>
-            </label>
-            <input
-              value={account.id}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: value,
-                  password: account.password,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: account.gender,
-                  birthday: account.birthday,
-                  picture: account.picture,
-                });
-              }}
-              type="text"
-            />
+          <div className="admission-div-user-id">
+            <label>Teacher I.D *</label>
+            <div className="user-id-div-input">
+              <input
+                onClick={generateId}
+                value={account.id}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: value,
+                    password: account.password,
+                    lastname: account.lastname,
+                    firstname: account.firstname,
+                    middlename: account.middlename,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type="text"
+              />
+            </div>
           </div>
 
-          <div className="admission-div admission-div-password">
-            <label>
-              Password<div>*</div>
-            </label>
-            <input
-              value={account.password}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: account.id,
-                  password: value,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: account.gender,
-                  birthday: account.birthday,
-                  picture: account.picture,
-                });
-              }}
-              type="password"
-            />
+          <div className="admission-div-user-id">
+            <label>Password *</label>
+            <div className="user-id-div-input">
+              <input
+                onClick={generatePassword}
+                value={account.password}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setAccount({
+                    id: account.id,
+                    password: value,
+                    lastname: account.lastname,
+                    firstname: account.firstname,
+                    middlename: account.middlename,
+                    gender: account.gender,
+                    birthday: account.birthday,
+                    picture: account.picture,
+                  });
+                }}
+                type={showpassword ? "text" : "password"}
+              />
+              <div
+                onClick={() => setShowpassword(!showpassword)}
+                className="user-id-div-input-div"
+              >
+                <i
+                  className={showpassword ? "far fa-eye" : "far fa-eye-slash"}
+                ></i>
+              </div>
+            </div>
           </div>
 
           <div className="multi-admission-div">
@@ -271,9 +343,6 @@ const TeacherAdmission = (props) => {
               type="date"
             />
           </div>
-
-         
-         
         </div>
       </div>
       {/* Contact Address*/}

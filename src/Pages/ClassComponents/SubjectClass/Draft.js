@@ -226,19 +226,18 @@ const Draft = (props) => {
 
           <div className="create-stream-post-divs">
             <input
-              value={activity.file}
-              onChange={(e) => {
-                let value = e.target.value;
-                setActivity({
-                  type: activity.type,
-                  points: activity.points,
-                  due: activity.due,
-                  time: activity.time,
-                  topic: activity.topic,
-                  instructions: activity.instructions,
-                  file: value,
-                });
-              }}
+              // onChange={(e) => {
+              //   let value = e.target.value;
+              //   setActivity({
+              //     type: activity.type,
+              //     points: activity.points,
+              //     due: activity.due,
+              //     time: activity.time,
+              //     topic: activity.topic,
+              //     instructions: activity.instructions,
+              //     file: value,
+              //   });
+              // }}
               type="file"
               className="custom-file-input"
             />

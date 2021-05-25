@@ -12,7 +12,6 @@ const Subject = (props) => {
   // Updating/Adding subjects to class
   const [subjectName, setSubjectName] = useState("");
   const [subjectDescription, setSubjectDescription] = useState("");
-  const [statusMsg, setStatusMsg] = useState("");
 
   useEffect(() => {
     Axios.get(`https://ecplcsms.herokuapp.com/year/${props.id}`).then(
@@ -24,7 +23,7 @@ const Subject = (props) => {
         }
       }
     );
-  }, []);
+  }, [props.initial]);
 
   const submitAdd = () => {
     Axios.put(`https://ecplcsms.herokuapp.com/year/add/${props.id}`, {
@@ -32,11 +31,14 @@ const Subject = (props) => {
       subjectDescription: subjectDescription,
     }).then((response) => {
       if (response.data.err) {
-        setStatusMsg(response.data.err);
+        props.setStatusMsg(response.data.err);
       } else {
-        setStatusMsg(response.data.success);
+        props.setStatusMsg(response.data.success);
         setSubjectName("");
         setSubjectDescription("");
+        props.setInitial([]);
+        setAddSubject(false)
+        setTimeout(() => props.setStatusMsg(""), 5000)
       }
     });
   };
@@ -55,19 +57,9 @@ const Subject = (props) => {
         </div>
 
         <div className="add-subject-form-after-body">
-          <div
-            className={
-              statusMsg === ""
-                ? "add-subject-form-status-hidden"
-                : statusMsg === "Successfully added subject (1)."
-                ? "add-subject-form-status-green"
-                : "add-subject-form-status"
-            }
-          >
-            {statusMsg}
-          </div>
+        
           <div className="add-subject-div">
-            <label>Subject Name</label>
+            <label>Subject Name *</label>
             <input
               value={subjectName}
               onChange={(e) => setSubjectName(e.target.value)}
@@ -94,7 +86,7 @@ const Subject = (props) => {
             <input
               onClick={submitAdd}
               type="submit"
-              className="add-subject-btn-2"
+              className={subjectName === "" ? "add-subject-btn-2-opacity" : "add-subject-btn-2"}
             />
           </div>
         </div>
@@ -121,13 +113,13 @@ const Subject = (props) => {
           ) : (
             <>
               <div className="yearlist-body-wrapper">
-                {yearList.map((value) => {
+                {yearList.map((value, key) => {
                   return (
                     <div
                       key={value._id}
                       className="yearlist-body-wrapper-subject"
                     >
-                      {value.subjectName}
+                      {key + 1 +"."} {" " + " " + " " + " "} {value.subjectName}
                     </div>
                   );
                 })}

@@ -4,6 +4,7 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import Axios from "axios";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
+import {LoginContext} from "../../../ContextFiles/LoginContext";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { Link } from "react-router-dom";
@@ -12,8 +13,9 @@ const Year = () => {
   const [showForm, setShowForm] = useState(false);
   const [grade, setGrade] = useState("");
   const [number, setNumber] = useState("");
-  const { valueAllYear } = useContext(StudentListContext);
+  const { valueAllYear, valueInitial } = useContext(StudentListContext);
   const [errMsg, setErrMsg] = useState("");
+  const [initials, setInitials] = valueInitial;
 
   const [yearList, setYearList] = valueAllYear;
 
@@ -30,13 +32,14 @@ const Year = () => {
         setErrMsg(response.data.success);
         setGrade("");
         setNumber("");
-        setYearList([
-          ...yearList,
-          {
-            _id: grade + " " + number,
-            year: grade + " " + number,
-          },
-        ]);
+        // setYearList([
+        //   ...yearList,
+        //   {
+        //     _id: grade + " " + number,
+        //     year: grade + " " + number,
+        //   },
+        // ]);
+        setInitials(response.data.success)
       }
     });
   };
@@ -44,6 +47,7 @@ const Year = () => {
   return (
     <>
       <div className="year-wrapper">
+     
         <div
           onClick={() => setShowForm(false)}
           className={showForm ? "year-wrapper-after" : ""}
