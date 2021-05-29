@@ -8,7 +8,7 @@ import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
 
 const People = (props) => {
   const [teacher, setTeacher] = useState("");
-  const url = `https://ecplcsms.herokuapp.com/class/class${props.id}`;
+  const url = `http://localhost:3001/class/class${props.id}`;
   const [showStudents, setShowStudents] = useState(false);
   const [studentData, setStudentData] = useState([]);
   const [studentState, setStudentState] = useState([]);
@@ -20,26 +20,24 @@ const People = (props) => {
   };
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/add-class-student").then(
-      (response) => {
-        let customer = response.data;
-        setStudentState(
-          customer
-            .filter((g) => g.year === props.year)
-            .map((d) => {
-              return {
-                select: false,
-                id: d._id,
-                name: d.fullname,
-              };
-            })
-        );
-      }
-    );
+    Axios.get("http://localhost:3001/add-class-student").then((response) => {
+      let customer = response.data;
+      setStudentState(
+        customer
+          .filter((g) => g.year === props.year)
+          .map((d) => {
+            return {
+              select: false,
+              id: d._id,
+              name: d.fullname,
+            };
+          })
+      );
+    });
   }, []);
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/class/class/${props.id}`).then(
+    Axios.get(`http://localhost:3001/class/class/${props.id}`).then(
       (response) => {
         setStudentData(response.data[0].students);
       }
@@ -53,12 +51,9 @@ const People = (props) => {
         arr.push(d.id);
       }
 
-      Axios.put(
-        `https://ecplcsms.herokuapp.com/class/add-student/${props.id}`,
-        {
-          studentId: arr,
-        }
-      ).then((response) => {
+      Axios.put(`http://localhost:3001/class/add-student/${props.id}`, {
+        studentId: arr,
+      }).then((response) => {
         if (response.data.success) {
           setMsg("Successfully added students");
           setTimeout(() => setMsg(""), 5000);

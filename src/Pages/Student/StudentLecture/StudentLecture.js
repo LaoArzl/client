@@ -21,15 +21,15 @@ const StudentLecture = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.lecture);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.lecture);
+        }
       }
-    });
+    );
   }, [props.initial]);
 
   return (
@@ -127,35 +127,9 @@ const StudentLecture = (props) => {
                   </div>
                 </div>
                 <div className="subject-content-assigned-body-wrapper">
-
-                {filtered === "All" ? (
-                  <>
-                    {activity.map((value) => {
-                      return (
-                        <Link
-                          to={"/student/lecture/" + value._id}
-                          className="subject-content-assigned-body"
-                        >
-                          <span>
-                            <MenuBookIcon fontSize="small" />
-                          </span>
-                          <div className="subject-content-assigned-body-right">
-                            <b>{value.topic}</b>
-                            <div className="sub-subject-content-assigned-body-right">
-                              <div className="activity-topic-value">
-                                <p>Lecture</p>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </>
-                ) : (
-                  <>
-                    {activity
-                      .filter((e) => e.quarter === filtered)
-                      .map((value) => {
+                  {filtered === "All" ? (
+                    <>
+                      {activity.map((value) => {
                         return (
                           <Link
                             to={"/student/lecture/" + value._id}
@@ -175,8 +149,33 @@ const StudentLecture = (props) => {
                           </Link>
                         );
                       })}
-                  </>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      {activity
+                        .filter((e) => e.quarter === filtered)
+                        .map((value) => {
+                          return (
+                            <Link
+                              to={"/student/lecture/" + value._id}
+                              className="subject-content-assigned-body"
+                            >
+                              <span>
+                                <MenuBookIcon fontSize="small" />
+                              </span>
+                              <div className="subject-content-assigned-body-right">
+                                <b>{value.topic}</b>
+                                <div className="sub-subject-content-assigned-body-right">
+                                  <div className="activity-topic-value">
+                                    <p>Lecture</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                    </>
+                  )}
                 </div>
               </div>
             </div>

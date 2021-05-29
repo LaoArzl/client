@@ -307,7 +307,7 @@
   height: 35px;
   padding: 0px 15px;
   display: flex;
-  font-size: var(--font14);
+  font-size: var(--font13);
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -1125,6 +1125,15 @@
   color: var(--sub-font);
   cursor: pointer;
   transition: 0.2s ease-out;
+}
+
+.tags {
+  padding: 2px 10px;
+  border: 1px solid lightgrey;
+  display: flex;
+  justify-content: center;
+  border-radius: 100px;
+  font-size: var(--font13);
 }
 
 .actual-activity-body-left-footer span:hover {

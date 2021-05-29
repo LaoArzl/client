@@ -8,7 +8,6 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
 const StudentGrade = (props) => {
-
   const history = useHistory();
   const goBack = () => {
     history.goBack();
@@ -18,22 +17,20 @@ const StudentGrade = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.activity);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.activity);
+        }
       }
-    });
+    );
   }, [props.initial]);
-
 
   return (
     <>
       <div className="subject-class-wrapper">
-
         <StudentDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
@@ -66,9 +63,7 @@ const StudentGrade = (props) => {
                   </Link>
                 </div>
               </div>
-              <div className="subject-content-body-right-body">
-                
-              </div>
+              <div className="subject-content-body-right-body"></div>
             </div>
           </div>
         </div>

@@ -23,13 +23,10 @@ const Class = (props) => {
   const [postTo, setPostTo] = useState("General");
 
   const submitComment = (commentId) => {
-    Axios.put(
-      `https://ecplcsms.herokuapp.com/class/comment/${props.id}/${commentId}`,
-      {
-        comment: comment,
-        commentor: firstname,
-      }
-    ).then((response) => {
+    Axios.put(`http://localhost:3001/${props.id}/${commentId}`, {
+      comment: comment,
+      commentor: firstname,
+    }).then((response) => {
       if (response.data.success) {
         props.setInitial([]);
         setComment("");
@@ -38,7 +35,7 @@ const Class = (props) => {
   };
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+    Axios.get("http://localhost:3001/user-login").then((response) => {
       if (response.data.length === 0) {
         setFirstname("");
       } else if (response.data.loggedIn) {
@@ -48,23 +45,24 @@ const Class = (props) => {
   }, [props.initial]);
 
   useEffect(() => {
-    Axios.get(
-      `https://ecplcsms.herokuapp.com/class/populate-subjects/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setSubjects([]);
-      } else {
-        //setSubjects()
-        setSubjects(response.data.year[0].subjects);
+    Axios.get(`http://localhost:3001/class/populate-subjects/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setSubjects([]);
+        } else {
+          //setSubjects()
+          setSubjects(response.data.year[0].subjects);
+        }
       }
-    });
+    );
   }, [props.initial]);
 
   const addPost = () => {
-    Axios.put(`https://ecplcsms.herokuapp.com/class/post/${props.id}`, {
+    Axios.put(`http://localhost:3001/class/post/${props.id}`, {
       body: post,
       date: date,
       poster: firstname,
+      tags: postTo,
     }).then((response) => {
       if (response.data.err) {
         props.setMsg(response.data.err);
@@ -76,6 +74,7 @@ const Class = (props) => {
       }
     });
   };
+
   return (
     <>
       <div className="create-something">
@@ -194,6 +193,7 @@ const Class = (props) => {
                       <div className="class-posts-body-header-right">
                         <h5>{value.poster}</h5>
                         <p>{value.date}</p>
+                        <div className="tags">{value.tags}</div>
                       </div>
                     </div>
                     <div className="class-posts-body-body">{value.body}</div>

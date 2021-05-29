@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Activity.css";
 import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
 import { useHistory } from "react-router-dom";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
+import { motion } from "framer-motion";
+
 import Axios from "axios";
 
 const Activity = (props) => {
+  const [studentData, setStudentData] = useState(null);
   const history = useHistory();
   const goBack = () => {
     history.goBack();
@@ -14,7 +17,7 @@ const Activity = (props) => {
 
   const markDone = () => {
     Axios.put(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}/${props.activityId}`,
+      `http://localhost:3001/class/assignment/${props.id}/${props.activityId}`,
       { active: false }
     ).then((response) => {
       props.setInitial([]);
@@ -27,7 +30,7 @@ const Activity = (props) => {
 
   const downloadFile = () => {
     window.open(
-      `https://ecplcsms.herokuapp.com/file/download/${props.filename}`,
+      `http://localhost:3001/file/download/${props.filename}`,
 
       "_blank"
     );
@@ -35,7 +38,7 @@ const Activity = (props) => {
 
   const markUndone = () => {
     Axios.put(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}/${props.activityId}`,
+      `http://localhost:3001/class/assignment/${props.id}/${props.activityId}`,
       { active: true }
     ).then((response) => {
       props.setInitial([]);
@@ -46,10 +49,40 @@ const Activity = (props) => {
     });
   };
 
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/class/class/${props.id}`).then(
+      (response) => {
+        setStudentData(response.data[0].students);
+        console.log(response.data[0].students);
+      }
+    );
+  }, [props.initial]);
+
   const [activityStatus, setActivityStatus] = useState("");
+
+  const pageVariants = {
+    initial: {
+      opacity: 0.5,
+      scale: 0.988,
+    },
+    in: {
+      opacity: 1,
+      scale: 1,
+    },
+    out: {
+      opacity: 1,
+      scale: 0.5,
+    },
+  };
   return (
     <>
-      <div className="actual-activity-wrapper">
+      <motion.div
+        initial="initial"
+        animate="in"
+        variants={pageVariants}
+        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+        className="actual-activity-wrapper"
+      >
         <div
           className={
             activityStatus === "" ? "hidden" : "actual-activity-wrapper-after"
@@ -85,9 +118,7 @@ const Activity = (props) => {
                 )}
               </span>
               <div className="actual-activity-body-left-header">
-                <h3>
-                  {props.topic}
-                </h3>
+                <h3>{props.topic}</h3>
                 <p>
                   {!props.due ? (
                     "No due date "
@@ -119,7 +150,7 @@ const Activity = (props) => {
                     className="material-document"
                     fontSize="small"
                   />
-                  {props.filename} 
+                  {props.filename}
                 </p>
                 <div onClick={downloadFile}>
                   Download <i className="fas fa-download"></i>
@@ -141,12 +172,12 @@ const Activity = (props) => {
               </div>
 
               <div className="activity-turned-in">
-                <p>Assigned:</p> 0
+                <p>Assigned:</p> {studentData === null ? 0 : studentData.length}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

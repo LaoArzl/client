@@ -5,7 +5,6 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import "../Teachers/UserProfile.css";
 import NavStudProfile from "./NavStudProfile";
 import NavStudAccount from "./NavStudAccount";
-import NavStudentGraddes from "./NavStudentGrades";
 
 const UserStudent = () => {
   const [userNav, setUserNav] = useState("");
@@ -65,7 +64,6 @@ const UserStudent = () => {
             <div className="user-profile-content-actual">
               {userNav === "Profile" && <NavStudProfile />}
               {userNav === "Account" && <NavStudAccount />}
-              {userNav === "Grades" && <NavStudentGraddes />}
             </div>
           </div>
         </div>

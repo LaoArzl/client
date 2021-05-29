@@ -14,19 +14,17 @@ const Subject = (props) => {
   const [subjectDescription, setSubjectDescription] = useState("");
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/year/${props.id}`).then(
-      (response) => {
-        if (response.data.subjects.length === 0) {
-          setYearList([]);
-        } else {
-          setYearList(response.data.subjects);
-        }
+    Axios.get(`http://localhost:3001/year/${props.id}`).then((response) => {
+      if (response.data.subjects.length === 0) {
+        setYearList([]);
+      } else {
+        setYearList(response.data.subjects);
       }
-    );
+    });
   }, [props.initial]);
 
   const submitAdd = () => {
-    Axios.put(`https://ecplcsms.herokuapp.com/year/add/${props.id}`, {
+    Axios.put(`http://localhost:3001/year/add/${props.id}`, {
       subjectName: subjectName,
       subjectDescription: subjectDescription,
     }).then((response) => {
@@ -37,8 +35,8 @@ const Subject = (props) => {
         setSubjectName("");
         setSubjectDescription("");
         props.setInitial([]);
-        setAddSubject(false)
-        setTimeout(() => props.setStatusMsg(""), 5000)
+        setAddSubject(false);
+        setTimeout(() => props.setStatusMsg(""), 5000);
       }
     });
   };
@@ -57,7 +55,6 @@ const Subject = (props) => {
         </div>
 
         <div className="add-subject-form-after-body">
-        
           <div className="add-subject-div">
             <label>Subject Name *</label>
             <input
@@ -86,7 +83,11 @@ const Subject = (props) => {
             <input
               onClick={submitAdd}
               type="submit"
-              className={subjectName === "" ? "add-subject-btn-2-opacity" : "add-subject-btn-2"}
+              className={
+                subjectName === ""
+                  ? "add-subject-btn-2-opacity"
+                  : "add-subject-btn-2"
+              }
             />
           </div>
         </div>
@@ -119,7 +120,8 @@ const Subject = (props) => {
                       key={value._id}
                       className="yearlist-body-wrapper-subject"
                     >
-                      {key + 1 +"."} {" " + " " + " " + " "} {value.subjectName}
+                      {key + 1 + "."} {" " + " " + " " + " "}{" "}
+                      {value.subjectName}
                     </div>
                   );
                 })}

@@ -18,7 +18,7 @@ const StudentProfile = (props) => {
   const [showClass, setShowClass] = useState(true);
   const [studentData, setStudentData] = useState([]);
 
-  const url = `https://ecplcsms.herokuapp.com/class/student/${props.id}`;
+  const url = `http://localhost:3001/class/student/${props.id}`;
 
   useEffect(() => {
     Axios.get(url).then((response) => {
@@ -26,21 +26,19 @@ const StudentProfile = (props) => {
         setYourClass([]);
       } else {
         setYourClass(response.data);
-        console.log(response.data)
+        console.log(response.data);
       }
     });
   }, []);
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/student/${pops}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setStudentData([]);
-        } else {
-          setStudentData(response.data);
-        }
+    Axios.get(`http://localhost:3001/student/${pops}`).then((response) => {
+      if (response.data.length === 0) {
+        setStudentData([]);
+      } else {
+        setStudentData(response.data);
       }
-    );
+    });
   }, []);
 
   return (

@@ -39,7 +39,7 @@ const StudentAdmission = (props) => {
   const [gradeLevel, setGradeLevel] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://ecplcsms.herokuapp.com/year/create").then((response) => {
+    Axios.get("http://localhost:3001/year/create").then((response) => {
       if (response.data.length === 0) {
         setGradeLevel([]);
       } else {
@@ -49,7 +49,7 @@ const StudentAdmission = (props) => {
   }, []);
 
   const submitStudent = () => {
-    Axios.post("https://ecplcsms.herokuapp.com/register-student", {
+    Axios.post("http://localhost:3001/register-student", {
       id: account.id,
       password: account.password,
       year: account.year,
@@ -139,7 +139,7 @@ const StudentAdmission = (props) => {
 
     setAccount({
       id: getDateNow + "-" + result1.join("") + result2.join(""),
-      password: account.passowrd,
+      password: account.password,
       year: account.year,
       lastname: account.lastname,
       firstname: account.firstname,
@@ -206,20 +206,20 @@ const StudentAdmission = (props) => {
               <input
                 onClick={generateId}
                 value={account.id}
-                onChange={(e) => {
-                  let value = e.target.value;
-                  setAccount({
-                    id: value,
-                    password: account.password,
-                    year: account.year,
-                    lastname: account.lastname,
-                    firstname: account.firstname,
-                    middlename: account.middlename,
-                    gender: account.gender,
-                    birthday: account.birthday,
-                    picture: account.picture,
-                  });
-                }}
+                // onChange={(e) => {
+                //   let value = e.target.value;
+                //   setAccount({
+                //     id: value,
+                //     password: account.password,
+                //     year: account.year,
+                //     lastname: account.lastname,
+                //     firstname: account.firstname,
+                //     middlename: account.middlename,
+                //     gender: account.gender,
+                //     birthday: account.birthday,
+                //     picture: account.picture,
+                //   });
+                // }}
                 type="text"
               />
             </div>

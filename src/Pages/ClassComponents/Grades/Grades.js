@@ -29,15 +29,15 @@ const Grades = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.activity);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.activity);
+        }
       }
-    });
+    );
   }, [props.initial]);
 
   /*Quarter state*/
@@ -66,12 +66,21 @@ const Grades = (props) => {
             subject={props.subject}
             setInitial={props.setInitial}
             setLecture={setLecture}
+            message={props.message}
+            setMessage={props.setMessage}
           />
         )}
 
         <TeacherDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
+          <div
+            className={
+              props.message === "" ? "hidden" : "assignment-wrapper-after"
+            }
+          >
+            {props.message}
+          </div>
 
           <div className="actual-activity-header">
             <Link to={props.goBack} className="go-back-btn">

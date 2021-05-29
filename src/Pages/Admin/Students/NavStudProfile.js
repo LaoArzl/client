@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { Image } from "cloudinary-react";
 
 const NavStudProfile = () => {
   const [userState, setUserState] = useState({});
   const tempId = window.location.pathname.replace("/admin/edit-user/", "");
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/teacher/${tempId}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setUserState({});
-        } else {
-          let user = response.data;
-          setUserState({
-            id: user._id,
-            firstname: user.firstname,
-            middlename: user.middlename,
-            lastname: user.lastname,
-            gender: user.gender,
-            contact: user.contact,
-            address: user.address,
-            email: user.email,
-          });
-        }
+    Axios.get(`http://localhost:3001/${tempId}`).then((response) => {
+      if (response.data.length === 0) {
+        setUserState({});
+      } else {
+        let user = response.data;
+        setUserState({
+          id: user._id,
+          firstname: user.firstname,
+          middlename: user.middlename,
+          lastname: user.lastname,
+          gender: user.gender,
+          contact: user.contact,
+          address: user.address,
+          email: user.email,
+        });
       }
-    );
+    });
   }, []);
 
   const updateSubmit = () => {
-    Axios.put(`https://ecplcsms.herokuapp.com/update/user/${tempId}`, {
+    Axios.put(`http://localhost:3001/${tempId}`, {
       lastname: userState.lastname,
       firstname: userState.firstname,
       middlename: userState.middlename,

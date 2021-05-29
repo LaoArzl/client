@@ -15,7 +15,7 @@ const StudentLectureActual = (props) => {
 
   const downloadFile = () => {
     window.open(
-      `https://ecplcsms.herokuapp.com/file/download/${props.filename}`,
+      `http://localhost:3001/file/download/${props.filename}`,
 
       "_blank"
     );

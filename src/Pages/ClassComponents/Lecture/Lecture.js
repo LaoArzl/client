@@ -10,6 +10,7 @@ import Material from "../SubjectClass/Material";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
+import { motion } from "framer-motion";
 
 const Lecture = (props) => {
   const [showAssigned, setShowAssigned] = useState(false);
@@ -37,16 +38,46 @@ const Lecture = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.lecture);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.lecture);
+        }
       }
-    });
+    );
   }, [props.initial]);
+
+  const dropdownVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      pointerEvents: "auto",
+      zIndex: 3,
+    },
+    initial: {
+      y: -50,
+      opacity: 0,
+      pointerEvents: "none",
+      zIndex: -1,
+    },
+  };
+
+  const dropdownVariants2 = {
+    visible2: {
+      y: 0,
+      opacity: 1,
+      pointerEvents: "auto",
+      zIndex: 3,
+    },
+    initial2: {
+      y: -50,
+      opacity: 0,
+      pointerEvents: "none",
+      zIndex: -1,
+    },
+  };
 
   return (
     <>
@@ -68,12 +99,22 @@ const Lecture = (props) => {
             subject={props.subject}
             setInitial={props.setInitial}
             setLecture={setLecture}
+            message={props.message}
+            setMessage={props.setMessage}
+            url={window.location.pathname}
           />
         )}
 
         <TeacherDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
+          <div
+            className={
+              props.message === "" ? "hidden" : "assignment-wrapper-after"
+            }
+          >
+            {props.message}
+          </div>
 
           <div className="actual-activity-header">
             <Link to={props.goBack} className="go-back-btn">
@@ -87,17 +128,19 @@ const Lecture = (props) => {
               <i
                 className={dropdown ? "fas fa-angle-up" : "fas fa-angle-down"}
               ></i>
-              <div
-                className={
-                  dropdown ? "create-activity-dropdown-after" : "hidden"
-                }
+              <motion.div
+                variants={dropdownVariants}
+                initial="initial"
+                animate={dropdown ? "visible" : ""}
+                transition={{ duration: 0.1 }}
+                className="create-activity-dropdown-after"
               >
                 <div onClick={() => setAssignment(true)}>Assignment</div>
                 <div onClick={() => setQuiz(true)}>Quiz</div>
                 <div className="material-item" onClick={() => setLecture(true)}>
                   Material
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
@@ -129,10 +172,12 @@ const Lecture = (props) => {
                     className="quarter-filtered"
                     onClick={() => setDropdown2(!dropdown2)}
                   >
-                    <div
-                      className={
-                        dropdown2 ? "quarter-filtered-after" : "hidden"
-                      }
+                    <motion.div
+                      variants={dropdownVariants2}
+                      initial="initial2"
+                      animate={dropdown2 ? "visible2" : ""}
+                      transition={{ duration: 0.1 }}
+                      className="quarter-filtered-after"
                     >
                       <div
                         onClick={() => {
@@ -179,7 +224,7 @@ const Lecture = (props) => {
                       >
                         4th Quarter
                       </div>
-                    </div>
+                    </motion.div>
                     Filter By: {filtered}
                     <i
                       className={

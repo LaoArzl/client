@@ -3,9 +3,10 @@ import "./Subject.css";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import MainLoader from "../../../Components/Loader/MainLoader";
+import { motion } from "framer-motion";
+import Loader from "../../../Components/Loader/Loader";
 
 const Draft = (props) => {
-  const [message, setMessage] = useState("");
   const [activity, setActivity] = useState({
     type: "",
     points: "",
@@ -23,7 +24,7 @@ const Draft = (props) => {
 
   useEffect(() => {
     Axios.get(
-      `http://ecplcsms.herokuapp.com/class/find-activity/${props.id}/${props.activityId}`
+      `http://localhost:3001/class/find-activity/${props.id}/${props.activityId}`
     ).then((response) => {
       if (response.data.length === 0) {
         setActivity({
@@ -51,7 +52,7 @@ const Draft = (props) => {
 
   const submitAssignment = () => {
     Axios.put(
-      `http://ecplcsms.herokuapp.com/class/update-activity/${props.id}/${props.activityId}`,
+      `http://localhost:3001/class/update-activity/${props.id}/${props.activityId}`,
       {
         type: "Assignment",
         points: activity.points,
@@ -66,11 +67,11 @@ const Draft = (props) => {
       }
     ).then((response) => {
       if (response.data.err) {
-        setMessage(response.data.err);
+        props.setMessage(response.data.err);
       } else {
-        setMessage(response.data.success);
+        props.setMessage(response.data.success);
         props.setInitial([]);
-        setTimeout(() => setMessage(""), 5000);
+        setTimeout(() => props.setMessage(""), 5000);
         setActivity({
           type: "",
           points: 100,
@@ -86,7 +87,7 @@ const Draft = (props) => {
 
   const submitDraft = () => {
     Axios.put(
-      `http://ecplcsms.herokuapp.com/class/update-activity/${props.id}/${props.activityId}`,
+      `http://localhost:3001/class/update-activity/${props.id}/${props.activityId}`,
       {
         type: "Draft",
         points: activity.points,
@@ -101,63 +102,117 @@ const Draft = (props) => {
       }
     ).then((response) => {
       if (response.data.err) {
-        setMessage(response.data.err);
+        props.setMessage(response.data.err);
       } else {
-        setMessage(response.data.success);
+        history.goBack();
+        props.setMessage(response.data.success);
         props.setInitial([]);
-        setTimeout(() => setMessage(""), 5000);
-        setActivity({
-          type: "",
-          points: 100,
-          due: "",
-          time: "",
-          topic: "",
-          instructions: "",
-          file: "",
-        });
+        setTimeout(() => props.setMessage(""), 5000);
+        // setActivity({
+        //   type: "",
+        //   points: 100,
+        //   due: "",
+        //   time: "",
+        //   topic: "",
+        //   instructions: "",
+        //   file: "",
+        // });
       }
     });
   };
+
+  const dropdownVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      pointerEvents: "auto",
+      zIndex: 1,
+    },
+    initial: {
+      y: -50,
+      opacity: 0,
+      pointerEvents: "none",
+      zIndex: -1,
+    },
+  };
+
+  const pageVariants = {
+    initial: {
+      opacity: 0.5,
+      scale: 0.988,
+    },
+    in: {
+      opacity: 1,
+      scale: 1,
+    },
+    out: {
+      opacity: 1,
+      scale: 0.5,
+    },
+  };
+
+  const submitDiscard = () => {
+    Axios.put(
+      `http://localhost:3001/class/delete-activity/${props.id}/${props.activityId}`
+    ).then((response) => {
+      if (response.data.err) {
+        setShowLoader(false);
+      } else {
+        setShowLoader(false);
+        history.goBack();
+        props.setMessage(response.data.success);
+        setTimeout(() => props.setMessage(""), 5000);
+        props.setInitial(response.data.success);
+      }
+    });
+  };
+
+  const [showLoader, setShowLoader] = useState(false);
   return (
     <>
       {activity.type === "" && <MainLoader />}
 
-      <div className="assignment-wrapper">
+      <motion.div
+        initial="initial"
+        animate="in"
+        variants={pageVariants}
+        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+        className="assignment-wrapper"
+      >
         <div
           onClick={() => setDiscard(false)}
           className={discard ? "assignment-wrapper-afters" : "hidden"}
         ></div>
         <div className={discard ? "show-discard" : "hidden"}>
+          {showLoader && <Loader />}
           <div className="show-discard-header">
-            <h4>Discard Draft</h4>
+            <p>Are you really sure you want to discard this draft?</p>
           </div>
 
-          <div className="show-discard-body"></div>
-          <div className="show-discard-footer"></div>
+          <div className="show-discard-body">
+            <div
+              onClick={() => setDiscard(false)}
+              className="cancel-discard-btn"
+            >
+              Cancel
+            </div>
+            <div
+              onClick={() => {
+                setShowLoader(true);
+                submitDiscard();
+              }}
+              className="confirm-discard-btn"
+            >
+              Confirm
+            </div>
+          </div>
         </div>
-        <div
-          className={
-            message === "" || message !== "Successfully created activity."
-              ? "hidden"
-              : "assignment-wrapper-after"
-          }
-        >
-          {message}
-        </div>
+
         <div className="assignment-header">
           <h3>Create Assignment (Draft)</h3>
         </div>
 
         <form onSubmit={(e) => e.preventDefault()} className="assignment-body">
-          <div
-            className={
-              message === "" || message === "Successfully created activity."
-                ? "hidden"
-                : "assignment-div-topic-err"
-            }
-          >
-            {message}
-          </div>
           <div className="assignment-div-points">
             <label>Points</label>
             <input
@@ -292,10 +347,12 @@ const Draft = (props) => {
               className="submit-btn-dropdown"
             >
               <i className="fas fa-caret-down"></i>
-              <div
-                className={
-                  dropdown ? "submit-btn-dropdown-after-draft" : "hidden"
-                }
+              <motion.div
+                variants={dropdownVariants}
+                initial="initial"
+                animate={dropdown ? "visible" : ""}
+                transition={{ duration: 0.3 }}
+                className="submit-btn-dropdown-after-draft"
               >
                 <div
                   onClick={() => setType("Assign")}
@@ -307,7 +364,7 @@ const Draft = (props) => {
                   onClick={() => setType("Draft")}
                   className="submit-btn-dropdown-after-item-draft"
                 >
-                  Draft
+                  Save Draft
                 </div>
                 <div
                   onClick={() => setType("Schedule")}
@@ -321,11 +378,11 @@ const Draft = (props) => {
                 >
                   Discard Draft
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </form>
-      </div>
+      </motion.div>
     </>
   );
 };

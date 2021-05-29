@@ -13,7 +13,7 @@ const StudentPeople = (props) => {
   const [studentState, setStudentState] = useState([]);
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/class/class/${props.id}`).then(
+    Axios.get(`http://localhost:3001/class/class/${props.id}`).then(
       (response) => {
         setStudentData(response.data[0].students);
       }

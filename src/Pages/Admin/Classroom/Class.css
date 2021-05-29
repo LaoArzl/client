@@ -9,7 +9,7 @@
 .classs-wrapper-after {
   width: 20%;
   height: 10%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -57,20 +57,19 @@
   min-height: 200px;
   background: rgb(255, 255, 255);
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 5px;
   margin-bottom: 20px;
-  border: 1px solid rgb(235, 235, 235);
+  border: 1px var(--border);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
 }
 
 .class-actual-body-header {
   width: 95%;
-  height: 12vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  margin-bottom: 20px;
-  max-height: 50px;
+  margin-bottom: 30px;
   min-height: 40px;
 }
 
@@ -101,7 +100,7 @@
 .div-class-search input {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 100px;
   border-style: none;
   outline-style: none;
   padding-left: 40px;
@@ -140,7 +139,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2ab56f;
+  color: var(--main-hover);
   border-bottom: 2px solid #2ab56f;
   font-size: var(--font16);
   font-weight: 500;
@@ -171,21 +170,17 @@
 }
 
 .add-class-button {
-  width: 10%;
-  min-width: 100px;
-  height: 100%;
+  width: 90px;
+  height: 40px;
   background: #2ab56f;
   color: #ffffff;
-  border-radius: 8px;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: var(--font15);
   transition: 0.2s ease-out;
-  font-weight: 500;
-  max-height: 50px;
-  min-height: 40px;
 }
 
 .add-class-button:hover {

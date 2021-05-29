@@ -16,8 +16,6 @@ const StudentActivity = (props) => {
   const [quiz, setQuiz] = useState(false);
   const [lecture, setLecture] = useState(false);
 
-
-
   const history = useHistory();
   const goBack = () => {
     history.goBack();
@@ -27,24 +25,20 @@ const StudentActivity = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.activity);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.activity);
+        }
       }
-    });
+    );
   }, [props.initial]);
-
-
-  
 
   return (
     <>
       <div className="subject-class-wrapper">
-
         <StudentDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
@@ -131,7 +125,7 @@ const StudentActivity = (props) => {
 
                 <div className="subject-content-completed-header">
                   <p onClick={() => setShowCompleted(!showCompleted)}>
-                    Completed 
+                    Completed
                     <i
                       className={
                         showCompleted

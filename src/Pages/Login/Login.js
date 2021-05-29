@@ -11,7 +11,6 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
 
@@ -27,9 +26,8 @@ const Login = () => {
 
   const id = localStorage.getItem("id");
 
-
   const submitLogin = () => {
-    Axios.post("https://ecplcsms.herokuapp.com/user-login", {
+    Axios.post("http://localhost:3001/user-login", {
       username: username,
       password: password,
     }).then((response) => {
@@ -102,7 +100,17 @@ const Login = () => {
           </div>
 
           <div className="login-input-login">
-            <input className={username === "" && password === "" ? "login-btn-disabled" : "login-btn"} disabled={username === "" && password === "" ? true : false} onClick={submitLogin} type="submit" value="Sign In" />
+            <input
+              className={
+                username === "" && password === ""
+                  ? "login-btn-disabled"
+                  : "login-btn"
+              }
+              disabled={username === "" && password === "" ? true : false}
+              onClick={submitLogin}
+              type="submit"
+              value="Sign In"
+            />
           </div>
           <span>Forgot your password?</span>
         </form>

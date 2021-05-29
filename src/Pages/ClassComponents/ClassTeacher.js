@@ -7,9 +7,10 @@ import TeacherDashboard from "../Teacher/TeacherDashboard/TeacherDashboard";
 import "./Class.css";
 import Class from "./Class";
 import { Link, Redirect } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ClassTeacher = (props) => {
-  const { valueID, } = useContext(LoginContext);
+  const { valueID } = useContext(LoginContext);
   const [userId, setUserId] = valueID;
   const [createStream, showCreateStream] = useState(false);
   const [postNav, setPostNav] = useState("post");
@@ -30,7 +31,7 @@ const ClassTeacher = (props) => {
 
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then(
+    Axios.get(`http://localhost:3001/class/post/${props.id}`).then(
       (response) => {
         if (!response.data.post[0]) {
           setActivities([]);
@@ -41,14 +42,36 @@ const ClassTeacher = (props) => {
     );
   }, [props.initial]);
 
+  const pageVariants = {
+    initial: {
+      opacity: 0.5,
+      scale: 0.998,
+    },
+    in: {
+      opacity: 1,
+      scale: 1,
+    },
+    out: {
+      opacity: 1,
+      scale: 0.5,
+    },
+  };
+
   return (
     <>
-      <div className="teacher-class-wrapper">
+      <motion.div
+        initial="initial"
+        animate="in"
+        variants={pageVariants}
+        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+        className="teacher-class-wrapper"
+      >
         <div
           onClick={() => showCreateStream(false)}
           className={createStream ? "teacher-class-wrapper-after" : ""}
         ></div>
         <TeacherDashboard />
+
         <div className={msg === "" ? "post-msg-hidden" : "post-msg"}>{msg}</div>
         <div className="class-content">
           <DashboardHeader />
@@ -81,8 +104,7 @@ const ClassTeacher = (props) => {
               <div className="class-content-body-left-header">
                 <p>Bulletin Board</p>
               </div>
-              <div className="class-content-body-left-body">
-              </div>
+              <div className="class-content-body-left-body"></div>
             </div>
             <div className="class-content-body-right">
               <Class
@@ -97,7 +119,7 @@ const ClassTeacher = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

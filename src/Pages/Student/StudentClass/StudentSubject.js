@@ -18,16 +18,16 @@ const StudentSubject = (props) => {
     }, 5000);
   };
   useEffect(() => {
-    Axios.get(
-      `https://ecplcsms.herokuapp.com/class/populate-subjects/${props.id}`
-    ).then((response) => {
-      let tempSub = response.data.year;
-      setSubjects(
-        tempSub.map((sub) => {
-          return sub.subjects;
-        })
-      );
-    });
+    Axios.get(`http://localhost:3001/class/populate-subjects/${props.id}`).then(
+      (response) => {
+        let tempSub = response.data.year;
+        setSubjects(
+          tempSub.map((sub) => {
+            return sub.subjects;
+          })
+        );
+      }
+    );
   }, []);
 
   return (
@@ -76,7 +76,12 @@ const StudentSubject = (props) => {
                   return (
                     <Link
                       className="class-by-subject"
-                      to={props.activeLink + "/" + value.subjectName + "/activities"}
+                      to={
+                        props.activeLink +
+                        "/" +
+                        value.subjectName +
+                        "/activities"
+                      }
                     >
                       <i className="far fa-folder"></i>
                       {value.subjectName}

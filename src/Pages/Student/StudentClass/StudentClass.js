@@ -21,7 +21,7 @@ const StudentClass = (props) => {
 
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/class/post/${props.id}`).then(
+    Axios.get(`http://localhost:3001/class/post/${props.id}`).then(
       (response) => {
         if (!response.data.post[0]) {
           setActivities([]);
@@ -33,13 +33,10 @@ const StudentClass = (props) => {
   }, [props.initial]);
 
   const submitComment = (commentId) => {
-    Axios.put(
-      `https://ecplcsms.herokuapp.com/class/comment/${props.id}/${commentId}`,
-      {
-        comment: comment,
-        commentor: firstname,
-      }
-    ).then((response) => {
+    Axios.put(`http://localhost:3001/class/comment/${props.id}/${commentId}`, {
+      comment: comment,
+      commentor: firstname,
+    }).then((response) => {
       if (response.data.success) {
         props.setInitial([]);
         setComment("");
@@ -48,7 +45,7 @@ const StudentClass = (props) => {
   };
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+    Axios.get("http://localhost:3001/user-login").then((response) => {
       if (response.data.length === 0) {
         setFirstname("");
       } else if (response.data.loggedIn) {
@@ -61,15 +58,15 @@ const StudentClass = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.activity);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.activity);
+        }
       }
-    });
+    );
   }, [props.initial]);
 
   return (

@@ -23,27 +23,23 @@ const Class = () => {
   const [classroom, setClassroom] = valueAllClass;
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/class/class-active").then(
-      (response) => {
-        if (response.data.length === 0) {
-          setActiveClass(0);
-        } else {
-          setActiveClass(response.data);
-        }
+    Axios.get("http://localhost:3001/class/class-active").then((response) => {
+      if (response.data.length === 0) {
+        setActiveClass(0);
+      } else {
+        setActiveClass(response.data);
       }
-    );
+    });
   }, []);
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/class/class-archived").then(
-      (response) => {
-        if (response.data.length === 0) {
-          setArchivedClass(0);
-        } else {
-          setArchivedClass(response.data);
-        }
+    Axios.get("http://localhost:3001/class/class-archived").then((response) => {
+      if (response.data.length === 0) {
+        setArchivedClass(0);
+      } else {
+        setArchivedClass(response.data);
       }
-    );
+    });
   });
 
   const makeFalse = () => {
@@ -59,7 +55,7 @@ const Class = () => {
   const [errMsg, setErrMsg] = useState("");
 
   const submitCreate = () => {
-    Axios.post("https://ecplcsms.herokuapp.com/class/create-class", {
+    Axios.post("http://localhost:3001/class/create-class", {
       className: classYear + "-" + section,
       classCapacity: classCapacity,
       section: section,

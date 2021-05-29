@@ -4,7 +4,7 @@ import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import Axios from "axios";
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
-import {LoginContext} from "../../../ContextFiles/LoginContext";
+import { LoginContext } from "../../../ContextFiles/LoginContext";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { Link } from "react-router-dom";
@@ -19,10 +19,8 @@ const Year = () => {
 
   const [yearList, setYearList] = valueAllYear;
 
-  
-
   const submitCreate = () => {
-    Axios.post("https://ecplcsms.herokuapp.com/year/create", {
+    Axios.post("http://localhost:3001/year/create", {
       grade: grade,
       number: number,
     }).then((response) => {
@@ -32,14 +30,7 @@ const Year = () => {
         setErrMsg(response.data.success);
         setGrade("");
         setNumber("");
-        // setYearList([
-        //   ...yearList,
-        //   {
-        //     _id: grade + " " + number,
-        //     year: grade + " " + number,
-        //   },
-        // ]);
-        setInitials(response.data.success)
+        setInitials(response.data.success);
       }
     });
   };
@@ -47,7 +38,6 @@ const Year = () => {
   return (
     <>
       <div className="year-wrapper">
-     
         <div
           onClick={() => setShowForm(false)}
           className={showForm ? "year-wrapper-after" : ""}

@@ -13,6 +13,8 @@ import Draft from "./Draft";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
+import Loader from "../../../Components/Loader/Loader";
 
 const Subjects = (props) => {
   const [showAssigned, setShowAssigned] = useState(false);
@@ -34,27 +36,36 @@ const Subjects = (props) => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    Axios.get(
-      `http://ecplcsms.herokuapp.com/class/assignment/${props.id}`
-    ).then((response) => {
-      if (response.data.length === 0) {
-        setActivity([]);
-      } else {
-        setActivity(response.data.activity);
+    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActivity([]);
+        } else {
+          setActivity(response.data.activity);
+        }
       }
-    });
+    );
   }, [props.initial]);
+
+  const dropdownVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      pointerEvents: "auto",
+      zIndex: 1,
+    },
+    initial: {
+      y: -50,
+      opacity: 0,
+      pointerEvents: "none",
+      zIndex: -1,
+    },
+  };
 
   return (
     <>
       <div className="subject-class-wrapper">
-        <div
-          className={
-            message === "" || message !== "Successfully created activity."
-              ? "hidden"
-              : "assignment-wrapper-after"
-          }
-        >
+        <div className={message === "" ? "hidden" : "assignment-wrapper-after"}>
           {message}
         </div>
         {assignment && (
@@ -63,7 +74,6 @@ const Subjects = (props) => {
             id={props.id}
             subject={props.subject}
             setActivity={setActivity}
-            activity={activity}
             setInitial={props.setInitial}
             message={message}
             setMessage={setMessage}
@@ -76,6 +86,8 @@ const Subjects = (props) => {
             subject={props.subject}
             setInitial={props.setInitial}
             setLecture={setLecture}
+            message={props.message}
+            setMessage={props.setMessage}
           />
         )}
 
@@ -84,6 +96,13 @@ const Subjects = (props) => {
         <TeacherDashboard />
         <div className="subject-class-content">
           <DashboardHeader />
+          <div
+            className={
+              props.message === "" ? "hidden" : "assignment-wrapper-after"
+            }
+          >
+            {props.message}
+          </div>
 
           <div className="actual-activity-header">
             <Link to={props.goBack} className="go-back-btn">
@@ -97,17 +116,19 @@ const Subjects = (props) => {
               <i
                 className={dropdown ? "fas fa-angle-up" : "fas fa-angle-down"}
               ></i>
-              <div
-                className={
-                  dropdown ? "create-activity-dropdown-after" : "hidden"
-                }
+              <motion.div
+                variants={dropdownVariants}
+                initial="initial"
+                animate={dropdown ? "visible" : ""}
+                transition={{ duration: 0.1 }}
+                className="create-activity-dropdown-after"
               >
                 <div onClick={() => setAssignment(true)}>Assignment</div>
                 <div onClick={() => setQuiz(true)}>Quiz</div>
                 <div className="material-item" onClick={() => setLecture(true)}>
                   Material
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 

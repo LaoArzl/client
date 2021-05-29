@@ -14,20 +14,18 @@ const MaterialLecture = (props) => {
 
   const downloadFile = () => {
     window.open(
-      `https://ecplcsms.herokuapp.com/file/download/${props.filename}`,
+      `http://localhost:3001/file/download/${props.filename}`,
 
       "_blank"
     );
   };
 
-  const [activityFile, setActivityFile] = useState([]);
-
   useEffect(() => {
-    Axios.get(
-      `https://ecplcsms.herokuapp.com/file/filename/${props.filename}`
-    ).then((response) => {
-      console.log(response);
-    });
+    Axios.get(`http://localhost:3001/file/filename/${props.filename}`).then(
+      (response) => {
+        console.log(response);
+      }
+    );
   }, [props.initial]);
 
   return (

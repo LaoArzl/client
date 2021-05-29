@@ -12,29 +12,25 @@ const GradeLevel = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/year/${props.id}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setGrade("");
-          setNumber("");
-        } else {
-          setGrade(response.data.grade);
-          setNumber(response.data.year);
-        }
+    Axios.get(`http://localhost:3001/year/${props.id}`).then((response) => {
+      if (response.data.length === 0) {
+        setGrade("");
+        setNumber("");
+      } else {
+        setGrade(response.data.grade);
+        setNumber(response.data.year);
       }
-    );
+    });
   }, [props.initial]);
 
   const submitDelete = () => {
-    Axios.put(`https://ecplcsms.herokuapp.com/year/${props.id}`, {}).then(
-      (response) => {
-        if (response) {
-          props.setStatusMsg(response.data.success)
-          props.setInitial([]);
-          history.push("/admin/year");
-        }
+    Axios.put(`http://localhost:3001/year/${props.id}`, {}).then((response) => {
+      if (response) {
+        props.setStatusMsg(response.data.success);
+        props.setInitial([]);
+        history.push("/admin/year");
       }
-    );
+    });
   };
 
   return (

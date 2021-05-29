@@ -17,7 +17,7 @@ const TeacherProfile = (props) => {
   const [yourClass, setYourClass] = useState([]);
   const [showClass, setShowClass] = useState(true);
 
-  const url = `https://ecplcsms.herokuapp.com/class/${props.id}`;
+  const url = `http://localhost:3001/class/${props.id}`;
 
   useEffect(() => {
     Axios.get(url).then((response) => {
@@ -30,70 +30,65 @@ const TeacherProfile = (props) => {
   }, []);
 
   useEffect(() => {
-    Axios.get(`https://ecplcsms.herokuapp.com/teacher/${pops}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setTeacherData([]);
-        } else {
-          setTeacherData(response.data);
-        }
+    Axios.get(`http://localhost:3001/teacher/${pops}`).then((response) => {
+      if (response.data.length === 0) {
+        setTeacherData([]);
+      } else {
+        setTeacherData(response.data);
       }
-    );
+    });
   }, []);
 
   return (
     <>
-      {teacherData.length === 0 && <MainLoader />}
-      {role !== "Teacher" ? (
-        <BrokenPage />
-      ) : (
-        <div className="user-profile">
-          <TeacherDashboard />
-          <div className="user-content">
-            <DashboardHeader />
-            <div className="user-content-header">
-              <h2>Teacher {teacherData.firstname}</h2>
-            </div>
-            <div className="user-content-sub-header">
-              <p onClick={() => setShowClass(!showClass)}>
-                Your Class
-                <i
-                  className={
-                    showClass ? "fas fa-caret-down" : "fas fa-caret-right"
-                  }
-                ></i>
-              </p>
-              <span></span>
-            </div>
-            <div
-              className={
-                showClass ? "user-content-body" : "user-content-body-hidden"
-              }
-            >
-              {yourClass.map((value, key) => {
-                return (
-                  <Link
-                    to={"/teacher-class/" + value._id}
-                    key={key}
-                    className="user-class-class-wrapper"
-                  >
-                    <div className="user-class-class-wrapper-upper">
-                      <span>
-                        <LibraryBooksOutlinedIcon fontSize="large" />
-                      </span>
-                    </div>
-                    <div className="user-class-class-wrapper-lower">
-                      <h3>{value.className}</h3>
-                      <b>{value.adviser_id.fullname}</b>
-                      <span> {value.students.length}</span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+      {/* {teacherData.length === 0 && <MainLoader />} */}
+
+      <div className="user-profile">
+        <TeacherDashboard />
+        <div className="user-content">
+          <DashboardHeader />
+          <div className="user-content-header">
+            <h2>Teacher {teacherData.firstname}</h2>
+          </div>
+          <div className="user-content-sub-header">
+            <p onClick={() => setShowClass(!showClass)}>
+              Your Class
+              <i
+                className={
+                  showClass ? "fas fa-caret-down" : "fas fa-caret-right"
+                }
+              ></i>
+            </p>
+            <span></span>
+          </div>
+          <div
+            className={
+              showClass ? "user-content-body" : "user-content-body-hidden"
+            }
+          >
+            {yourClass.map((value, key) => {
+              return (
+                <Link
+                  to={"/teacher-class/" + value._id}
+                  key={key}
+                  className="user-class-class-wrapper"
+                >
+                  <div className="user-class-class-wrapper-upper">
+                    <span>
+                      <LibraryBooksOutlinedIcon fontSize="large" />
+                    </span>
+                  </div>
+                  <div className="user-class-class-wrapper-lower">
+                    <h3>{value.className}</h3>
+                    <b>{value.adviser_id.fullname}</b>
+                    <span> {value.students.length}</span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

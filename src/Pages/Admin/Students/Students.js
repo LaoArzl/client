@@ -12,16 +12,6 @@ const Students = () => {
   const [students, setStudents] = value00;
   const [searchItem, setSearchItem] = value03;
 
-  // const generatePassword = () => {
-  //   let result = "";
-  //   let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  //   let charactersLength = characters.length;
-  //   for (var i = 0; i < 5; i++) {
-  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  //   }
-  //   setPasswordStudent("ECPLC" + result);
-  // };
-
   const [showExport, setShowExport] = useState(false);
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
@@ -87,7 +77,9 @@ const Students = () => {
                   return (
                     <>
                       <div key={value._id} className="student-list-body">
-                        <div className="student-list-id-span">{value._id}</div>
+                        <div className="student-list-id-span">
+                          {value.idNumber}
+                        </div>
                         <div className="student-list-name-span">
                           {value.fullname}
                         </div>

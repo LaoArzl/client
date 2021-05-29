@@ -8,16 +8,15 @@ export const LoginProvider = (props) => {
   const [role, setRole] = useState("");
   const [userID, setUserID] = useState("");
   const [firstname, setFirstname] = useState("");
-  
 
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+    Axios.get("http://localhost:3001/user-login").then((response) => {
       if (response.data.length === 0) {
         console.log("No User");
         setRole("");
-        setUserID("")
+        setUserID("");
       } else if (response.data.loggedIn) {
         setRole(response.data.user);
         setUserID(response.data.id);
@@ -33,7 +32,6 @@ export const LoginProvider = (props) => {
         loginRole: [role, setRole],
         valueID: [userID, setUserID],
         valueFirstname: [firstname, setFirstname],
-        
       }}
     >
       {props.children}

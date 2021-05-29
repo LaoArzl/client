@@ -31,7 +31,7 @@ const TeacherAdmission = (props) => {
   }, []);
 
   const submitTeacher = () => {
-    Axios.post("https://ecplcsms.herokuapp.com/register-teacher", {
+    Axios.post("http://localhost:3001/register-teacher", {
       id: account.id,
       password: account.password,
       lastname: account.lastname,
@@ -105,7 +105,7 @@ const TeacherAdmission = (props) => {
 
     setAccount({
       id: "ECPLC" + "-" + result1.join("") + result2.join(""),
-      password: account.passowrd,
+      password: account.password,
       year: account.year,
       lastname: account.lastname,
       firstname: account.firstname,

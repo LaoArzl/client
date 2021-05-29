@@ -15,7 +15,6 @@ const Dashboard = () => {
     setShowName(!showName);
   };
 
-
   return (
     <>
       <div className={showName ? "extra-sidebar" : "sidebar"}>
@@ -31,7 +30,12 @@ const Dashboard = () => {
             className={showName ? "router-link" : "router-link-extra"}
             to="/admin/dashboard"
           >
-            <Tippy enabled={showName ? false : true} content={"Dashboard"} arrow={false} placement="right">
+            <Tippy
+              enabled={showName ? false : true}
+              content={"Dashboard"}
+              arrow={false}
+              placement="right"
+            >
               <li
                 className="li-middle"
                 id={
@@ -80,7 +84,12 @@ const Dashboard = () => {
                 to={val.link}
                 key={key}
               >
-                <Tippy enabled={showName ? false : true} content={val.name} arrow={false} placement="right">
+                <Tippy
+                  enabled={showName ? false : true}
+                  content={val.name}
+                  arrow={false}
+                  placement="right"
+                >
                   <li
                     className="li-middle"
                     key={key}
@@ -130,7 +139,12 @@ const Dashboard = () => {
                 to={val.link}
                 key={key}
               >
-                <Tippy enabled={showName ? false : true} content={val.name} arrow={false} placement="right">
+                <Tippy
+                  enabled={showName ? false : true}
+                  content={val.name}
+                  arrow={false}
+                  placement="right"
+                >
                   <li
                     className="li-middle"
                     key={key}
