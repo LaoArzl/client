@@ -5,7 +5,7 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { DashboardContext } from "../../../ContextFiles/DashboardContext";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
-import Axios from "axios"
+import Axios from "axios";
 
 const TeacherDashboard = () => {
   const [showName, setShowName] = useContext(DashboardContext);
@@ -16,15 +16,14 @@ const TeacherDashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/user-login").then((response) => {
       if (response.data.length === 0) {
-        setUserID("")
+        setUserID("");
       } else if (response.data.loggedIn) {
         setUserID(response.data.id);
       }
     });
   }, []);
-
 
   return (
     <>
@@ -39,8 +38,17 @@ const TeacherDashboard = () => {
         <ul className={showName ? "dashboard-extra-links" : "dashboard-links"}>
           {TeacherDashboardData.map((val, key) => {
             return (
-              <Link className="router-link-extra" to={val.link + userID} key={key}>
-                <Tippy content={val.name} enabled={showName ? false : true} arrow={false} placement="right">
+              <Link
+                className="router-link-extra"
+                to={val.link + userID}
+                key={key}
+              >
+                <Tippy
+                  content={val.name}
+                  enabled={showName ? false : true}
+                  arrow={false}
+                  placement="right"
+                >
                   <li
                     className="li-middle"
                     id={

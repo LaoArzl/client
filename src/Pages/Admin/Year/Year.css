@@ -51,7 +51,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .year-form-header {
@@ -304,7 +304,6 @@
 
 .year-content-header-header {
   width: 95%;
-  height: 12vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -314,8 +313,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  max-height: 50px;
-  min-height: 40px;
+  height: 50px;
 }
 
 .year-content-header-header div:hover {
@@ -324,19 +322,17 @@
 }
 
 .year-content-header-header div {
-  width: 10%;
-  min-width: 100px;
-  height: 100%;
+  width: 90px;
+  height: 40px;
   background: #2ab56f;
   color: #ffffff;
-  border-radius: 8px;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: var(--font15);
   transition: 0.2s ease-out;
-  font-weight: 500;
 }
 
 .year-list-wrapper {
@@ -344,7 +340,7 @@
   height: auto;
   background: rgb(255, 255, 255);
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 5px;
   margin-bottom: 20px;
   border-right: 1px solid rgb(235, 235, 235);
   border-top: 1px solid rgb(235, 235, 235);

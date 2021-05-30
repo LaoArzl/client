@@ -12,25 +12,29 @@ const GradeLevel = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/year/${props.id}`).then((response) => {
-      if (response.data.length === 0) {
-        setGrade("");
-        setNumber("");
-      } else {
-        setGrade(response.data.grade);
-        setNumber(response.data.year);
+    Axios.get(`https://ecplc2021.herokuapp.com/year/${props.id}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setGrade("");
+          setNumber("");
+        } else {
+          setGrade(response.data.grade);
+          setNumber(response.data.year);
+        }
       }
-    });
+    );
   }, [props.initial]);
 
   const submitDelete = () => {
-    Axios.put(`http://localhost:3001/year/${props.id}`, {}).then((response) => {
-      if (response) {
-        props.setStatusMsg(response.data.success);
-        props.setInitial([]);
-        history.push("/admin/year");
+    Axios.put(`https://ecplc2021.herokuapp.com/year/${props.id}`, {}).then(
+      (response) => {
+        if (response) {
+          props.setStatusMsg(response.data.success);
+          props.setInitial([]);
+          history.push("/admin/year");
+        }
       }
-    });
+    );
   };
 
   return (

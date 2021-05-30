@@ -64,31 +64,35 @@ function App() {
   const [initial, setInitial] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/student-list").then((response) => {
-      if (response.data.length === 0) {
-        setStudentUser([]);
-      } else {
-        setStudentUser(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/student-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setStudentUser([]);
+        } else {
+          setStudentUser(response.data);
+        }
       }
-    });
+    );
 
     return console.log("Unmounting");
   }, [initial]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/teacher-list").then((response) => {
-      if (response.data.length === 0) {
-        setTeacherUser([]);
-      } else {
-        setTeacherUser(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/teacher-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTeacherUser([]);
+        } else {
+          setTeacherUser(response.data);
+        }
       }
-    });
+    );
 
     return console.log("Unmounting");
   }, [initial]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/populate-teacher").then(
+    Axios.get("https://ecplc2021.herokuapp.com/class/populate-teacher").then(
       (response) => {
         if (response.data.length === 0) {
           setClassData([]);
@@ -102,13 +106,15 @@ function App() {
   }, [initial]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/year/create").then((response) => {
-      if (response.data.length === 0) {
-        setYearId([]);
-      } else {
-        setYearId(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/year/create").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setYearId([]);
+        } else {
+          setYearId(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   const [message, setMessage] = useState("");
@@ -155,17 +161,18 @@ function App() {
                               <Route
                                 key={value._id}
                                 path={"/admin/edit-user/" + value._id}
-                                id={value._id}
                                 exact
-                                component={UserStudent}
-                              />
+                              >
+                                <UserStudent id={value._id} />
+                              </Route>
                             );
                           })}
-                          <Route
-                            path="/admin/students"
-                            exact
-                            component={Students}
-                          />
+                          <Route path="/admin/students" exact>
+                            <Students
+                              initial={initial}
+                              setInitial={setInitial}
+                            />
+                          </Route>
 
                           <Route
                             path="/prototype"
@@ -215,6 +222,7 @@ function App() {
                               </Route>
                             );
                           })}
+
                           {teacherUser.map((value) => {
                             return (
                               <Route
@@ -226,11 +234,12 @@ function App() {
                               </Route>
                             );
                           })}
-                          <Route
+
+                          {/* <Route
                             path="/user/student/"
                             exact
                             component={StudentProfile}
-                          />
+                          /> */}
                           {classData.map((value) => {
                             return (
                               <Route
@@ -242,24 +251,28 @@ function App() {
                               </Route>
                             );
                           })}
-                          {classData.map((value) => {
-                            return (
-                              <Route
-                                key={value._id}
-                                path={"/teacher-class/" + value._id}
-                                exact
-                              >
-                                <ClassTeacher
-                                  id={value._id}
-                                  adviser={value.adviser_id.fullname}
-                                  adviserId={value.adviser_id._id}
-                                  name={value.className}
-                                  setInitial={setInitial}
-                                  initial={initial}
-                                />
-                              </Route>
-                            );
-                          })}
+                          {classData === null ? null : (
+                            <>
+                              {classData.map((value) => {
+                                return (
+                                  <Route
+                                    key={value._id}
+                                    path={"/teacher-class/" + value._id}
+                                    exact
+                                  >
+                                    <ClassTeacher
+                                      id={value._id}
+                                      adviser={value.adviser_id.fullname}
+                                      adviserId={value.adviser_id._id}
+                                      name={value.className}
+                                      setInitial={setInitial}
+                                      initial={initial}
+                                    />
+                                  </Route>
+                                );
+                              })}
+                            </>
+                          )}
 
                           {classData.map((value) => {
                             return value.students.map((stud) => {
@@ -733,6 +746,8 @@ function App() {
                                     setInitial={setInitial}
                                     initial={initial}
                                     filename={key.file}
+                                    message={message}
+                                    setMessage={setMessage}
                                   />
                                 </Route>
                               );

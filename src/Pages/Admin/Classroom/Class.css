@@ -70,11 +70,11 @@
   justify-content: space-between;
   margin: 0 auto;
   margin-bottom: 30px;
-  min-height: 40px;
+  min-height: 50px;
 }
 
 .div-class-search {
-  width: 35%;
+  width: 40%;
   height: 100%;
   position: relative;
   display: flex;

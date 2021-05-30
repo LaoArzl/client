@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import "../Students/Students.css";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
@@ -6,14 +6,25 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
+import Axios from "axios";
 
 const Teachers = () => {
-  const { value01, value04 } = useContext(StudentListContext);
-  const [teachers, setTeachers] = value01;
-  const [searchTeacher, setSearchTeacher] = value04;
   const [showExport, setShowExport] = useState(false);
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
+  const [teachers, setTeachers] = useState([]);
+
+  useEffect(() => {
+    Axios.get("https://ecplc2021.herokuapp.com/teacher-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTeachers([]);
+        } else {
+          setTeachers(response.data);
+        }
+      }
+    );
+  }, []);
 
   return (
     <>
@@ -55,43 +66,31 @@ const Teachers = () => {
                 <div className="student-list-gradelevel">Gender</div>
                 <div className="student-list-action">Action</div>
               </div>
-              {teachers
-                .filter((val) => {
-                  if (searchTeacher === "") {
-                    return val;
-                  } else if (val._id.includes(searchTeacher)) {
-                    return val;
-                  } else if (
-                    val.fullName
-                      .toLowerCase()
-                      .includes(searchTeacher.toLowerCase())
-                  ) {
-                    return val;
-                  }
-                })
-                .map((value, key) => {
-                  return (
-                    <>
-                      <div key={value._id} className="student-list-body">
-                        <div className="student-list-id-span">{value._id}</div>
-                        <div className="student-list-name-span">
-                          {value.fullname}
-                        </div>
-                        <div className="student-list-gradelevel-span">
-                          {value.gender}
-                        </div>
-                        <div className="student-list-action-span">
-                          <Link
-                            className="student-list-action-link"
-                            to={"/admin/edit-user/" + value._id}
-                          >
-                            <i className="fas fa-pen"></i>
-                          </Link>
-                        </div>
+              {teachers.map((value, key) => {
+                return (
+                  <>
+                    <div key={value.username} className="student-list-body">
+                      <div className="student-list-id-span">
+                        {value.username}
                       </div>
-                    </>
-                  );
-                })}
+                      <div className="student-list-name-span">
+                        {value.fullname}
+                      </div>
+                      <div className="student-list-gradelevel-span">
+                        {value.gender}
+                      </div>
+                      <div className="student-list-action-span">
+                        <Link
+                          className="student-list-action-link"
+                          to={"/admin/edit-user/" + value._id}
+                        >
+                          <i className="fas fa-pen"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
         </div>

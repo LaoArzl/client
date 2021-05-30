@@ -1,11 +1,11 @@
 .div-loader-spinner-wrapper {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   background: rgba(255, 255, 255, 0.5);
   left: 0;
   top: 0;

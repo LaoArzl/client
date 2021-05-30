@@ -3,6 +3,8 @@ import "./Login.css";
 import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../ContextFiles/LoginContext";
 import Axios from "axios";
+import WhiteLoader from "../../Components/Loader/Loader";
+import { PulseLoader } from "react-spinners";
 
 const Login = () => {
   Axios.defaults.withCredentials = true;
@@ -14,32 +16,30 @@ const Login = () => {
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
 
-  // useEffect(() => {
-  //   Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
-  //     if(response.data.loggedIn === false) {
-  //       setRole("")
-  //     } else {
-  //       setRole(response.data.user)
-  //     }
-  //   })
-  // }, [])
+  const [loader, setLoader] = useState(false);
 
   const id = localStorage.getItem("id");
 
   const submitLogin = () => {
-    Axios.post("http://localhost:3001/user-login", {
+    setLoader(true);
+    Axios.post("https://ecplc2021.herokuapp.com/user-login", {
       username: username,
       password: password,
     }).then((response) => {
       if (response.data.wrong) {
+        setLoader(false);
         setErrMsg(response.data.wrong);
       } else if (response.data.empty) {
+        setLoader(false);
         setErrMsg(response.data.empty);
       } else if (response.data.nouser) {
+        setLoader(false);
         setErrMsg(response.data.nouser);
       } else if (!response.data.auth) {
+        setLoader(false);
         console.log("Error Logging in");
       } else if (response.data.auth) {
+        setLoader(false);
         localStorage.setItem("id", response.data._id);
         setRole(response.data.userType);
         setPassword("");
@@ -100,17 +100,16 @@ const Login = () => {
           </div>
 
           <div className="login-input-login">
-            <input
-              className={
-                username === "" && password === ""
-                  ? "login-btn-disabled"
-                  : "login-btn"
-              }
-              disabled={username === "" && password === "" ? true : false}
+            <button
+              className={loader ? "login-btn-disabled" : "login-btn"}
               onClick={submitLogin}
-              type="submit"
-              value="Sign In"
-            />
+            >
+              {loader ? (
+                <PulseLoader color={`#fff`} size={8} margin={2} loading />
+              ) : (
+                "Sign In"
+              )}
+            </button>
           </div>
           <span>Forgot your password?</span>
         </form>

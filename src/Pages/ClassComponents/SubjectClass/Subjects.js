@@ -36,15 +36,15 @@ const Subjects = (props) => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setActivity([]);
-        } else {
-          setActivity(response.data.activity);
-        }
+    Axios.get(
+      `https://ecplc2021.herokuapp.com/class/assignment/${props.id}`
+    ).then((response) => {
+      if (response.data.length === 0) {
+        setActivity([]);
+      } else {
+        setActivity(response.data.activity);
       }
-    );
+    });
   }, [props.initial]);
 
   const dropdownVariants = {

@@ -44,7 +44,7 @@
   min-height: 80px;
   max-height: 120px;
   transition: 0.2s ease-out;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: var(--font15);
 }
 
@@ -68,6 +68,13 @@
   color: var(--sub-font);
   text-align: center;
   font-size: var(--font14);
+}
+
+.subject-loader {
+  background: rgba(255, 0, 0, 0);
+  top: 50%;
+  left: 50%;
+  position: absolute;
 }
 
 @media screen and (max-width: 780px) {

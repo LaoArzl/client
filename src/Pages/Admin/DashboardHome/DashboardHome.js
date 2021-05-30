@@ -25,37 +25,43 @@ const DashboardHome = () => {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/total-student").then((response) => {
-      if (response.data.length === 0) {
-        setTotalStudent(0);
-      } else {
-        setTotalStudent(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/total-student").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTotalStudent(0);
+        } else {
+          setTotalStudent(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/total-teacher").then((response) => {
-      if (response.data.length === 0) {
-        setTotalTeacher(0);
-      } else {
-        setTotalTeacher(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/total-teacher").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTotalTeacher(0);
+        } else {
+          setTotalTeacher(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/total-class").then((response) => {
-      if (response.data.length === 0) {
-        setTotalClass(0);
-      } else {
-        setTotalClass(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/class/total-class").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTotalClass(0);
+        } else {
+          setTotalClass(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/user-login").then((response) => {
       console.log(response.data);
     });
   }, []);

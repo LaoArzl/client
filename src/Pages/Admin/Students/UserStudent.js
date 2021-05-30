@@ -6,7 +6,7 @@ import "../Teachers/UserProfile.css";
 import NavStudProfile from "./NavStudProfile";
 import NavStudAccount from "./NavStudAccount";
 
-const UserStudent = () => {
+const UserStudent = (props) => {
   const [userNav, setUserNav] = useState("");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const UserStudent = () => {
                     : "user-navigation-profile"
                 }
               >
-                User Profile{" "}
+                User Profile
                 <i
                   class={userNav === "Profile" ? "fas fa-chevron-right" : ""}
                 ></i>
@@ -62,8 +62,8 @@ const UserStudent = () => {
               </div>
             </div>
             <div className="user-profile-content-actual">
-              {userNav === "Profile" && <NavStudProfile />}
-              {userNav === "Account" && <NavStudAccount />}
+              {userNav === "Profile" && <NavStudProfile id={props.id} />}
+              {userNav === "Account" && <NavStudAccount id={props.id} />}
             </div>
           </div>
         </div>

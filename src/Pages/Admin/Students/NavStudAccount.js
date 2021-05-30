@@ -13,7 +13,7 @@ const NavStudAccount = () => {
   const [changeError, setChangeError] = useState("");
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/student/${tempId}`).then((response) => {
+    Axios.get(`https://ecplc2021.herokuapp.com/${tempId}`).then((response) => {
       if (response.data.length == 0) {
         setStudentUsername("");
         setStudentPassword("");
@@ -30,7 +30,7 @@ const NavStudAccount = () => {
     } else if (changePassword === "" && changeConfirm === "") {
       setChangeError("Input empty field");
     } else {
-      Axios.post(`http://localhost:3001/change-password/${tempId}`, {
+      Axios.post(`https://ecplc2021.herokuapp.com/change-password/${tempId}`, {
         changePassword: changePassword,
       }).then((response) => {
         if (response.data.result) {

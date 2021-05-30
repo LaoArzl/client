@@ -18,7 +18,7 @@ const StudentProfile = (props) => {
   const [showClass, setShowClass] = useState(true);
   const [studentData, setStudentData] = useState([]);
 
-  const url = `http://localhost:3001/class/student/${props.id}`;
+  const url = `https://ecplc2021.herokuapp.com/class/student/${props.id}`;
 
   useEffect(() => {
     Axios.get(url).then((response) => {
@@ -32,13 +32,15 @@ const StudentProfile = (props) => {
   }, []);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/student/${pops}`).then((response) => {
-      if (response.data.length === 0) {
-        setStudentData([]);
-      } else {
-        setStudentData(response.data);
+    Axios.get(`https://ecplc2021.herokuapp.com/student/${pops}`).then(
+      (response) => {
+        if (response.data.length === 0) {
+          setStudentData([]);
+        } else {
+          setStudentData(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   return (

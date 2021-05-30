@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import "./Students.css";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
@@ -6,15 +6,28 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
+import Axios from "axios";
 
-const Students = () => {
+const Students = (props) => {
   const { value00, value03 } = useContext(StudentListContext);
-  const [students, setStudents] = value00;
+  const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = value03;
 
   const [showExport, setShowExport] = useState(false);
   const { loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
+
+  useEffect(() => {
+    Axios.get("https://ecplc2021.herokuapp.com/student-list").then(
+      (response) => {
+        if (response.data.length == 0) {
+          setStudents([]);
+        } else {
+          setStudents(response.data);
+        }
+      }
+    );
+  }, [props.initial]);
 
   return (
     <>

@@ -209,6 +209,10 @@
   transition: 0.2s ease-out;
   margin-top: 10px;
   font-size: var(--font16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .login-btn-disabled {
@@ -226,6 +230,10 @@
   font-size: var(--font16);
   opacity: 0.5;
   pointer-events: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-input input:hover {

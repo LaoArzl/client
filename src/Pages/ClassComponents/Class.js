@@ -3,8 +3,26 @@ import "./Class.css";
 import Axios from "axios";
 import { LoginContext } from "../../ContextFiles/LoginContext";
 import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
+import Loader from "../.././Components/Loader/Loader";
+import { motion } from "framer-motion";
 
 const Class = (props) => {
+  const dropdownVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      pointerEvents: "auto",
+      zIndex: 3,
+    },
+    initial: {
+      y: -50,
+      opacity: 0,
+      pointerEvents: "none",
+      zIndex: -1,
+    },
+  };
+  const [del, setDel] = useState(false);
+  const [option, setOption] = useState(false);
   const { valueID, valueFirstname } = useContext(LoginContext);
   const [userID, setUserID] = valueID;
   const [firstname, setFirstname] = useState("");
@@ -13,17 +31,17 @@ const Class = (props) => {
   const [post, setPost] = useState("");
   const date = new Date().toLocaleDateString();
 
-  const [key, setKey] = useState("");
-
+  const [key, setKey] = useState(null);
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState(null);
+  const [loader, setLoader] = useState(false);
 
   const [subjects, setSubjects] = useState([]);
   const [postDropdown, setPostDropdown] = useState(false);
   const [postTo, setPostTo] = useState("General");
 
   const submitComment = (commentId) => {
-    Axios.put(`http://localhost:3001/${props.id}/${commentId}`, {
+    Axios.put(`https://ecplc2021.herokuapp.com/${props.id}/${commentId}`, {
       comment: comment,
       commentor: firstname,
     }).then((response) => {
@@ -35,7 +53,7 @@ const Class = (props) => {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/user-login").then((response) => {
       if (response.data.length === 0) {
         setFirstname("");
       } else if (response.data.loggedIn) {
@@ -45,32 +63,52 @@ const Class = (props) => {
   }, [props.initial]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/class/populate-subjects/${props.id}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setSubjects([]);
-        } else {
-          //setSubjects()
-          setSubjects(response.data.year[0].subjects);
-        }
+    Axios.get(
+      `https://ecplc2021.herokuapp.com/class/populate-subjects/${props.id}`
+    ).then((response) => {
+      if (response.data.length === 0) {
+        setSubjects([]);
+      } else {
+        //setSubjects()
+        setSubjects(response.data.year[0].subjects);
       }
-    );
+    });
   }, [props.initial]);
 
   const addPost = () => {
-    Axios.put(`http://localhost:3001/class/post/${props.id}`, {
+    setLoader(true);
+    let formData = new FormData();
+    formData.append("caption", filename);
+    formData.append("file", file);
+
+    Axios.put(`https://ecplc2021.herokuapp.com/class/post/${props.id}`, {
       body: post,
       date: date,
       poster: firstname,
       tags: postTo,
+      file: filename,
     }).then((response) => {
       if (response.data.err) {
         props.setMsg(response.data.err);
+        setLoader(false);
       } else {
+        Axios.post(
+          "https://ecplc2021.herokuapp.com/file/upload-file",
+          formData,
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          }
+        );
         props.setMsg(response.data.success);
         setPost("");
         props.setInitial([]);
         setTimeout(() => props.setMsg(""), 5000);
+        setLoader(false);
+        setKey(null);
+        setFilename(null);
+        setFile(null);
       }
     });
   };
@@ -78,6 +116,7 @@ const Class = (props) => {
   return (
     <>
       <div className="create-something">
+        {loader && <Loader />}
         <div className="create-something-header">
           <p>General Discussion</p>
         </div>
@@ -188,6 +227,26 @@ const Class = (props) => {
               return (
                 <div key={value._id} className="class-posts">
                   <div className="class-posts-body">
+                    <div
+                      onClick={() => setOption(!option)}
+                      className="option-menu"
+                    >
+                      <motion.div
+                        variants={dropdownVariants}
+                        initial="initial"
+                        animate={value.isEditing ? "visible" : ""}
+                        transition={{ duration: 0.1 }}
+                        className="option-menu-after"
+                      >
+                        <div className="option-menu-item">
+                          <p>Edit</p>
+                        </div>
+                        <div className="option-menu-item">
+                          <p onClick={() => setDel(true)}>Delete</p>
+                        </div>
+                      </motion.div>
+                      <i className="fas fa-ellipsis-v"></i>
+                    </div>
                     <div className="class-posts-body-header">
                       <div className="class-posts-body-header-left"></div>
                       <div className="class-posts-body-header-right">
@@ -197,6 +256,24 @@ const Class = (props) => {
                       </div>
                     </div>
                     <div className="class-posts-body-body">{value.body}</div>
+                    {/* <div className="actual-activity-body-left-footer">
+                      <p className="footer-add-word">
+                        <InsertDriveFileOutlinedIcon
+                          className="material-document"
+                          fontSize="small"
+                        />
+                        <i>{value.file}</i>
+                      </p>
+                      <span
+                        onClick={() => {
+                          setFilename(null);
+                          setFile(null);
+                          setKey(null);
+                        }}
+                      >
+                        <i className="far fa-times-circle"></i>
+                      </span>
+                    </div> */}
                     <div className="class-posts-body-comment">
                       {value.comments.map((comment) => {
                         return (
@@ -210,7 +287,7 @@ const Class = (props) => {
                             <div className="class-posts-body-header-left"></div>
                             <div className="class-posts-body-comment-user">
                               <h5>{comment.commentor}</h5>
-                              <p>{comment.comment}</p>
+                              <p>{comment.comment} </p>
                             </div>
                           </div>
                         );

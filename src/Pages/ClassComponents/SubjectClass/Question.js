@@ -16,7 +16,7 @@ const Question = (props) => {
   }, []);
 
   const submitAssignment = () => {
-    Axios.put(`http://localhost:3001/class/lecture/${props.id}`, {
+    Axios.put(`https://ecplc2021.herokuapp.com/class/lecture/${props.id}`, {
       datetime: new Date().toLocaleDateString(),
       topic: activity.topic,
       instructions: activity.instructions,
@@ -42,13 +42,13 @@ const Question = (props) => {
     formData.append("file", file);
 
     Axios.all([
-      Axios.post("http://localhost:3001/upload-file", formData, {
+      Axios.post("https://ecplc2021.herokuapp.com/upload-file", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
       }),
 
-      Axios.put(`http://localhost:3001/class/lecture/${props.id}`, {
+      Axios.put(`https://ecplc2021.herokuapp.com/class/lecture/${props.id}`, {
         datetime: new Date().toLocaleDateString(),
         topic: activity.topic,
         instructions: activity.instructions,

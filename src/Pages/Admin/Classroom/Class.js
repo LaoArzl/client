@@ -23,23 +23,27 @@ const Class = () => {
   const [classroom, setClassroom] = valueAllClass;
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/class-active").then((response) => {
-      if (response.data.length === 0) {
-        setActiveClass(0);
-      } else {
-        setActiveClass(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/class/class-active").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setActiveClass(0);
+        } else {
+          setActiveClass(response.data);
+        }
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/class/class-archived").then((response) => {
-      if (response.data.length === 0) {
-        setArchivedClass(0);
-      } else {
-        setArchivedClass(response.data);
+    Axios.get("https://ecplc2021.herokuapp.com/class/class-archived").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setArchivedClass(0);
+        } else {
+          setArchivedClass(response.data);
+        }
       }
-    });
+    );
   });
 
   const makeFalse = () => {
@@ -106,6 +110,14 @@ const Class = () => {
                     }
                   >
                     {errMsg}
+                  </div>
+
+                  <div className="create-class-div">
+                    <label>Class Name</label>
+                    <input
+                      value={classYear + " - " + section}
+                      type="text"
+                    ></input>
                   </div>
 
                   <div className="create-class-div">
@@ -193,10 +205,10 @@ const Class = () => {
           ></div>
           <div className="classs-content">
             <DashboardHeader />
-            <div className="class-actual-body-header">
+            <div className="students-content-lists-body-header">
               <div className="div-class-search">
                 <i className="fas fa-search"></i>
-                <input type="search" placeholder="Search for a class"></input>
+                <input type="search" placeholder="Search for a Class"></input>
               </div>
               <div className="div-class-active">
                 <span
@@ -246,7 +258,9 @@ const Class = () => {
                       Action
                     </div>
                   </div>
-                  {classroom === null ? null : (
+                  {classroom.length === 0 ? (
+                    ""
+                  ) : (
                     <>
                       {classroom.map((key) => {
                         return (
@@ -261,7 +275,7 @@ const Class = () => {
                               {key.section}
                             </div>
                             <div className="class-actual-body-active-adviser">
-                              {key.adviser_id.fullname}
+                              {/* {key.adviser_id.fullname} */}
                             </div>
                             <div className="class-actual-body-active-capacity">
                               {key.capacity}

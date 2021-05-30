@@ -18,7 +18,7 @@ const DashboardHeader = () => {
   };
 
   const submitLogout = () => {
-    Axios.get("http://localhost:3001/logout").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/logout").then((response) => {
       if (response) {
         localStorage.clear();
         window.location.reload();
@@ -27,7 +27,7 @@ const DashboardHeader = () => {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/user-login").then((response) => {
       if (response.data.length === 0) {
         setFirstname("");
       } else if (response.data.loggedIn) {

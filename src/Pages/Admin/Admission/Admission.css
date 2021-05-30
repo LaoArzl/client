@@ -74,8 +74,8 @@
 
 .admission-nav-student:hover {
   width: 100%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   color: #323b44;
   transition: 0.1s ease-in;
   background: #f5f6fa;
@@ -100,8 +100,8 @@
 .admission-nav-teacher:hover {
   width: 100%;
   transition: 0.2s ease-in;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   color: #323b44;
   transition: 0.1s ease-in;
   background: #f5f6fa;
@@ -121,8 +121,8 @@
   position: relative;
   transition: 0.1s ease-out;
   background: #f5f6fa;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .admission-nav-student-active i,
@@ -146,8 +146,8 @@
   position: relative;
   transition: 0.1s ease-out;
   background: #f5f6fa;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .admission-right {
@@ -194,6 +194,26 @@
   margin-bottom: 15px;
 }
 
+.contact-number-div {
+  position: absolute;
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.contact-number-div input {
+  width: 100%;
+}
+
+.contact-number-div .span {
+  width: 20%;
+  height: 100%;
+  background: pink;
+}
+
 .one-multi-admission-div {
   width: 43%;
   height: auto;
@@ -215,19 +235,20 @@
   border-style: none;
   outline-style: none;
   background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(230, 230, 230);
   padding-left: 10px;
   margin-top: 5px;
   color: var(--font);
 }
 
+.user-id-div-input input:focus,
 .one-multi-admission-div input:focus,
 .two-multi-admission-div input:focus,
 .three-multi-admission-div input:focus,
 .dual-admission-div-div input:focus,
 .admission-div input:focus,
 .admission-div select:focus {
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
 }
 
 .two-multi-admission-div {
@@ -251,7 +272,7 @@
   border-style: none;
   outline-style: none;
   background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(230, 230, 230);
   padding-left: 10px;
   margin-top: 5px;
   color: var(--font);
@@ -288,7 +309,7 @@
   border-style: none;
   outline-style: none;
   background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(230, 230, 230);
   padding-left: 10px;
   margin-top: 5px;
   color: var(--font);
@@ -350,8 +371,8 @@
   border-radius: 2px;
   border-style: none;
   outline-style: none;
-  background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  background: rgb(245, 246, 248);
+  border: 1px solid rgb(230, 230, 230);
   padding-left: 10px;
   margin-top: 5px;
   color: var(--font);
@@ -451,14 +472,15 @@
   margin-left: 3px;
 }
 
-.dual-admission-div-div input {
+.dual-admission-div-div input,
+.dual-admission-div-div select {
   width: 100%;
   height: 40px;
   border-radius: 2px;
   border-style: none;
   outline-style: none;
   background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(230, 230, 230);
   padding-left: 10px;
   margin-top: 5px;
   color: var(--font);
@@ -477,7 +499,7 @@
   border-style: none;
   outline-style: none;
   background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(230, 230, 230);
   padding-left: 10px;
   margin-top: 5px;
   color: var(--font);
@@ -490,7 +512,7 @@
   border-style: none;
   outline-style: none;
   background: rgb(246, 248, 250);
-  border: 1px solid lightgrey;
+  border: 1px solid rgb(230, 230, 230);
   padding: 10px;
   margin-top: 5px;
   resize: none;
@@ -651,4 +673,44 @@
 
 .successfully-created-hidden {
   display: none;
+}
+
+.gender-radio-btn {
+  display: flex;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.gender-radio-btn div {
+  display: flex;
+}
+
+.gender-radio-btn label {
+  color: var(--font);
+  font-weight: 400;
+  margin-top: 3px;
+}
+
+.gender-radio-btn input {
+  width: 15px;
+  height: 15px;
+  margin: none;
+  margin-right: 15px;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.label-div {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  margin-top: 50px;
+  color: var(--font);
+  font-weight: 500;
 }

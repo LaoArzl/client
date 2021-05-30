@@ -10,7 +10,8 @@ import { Link, Redirect } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const ClassTeacher = (props) => {
-  const { valueID } = useContext(LoginContext);
+  const { valueID, loginRole } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
   const [userId, setUserId] = valueID;
   const [createStream, showCreateStream] = useState(false);
   const [postNav, setPostNav] = useState("post");
@@ -31,12 +32,13 @@ const ClassTeacher = (props) => {
 
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    Axios.get(`http://localhost:3001/class/post/${props.id}`).then(
+    Axios.get(`https://ecplc2021.herokuapp.com/class/post/${props.id}`).then(
       (response) => {
         if (!response.data.post[0]) {
           setActivities([]);
         } else {
           setActivities(response.data.post);
+          console.log(response.data.post);
         }
       }
     );
@@ -59,67 +61,73 @@ const ClassTeacher = (props) => {
 
   return (
     <>
-      <motion.div
-        initial="initial"
-        animate="in"
-        variants={pageVariants}
-        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
-        className="teacher-class-wrapper"
-      >
-        <div
-          onClick={() => showCreateStream(false)}
-          className={createStream ? "teacher-class-wrapper-after" : ""}
-        ></div>
-        <TeacherDashboard />
+      {role !== "Teacher" ? (
+        <BrokenPage />
+      ) : (
+        <motion.div
+          initial="initial"
+          animate="in"
+          variants={pageVariants}
+          transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+          className="teacher-class-wrapper"
+        >
+          <div
+            onClick={() => showCreateStream(false)}
+            className={createStream ? "teacher-class-wrapper-after" : ""}
+          ></div>
+          <TeacherDashboard />
 
-        <div className={msg === "" ? "post-msg-hidden" : "post-msg"}>{msg}</div>
-        <div className="class-content">
-          <DashboardHeader />
-          <div className="class-content-header">
-            <div className="class-content-upper-header">
-              <h2>{props.name}</h2>
-              <p>{props.adviser}</p>
-            </div>
-            <div className="class-content-lower-header">
-              <Link className="nav-span-active">Posts</Link>
-
-              <Link
-                className="nav-span-diactive"
-                to={"/teacher-class/" + props.id + "/subjects"}
-              >
-                Subjects
-              </Link>
-
-              <Link
-                className="nav-span-diactive"
-                to={"/teacher-class/" + props.id + "/people"}
-              >
-                People
-              </Link>
-            </div>
+          <div className={msg === "" ? "post-msg-hidden" : "post-msg"}>
+            {msg}
           </div>
-
-          <div className="class-content-body">
-            <div className="class-content-body-left">
-              <div className="class-content-body-left-header">
-                <p>Bulletin Board</p>
+          <div className="class-content">
+            <DashboardHeader />
+            <div className="class-content-header">
+              <div className="class-content-upper-header">
+                <h2>{props.name}</h2>
+                <p>{props.adviser}</p>
               </div>
-              <div className="class-content-body-left-body"></div>
+              <div className="class-content-lower-header">
+                <Link className="nav-span-active">Posts</Link>
+
+                <Link
+                  className="nav-span-diactive"
+                  to={"/teacher-class/" + props.id + "/subjects"}
+                >
+                  Subjects
+                </Link>
+
+                <Link
+                  className="nav-span-diactive"
+                  to={"/teacher-class/" + props.id + "/people"}
+                >
+                  People
+                </Link>
+              </div>
             </div>
-            <div className="class-content-body-right">
-              <Class
-                id={props.id}
-                showCreateStream={showCreateStream}
-                activities={activities}
-                setActivities={setActivities}
-                msg={msg}
-                setMsg={setMsg}
-                setInitial={props.setInitial}
-              />
+
+            <div className="class-content-body">
+              <div className="class-content-body-left">
+                <div className="class-content-body-left-header">
+                  <p>Upcoming Work</p>
+                </div>
+                <div className="class-content-body-left-body"></div>
+              </div>
+              <div className="class-content-body-right">
+                <Class
+                  id={props.id}
+                  showCreateStream={showCreateStream}
+                  activities={activities}
+                  setActivities={setActivities}
+                  msg={msg}
+                  setMsg={setMsg}
+                  setInitial={props.setInitial}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      )}
     </>
   );
 };

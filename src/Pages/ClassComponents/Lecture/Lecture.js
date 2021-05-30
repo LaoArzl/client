@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TeacherDashboard from "../../Teacher/TeacherDashboard/TeacherDashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
 import "../../ClassComponents/SubjectClass/SubjectClass.css";
@@ -11,8 +11,13 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import { motion } from "framer-motion";
+import { LoginContext } from "../../../ContextFiles/LoginContext";
+import BrokenPage from "../../../Components/My404Component/BrokenPage";
 
 const Lecture = (props) => {
+  const { value1, loginRole } = useContext(LoginContext);
+  const [role, setRole] = loginRole;
+
   const [showAssigned, setShowAssigned] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
   const [dropdown, setDropdown] = useState(false);
@@ -38,15 +43,15 @@ const Lecture = (props) => {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/class/assignment/${props.id}`).then(
-      (response) => {
-        if (response.data.length === 0) {
-          setActivity([]);
-        } else {
-          setActivity(response.data.lecture);
-        }
+    Axios.get(
+      `https://ecplc2021.herokuapp.com/class/assignment/${props.id}`
+    ).then((response) => {
+      if (response.data.length === 0) {
+        setActivity([]);
+      } else {
+        setActivity(response.data.lecture);
       }
-    );
+    });
   }, [props.initial]);
 
   const dropdownVariants = {
@@ -81,189 +86,168 @@ const Lecture = (props) => {
 
   return (
     <>
-      <div className="subject-class-wrapper">
-        {assignment && (
-          <Assignment
-            setAssignment={setAssignment}
-            id={props.id}
-            subject={props.subject}
-            setActivity={setActivity}
-            activity={activity}
-            setInitial={props.setInitial}
-          />
-        )}
-        {quiz && <Quiz setQuiz={setQuiz} />}
-        {lecture && (
-          <Material
-            id={props.id}
-            subject={props.subject}
-            setInitial={props.setInitial}
-            setLecture={setLecture}
-            message={props.message}
-            setMessage={props.setMessage}
-            url={window.location.pathname}
-          />
-        )}
+      {role !== "Teacher" ? (
+        <BrokenPage />
+      ) : (
+        <div className="subject-class-wrapper">
+          {assignment && (
+            <Assignment
+              setAssignment={setAssignment}
+              id={props.id}
+              subject={props.subject}
+              setActivity={setActivity}
+              activity={activity}
+              setInitial={props.setInitial}
+            />
+          )}
+          {quiz && <Quiz setQuiz={setQuiz} />}
+          {lecture && (
+            <Material
+              id={props.id}
+              subject={props.subject}
+              setInitial={props.setInitial}
+              setLecture={setLecture}
+              message={props.message}
+              setMessage={props.setMessage}
+              url={window.location.pathname}
+            />
+          )}
 
-        <TeacherDashboard />
-        <div className="subject-class-content">
-          <DashboardHeader />
-          <div
-            className={
-              props.message === "" ? "hidden" : "assignment-wrapper-after"
-            }
-          >
-            {props.message}
-          </div>
-
-          <div className="actual-activity-header">
-            <Link to={props.goBack} className="go-back-btn">
-              <i className="fas fa-angle-left"></i>Back
-            </Link>
+          <TeacherDashboard />
+          <div className="subject-class-content">
+            <DashboardHeader />
             <div
-              onClick={() => setDropdown(!dropdown)}
-              className="create-activity-dropdown"
+              className={
+                props.message === "" ? "hidden" : "assignment-wrapper-after"
+              }
             >
-              Create
-              <i
-                className={dropdown ? "fas fa-angle-up" : "fas fa-angle-down"}
-              ></i>
-              <motion.div
-                variants={dropdownVariants}
-                initial="initial"
-                animate={dropdown ? "visible" : ""}
-                transition={{ duration: 0.1 }}
-                className="create-activity-dropdown-after"
-              >
-                <div onClick={() => setAssignment(true)}>Assignment</div>
-                <div onClick={() => setQuiz(true)}>Quiz</div>
-                <div className="material-item" onClick={() => setLecture(true)}>
-                  Material
-                </div>
-              </motion.div>
+              {props.message}
             </div>
-          </div>
 
-          <div className="subject-content-body">
-            <div className="subject-content-body-right">
-              <div className="subject-content-body-right-header">
-                <b>{props.subject}</b>
-                <div className="subject-content-body-right-header-nav">
-                  <Link
-                    to={props.activityLink}
-                    className="subject-content-body-right-header-nav-link-inactive"
-                  >
-                    Activities
-                  </Link>
-                  <Link className="subject-content-body-right-header-nav-link-active">
-                    Lectures
-                  </Link>
-                  <Link
-                    to={props.gradeLink}
-                    className="subject-content-body-right-header-nav-link-inactive"
-                  >
-                    Grades
-                  </Link>
-                </div>
-              </div>
-              <div className="subject-content-body-right-body">
-                <div className="subject-content-assigned-headers">
+            <div className="actual-activity-header">
+              <Link to={props.goBack} className="go-back-btn">
+                <i className="fas fa-angle-left"></i>Back
+              </Link>
+              <div
+                onClick={() => setDropdown(!dropdown)}
+                className="create-activity-dropdown"
+              >
+                Create
+                <i
+                  className={dropdown ? "fas fa-angle-up" : "fas fa-angle-down"}
+                ></i>
+                <motion.div
+                  variants={dropdownVariants}
+                  initial="initial"
+                  animate={dropdown ? "visible" : ""}
+                  transition={{ duration: 0.1 }}
+                  className="create-activity-dropdown-after"
+                >
+                  <div onClick={() => setAssignment(true)}>Assignment</div>
+                  <div onClick={() => setQuiz(true)}>Quiz</div>
                   <div
-                    className="quarter-filtered"
-                    onClick={() => setDropdown2(!dropdown2)}
+                    className="material-item"
+                    onClick={() => setLecture(true)}
                   >
-                    <motion.div
-                      variants={dropdownVariants2}
-                      initial="initial2"
-                      animate={dropdown2 ? "visible2" : ""}
-                      transition={{ duration: 0.1 }}
-                      className="quarter-filtered-after"
+                    Material
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            <div className="subject-content-body">
+              <div className="subject-content-body-right">
+                <div className="subject-content-body-right-header">
+                  <b>{props.subject}</b>
+                  <div className="subject-content-body-right-header-nav">
+                    <Link
+                      to={props.activityLink}
+                      className="subject-content-body-right-header-nav-link-inactive"
                     >
-                      <div
-                        onClick={() => {
-                          setFiltered("All");
-                          setDropdown2(false);
-                        }}
-                        className="quarter-filtered-items"
-                      >
-                        All
-                      </div>
-                      <div
-                        onClick={() => {
-                          setFiltered("1st Quarter");
-                          setDropdown2(false);
-                        }}
-                        className="quarter-filtered-items"
-                      >
-                        1st Quarter
-                      </div>
-                      <div
-                        onClick={() => {
-                          setFiltered("2nd Quarter");
-                          setDropdown2(false);
-                        }}
-                        className="quarter-filtered-items"
-                      >
-                        2nd Quarter
-                      </div>
-                      <div
-                        onClick={() => {
-                          setFiltered("3rd Quarter");
-                          setDropdown2(false);
-                        }}
-                        className="quarter-filtered-items"
-                      >
-                        3rd Quarter
-                      </div>
-                      <div
-                        onClick={() => {
-                          setFiltered("4th Quarter");
-                          setDropdown2(false);
-                        }}
-                        className="quarter-filtered-items"
-                      >
-                        4th Quarter
-                      </div>
-                    </motion.div>
-                    Filter By: {filtered}
-                    <i
-                      className={
-                        dropdown2 ? "fas fa-angle-up" : "fas fa-angle-down"
-                      }
-                    ></i>
+                      Activities
+                    </Link>
+                    <Link className="subject-content-body-right-header-nav-link-active">
+                      Lectures
+                    </Link>
+                    <Link
+                      to={props.gradeLink}
+                      className="subject-content-body-right-header-nav-link-inactive"
+                    >
+                      Grades
+                    </Link>
                   </div>
                 </div>
-                <div className="subject-content-assigned-body-wrapper">
-                  {filtered === "All" ? (
-                    <>
-                      {activity.map((value) => {
-                        return (
-                          <Link
-                            to={"/lecture/" + value._id}
-                            className={
-                              first ? "hidden" : "subject-content-assigned-body"
-                            }
-                          >
-                            <span>
-                              <MenuBookIcon fontSize="small" />
-                            </span>
-                            <div className="subject-content-assigned-body-right">
-                              <b>{value.topic}</b>
-                              <div className="sub-subject-content-assigned-body-right">
-                                <div className="activity-topic-value">
-                                  <p>Lecture</p>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </>
-                  ) : (
-                    <>
-                      {activity
-                        .filter((e) => e.quarter === filtered)
-                        .map((value) => {
+                <div className="subject-content-body-right-body">
+                  <div className="subject-content-assigned-headers">
+                    <div
+                      className="quarter-filtered"
+                      onClick={() => setDropdown2(!dropdown2)}
+                    >
+                      <motion.div
+                        variants={dropdownVariants2}
+                        initial="initial2"
+                        animate={dropdown2 ? "visible2" : ""}
+                        transition={{ duration: 0.1 }}
+                        className="quarter-filtered-after"
+                      >
+                        <div
+                          onClick={() => {
+                            setFiltered("All");
+                            setDropdown2(false);
+                          }}
+                          className="quarter-filtered-items"
+                        >
+                          All
+                        </div>
+                        <div
+                          onClick={() => {
+                            setFiltered("1st Quarter");
+                            setDropdown2(false);
+                          }}
+                          className="quarter-filtered-items"
+                        >
+                          1st Quarter
+                        </div>
+                        <div
+                          onClick={() => {
+                            setFiltered("2nd Quarter");
+                            setDropdown2(false);
+                          }}
+                          className="quarter-filtered-items"
+                        >
+                          2nd Quarter
+                        </div>
+                        <div
+                          onClick={() => {
+                            setFiltered("3rd Quarter");
+                            setDropdown2(false);
+                          }}
+                          className="quarter-filtered-items"
+                        >
+                          3rd Quarter
+                        </div>
+                        <div
+                          onClick={() => {
+                            setFiltered("4th Quarter");
+                            setDropdown2(false);
+                          }}
+                          className="quarter-filtered-items"
+                        >
+                          4th Quarter
+                        </div>
+                      </motion.div>
+                      Filter By: {filtered}
+                      <i
+                        className={
+                          dropdown2 ? "fas fa-angle-up" : "fas fa-angle-down"
+                        }
+                      ></i>
+                    </div>
+                  </div>
+                  <div className="subject-content-assigned-body-wrapper">
+                    {filtered === "All" ? (
+                      <>
+                        {activity.map((value) => {
                           return (
                             <Link
                               to={"/lecture/" + value._id}
@@ -287,14 +271,44 @@ const Lecture = (props) => {
                             </Link>
                           );
                         })}
-                    </>
-                  )}
+                      </>
+                    ) : (
+                      <>
+                        {activity
+                          .filter((e) => e.quarter === filtered)
+                          .map((value) => {
+                            return (
+                              <Link
+                                to={"/lecture/" + value._id}
+                                className={
+                                  first
+                                    ? "hidden"
+                                    : "subject-content-assigned-body"
+                                }
+                              >
+                                <span>
+                                  <MenuBookIcon fontSize="small" />
+                                </span>
+                                <div className="subject-content-assigned-body-right">
+                                  <b>{value.topic}</b>
+                                  <div className="sub-subject-content-assigned-body-right">
+                                    <div className="activity-topic-value">
+                                      <p>Lecture</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

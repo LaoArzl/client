@@ -632,8 +632,7 @@
   color: var(--font);
 }
 
-.assignment-body,
-.quiz-body {
+.assignment-body {
   width: 50%;
   height: auto;
   margin: 0 auto;
@@ -861,6 +860,24 @@
   position: relative;
 }
 
+.submit-btn-dropdown-opacity {
+  width: 30px;
+  height: 40px;
+  background: var(--main);
+  margin-left: 2px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease-out;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .submit-btn-dropdown:hover {
   transition: 0.2s ease-in;
   background: var(--main-hover);
@@ -868,7 +885,7 @@
 
 .submit-btn-dropdown-after {
   width: 122px;
-  height: 260%;
+  height: 200%;
   position: absolute;
   top: 105%;
   background: rgb(255, 255, 255);
@@ -887,7 +904,7 @@
 
 .submit-btn-dropdown-after-draft {
   width: 122px;
-  height: 350%;
+  height: 300%;
   position: absolute;
   top: 105%;
   background: rgb(255, 255, 255);
@@ -907,7 +924,7 @@
 .submit-btn-dropdown-after-item {
   display: flex;
   width: 100%;
-  height: 33.33%;
+  height: 50%;
   align-items: center;
   padding-left: 20px;
   font-size: var(--font13);
@@ -917,7 +934,7 @@
 .submit-btn-dropdown-after-item-draft {
   display: flex;
   width: 100%;
-  height: 25%;
+  height: 33.33%;
   align-items: center;
   padding-left: 20px;
   font-size: var(--font13);
@@ -928,7 +945,7 @@
   border-top: 1px solid lightgrey;
   display: flex;
   width: 100%;
-  height: 25%;
+  height: 33.33%;
   align-items: center;
   padding-left: 20px;
   font-size: var(--font13);

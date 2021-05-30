@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Admission.css";
 import Axios from "axios";
+import { Barangay } from "./Barangay";
 
 const TeacherAdmission = (props) => {
   const [account, setAccount] = useState({});
@@ -15,7 +16,6 @@ const TeacherAdmission = (props) => {
       middlename: "",
       gender: "",
       birthday: "",
-      picture: "",
     });
   }, []);
 
@@ -23,40 +23,37 @@ const TeacherAdmission = (props) => {
     setAddress({
       street: "",
       barangay: "",
-      city: "",
-      postal: "",
+      city: "Zamboanga City",
       email: "",
       contact: "",
     });
   }, []);
 
   const submitTeacher = () => {
-    Axios.post("http://localhost:3001/register-teacher", {
+    props.setLoader(true);
+    Axios.post("https://ecplc2021.herokuapp.com/register-teacher", {
       id: account.id,
       password: account.password,
       lastname: account.lastname,
       firstname: account.firstname,
       middlename: account.middlename,
-      fullname:
-        account.firstname +
-        " " +
-        account.middlename[0] +
-        "." +
-        " " +
-        account.lastname,
-      gender: account.gender,
+      fullname: account.firstname + " " + account.lastname,
+      gender: radio,
       birthday: account.birthday,
-      picture: account.picture,
       street: address.street,
       barangay: address.barangay,
       city: address.city,
-      postal: address.postal,
       email: address.email,
       contact: address.contact,
+      landmark: landmark,
     }).then((response) => {
       if (response.data.err) {
+        props.setLoader(false);
         props.setTeacherMsg(response.data.err);
       } else {
+        setLandmark("");
+        setRadio("");
+        props.setLoader(false);
         props.setInitial(response.data.success);
         props.setTeacherMsg(response.data.success);
         setTimeout(() => props.setTeacherMsg(""), 10000);
@@ -73,7 +70,6 @@ const TeacherAdmission = (props) => {
         setAddress({
           street: "",
           barangay: "",
-          city: "",
           postal: "",
           email: "",
           contact: "",
@@ -143,6 +139,9 @@ const TeacherAdmission = (props) => {
   };
 
   const [showpassword, setShowpassword] = useState(false);
+
+  const [radio, setRadio] = useState("");
+  const [landmark, setLandmark] = useState("");
 
   return (
     <>
@@ -268,9 +267,7 @@ const TeacherAdmission = (props) => {
               />
             </div>
             <div className="three-multi-admission-div">
-              <label>
-                M.I <div>*</div>
-              </label>
+              <label>M.I</label>
               <input
                 value={account.middlename}
                 onChange={(e) => {
@@ -293,32 +290,34 @@ const TeacherAdmission = (props) => {
           </div>
 
           <div className="admission-div">
-            <label>
-              Gender <div>*</div>
-            </label>
-            <select
-              value={account.gender}
-              onChange={(e) => {
-                let value = e.target.value;
-                setAccount({
-                  id: account.id,
-                  password: account.password,
-                  lastname: account.lastname,
-                  firstname: account.firstname,
-                  middlename: account.middlename,
-                  gender: value,
-                  birthday: account.birthday,
-                  picture: account.picture,
-                });
-              }}
-            >
-              <option value="" disabled>
-                Select option
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Others">Others</option>
-            </select>
+            <label>Gender *</label>
+            <div className="gender-radio-btn">
+              <div>
+                <input
+                  checked={radio === "Male"}
+                  value="Male"
+                  onChange={(e) => {
+                    setRadio(e.target.value);
+                    console.log(radio);
+                  }}
+                  type="radio"
+                />
+                <label>Male</label>
+              </div>
+
+              <div>
+                <input
+                  checked={radio === "Female"}
+                  value="Female"
+                  onChange={(e) => {
+                    setRadio(e.target.value);
+                    console.log(radio);
+                  }}
+                  type="radio"
+                />
+                <label>Female</label>
+              </div>
+            </div>
           </div>
 
           <div className="admission-div">
@@ -353,13 +352,13 @@ const TeacherAdmission = (props) => {
         <div className="personal-info-body">
           <div className="dual-admission-div">
             <div className="dual-admission-div-div">
-              <label>
-                Street <div>*</div>
-              </label>
+              <label>Street</label>
               <input
+                placeholder="Optional"
                 value={address.street}
                 onChange={(e) => {
                   let value = e.target.value;
+
                   setAddress({
                     street: value,
                     barangay: address.barangay,
@@ -374,10 +373,20 @@ const TeacherAdmission = (props) => {
             </div>
 
             <div className="dual-admission-div-div">
-              <label>
-                Brgy. <div>*</div>
-              </label>
+              <label>Landmark</label>
               <input
+                placeholder="Optional"
+                value={landmark}
+                onChange={(e) => setLandmark(e.target.vale)}
+                type="text"
+              ></input>
+            </div>
+          </div>
+
+          <div className="dual-admission-div">
+            <div className="dual-admission-div-div">
+              <label>Brgy. *</label>
+              <select
                 value={address.barangay}
                 onChange={(e) => {
                   let value = e.target.value;
@@ -390,11 +399,13 @@ const TeacherAdmission = (props) => {
                     contact: address.contact,
                   });
                 }}
-                type="text"
-              ></input>
+              >
+                {Barangay.map((e) => {
+                  return <option value={e.name}>{e.name}</option>;
+                })}
+              </select>
             </div>
-          </div>
-          <div className="dual-admission-div">
+
             <div className="dual-admission-div-div">
               <label>
                 City <div>*</div>
@@ -415,32 +426,12 @@ const TeacherAdmission = (props) => {
                 type="text"
               ></input>
             </div>
-
-            <div className="dual-admission-div-div">
-              <label>
-                Postal Code<div>*</div>
-              </label>
-              <input
-                value={address.postal}
-                onChange={(e) => {
-                  let value = e.target.value;
-                  setAddress({
-                    street: address.street,
-                    barangay: address.barangay,
-                    city: address.city,
-                    postal: value,
-                    email: address.email,
-                    contact: address.contact,
-                  });
-                }}
-                type="number"
-              ></input>
-            </div>
           </div>
 
           <div className="admission-div">
             <label>Email Address</label>
             <input
+              placeholder="teacher@email.com"
               value={address.email}
               onChange={(e) => {
                 let value = e.target.value;
@@ -460,16 +451,21 @@ const TeacherAdmission = (props) => {
           <div className="admission-div">
             <label>Contact No.</label>
             <input
+              maxLength="14"
+              placeholder="0987 6543 210"
               value={address.contact}
               onChange={(e) => {
                 let value = e.target.value;
+                let newValue = value
+                  .replace(/\W/gi, "")
+                  .replace(/(.{4})/g, "$1 ");
                 setAddress({
                   street: address.street,
                   barangay: address.barangay,
                   city: address.city,
                   postal: address.postal,
                   email: address.email,
-                  contact: value,
+                  contact: newValue,
                 });
               }}
               type="text"

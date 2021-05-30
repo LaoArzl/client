@@ -14,9 +14,9 @@ const StudentDashboard = () => {
   };
 
   useEffect(() => {
-    Axios.get("https://ecplcsms.herokuapp.com/user-login").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/user-login").then((response) => {
       if (response.data.length === 0) {
-        setUserID("")
+        setUserID("");
       } else if (response.data.loggedIn) {
         setUserID(response.data.id);
       }
@@ -36,12 +36,19 @@ const StudentDashboard = () => {
           {StudentDashboardData.map((val, key) => {
             return (
               <Link className="router-link" to={val.link + userID} key={key}>
-                <Tippy content={val.name} enabled={showName ? false : true} arrow={false} placement="right">
+                <Tippy
+                  content={val.name}
+                  enabled={showName ? false : true}
+                  arrow={false}
+                  placement="right"
+                >
                   <li
                     className="li-middle"
                     key={key}
                     id={
-                      window.location.pathname === val.link + userID ? "link-active" : ""
+                      window.location.pathname === val.link + userID
+                        ? "link-active"
+                        : ""
                     }
                   >
                     <div
@@ -54,7 +61,7 @@ const StudentDashboard = () => {
                           : "icon-inactive"
                       }
                     >
-                     {window.location.pathname === val.link + userID
+                      {window.location.pathname === val.link + userID
                         ? val.icons
                         : val.icon}
                     </div>

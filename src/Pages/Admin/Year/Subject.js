@@ -14,17 +14,19 @@ const Subject = (props) => {
   const [subjectDescription, setSubjectDescription] = useState("");
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/year/${props.id}`).then((response) => {
-      if (response.data.subjects.length === 0) {
-        setYearList([]);
-      } else {
-        setYearList(response.data.subjects);
+    Axios.get(`https://ecplc2021.herokuapp.com/year/${props.id}`).then(
+      (response) => {
+        if (response.data.subjects.length === 0) {
+          setYearList([]);
+        } else {
+          setYearList(response.data.subjects);
+        }
       }
-    });
+    );
   }, [props.initial]);
 
   const submitAdd = () => {
-    Axios.put(`http://localhost:3001/year/add/${props.id}`, {
+    Axios.put(`https://ecplc2021.herokuapp.com/year/add/${props.id}`, {
       subjectName: subjectName,
       subjectDescription: subjectDescription,
     }).then((response) => {

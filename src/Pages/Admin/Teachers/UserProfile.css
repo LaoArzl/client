@@ -22,24 +22,30 @@
 
 .user-profile-navigation {
   width: 25%;
-  height: 30vh;
+  height: 20vh;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   border: 1px solid rgb(235, 235, 235);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  max-height: 300px;
+  min-height: 200px;
 }
 
 .user-student-navigation {
   width: 25%;
-  height: 30vh;
+  height: 20vh;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   border: 1px solid rgb(235, 235, 235);
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  max-height: 300px;
+  min-height: 200px;
 }
 
 .user-navigation-profile {
@@ -103,8 +109,8 @@
   min-height: 200px;
   background: white;
   box-shadow: 0px 8px 30px 0px rgba(63, 87, 102, 0.1);
-  border-radius: 20px;
-  margin-bottom: 20px;
+  border-radius: 5px;
+  margin-bottom: 5px;
   border: 1px solid rgb(235, 235, 235);
 }
 
@@ -116,22 +122,22 @@
 /*User Profile */
 .user-nav-wrapper-header {
   width: 100%;
-  height: 15vh;
+  height: 90px;
   display: flex;
   align-items: center;
-  padding-left: 5%;
   color: #323b44;
+  justify-content: center;
+  background: pink;
 }
 
 .user-nav-wrapper-profile-body {
   width: 100%;
   height: auto;
-  padding-left: 5%;
 }
 
 .user-nav-wrapper-sub-header {
   width: 100%;
-  height: 10vh;
+  height: 80px;
   color: #323b44;
   display: flex;
   align-items: center;
@@ -203,7 +209,7 @@
 }
 
 .update-user-profile-submit {
-  width: 55%;
+  width: 75%;
   height: auto;
   font-size: 15px;
   display: flex;
@@ -211,11 +217,10 @@
   margin: auto;
   margin-bottom: 50px;
   align-items: flex-end;
-  margin-top: 50px;
 }
 
 .update-user-profile-submit input {
-  width: 25%;
+  width: 100px;
   height: 45px;
   background: #2ab56f;
   color: white;

@@ -12,7 +12,7 @@ export const LoginProvider = (props) => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/user-login").then((response) => {
+    Axios.get("https://ecplc2021.herokuapp.com/user-login").then((response) => {
       if (response.data.length === 0) {
         console.log("No User");
         setRole("");
