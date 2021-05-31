@@ -79,7 +79,6 @@ const StudentAdmission = (props) => {
       parentMiddlename: parentMiddlename,
       parentLastname: parentLastname,
       parentFirstname: parentFirstname,
-      landmark: landmark,
     }).then((response) => {
       if (response.data.err) {
         props.setLoader(false);
@@ -429,37 +428,26 @@ const StudentAdmission = (props) => {
               <h3>Contact Address</h3>
             </div>
             <div className="personal-info-body">
-              <div className="dual-admission-div">
-                <div className="dual-admission-div-div">
-                  <label>Street</label>
-                  <input
-                    placeholder="Optional"
-                    value={address.street}
-                    onChange={(e) => {
-                      let value = e.target.value;
-                      setAdress({
-                        street: value,
-                        barangay: address.barangay,
-                        city: address.city,
-                        postal: address.postal,
-                        email: address.email,
-                        contact: address.contact,
-                      });
-                    }}
-                    type="text"
-                  ></input>
-                </div>
-
-                <div className="dual-admission-div-div">
-                  <label>Landmark</label>
-                  <input
-                    placeholder="Optional"
-                    value={landmark}
-                    onChange={(e) => setLandmark(e.target.vale)}
-                    type="text"
-                  ></input>
-                </div>
+              <div className="admission-div">
+                <label>Street</label>
+                <input
+                  placeholder="Optional"
+                  value={address.street}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    setAdress({
+                      street: value,
+                      barangay: address.barangay,
+                      city: address.city,
+                      postal: address.postal,
+                      email: address.email,
+                      contact: address.contact,
+                    });
+                  }}
+                  type="text"
+                ></input>
               </div>
+
               <div className="dual-admission-div">
                 <div className="dual-admission-div-div">
                   <label>Brgy. *</label>
@@ -477,6 +465,7 @@ const StudentAdmission = (props) => {
                       });
                     }}
                   >
+                    <option value="" disabled></option>
                     {Barangay.map((e) => {
                       return <option value={e.name}>{e.name}</option>;
                     })}

@@ -98,6 +98,7 @@ function App() {
           setClassData([]);
         } else {
           setClassData(response.data);
+          console.log(response.data);
         }
       }
     );
@@ -142,7 +143,10 @@ function App() {
                             component={DashboardHome}
                           />
                           <Route path="/admin/class" exact>
-                            <Classroom />
+                            <Classroom
+                              initial={initial}
+                              setInitial={setInitial}
+                            />
                           </Route>
 
                           {teacherUser.map((value) => {
@@ -163,7 +167,11 @@ function App() {
                                 path={"/admin/edit-user/" + value._id}
                                 exact
                               >
-                                <UserStudent id={value._id} />
+                                <UserStudent
+                                  id={value._id}
+                                  initial={initial}
+                                  setInitial={setInitial}
+                                />
                               </Route>
                             );
                           })}
@@ -251,28 +259,25 @@ function App() {
                               </Route>
                             );
                           })}
-                          {classData === null ? null : (
-                            <>
-                              {classData.map((value) => {
-                                return (
-                                  <Route
-                                    key={value._id}
-                                    path={"/teacher-class/" + value._id}
-                                    exact
-                                  >
-                                    <ClassTeacher
-                                      id={value._id}
-                                      adviser={value.adviser_id.fullname}
-                                      adviserId={value.adviser_id._id}
-                                      name={value.className}
-                                      setInitial={setInitial}
-                                      initial={initial}
-                                    />
-                                  </Route>
-                                );
-                              })}
-                            </>
-                          )}
+
+                          {classData.map((value) => {
+                            return (
+                              <Route
+                                key={value._id}
+                                path={"/teacher-class/" + value._id}
+                                exact
+                              >
+                                <ClassTeacher
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  adviserId={value.adviser_id._id}
+                                  name={value.className}
+                                  setInitial={setInitial}
+                                  initial={initial}
+                                />
+                              </Route>
+                            );
+                          })}
 
                           {classData.map((value) => {
                             return value.students.map((stud) => {
@@ -297,35 +302,24 @@ function App() {
                           })}
 
                           {classData.map((value) => {
-                            return value.year.map((key) => {
-                              return (
-                                <Route
-                                  key={value._id}
-                                  path={
+                            return (
+                              <Route
+                                key={value._id}
+                                path={
+                                  "/teacher-class/" + value._id + "/subjects"
+                                }
+                                exact
+                              >
+                                <SubjectClass
+                                  id={value._id}
+                                  adviser={value.adviser_id.fullname}
+                                  name={value.className}
+                                  activeLink={
                                     "/teacher-class/" + value._id + "/subjects"
                                   }
-                                  exact
-                                >
-                                  <SubjectClass
-                                    id={value._id}
-                                    adviser={value.adviser_id.fullname}
-                                    name={value.className}
-                                    // activityLink={
-                                    //   "/teacher-class/" +
-                                    //   value._id +
-                                    //   "/subjects/" +
-                                    //   sub.subjectName +
-                                    //   "/activities"
-                                    // }
-                                    activeLink={
-                                      "/teacher-class/" +
-                                      value._id +
-                                      "/subjects"
-                                    }
-                                  />
-                                </Route>
-                              );
-                            });
+                                />
+                              </Route>
+                            );
                           })}
 
                           {classData.map((value) => {

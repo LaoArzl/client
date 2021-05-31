@@ -334,7 +334,26 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-.actual-activity-body-left-footer p {
+.actual-activity-body-left-footer-file {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  font-size: var(--font14);
+  padding: 0px 10px;
+  justify-content: space-between;
+  color: var(--font);
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.actual-activity-body-left-footer p,
+.actual-activity-body-left-footer-file p {
   width: auto;
   height: 100%;
   display: flex;
@@ -362,6 +381,24 @@
 
 .actual-activity-body-left-footer div i {
   margin-left: 10px;
+}
+
+.actual-activity-body-left-footer-file span {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: var(--font15);
+  color: var(--sub-font);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.actual-activity-body-left-footer-file span:hover {
+  transition: 0.2s ease-in;
+  background: #eee;
 }
 
 .actual-activity-body-left-footer div:hover {

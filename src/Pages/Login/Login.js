@@ -105,7 +105,7 @@ const Login = () => {
               onClick={submitLogin}
             >
               {loader ? (
-                <PulseLoader color={`#fff`} size={8} margin={2} loading />
+                <PulseLoader color={`#fff`} size={6} margin={2} loading />
               ) : (
                 "Sign In"
               )}

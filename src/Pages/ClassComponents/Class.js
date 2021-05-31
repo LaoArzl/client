@@ -69,7 +69,6 @@ const Class = (props) => {
       if (response.data.length === 0) {
         setSubjects([]);
       } else {
-        //setSubjects()
         setSubjects(response.data.year[0].subjects);
       }
     });

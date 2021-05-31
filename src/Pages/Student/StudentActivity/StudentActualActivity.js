@@ -8,10 +8,16 @@ import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 
 const StudentActualActivity = (props) => {
+  const [file, setFile] = useState(null);
+  const [filename, setFilename] = useState(null);
+  const [key, setKey] = useState(null);
   const { value1, loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
   const history = useHistory();
-  const [key, setKey] = useState("");
+
+  let formData = new FormData();
+  formData.append("caption", filename);
+  formData.append("file", file);
 
   const goBack = () => {
     history.goBack();
@@ -110,12 +116,42 @@ const StudentActualActivity = (props) => {
 
                 <div className="actual-activity-body-left-attach">
                   <input
+                    key={key}
                     type="file"
                     onChange={(e) => {
+                      setFilename(e.target.files[0].name);
+                      setFile(e.target.files[0]);
                       setKey(e.target.files[0].name);
                     }}
-                    className="custom-file-input"
+                    className={
+                      filename === null ? "custom-file-input" : "hidden"
+                    }
                   />
+                </div>
+
+                <div
+                  className={
+                    filename !== null
+                      ? "actual-activity-body-left-footer-file"
+                      : "hidden"
+                  }
+                >
+                  <p className="footer-add-word">
+                    <InsertDriveFileOutlinedIcon
+                      className="material-document"
+                      fontSize="small"
+                    />
+                    <i>{filename}</i>
+                  </p>
+                  <span
+                    onClick={() => {
+                      setFilename(null);
+                      setFile(null);
+                      setKey(null);
+                    }}
+                  >
+                    <i className="far fa-times-circle"></i>
+                  </span>
                 </div>
 
                 <input

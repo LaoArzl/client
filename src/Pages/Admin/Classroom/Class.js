@@ -7,10 +7,22 @@ import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import Axios from "axios";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
+import Loader from "../../../Components/Loader/Loader";
 
-const Class = () => {
-  const { value01, valueAllClass } = useContext(StudentListContext);
-  const [teachers, setTeachers] = value01;
+const Class = (props) => {
+  useEffect(() => {
+    Axios.get("https://ecplc2021.herokuapp.com/teacher-list").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setTeachers([]);
+        } else {
+          setTeachers(response.data);
+        }
+      }
+    );
+  }, [props.initial]);
+
+  const [teachers, setTeachers] = useState([]);
   const [activeClass, setActiveClass] = useState(0);
   const [archivedClass, setArchivedClass] = useState(0);
 
@@ -20,7 +32,20 @@ const Class = () => {
   const [role, setRole] = loginRole;
   const [activeArch, setActiveArch] = useState(false);
 
-  const [classroom, setClassroom] = valueAllClass;
+  const [classroom, setClassroom] = useState([]);
+  const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    Axios.get("https://ecplc2021.herokuapp.com/class/populate-teacher").then(
+      (response) => {
+        if (response.data.length === 0) {
+          setClassroom([]);
+        } else {
+          setClassroom(response.data);
+        }
+      }
+    );
+  }, [props.initial]);
 
   useEffect(() => {
     Axios.get("https://ecplc2021.herokuapp.com/class/class-active").then(
@@ -32,7 +57,7 @@ const Class = () => {
         }
       }
     );
-  }, []);
+  }, [props.initial]);
 
   useEffect(() => {
     Axios.get("https://ecplc2021.herokuapp.com/class/class-archived").then(
@@ -44,30 +69,38 @@ const Class = () => {
         }
       }
     );
-  });
+  }, []);
 
   const makeFalse = () => {
     setShowCreate(false);
     setErrMsg("");
   };
 
+  let date = new Date();
+  let getDate = date.getFullYear();
+  let nextDate = date.getFullYear() + 1;
+  let years = getDate + "-" + nextDate.toString().replace(/^.{2}/g, "");
+
   const [className, setClassName] = useState("");
-  const [classCapacity, setClassCapacity] = useState(0);
+  const [classCapacity, setClassCapacity] = useState("");
   const [classYear, setClassYear] = useState("");
   const [classAdviser, setClassAdviser] = useState("");
   const [section, setSection] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   const submitCreate = () => {
-    Axios.post("http://localhost:3001/class/create-class", {
+    setLoader(true);
+    Axios.post("https://ecplc2021.herokuapp.com/class/create-class", {
       className: classYear + "-" + section,
+      years: years,
       classCapacity: classCapacity,
       section: section,
-      classYear: classYear,
       classAdviser: classAdviser,
+      classYear: classYear,
     }).then((response) => {
       if (response.data.err) {
         setErrMsg(response.data.err);
+        setLoader(false);
       } else if (response.data.success) {
         setClassName("");
         setClassCapacity("");
@@ -77,17 +110,28 @@ const Class = () => {
         setErrMsg(response.data.success);
         setTimeout(() => setErrMsg(""), 5000);
         setShowCreate(false);
+        setLoader(false);
+        props.setInitial([]);
       }
     });
   };
 
   return (
     <>
+      {loader && <Loader />}
       {role !== "Admin" ? (
         <BrokenPage />
       ) : (
         <div className="classs-wrapper">
-          <div className={errMsg === "" ? "hidden" : "classs-wrapper-after"}>
+          <div
+            className={
+              errMsg === ""
+                ? "hidden"
+                : errMsg !== "Successfully created."
+                ? "hidden"
+                : "classs-wrapper-after"
+            }
+          >
             {errMsg}
           </div>
           {showCreate ? (
@@ -104,7 +148,7 @@ const Class = () => {
                     className={
                       errMsg === ""
                         ? "class-error-message"
-                        : errMsg === "Successfully created"
+                        : errMsg === "Successfully created."
                         ? "hidden"
                         : "class-error-message-red"
                     }
@@ -115,6 +159,7 @@ const Class = () => {
                   <div className="create-class-div">
                     <label>Class Name</label>
                     <input
+                      readOnly
                       value={classYear + " - " + section}
                       type="text"
                     ></input>
@@ -172,7 +217,7 @@ const Class = () => {
                       {teachers.map((value, key) => {
                         return (
                           <option key={key} value={value._id}>
-                            {value.fullname}
+                            {value.firstname + " " + value.lastname}
                           </option>
                         );
                       })}
@@ -241,6 +286,7 @@ const Class = () => {
               {activeArch === false ? (
                 <div className="class-actual-body-active">
                   <div className="class-actual-body-active-header">
+                    <div className="class-actual-body-active-year">S.Y</div>
                     <div className="class-actual-body-active-name">
                       Class name
                     </div>
@@ -268,6 +314,9 @@ const Class = () => {
                             key={key._id}
                             className="class-actual-body-active-body"
                           >
+                            <div className="class-actual-body-active-year">
+                              {key.years}
+                            </div>
                             <div className="class-actual-body-active-name">
                               {key.className}
                             </div>
@@ -275,7 +324,9 @@ const Class = () => {
                               {key.section}
                             </div>
                             <div className="class-actual-body-active-adviser">
-                              {/* {key.adviser_id.fullname} */}
+                              {key.adviser_id.firstname +
+                                " " +
+                                key.adviser_id.lastname}
                             </div>
                             <div className="class-actual-body-active-capacity">
                               {key.capacity}

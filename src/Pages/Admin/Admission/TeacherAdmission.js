@@ -350,37 +350,25 @@ const TeacherAdmission = (props) => {
           <h3>Contact Address </h3>
         </div>
         <div className="personal-info-body">
-          <div className="dual-admission-div">
-            <div className="dual-admission-div-div">
-              <label>Street</label>
-              <input
-                placeholder="Optional"
-                value={address.street}
-                onChange={(e) => {
-                  let value = e.target.value;
+          <div className="admission-div">
+            <label>Street</label>
+            <input
+              placeholder="Optional"
+              value={address.street}
+              onChange={(e) => {
+                let value = e.target.value;
 
-                  setAddress({
-                    street: value,
-                    barangay: address.barangay,
-                    city: address.city,
-                    postal: address.postal,
-                    email: address.email,
-                    contact: address.contact,
-                  });
-                }}
-                type="text"
-              ></input>
-            </div>
-
-            <div className="dual-admission-div-div">
-              <label>Landmark</label>
-              <input
-                placeholder="Optional"
-                value={landmark}
-                onChange={(e) => setLandmark(e.target.vale)}
-                type="text"
-              ></input>
-            </div>
+                setAddress({
+                  street: value,
+                  barangay: address.barangay,
+                  city: address.city,
+                  postal: address.postal,
+                  email: address.email,
+                  contact: address.contact,
+                });
+              }}
+              type="text"
+            ></input>
           </div>
 
           <div className="dual-admission-div">

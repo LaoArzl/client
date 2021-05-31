@@ -1,41 +1,80 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Barangay } from "../../../Pages/Admin/Admission/Barangay";
+import Loader from "../../../Components/Loader/Loader";
 
 const NavStudProfile = (props) => {
-  const [radio, setRadio] = useState("");
-  const [landmark, setLandmark] = useState("");
-  const [home, setHome] = useState("");
-  const [work, setWork] = useState("");
-  const [parentFirstname, setParentFirstname] = useState("");
-  const [parentLastname, setParentLastname] = useState("");
-  const [parentMiddlename, setParentMiddlename] = useState("");
+  const [students, setStudents] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [gradeLevel, setGradeLevel] = useState([]);
 
-  const [account, setAccount] = useState({
-    id: "",
-    password: "",
-    year: "",
-    lastname: "",
-    firstname: "",
-    middlename: "",
-    gender: "",
-    birthday: "",
-    picture: "",
-  });
-  const [address, setAdress] = useState({
-    street: "",
-    barangay: "",
-    city: "Zamboanga City",
-    postal: "",
-    email: "",
-    contact: "",
-  });
-  const [parent, setParent] = useState({
-    parentFullname: "",
-    relation: "",
-    parentEmail: "",
-    parentContact: "",
-  });
+  const updateSubmit = () => {
+    setLoader(true);
+    Axios.put(`https://ecplc2021.herokuapp.com/update/user/${props.id}`, {
+      barangay: students.barangay,
+      birthday: students.birthday,
+      city: students.city,
+      email: students.email,
+      firstname: students.firstname,
+      gender: students.gender,
+      home: students.home,
+      idNumber: students.idNumber,
+      lastname: students.lastname,
+      middlename: students.middlename,
+      parentContact: students.parentContact,
+      parentEmail: students.parentEmail,
+      parentFirstname: students.parentFirstname,
+      parentLastname: students.parentLastname,
+      parentMiddlename: students.parentMiddlename,
+      relation: students.relation,
+      street: students.street,
+      work: students.work,
+      year: students.year,
+      contact: students.contact,
+    }).then((response) => {
+      if (response.data.err) {
+        props.setMessage(response.data.err);
+        setLoader(false);
+      } else {
+        setLoader(false);
+        props.setMessage(response.data.success);
+        props.setInitial([]);
+        setTimeout(() => props.setMessage(""), 5000);
+      }
+    });
+  };
+  Axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    Axios.get(`https://ecplc2021.herokuapp.com/student/${props.id}`).then(
+      (response) => {
+        let e = response.data;
+        console.log(e);
+        setStudents({
+          barangay: e.barangay,
+          birthday: e.birthday,
+          city: e.city,
+          email: e.email,
+          firstname: e.firstname,
+          gender: e.gender,
+          home: e.home,
+          idNumber: e.idNumber,
+          lastname: e.lastname,
+          middlename: e.middlename,
+          parentContact: e.parent.parentContact,
+          parentEmail: e.parent.parentEmail,
+          parentFirstname: e.parent.parentFirstname,
+          parentLastname: e.parent.parentLastname,
+          parentMiddlename: e.parent.parentMiddlename,
+          relation: e.parent.relation,
+          street: e.street,
+          work: e.work,
+          year: e.year,
+          contact: e.contact,
+        });
+      }
+    );
+  }, []);
 
   useEffect(() => {
     Axios.get("https://ecplc2021.herokuapp.com/year/create").then(
@@ -49,64 +88,9 @@ const NavStudProfile = (props) => {
     );
   }, []);
 
-  const [gradeLevel, setGradeLevel] = useState([]);
-  const [userState, setUserState] = useState({});
-  const tempId = window.location.pathname.replace("/admin/edit-user/", "");
-
-  useEffect(() => {
-    Axios.get(`https://ecplc2021.herokuapp.com/${tempId}`).then((response) => {
-      if (response.data.length === 0) {
-        setUserState({});
-      } else {
-        let user = response.data;
-        setUserState({
-          id: user._id,
-          firstname: user.firstname,
-          middlename: user.middlename,
-          lastname: user.lastname,
-          gender: user.gender,
-          contact: user.contact,
-          address: user.address,
-          email: user.email,
-        });
-      }
-    });
-  }, []);
-
-  const updateSubmit = () => {
-    Axios.put(`https://ecplc2021.herokuapp.com/${tempId}`, {
-      lastname: userState.lastname,
-      firstname: userState.firstname,
-      middlename: userState.middlename,
-      fullname:
-        userState.firstname +
-        " " +
-        userState.middlename[0] +
-        " " +
-        userState.lastname,
-      gender: userState.gender,
-      email: userState.email,
-      contact: userState.contact,
-      address: userState.address,
-    }).then((response) => {
-      console.log(response);
-    });
-  };
-  Axios.defaults.withCredentials = true;
-
-  useEffect(() => {
-    Axios.get(`https://ecplc2021.herokuapp.com/student/${props.id}`).then(
-      (response) => {
-        setLandmark(response.data.landmark);
-        setHome(response.data.home);
-        setWork(response.data.work);
-        console.log(response.data.landmark);
-      }
-    );
-  }, []);
-
   return (
     <>
+      {loader && <Loader />}
       <div className="user-nav-wrapper">
         <div className="user-nav-wrapper-profile-body">
           <div className="personal-info-body">
@@ -116,7 +100,7 @@ const NavStudProfile = (props) => {
             <div className="admission-div-user-id">
               <label>Student I.D *</label>
               <div className="user-id-div-input">
-                <input value={account.id} type="text" />
+                <input value={students.idNumber} type="text" />
               </div>
             </div>
 
@@ -125,25 +109,34 @@ const NavStudProfile = (props) => {
                 Grade <div>*</div>
               </label>
               <select
-                value={account.year}
+                value={students.year}
                 onChange={(e) => {
                   let value = e.target.value;
-                  setAccount({
-                    id: account.id,
-                    password: account.password,
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: students.street,
+                    work: students.work,
                     year: value,
-                    lastname: account.lastname,
-                    firstname: account.firstname,
-                    middlename: account.middlename,
-                    gender: account.gender,
-                    birthday: account.birthday,
-                    picture: account.picture,
+                    contact: students.contact,
                   });
                 }}
               >
-                <option value="" disabled>
-                  Select Option
-                </option>
+                <option disabled>Select Option</option>
                 {gradeLevel.map((value) => {
                   return (
                     <option key={value._id} value={value._id}>
@@ -160,19 +153,30 @@ const NavStudProfile = (props) => {
                   Last Name <div>*</div>
                 </label>
                 <input
-                  value={account.lastname}
+                  value={students.lastname}
                   onChange={(e) => {
                     let value = e.target.value;
-                    setAccount({
-                      id: account.id,
-                      password: account.password,
-                      year: account.year,
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
                       lastname: value,
-                      firstname: account.firstname,
-                      middlename: account.middlename,
-                      gender: account.gender,
-                      birthday: account.birthday,
-                      picture: account.picture,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
                     });
                   }}
                   type="text"
@@ -183,40 +187,62 @@ const NavStudProfile = (props) => {
                   First Name <div>*</div>
                 </label>
                 <input
-                  value={account.firstname}
                   onChange={(e) => {
                     let value = e.target.value;
-                    setAccount({
-                      id: account.id,
-                      password: account.password,
-                      year: account.year,
-                      lastname: account.lastname,
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
                       firstname: value,
-                      middlename: account.middlename,
-                      gender: account.gender,
-                      birthday: account.birthday,
-                      picture: account.picture,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
                     });
                   }}
+                  value={students.firstname}
                   type="text"
                 />
               </div>
               <div className="three-multi-admission-div">
                 <label>M.I.</label>
                 <input
-                  value={account.middlename}
+                  value={students.middlename}
                   onChange={(e) => {
                     let value = e.target.value;
-                    setAccount({
-                      id: account.id,
-                      password: account.password,
-                      year: account.year,
-                      lastname: account.lastname,
-                      firstname: account.firstname,
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
                       middlename: value,
-                      gender: account.gender,
-                      birthday: account.birthday,
-                      picture: account.picture,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
                     });
                   }}
                   type="text"
@@ -229,11 +255,32 @@ const NavStudProfile = (props) => {
               <div className="gender-radio-btn">
                 <div>
                   <input
-                    checked={radio === "Male"}
+                    checked={students.gender === "Male"}
                     value="Male"
                     onChange={(e) => {
-                      setRadio(e.target.value);
-                      console.log(radio);
+                      let value = e.target.value;
+                      setStudents({
+                        barangay: students.barangay,
+                        birthday: students.birthday,
+                        city: students.city,
+                        email: students.email,
+                        firstname: students.firstname,
+                        gender: value,
+                        home: students.home,
+                        idNumber: students.idNumber,
+                        lastname: students.lastname,
+                        middlename: students.middlename,
+                        parentContact: students.parentContact,
+                        parentEmail: students.parentEmail,
+                        parentFirstname: students.parentFirstname,
+                        parentLastname: students.parentLastname,
+                        parentMiddlename: students.parentMiddlename,
+                        relation: students.relation,
+                        street: students.street,
+                        work: students.work,
+                        year: students.year,
+                        contact: students.contact,
+                      });
                     }}
                     type="radio"
                   />
@@ -242,12 +289,33 @@ const NavStudProfile = (props) => {
 
                 <div>
                   <input
-                    checked={radio === "Female"}
-                    value="Female"
+                    checked={students.gender === "Female"}
                     onChange={(e) => {
-                      setRadio(e.target.value);
-                      console.log(radio);
+                      let value = e.target.value;
+                      setStudents({
+                        barangay: students.barangay,
+                        birthday: students.birthday,
+                        city: students.city,
+                        email: students.email,
+                        firstname: students.firstname,
+                        gender: value,
+                        home: students.home,
+                        idNumber: students.idNumber,
+                        lastname: students.lastname,
+                        middlename: students.middlename,
+                        parentContact: students.parentContact,
+                        parentEmail: students.parentEmail,
+                        parentFirstname: students.parentFirstname,
+                        parentLastname: students.parentLastname,
+                        parentMiddlename: students.parentMiddlename,
+                        relation: students.relation,
+                        street: students.street,
+                        work: students.work,
+                        year: students.year,
+                        contact: students.contact,
+                      });
                     }}
+                    value="Female"
                     type="radio"
                   />
                   <label>Female</label>
@@ -260,21 +328,31 @@ const NavStudProfile = (props) => {
                 Birth Date <div>*</div>
               </label>
               <input
-                value={account.birthday}
+                value={students.birthday}
                 onChange={(e) => {
                   let value = e.target.value;
-                  setAccount({
-                    id: account.id,
-                    password: account.password,
-                    year: account.year,
-                    lastname: account.lastname,
-                    firstname: account.firstname,
-                    middlename: account.middlename,
-                    gender: account.gender,
+                  setStudents({
+                    barangay: students.barangay,
                     birthday: value,
-                    picture: account.picture,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: students.street,
+                    work: students.work,
+                    year: students.year,
+                    contact: students.contact,
                   });
-                  console.log(value);
                 }}
                 type="date"
               />
@@ -284,51 +362,67 @@ const NavStudProfile = (props) => {
           <div className="user-nav-wrapper-sub-header">Contact Address</div>
 
           <div className="personal-info-body">
-            <div className="dual-admission-div">
-              <div className="dual-admission-div-div">
-                <label>Street</label>
-                <input
-                  placeholder="Optional"
-                  value={address.street}
-                  onChange={(e) => {
-                    let value = e.target.value;
-                    setAdress({
-                      street: value,
-                      barangay: address.barangay,
-                      city: address.city,
-                      postal: address.postal,
-                      email: address.email,
-                      contact: address.contact,
-                    });
-                  }}
-                  type="text"
-                ></input>
-              </div>
-
-              <div className="dual-admission-div-div">
-                <label>Landmark</label>
-                <input
-                  placeholder="Optional"
-                  value={landmark}
-                  onChange={(e) => setLandmark(e.target.vale)}
-                  type="text"
-                ></input>
-              </div>
+            <div className="admission-div">
+              <label>Street</label>
+              <input
+                value={students.street}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: value,
+                    work: students.work,
+                    year: students.year,
+                    contact: students.contact,
+                  });
+                }}
+                type="text"
+              ></input>
             </div>
+
             <div className="dual-admission-div">
               <div className="dual-admission-div-div">
                 <label>Brgy. *</label>
                 <select
-                  value={address.barangay}
+                  value={students.barangay}
                   onChange={(e) => {
                     let value = e.target.value;
-                    setAdress({
-                      street: address.street,
+                    setStudents({
                       barangay: value,
-                      city: address.city,
-                      postal: address.postal,
-                      email: address.email,
-                      contact: address.contact,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
                     });
                   }}
                 >
@@ -343,16 +437,30 @@ const NavStudProfile = (props) => {
                   City <div>*</div>
                 </label>
                 <input
-                  value={address.city}
+                  value={students.city}
                   onChange={(e) => {
                     let value = e.target.value;
-                    setAdress({
-                      street: address.street,
-                      barangay: address.barangay,
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
                       city: value,
-                      postal: address.postal,
-                      email: address.email,
-                      contact: address.contact,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
                     });
                   }}
                   type="text"
@@ -363,16 +471,30 @@ const NavStudProfile = (props) => {
             <div className="admission-div">
               <label>Email Address</label>
               <input
-                value={address.email}
+                value={students.email}
                 onChange={(e) => {
                   let value = e.target.value;
-                  setAdress({
-                    street: address.street,
-                    barangay: address.barangay,
-                    city: address.city,
-                    postal: address.postal,
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
                     email: value,
-                    contact: address.contact,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: students.street,
+                    work: students.work,
+                    year: students.year,
+                    contact: students.contact,
                   });
                 }}
                 type="text"
@@ -384,22 +506,33 @@ const NavStudProfile = (props) => {
               <label>Contact No.</label>
 
               <input
-                maxlength="14"
-                value={address.contact}
+                value={students.contact}
                 onChange={(e) => {
                   let value = e.target.value;
-                  let newValue = value
-                    .replace(/\W/gi, "")
-                    .replace(/(.{4})/g, "$1 ");
-                  setAdress({
-                    street: address.street,
-                    barangay: address.barangay,
-                    city: address.city,
-                    postal: address.postal,
-                    email: address.email,
-                    contact: newValue,
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: students.street,
+                    work: students.work,
+                    year: students.year,
+                    contact: value,
                   });
                 }}
+                maxLength="14"
                 type="text"
                 placeholder="0987 6543 210 (Optional)"
               />
@@ -415,8 +548,32 @@ const NavStudProfile = (props) => {
                   Last Name <div>*</div>
                 </label>
                 <input
-                  value={parentLastname}
-                  onChange={(e) => setParentLastname(e.target.value)}
+                  value={students.parentLastname}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: value,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
+                    });
+                  }}
                   type="text"
                 />
               </div>
@@ -425,16 +582,64 @@ const NavStudProfile = (props) => {
                   First Name <div>*</div>
                 </label>
                 <input
-                  value={parentFirstname}
-                  onChange={(e) => setParentFirstname(e.target.value)}
+                  value={students.parentFirstname}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: value,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
+                    });
+                  }}
                   type="text"
                 />
               </div>
               <div className="three-multi-admission-div">
                 <label>M.I.</label>
                 <input
-                  value={parentMiddlename}
-                  onChange={(e) => setParentMiddlename(e.target.value)}
+                  value={students.parentMiddlename}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: value,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
+                    });
+                  }}
                   type="text"
                 />
               </div>
@@ -445,20 +650,34 @@ const NavStudProfile = (props) => {
                 Relation<div>*</div>
               </label>
               <select
-                value={parent.relation}
+                value={students.relation}
                 onChange={(e) => {
                   let value = e.target.value;
-                  setParent({
-                    parentFullname: parent.parentFullname,
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
                     relation: value,
-                    parentEmail: parent.parentEmail,
-                    parentContact: parent.parentContact,
+                    street: students.street,
+                    work: students.work,
+                    year: students.year,
+                    contact: students.contact,
                   });
                 }}
               >
-                <option value="" disabled>
-                  Select Option
-                </option>
+                <option disabled>Select Option</option>
                 <option value="Mother">Mother</option>
                 <option value="Father">Father</option>
                 <option value="Grand Mother">Grand Mother</option>
@@ -477,17 +696,33 @@ const NavStudProfile = (props) => {
                 Email Address <div>*</div>
               </label>
               <input
-                placeholder="parent@email.com (Required)"
-                value={parent.parentEmail}
+                value={students.parentEmail}
                 onChange={(e) => {
                   let value = e.target.value;
-                  setParent({
-                    parentFullname: parent.parentFullname,
-                    relation: parent.relation,
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: students.parentContact,
                     parentEmail: value,
-                    parentContact: parent.parentContact,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: students.street,
+                    work: students.work,
+                    year: students.year,
+                    contact: students.contact,
                   });
                 }}
+                placeholder="parent@email.com (Required)"
                 type="text"
               />
             </div>
@@ -497,20 +732,33 @@ const NavStudProfile = (props) => {
                 Contact No.<div>*</div>
               </label>
               <input
-                placeholder="0987 6543 210 (Required)"
-                value={parent.parentContact}
+                value={students.parentContact}
                 onChange={(e) => {
                   let value = e.target.value;
-                  let newValue = value
-                    .replace(/\W/gi, "")
-                    .replace(/(.{4})/g, "$1 ");
-                  setParent({
-                    parentFullname: parent.parentFullname,
-                    relation: parent.relation,
-                    parentEmail: parent.parentEmail,
-                    parentContact: newValue,
+                  setStudents({
+                    barangay: students.barangay,
+                    birthday: students.birthday,
+                    city: students.city,
+                    email: students.email,
+                    firstname: students.firstname,
+                    gender: students.gender,
+                    home: students.home,
+                    idNumber: students.idNumber,
+                    lastname: students.lastname,
+                    middlename: students.middlename,
+                    parentContact: value,
+                    parentEmail: students.parentEmail,
+                    parentFirstname: students.parentFirstname,
+                    parentLastname: students.parentLastname,
+                    parentMiddlename: students.parentMiddlename,
+                    relation: students.relation,
+                    street: students.street,
+                    work: students.work,
+                    year: students.year,
+                    contact: students.contact,
                   });
                 }}
+                placeholder="0987 6543 210 (Required)"
                 type="text"
               />
             </div>
@@ -523,8 +771,32 @@ const NavStudProfile = (props) => {
               <div className="dual-admission-div-div">
                 <label>Home no.</label>
                 <input
-                  value={home}
-                  onChange={(e) => setHome(e.target.value)}
+                  value={students.home}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: value,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: students.work,
+                      year: students.year,
+                      contact: students.contact,
+                    });
+                  }}
                   type="text"
                 />
               </div>
@@ -532,8 +804,32 @@ const NavStudProfile = (props) => {
               <div className="dual-admission-div-div">
                 <label>Work no.</label>
                 <input
-                  value={work}
-                  onChange={(e) => setWork(e.target.value)}
+                  value={students.work}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    setStudents({
+                      barangay: students.barangay,
+                      birthday: students.birthday,
+                      city: students.city,
+                      email: students.email,
+                      firstname: students.firstname,
+                      gender: students.gender,
+                      home: students.home,
+                      idNumber: students.idNumber,
+                      lastname: students.lastname,
+                      middlename: students.middlename,
+                      parentContact: students.parentContact,
+                      parentEmail: students.parentEmail,
+                      parentFirstname: students.parentFirstname,
+                      parentLastname: students.parentLastname,
+                      parentMiddlename: students.parentMiddlename,
+                      relation: students.relation,
+                      street: students.street,
+                      work: value,
+                      year: students.year,
+                      contact: students.contact,
+                    });
+                  }}
                   type="text"
                 ></input>
               </div>
