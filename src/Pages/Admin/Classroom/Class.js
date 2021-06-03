@@ -3,7 +3,6 @@ import { withRouter, Link } from "react-router-dom";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import "./Class.css";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
-import { StudentListContext } from "../../../ContextFiles/StudentListContext";
 import Axios from "axios";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
@@ -28,11 +27,11 @@ const Class = (props) => {
 
   const [showCreate, setShowCreate] = useState(false);
 
-  const { loginRole } = useContext(LoginContext);
+  const { loginRole, valueClassroom } = useContext(LoginContext);
   const [role, setRole] = loginRole;
   const [activeArch, setActiveArch] = useState(false);
 
-  const [classroom, setClassroom] = useState([]);
+  const [classroom, setClassroom] = valueClassroom;
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {

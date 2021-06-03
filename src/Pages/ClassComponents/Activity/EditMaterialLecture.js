@@ -29,12 +29,11 @@ const EditMaterialLecture = (props) => {
 
   const date = new Date();
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + dd + yyyy;
+  let today = new Date();
+  let getDate =
+    String(today.getUTCDate()).padStart(2, "0") +
+    String(today.getUTCMonth() + 1).padStart(2, "0") +
+    String(today.getUTCFullYear()).replace("20", "");
 
   const submitBtn = (e) => {
     setLoader(true);
@@ -48,7 +47,7 @@ const EditMaterialLecture = (props) => {
       instructions: activity.instructions,
       subject: props.subject,
       quarter: activity.quarter,
-      filename: today + "_" + filename,
+      filename: getDate + "_" + filename,
     }).then((response) => {
       if (response.data.err) {
         props.setMessage(response.data.err);

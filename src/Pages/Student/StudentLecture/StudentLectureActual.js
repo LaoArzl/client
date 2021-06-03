@@ -10,6 +10,7 @@ import { LoginContext } from "../../../ContextFiles/LoginContext";
 const StudentLectureActual = (props) => {
   const { valueID, loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
+
   const history = useHistory();
   const goBack = () => {
     history.goBack();

@@ -223,7 +223,7 @@
   border-bottom: 2px solid #f7f8fb;
   cursor: pointer;
   transition: 0.1s ease-in-out;
-  background: white;
+  background: rgb(255, 255, 255);
 }
 
 .student-list-body:hover {
@@ -234,4 +234,117 @@
 
 .hidinger {
   display: none;
+}
+.profile-picture {
+  background: rgb(230, 230, 230);
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border: 2px solid lightgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-picture img {
+  width: 100%;
+}
+
+.profile-picture i {
+  font-size: 90px;
+  color: white;
+}
+
+.custom-file-div {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-file-div input {
+  width: 30%;
+}
+
+.profile-info {
+  padding-bottom: 50px;
+}
+
+.actuals span:hover {
+  transition: 0.2s ease-in;
+  background: #eee;
+}
+
+.actuals span {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: var(--font15);
+  color: var(--sub-font);
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.actuals {
+  margin: 0 auto;
+  width: 50%;
+  height: 50px;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 3px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: var(--font14);
+  padding: 0px 10px;
+  justify-content: space-between;
+  color: var(--font);
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.actuals-btn {
+  margin: 0 auto;
+  width: 50%;
+  height: 40px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  color: white;
+  background: var(--main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: 0.2s ease-out;
+}
+
+.actuals-btn:hover {
+  background: var(--main-hover);
+}
+
+.actuals p {
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture-name {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  color: var(--font);
+  margin-bottom: 20px;
 }

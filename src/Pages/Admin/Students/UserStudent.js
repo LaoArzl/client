@@ -5,6 +5,7 @@ import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader
 import "../Teachers/UserProfile.css";
 import NavStudProfile from "./NavStudProfile";
 import NavStudAccount from "./NavStudAccount";
+import UserProfilePicture from "./UserProfilePicture";
 
 const UserStudent = (props) => {
   const [userNav, setUserNav] = useState("");
@@ -59,7 +60,7 @@ const UserStudent = (props) => {
                     : "user-navigation-profile"
                 }
               >
-                Grades
+                Profile Picture
                 <i
                   className={userNav === "Grades" ? "fas fa-chevron-right" : ""}
                 ></i>
@@ -76,6 +77,16 @@ const UserStudent = (props) => {
                 />
               )}
               {userNav === "Account" && <NavStudAccount id={props.id} />}
+              {userNav === "Grades" && (
+                <UserProfilePicture
+                  picture={props.picture}
+                  id={props.id}
+                  initial={props.initial}
+                  setInitial={props.setInitial}
+                  message={message}
+                  setMessage={setMessage}
+                />
+              )}
             </div>
           </div>
         </div>

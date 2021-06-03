@@ -24,12 +24,11 @@ const Draft = (props) => {
 
   const date = new Date();
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + dd + yyyy;
+  let today = new Date();
+  let getDate =
+    String(today.getUTCDate()).padStart(2, "0") +
+    String(today.getUTCMonth() + 1).padStart(2, "0") +
+    String(today.getUTCFullYear()).replace("20", "");
   const [dropdown, setDropdown] = useState(false);
   const [type, setType] = useState("Draft");
   const [discard, setDiscard] = useState(false);
@@ -84,7 +83,7 @@ const Draft = (props) => {
         time: activity.time,
         topic: activity.topic,
         instructions: activity.instructions,
-        file: filename === null ? activity.file : today + "_" + filename,
+        file: filename === null ? activity.file : getDate + "_" + filename,
         active: true,
         subject: props.subject,
       }
@@ -128,7 +127,7 @@ const Draft = (props) => {
         time: activity.time,
         topic: activity.topic,
         instructions: activity.instructions,
-        file: filename === null ? activity.file : today + "_" + filename,
+        file: filename === null ? activity.file : getDate + "_" + filename,
         active: true,
         subject: props.subject,
       }

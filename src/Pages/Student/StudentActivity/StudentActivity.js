@@ -93,7 +93,12 @@ const StudentActivity = (props) => {
                       .map((value) => {
                         return (
                           <Link
-                            to={"/student/activity/" + value._id}
+                            to={
+                              "/student/activity/" +
+                              props.studentId +
+                              "/" +
+                              value._id
+                            }
                             className={
                               showAssigned
                                 ? "hidden"
@@ -105,6 +110,8 @@ const StudentActivity = (props) => {
                             </span>
                             <div className="subject-content-assigned-body-right">
                               <b>{value.topic}</b>
+                              <br />
+
                               <div className="sub-subject-content-assigned-body-right">
                                 <div className="activity-topic-value">
                                   <p>{value.activityType}</p>
@@ -121,7 +128,6 @@ const StudentActivity = (props) => {
                                 </div>
                               </div>
                             </div>
-
                             <div className="activity-points-after">
                               {value.points < 0 ? (
                                 "No points"
@@ -153,7 +159,12 @@ const StudentActivity = (props) => {
                     .map((value) => {
                       return (
                         <Link
-                          to={"/student/activity/" + value._id}
+                          to={
+                            "/student/activity/" +
+                            props.studentId +
+                            "/" +
+                            value._id
+                          }
                           className={
                             showCompleted
                               ? "hidden"

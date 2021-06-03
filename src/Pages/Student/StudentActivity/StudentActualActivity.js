@@ -6,14 +6,102 @@ import Axios from "axios";
 import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
+import Loader from "../../../Components/Loader/Loader";
+import { Link } from "react-router-dom";
 
 const StudentActualActivity = (props) => {
+  const [myWork, setMyWork] = useState([]);
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  var dt = new Date();
+  var d = dt.toLocaleString("default", options);
+  var t = dt.toLocaleTimeString();
+  t = t.replace(/\u200E/g, "");
+  t = t.replace(/^([^\d]*\d{1,2}:\d{1,2}):\d{1,2}([^\d]*)$/, "$1$2");
+  var result = d + " " + t;
+
+  const [init, setInit] = useState(null);
+  let today = new Date();
+  let getDate =
+    String(today.getUTCDate()).padStart(2, "0") +
+    String(today.getUTCMonth() + 1).padStart(2, "0") +
+    String(today.getUTCFullYear()).replace("20", "");
+
+  useEffect(() => {
+    Axios.get(
+      `https://ecplc2021.herokuapp.com/class/find-activity/${props.id}/${props.activityId}`
+    ).then((response) => {
+      console.log(response.data.turnedIn);
+      let result;
+      setMyWork(
+        (result = response.data.turnedIn.filter((e) => {
+          return e.studentId === props.studentId;
+        }))
+      );
+    });
+  }, [init]);
+
+  useEffect(() => {
+    Axios.get("https://ecplc2021.herokuapp.com/class/user-login").then(
+      (response) => {
+        console.log(response.data);
+      }
+    );
+  }, []);
+
+  const submitTurnIn = () => {
+    setLoader(true);
+    Axios.put(
+      `https://ecplc2021.herokuapp.com/class/turn-in/${props.id}/${props.activityId}`,
+      {
+        activityId: props.activityId,
+        studentId: props.studentId,
+        activityFile: getDate + "_" + filename,
+        points: props.points,
+        activityType: props.activityType,
+        dateSubmitted: result,
+        fullname: props.fullname,
+      }
+    ).then((response) => {
+      if (response.data.err) {
+        setLoader(false);
+      } else {
+        Axios.post(
+          "https://ecplc2021.herokuapp.com/file/upload-file",
+          formData,
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          }
+        );
+        setActivityStatus(response.data.success);
+        setLoader(false);
+        setInit(response.data.success);
+        setKey(null);
+        setFile(null);
+        setFilename(null);
+        setActivityStatus(response.data.success);
+        setTimeout(() => {
+          setActivityStatus("");
+          setInit(null);
+        }, 5000);
+      }
+    });
+  };
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState(null);
   const [key, setKey] = useState(null);
-  const { value1, loginRole } = useContext(LoginContext);
+  const { valueID, loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
   const history = useHistory();
+  const [loader, setLoader] = useState(false);
+  const [showUndo, setShowUndo] = useState(false);
 
   let formData = new FormData();
   formData.append("caption", filename);
@@ -33,18 +121,68 @@ const StudentActualActivity = (props) => {
     );
   };
 
+  const downloadWork = () => {
+    myWork.map((e) => {
+      return window.open(
+        `https://ecplc2021.herokuapp.com/file/filename/${e.activityFile}`,
+        "_blank"
+      );
+    });
+  };
+
+  const unsubmit = () => {
+    setLoader(true);
+    myWork.map((e) => {
+      return Axios.put(
+        `https://ecplc2021.herokuapp.com/class/delete-turnIn/${props.id}/${props.activityId}/${e._id}`
+      ).then((response) => {
+        console.log(response.data);
+        setLoader(false);
+        setInit(response.data.success);
+        setActivityStatus(response.data.success);
+        setTimeout(() => {
+          setActivityStatus("");
+          setInit(null);
+        }, 5000);
+        setShowUndo(false);
+      });
+    });
+  };
+
   return (
     <>
+      {loader && <Loader />}
       {role !== "Student" ? (
         <BrokenPage />
       ) : (
         <div className="actual-activity-wrapper">
+          <div
+            className={showUndo ? "actual-activity-wrapper-afters" : "hidden"}
+          ></div>
           <div
             className={
               activityStatus === "" ? "hidden" : "actual-activity-wrapper-after"
             }
           >
             {activityStatus}
+          </div>
+
+          <div className={showUndo ? "show-discard" : "hidden"}>
+            <div className="show-discard-header">
+              <p>Are you really sure you want to discard this draft?</p>
+            </div>
+
+            <div className="show-discard-body">
+              <div
+                onClick={() => setShowUndo(false)}
+                className="cancel-discard-btn"
+              >
+                Cancel
+              </div>
+              <div onClick={unsubmit} className="confirm-discard-btn">
+                Confirm
+              </div>
+            </div>
           </div>
           <StudentDashboard />
           <div className="actual-activity-content">
@@ -62,6 +200,18 @@ const StudentActualActivity = (props) => {
                   ) : (
                     <>{props.points + " points"} </>
                   )}
+                  {myWork.length === 0 ? null : (
+                    <>
+                      {myWork.map((e) => {
+                        return (
+                          <i>
+                            Turned in: {e.dateSubmitted}{" "}
+                            <i className="fas fa-check"></i>
+                          </i>
+                        );
+                      })}
+                    </>
+                  )}
                 </span>
                 <div className="actual-activity-body-left-header">
                   <h3>{props.topic}</h3>
@@ -75,7 +225,6 @@ const StudentActualActivity = (props) => {
                     )}
                   </p>
                 </div>
-
                 <div
                   className={
                     props.instructions === ""
@@ -114,7 +263,13 @@ const StudentActualActivity = (props) => {
                   </p>
                 </div>
 
-                <div className="actual-activity-body-left-attach">
+                <div
+                  className={
+                    myWork.length === 0
+                      ? "actual-activity-body-left-attach"
+                      : "hidden"
+                  }
+                >
                   <input
                     key={key}
                     type="file"
@@ -128,6 +283,35 @@ const StudentActualActivity = (props) => {
                     }
                   />
                 </div>
+
+                {myWork.map((e) => {
+                  return (
+                    <>
+                      <div
+                        onClick={downloadWork}
+                        className="actual-activity-body-left-footer-file"
+                      >
+                        <p className="footer-add-word">
+                          <InsertDriveFileOutlinedIcon
+                            className="material-document"
+                            fontSize="small"
+                          />
+                          <i>{e.activityFile}</i>
+                        </p>
+                      </div>
+                    </>
+                  );
+                })}
+                <input
+                  onClick={() => setShowUndo(true)}
+                  type="submit"
+                  className={
+                    myWork.length === 0
+                      ? "hidden"
+                      : "actual-activity-body-left-submit-btn"
+                  }
+                  value="Undo turn in"
+                />
 
                 <div
                   className={
@@ -154,11 +338,18 @@ const StudentActualActivity = (props) => {
                   </span>
                 </div>
 
-                <input
-                  type="submit"
-                  className="actual-activity-body-left-submit-btn"
-                  value="Turn in"
-                />
+                <div className={myWork.length === 0 ? "" : "hidden"}>
+                  <input
+                    onClick={submitTurnIn}
+                    type="submit"
+                    className={
+                      filename === null
+                        ? "actual-activity-body-left-submit-btn-opacity"
+                        : "actual-activity-body-left-submit-btn"
+                    }
+                    value="Turn in"
+                  />
+                </div>
               </div>
             </div>
           </div>

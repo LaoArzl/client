@@ -463,3 +463,29 @@
 .class-error-message {
   display: none;
 }
+
+.submit-btn-update-class {
+  width: 75%;
+  margin: 0 auto;
+  height: 40px;
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-btn-update-class input {
+  border: none;
+  outline: none;
+  background: var(--main);
+  color: white;
+  width: 90px;
+  height: 100%;
+  border-radius: 3px;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+}
+
+.submit-btn-update-class input:hover {
+  transition: 0.2s ease-in;
+  background: var(--main-hover);
+}

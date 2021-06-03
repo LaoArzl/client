@@ -5,12 +5,14 @@ import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutli
 import Loader from "../../../Components/Loader/Loader";
 import { LoginContext } from "../../../ContextFiles/LoginContext";
 import BrokenPage from "../../../Components/My404Component/BrokenPage";
+import Rubrics from "./Rubrics";
 
 const Assignment = (props) => {
   const { value1, loginRole } = useContext(LoginContext);
   const [role, setRole] = loginRole;
   const [activity, setActivity] = useState([]);
   const [dropdown, setDropdown] = useState(false);
+  const [dropdown2, setDropdown2] = useState(false);
   const [type, setType] = useState("Assign");
 
   const [file, setFile] = useState({});
@@ -18,6 +20,9 @@ const Assignment = (props) => {
   const [key, setKey] = useState(null);
   const [encryptFile, setEncryptFile] = useState("");
   const [loader, setLoader] = useState(false);
+  const [pointType, setPointType] = useState("points");
+  const [rubrics, setRubrics] = useState(false);
+  const [showRubrics, setShowRubrics] = useState(false);
 
   useEffect(() => {
     setActivity({
@@ -32,12 +37,11 @@ const Assignment = (props) => {
 
   const date = new Date();
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + dd + yyyy;
+  let today = new Date();
+  let getDate =
+    String(today.getUTCDate()).padStart(2, "0") +
+    String(today.getUTCMonth() + 1).padStart(2, "0") +
+    String(today.getUTCFullYear()).replace("20", "");
 
   const submitAssignment = () => {
     //setLoader(true);
@@ -55,7 +59,7 @@ const Assignment = (props) => {
       instructions: activity.instructions,
       active: true,
       subject: props.subject,
-      filename: today + "_" + filename,
+      filename: getDate + "_" + filename,
     }).then((response) => {
       if (response.data.err) {
         setLoader(false);
@@ -106,7 +110,7 @@ const Assignment = (props) => {
       instructions: activity.instructions,
       active: true,
       subject: props.subject,
-      filename: today + "_" + filename,
+      filename: getDate + "_" + filename,
     }).then((response) => {
       if (response.data.err) {
         props.setMessage(response.data.err);
@@ -152,10 +156,43 @@ const Assignment = (props) => {
   };
   return (
     <>
+      {showRubrics && <Rubrics setShowRubrics={setShowRubrics} />}
       {role !== "Teacher" ? (
         <BrokenPage />
       ) : (
         <div className="assignment-wrapper">
+          <div
+            onClick={() => {
+              setRubrics(false);
+              setPointType("none");
+            }}
+            className={rubrics ? "assignment-wrapper-afterss" : "hidden"}
+          ></div>
+          <div className={rubrics ? "rubrics-form" : "hidden"}>
+            <div className="rubrics-header">
+              <p>Select a rubric</p>
+              <input
+                onClick={() => setShowRubrics(true)}
+                type="submit"
+                value="Create"
+              />
+            </div>
+            <div className="rubrics-body">
+              <p
+                style={{
+                  color: "grey",
+                  fontSize: ".9rem",
+                  position: "absolute",
+                  fontWeight: 300,
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                No items to show
+              </p>
+            </div>
+          </div>
           {loader && <Loader />}
           <div className="assignment-header">
             <h3>Create Assignment</h3>
@@ -167,21 +204,61 @@ const Assignment = (props) => {
           >
             <div className="assignment-div-points">
               <label>Points</label>
-              <input
-                value={activity.points}
-                onChange={(e) => {
-                  let value = e.target.value;
-                  setActivity({
-                    type: activity.type,
-                    points: value,
-                    due: activity.due,
-                    time: activity.time,
-                    topic: activity.topic,
-                    instructions: activity.instructions,
-                  });
-                }}
-                type="number"
-              />
+              <div className="assignment-div-points-div ">
+                {pointType === "points" && (
+                  <input
+                    value={activity.points}
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      setActivity({
+                        type: activity.type,
+                        points: value,
+                        due: activity.due,
+                        time: activity.time,
+                        topic: activity.topic,
+                        instructions: activity.instructions,
+                      });
+                    }}
+                    type="number"
+                  />
+                )}
+                {pointType === "rubric" && (
+                  <div className="type-rubric">Rubrics</div>
+                )}
+
+                {pointType === "none" && (
+                  <div className="type-rubric">No points set</div>
+                )}
+                <div onClick={() => setDropdown2(!dropdown2)} className="agent">
+                  <i className="fas fa-caret-down"></i>
+                  <div className={dropdown2 === true ? "agent-2" : "hidden"}>
+                    <p onClick={() => setPointType("points")}>Points</p>
+                    <p
+                      onClick={() => {
+                        setPointType("rubric");
+                        setRubrics(true);
+                      }}
+                    >
+                      Rubrics
+                    </p>
+                    <p
+                      onClick={() => {
+                        setPointType("none");
+                        setActivity({
+                          type: activity.type,
+                          points: 0,
+                          due: activity.due,
+                          time: activity.time,
+                          topic: activity.topic,
+                          instructions: activity.instructions,
+                        });
+                      }}
+                    >
+                      None
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="assignment-div-due">
               <div className="assignment-div-date">

@@ -110,17 +110,7 @@ const DashboardHome = () => {
                   </div>
                 </div>
               </div>
-              <div className="dashboard-actual-body-right">
-                <div className="calendar-section">
-                  <div className="calendar-section-header">
-                    <h3>Upcoming Events</h3>
-                  </div>
-                  <div className="calendar-section-body">
-                    <img src={Empty} alt="Empty" />
-                    <p>Nothing found.</p>
-                  </div>
-                </div>
-              </div>
+              <div className="dashboard-actual-body-right"></div>
             </div>
           </div>
         </div>

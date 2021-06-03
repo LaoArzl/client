@@ -67,9 +67,6 @@ const Login = () => {
                 educational school related materials.
               </p>
             </div>
-            <div className="third-login-div">
-              <p>Learn More</p>
-            </div>
           </div>
         </div>
         <form

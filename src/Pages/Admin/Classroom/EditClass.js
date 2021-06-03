@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Dashboard from "../../../Components/Dashboard/Dashboard";
 import DashboardHeader from "../../../Components/DashboardHeader/DashboardHeader";
@@ -6,13 +6,37 @@ import "./EditClass.css";
 import Axios from "axios";
 import ClassPeople from "./ClassPeople";
 import ClassInfo from "./ClassInfo";
+import Loader from "../../../Components/Loader/Loader";
 
 const EditClass = (props) => {
-  const [editPage, setEditPage] = useState("");
+  const [editPage, setEditPage] = useState("class");
+  const [classess, setClassess] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [message, setMessage] = useState("");
+  const [initial, setInitial] = useState("");
+
+  useEffect(() => {
+    Axios.get(`https://ecplc2021.herokuapp.com/class/class/${props.id}`).then(
+      (response) => {
+        let e = response.data[0];
+        setClassess({
+          classname: e.className,
+          capacity: e.capacity,
+          section: e.section,
+          years: e.years,
+          year: e.year,
+        });
+      }
+    );
+  }, [initial]);
   return (
     <>
+      {loader && <Loader />}
       <div className="edit-class-wrapper">
         <Dashboard />
+        <div className={message !== "" ? "successfully-created" : "hidden"}>
+          {message}
+        </div>
         <div className="edit-class-content">
           <DashboardHeader />
           <div className="edit-class-body">
@@ -28,29 +52,40 @@ const EditClass = (props) => {
                 Class Details
               </div>
               <div
-                onClick={() => setEditPage("students")}
+                onClick={() => setEditPage("people")}
                 className={
-                  editPage === "students"
-                    ? "edit-class-left2-active"
+                  editPage === "people"
+                    ? "edit-class-left1-active"
                     : "edit-class-left2"
                 }
                 className="edit-class-left2"
               >
-                Students
-              </div>
-              <div
-                onClick={() => setEditPage("s")}
-                className={
-                  editPage === "s"
-                    ? "edit-class-left3-active"
-                    : "edit-class-left3"
-                }
-                className="edit-class-left3"
-              >
-                Teachers
+                People
               </div>
             </div>
-            <div className="edit-class-right"></div>
+            <div className="edit-class-right">
+              {editPage === "class" && (
+                <ClassInfo
+                  classess={classess}
+                  setClassess={setClassess}
+                  loader={loader}
+                  setLoader={setLoader}
+                  setMessage={setMessage}
+                  setInitial={setInitial}
+                  id={props.id}
+                />
+              )}
+
+              {editPage === "people" && (
+                <ClassPeople
+                  loader={loader}
+                  setLoader={setLoader}
+                  setMessage={setMessage}
+                  setInitial={setInitial}
+                  id={props.id}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

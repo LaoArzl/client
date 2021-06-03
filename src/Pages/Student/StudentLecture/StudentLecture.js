@@ -58,7 +58,12 @@ const StudentLecture = (props) => {
                   <b>{props.subject}</b>
                   <div className="subject-content-body-right-header-nav">
                     <Link
-                      to={props.activityLink}
+                      to={
+                        "/student-class/" +
+                        props.studentId +
+                        "/subjects/" +
+                        props.activityLink
+                      }
                       className="subject-content-body-right-header-nav-link-inactive"
                     >
                       Activities

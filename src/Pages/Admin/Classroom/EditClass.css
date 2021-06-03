@@ -22,21 +22,21 @@
 
 .edit-class-left {
   width: 25%;
-  height: 30vh;
+  height: 20vh;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   border: 1px solid rgb(235, 235, 235);
   box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
-  max-height: 300px;
+  max-height: 200px;
   min-height: 150px;
 }
 
 .edit-class-left1 {
   width: 100%;
-  height: 33.33%;
+  height: 50%;
   cursor: pointer;
   transition: 0.2s ease-out;
   display: flex;
@@ -53,24 +53,7 @@
 
 .edit-class-left2 {
   width: 100%;
-  height: 33.33%;
-  cursor: pointer;
-  transition: 0.2s ease-out;
-  display: flex;
-  align-items: center;
-  padding-left: 15%;
-  cursor: pointer;
-  color: #bac1d1;
-  position: relative;
-  font-size: 15px;
-  font-weight: 500;
-  position: relative;
-  transition: 0.1s ease-out;
-}
-
-.edit-class-left3 {
-  width: 100%;
-  height: 33.33%;
+  height: 50%;
   cursor: pointer;
   transition: 0.2s ease-out;
   display: flex;
@@ -112,7 +95,7 @@
 
 .edit-class-left1-active {
   width: 100%;
-  height: 33.33%;
+  height: 50%;
   display: flex;
   align-items: center;
   padding-left: 15%;
@@ -128,7 +111,7 @@
 
 .edit-class-left2-active {
   width: 100%;
-  height: 33.33%;
+  height: 50%;
   align-items: center;
   padding-left: 15%;
   cursor: pointer;
@@ -164,9 +147,83 @@
   width: 73%;
   height: auto;
   min-height: 200px;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
   border-radius: 20px;
   margin-bottom: 20px;
+}
+
+.class-info {
+  width: 100%;
+  background: white;
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
   border: 1px solid rgb(235, 235, 235);
+  padding: 30px 0px;
+  padding-top: 50px;
+  height: auto;
+}
+
+.people-info {
+  width: 100%;
+  background: white;
+  box-shadow: 0px 1px 1px 0px rgba(63, 87, 102, 0.2);
+  border: 1px solid rgb(235, 235, 235);
+  height: auto;
+  margin-bottom: 20px;
+}
+.people-header {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  border-bottom: 1px solid lightgrey;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: var(--font);
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+.people-body {
+  min-height: 60px;
+  width: 100%;
+  display: flex;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: var(--font);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+
+.people-body-body {
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+  font-size: var(--font15);
+  color: var(--font);
+  display: flex;
+}
+
+.people-body-body p {
+  margin-right: 10px;
+}
+
+.add-student-btn {
+  background: rgb(236, 234, 234);
+  font-size: var(--font14);
+  padding: 10px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  color: var(--font);
+  font-weight: 500;
+}
+
+.add-student-btn:hover {
+  background: rgb(219, 215, 215);
+  font-size: var(--font14);
+  padding: 10px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s ease-in;
 }

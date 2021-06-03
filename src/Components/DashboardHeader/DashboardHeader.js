@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./DashboardHeader.css";
 import Logo from "./logo.png";
 import Axios from "axios";
@@ -7,12 +7,12 @@ import { LoginContext } from "../../ContextFiles/LoginContext";
 import { motion } from "framer-motion";
 
 const DashboardHeader = () => {
+  const { valuePicture, valueID, valueFirstname } = useContext(LoginContext);
+  const [picture, setPicture] = valuePicture;
   const [logout, setLogout] = useState(false);
-  const [currUser, setCurrUser] = useState([]);
-  const [firstname, setFirstname] = useState("");
-  const [chat, setChat] = useState(false);
-  const [isLogout, setIsLogout] = useState(false);
-  const [picture, setPicture] = useState("");
+  const [firstname, setFirstname] = valueFirstname;
+  const [userID, setUserID] = valueID;
+
   const logoutMenu = () => {
     setLogout(!logout);
   };
@@ -31,6 +31,7 @@ const DashboardHeader = () => {
       if (response.data.length === 0) {
         setFirstname("");
       } else if (response.data.loggedIn) {
+        setUserID(response.data.id);
         setFirstname(response.data.firstname);
         setPicture(response.data.picture);
       }
@@ -45,7 +46,7 @@ const DashboardHeader = () => {
       zIndex: 1,
     },
     initial: {
-      y: -50,
+      y: 0,
       opacity: 0,
       pointerEvents: "none",
       zIndex: -1,
@@ -57,15 +58,21 @@ const DashboardHeader = () => {
       <div className="dashboard-header">
         <div className="dashboard-header-wrapper">
           <div className="dashboard-spanner-left">
-            <img src={Logo} alt="logo" />
-            <h2>ECPLC</h2>
+            <h2>ECPLC </h2>
+            <p>LMS</p>
           </div>
           <div className="dashboard-spanner-right">
-            <div onClick={logoutMenu} className="dashboard-admin-profile">
+            <div
+              onClick={logoutMenu}
+              className={
+                logout ? "dashboard-admin-profile-2" : "dashboard-admin-profile"
+              }
+            >
               <div className="dashboard-header-profile1">
                 <img src={picture} />
               </div>
               <div className="dashboard-header-profile-name">
+                <p> {firstname}</p>
                 <i className="fas fa-caret-down"></i>
               </div>
             </div>
@@ -84,7 +91,7 @@ const DashboardHeader = () => {
                 </div>
                 <div className="dashboard-profile-name-wrapper2">
                   {firstname}
-                  <div className="view-profile">View Profile</div>
+                  <div className="view-profile">ECPLC LMS</div>
                 </div>
               </span>
               <span className="dashboard-profile-span2">

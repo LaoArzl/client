@@ -17,6 +17,13 @@ const UserTeacher = (props) => {
   return (
     <>
       <div className="userprofile-wrapper">
+        <div
+          className={
+            props.message === "" ? "hidden" : "assignment-wrapper-after"
+          }
+        >
+          {props.message}
+        </div>
         <Dashboard />
         <div className="userprofile-content">
           <DashboardHeader />
@@ -43,7 +50,7 @@ const UserTeacher = (props) => {
                     : "user-navigation-profile"
                 }
               >
-                User Account{" "}
+                Password and Security
                 <i
                   class={userNav === "Account" ? "fas fa-chevron-right" : ""}
                 ></i>
@@ -56,16 +63,32 @@ const UserTeacher = (props) => {
                     : "user-navigation-profile"
                 }
               >
-                Delete Account
+                Profile Picture
                 <i
                   class={userNav === "Advising" ? "fas fa-chevron-right" : ""}
                 ></i>
               </div>
             </div>
             <div className="user-profile-content-actual">
-              {userNav === "Profile" && <NavProfile />}
+              {userNav === "Profile" && (
+                <NavProfile
+                  id={props.id}
+                  message={props.message}
+                  setMessage={props.setMessage}
+                  initial={props.initial}
+                  setInitial={props.setInitial}
+                />
+              )}
               {userNav === "Account" && <NavAccount />}
-              {userNav === "Advising" && <NavDelete />}
+              {userNav === "Advising" && (
+                <NavDelete
+                  id={props.id}
+                  message={props.message}
+                  setMessage={props.setMessage}
+                  initial={props.initial}
+                  setInitial={props.setInitial}
+                />
+              )}
             </div>
           </div>
         </div>

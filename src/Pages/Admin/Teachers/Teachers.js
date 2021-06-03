@@ -10,9 +10,9 @@ import Axios from "axios";
 
 const Teachers = () => {
   const [showExport, setShowExport] = useState(false);
-  const { loginRole } = useContext(LoginContext);
+  const { loginRole, valueTeachers } = useContext(LoginContext);
   const [role, setRole] = loginRole;
-  const [teachers, setTeachers] = useState([]);
+  const [teachers, setTeachers] = valueTeachers;
 
   useEffect(() => {
     Axios.get("https://ecplc2021.herokuapp.com/teacher-list").then(

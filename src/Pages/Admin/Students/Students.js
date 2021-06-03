@@ -10,11 +10,12 @@ import Axios from "axios";
 
 const Students = (props) => {
   const { value00, value03 } = useContext(StudentListContext);
-  const [students, setStudents] = useState([]);
+
   const [searchItem, setSearchItem] = value03;
 
   const [showExport, setShowExport] = useState(false);
-  const { loginRole } = useContext(LoginContext);
+  const { loginRole, valueStudents } = useContext(LoginContext);
+  const [students, setStudents] = valueStudents;
   const [role, setRole] = loginRole;
 
   useEffect(() => {
@@ -88,30 +89,28 @@ const Students = (props) => {
 
                 .map((value, key) => {
                   return (
-                    <>
-                      <div key={value._id} className="student-list-body">
-                        <div className="student-list-id-span">
-                          {value.idNumber}
-                        </div>
-                        <div className="student-list-name-span">
-                          {value.fullname}
-                        </div>
-                        <div className="student-list-gender-span">
-                          {value.gender}
-                        </div>
-                        <div className="student-list-gradelevel-span">
-                          {value.year}
-                        </div>
-                        <div className="student-list-action-span">
-                          <Link
-                            className="student-list-action-link"
-                            to={"/admin/edit-user/" + value._id}
-                          >
-                            <i class="fas fa-pen"></i>
-                          </Link>
-                        </div>
+                    <div key={value._id} className="student-list-body">
+                      <div className="student-list-id-span">
+                        {value.idNumber}
                       </div>
-                    </>
+                      <div className="student-list-name-span">
+                        {value.fullname}
+                      </div>
+                      <div className="student-list-gender-span">
+                        {value.gender}
+                      </div>
+                      <div className="student-list-gradelevel-span">
+                        {value.year}
+                      </div>
+                      <div className="student-list-action-span">
+                        <Link
+                          className="student-list-action-link"
+                          to={"/admin/edit-user/" + value._id}
+                        >
+                          <i class="fas fa-pen"></i>
+                        </Link>
+                      </div>
+                    </div>
                   );
                 })}
             </div>

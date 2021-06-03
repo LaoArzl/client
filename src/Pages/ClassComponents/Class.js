@@ -23,7 +23,9 @@ const Class = (props) => {
   };
   const [del, setDel] = useState(false);
   const [option, setOption] = useState(false);
-  const { valueID, valueFirstname } = useContext(LoginContext);
+  const { valueID, valueFirstname, valueTeacherPicture } =
+    useContext(LoginContext);
+  const [teacherPicture, setTeacherPicture] = valueTeacherPicture;
   const [userID, setUserID] = valueID;
   const [firstname, setFirstname] = useState("");
   const [comment, setComment] = useState("");
@@ -58,6 +60,7 @@ const Class = (props) => {
         setFirstname("");
       } else if (response.data.loggedIn) {
         setFirstname(response.data.firstname);
+        setTeacherPicture(response.data.picture);
       }
     });
   }, [props.initial]);
@@ -86,6 +89,7 @@ const Class = (props) => {
       poster: firstname,
       tags: postTo,
       file: filename,
+      picture: teacherPicture,
     }).then((response) => {
       if (response.data.err) {
         props.setMsg(response.data.err);
@@ -247,7 +251,9 @@ const Class = (props) => {
                       <i className="fas fa-ellipsis-v"></i>
                     </div>
                     <div className="class-posts-body-header">
-                      <div className="class-posts-body-header-left"></div>
+                      <div className="class-posts-body-header-left">
+                        <img src={teacherPicture} alt="Picture" />
+                      </div>
                       <div className="class-posts-body-header-right">
                         <h5>{value.poster}</h5>
                         <p>{value.date}</p>
@@ -283,7 +289,9 @@ const Class = (props) => {
                                 : "class-posts-body-comment-lower"
                             }
                           >
-                            <div className="class-posts-body-header-left"></div>
+                            <div className="class-posts-body-header-left">
+                              <img src={comment.picture} alt="Picture" />
+                            </div>
                             <div className="class-posts-body-comment-user">
                               <h5>{comment.commentor}</h5>
                               <p>{comment.comment} </p>

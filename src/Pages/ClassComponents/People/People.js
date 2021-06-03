@@ -19,10 +19,6 @@ const People = (props) => {
 
   const [msg, setMsg] = useState("");
 
-  const setStudent = () => {
-    setShowStudents(true);
-  };
-
   useEffect(() => {
     Axios.get("https://ecplc2021.herokuapp.com/add-class-student").then(
       (response) => {

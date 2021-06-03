@@ -132,7 +132,6 @@ const Activity = (props) => {
                     )}
                   </p>
                 </div>
-
                 <div
                   className={
                     props.instructions === ""
@@ -142,7 +141,6 @@ const Activity = (props) => {
                 >
                   <p> {props.instructions}</p>
                 </div>
-
                 <div className="actual-activity-body-left-attach">
                   <p>Attached file</p>
                 </div>

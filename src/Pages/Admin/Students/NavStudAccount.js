@@ -13,15 +13,18 @@ const NavStudAccount = () => {
   const [changeError, setChangeError] = useState("");
 
   useEffect(() => {
-    Axios.get(`https://ecplc2021.herokuapp.com/${tempId}`).then((response) => {
-      if (response.data.length == 0) {
-        setStudentUsername("");
-        setStudentPassword("");
-      } else {
-        setStudentUsername(response.data.username);
-        setStudentPassword(response.data.password);
+    Axios.get(`https://ecplc2021.herokuapp.com/student/${tempId}`).then(
+      (response) => {
+        if (response.data.length == 0) {
+          setStudentUsername("");
+          setStudentPassword("");
+        } else {
+          console.log(response.data);
+          setStudentUsername(response.data.username);
+          setStudentPassword(response.data.password);
+        }
       }
-    });
+    );
   }, []);
 
   const changingPassword = () => {
@@ -46,92 +49,88 @@ const NavStudAccount = () => {
 
   return (
     <>
-      {studentUsername === "" ? (
-        <Loader />
-      ) : (
-        <div className="user-nav-wrapper">
-          <div className="user-nav-wrapper-header">
-            {showUserAccount === false ? (
-              <h2>Security and Password</h2>
-            ) : (
-              <h2>Change Password</h2>
-            )}
-          </div>
-          <div className="user-nav-wrapper-body">
-            {showUserAccount === false ? (
-              <form className="user-nav-account-body-form">
-                <div className="div">
-                  <label>Username</label>
-                  <input
-                    type="text"
-                    value={studentUsername}
-                    className="div-input-password"
-                  ></input>
-                </div>
-                <div className="div">
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    value={studentPassword}
-                    className="div-input-password"
-                  ></input>
-                </div>
-                <div className="div">
-                  <span onClick={() => setShowUserAccount(true)}>
-                    Change Password
-                  </span>
-                </div>
-              </form>
-            ) : (
-              <form className="user-nav-wrapper-form-after">
-                <div
-                  className={
-                    changeError === ""
-                      ? ""
-                      : changeError === "Succesfully change password"
-                      ? "div-green"
-                      : "div-red"
-                  }
-                >
-                  {changeError}
-                </div>
-                <div className="div">
-                  <label>Password</label>
-                  <input
-                    type="text"
-                    value={changePassword}
-                    className="div-input-password"
-                    onChange={(e) => setChangePassword(e.target.value)}
-                  ></input>
-                </div>
-                <div className="div">
-                  <label>Confirm Password</label>
-                  <input
-                    type="text"
-                    value={changeConfirm}
-                    className="div-input-password"
-                    onChange={(e) => setChangeConfirm(e.target.value)}
-                  ></input>
-                </div>
-                <div className="change-password-submit">
-                  <span
-                    onClick={changingPassword}
-                    className="change-password-span1"
-                  >
-                    Save
-                  </span>
-                  <span
-                    onClick={() => setShowUserAccount(false)}
-                    className="change-password-span2"
-                  >
-                    Close
-                  </span>
-                </div>
-              </form>
-            )}
-          </div>
+      <div className="user-nav-wrapper">
+        <div className="user-nav-wrapper-header">
+          {showUserAccount === false ? (
+            <div className="user-nav-wrapper-sub-header">Change Password</div>
+          ) : (
+            <h2>Change Password</h2>
+          )}
         </div>
-      )}
+        <div className="user-nav-wrapper-body">
+          {showUserAccount === false ? (
+            <form className="user-nav-account-body-form">
+              <div className="admission-div">
+                <label>Username</label>
+                <input
+                  type="text"
+                  value={studentUsername}
+                  className="div-input-password"
+                ></input>
+              </div>
+              <div className="admission-div">
+                <label>Password</label>
+                <input
+                  type="password"
+                  value={studentPassword}
+                  className="div-input-password"
+                ></input>
+              </div>
+              <div className="div">
+                <span onClick={() => setShowUserAccount(true)}>
+                  Change Password
+                </span>
+              </div>
+            </form>
+          ) : (
+            <form className="user-nav-wrapper-form-after">
+              <div
+                className={
+                  changeError === ""
+                    ? ""
+                    : changeError === "Succesfully change password"
+                    ? "div-green"
+                    : "div-red"
+                }
+              >
+                {changeError}
+              </div>
+              <div className="div">
+                <label>Password</label>
+                <input
+                  type="text"
+                  value={changePassword}
+                  className="div-input-password"
+                  onChange={(e) => setChangePassword(e.target.value)}
+                ></input>
+              </div>
+              <div className="div">
+                <label>Confirm Password</label>
+                <input
+                  type="text"
+                  value={changeConfirm}
+                  className="div-input-password"
+                  onChange={(e) => setChangeConfirm(e.target.value)}
+                ></input>
+              </div>
+              <div className="change-password-submit">
+                <span
+                  onClick={changingPassword}
+                  className="change-password-span1"
+                >
+                  Save
+                </span>
+                <span
+                  onClick={() => setShowUserAccount(false)}
+                  className="change-password-span2"
+                >
+                  Close
+                </span>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
     </>
   );
 };

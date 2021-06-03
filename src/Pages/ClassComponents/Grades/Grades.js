@@ -46,6 +46,18 @@ const Grades = (props) => {
     });
   }, [props.initial]);
 
+  useEffect(() => {
+    Axios.get(
+      `https://ecplc2021.herokuapp.com/class/assignment/${props.id}`
+    ).then((response) => {
+      if (response.data.length === 0) {
+        setActivity([]);
+      } else {
+        setActivity(response.data.activity);
+      }
+    });
+  }, [props.initial]);
+
   /*Quarter state*/
   const [first, setFirst] = useState(false);
   const [second, setSecond] = useState(false);
@@ -81,6 +93,8 @@ const Grades = (props) => {
               setActivity={setActivity}
               activity={activity}
               setInitial={props.setInitial}
+              message={props.message}
+              setMessage={props.setMessage}
             />
           )}
           {quiz && <Quiz setQuiz={setQuiz} />}
@@ -160,61 +174,17 @@ const Grades = (props) => {
                   </div>
                 </div>
                 <div className="subject-content-body-right-body">
-                  <div className="subject-content-assigned-header">
-                    <p onClick={() => setFirst(!first)}>
-                      1st Quarter
-                      <i
-                        className={
-                          first ? "fas fa-caret-right" : "fas fa-caret-down"
-                        }
-                      ></i>
-                    </p>
-                  </div>
-
+                  <div className="subject-content-completed-header"></div>
                   {activity
-                    .filter((e) => e.quarter === "1st Quarter")
+                    .filter((subject) => subject.subject === props.subject)
                     .map((value) => {
                       return (
                         <Link
-                          to={"/lecture/" + value._id}
+                          to={"/grade/" + value._id}
                           className={
-                            first ? "hidden" : "subject-content-assigned-body"
-                          }
-                        >
-                          <span>
-                            <LibraryAddCheckIcon fontSize="small" />
-                          </span>
-                          <div className="subject-content-assigned-body-right">
-                            <b>{value.topic}</b>
-                            <div className="sub-subject-content-assigned-body-right">
-                              <div className="activity-topic-value">
-                                <p>Lecture</p>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-
-                  <div className="subject-content-assigned-header">
-                    <p onClick={() => setSecond(!second)}>
-                      2nd Quarter
-                      <i
-                        className={
-                          second ? "fas fa-caret-right" : "fas fa-caret-down"
-                        }
-                      ></i>
-                    </p>
-                  </div>
-
-                  {activity
-                    .filter((e) => e.quarter === "2nd Quarter")
-                    .map((value) => {
-                      return (
-                        <Link
-                          to={"/lecture/" + value._id}
-                          className={
-                            second ? "hidden" : "subject-content-assigned-body"
+                            showCompleted
+                              ? "hidden"
+                              : "subject-content-completed-body"
                           }
                         >
                           <span>
@@ -226,79 +196,21 @@ const Grades = (props) => {
                               <div className="activity-topic-value">
                                 <p>{value.activityType}</p>
                               </div>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-
-                  <div className="subject-content-assigned-header">
-                    <p onClick={() => setThird(!third)}>
-                      3rd Quarter
-                      <i
-                        className={
-                          third ? "fas fa-caret-right" : "fas fa-caret-down"
-                        }
-                      ></i>
-                    </p>
-                  </div>
-
-                  {activity
-                    .filter((e) => e.quarter === "3rd Quarter")
-                    .map((value) => {
-                      return (
-                        <Link
-                          to={"/lecture/" + value._id}
-                          className={
-                            third ? "hidden" : "subject-content-assigned-body"
-                          }
-                        >
-                          <span>
-                            <LibraryAddCheckIcon fontSize="small" />
-                          </span>
-                          <div className="subject-content-assigned-body-right">
-                            <b>{value.topic}</b>
-                            <div className="sub-subject-content-assigned-body-right">
-                              <div className="activity-topic-value">
-                                <p>Lecture</p>
+                              <div className="activity-due-value">
+                                {value.due === "" ? "" : <p>Due {value.due}</p>}
+                              </div>
+                              <div className="activity-time-value">
+                                {value.due === "" ? "" : <p>{value.time}</p>}
                               </div>
                             </div>
                           </div>
-                        </Link>
-                      );
-                    })}
 
-                  <div className="subject-content-assigned-header">
-                    <p onClick={() => setFourth(!fourth)}>
-                      4th Quarter
-                      <i
-                        className={
-                          fourth ? "fas fa-caret-right" : "fas fa-caret-down"
-                        }
-                      ></i>
-                    </p>
-                  </div>
-
-                  {activity
-                    .filter((e) => e.quarter === "4th Quarter")
-                    .map((value) => {
-                      return (
-                        <Link
-                          to={"/lecture/" + value._id}
-                          className={
-                            fourth ? "hidden" : "subject-content-assigned-body"
-                          }
-                        >
-                          <span>
-                            <LibraryAddCheckIcon fontSize="small" />
-                          </span>
-                          <div className="subject-content-assigned-body-right">
-                            <b>{value.topic}</b>
-                            <div className="sub-subject-content-assigned-body-right">
-                              <div className="activity-topic-value">
-                                <p>Lecture</p>
-                              </div>
-                            </div>
+                          <div className="activity-points-after">
+                            {value.points < 0 ? (
+                              "No points"
+                            ) : (
+                              <>{value.points + " points"} </>
+                            )}
                           </div>
                         </Link>
                       );

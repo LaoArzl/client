@@ -117,6 +117,7 @@
 .user-nav-wrapper {
   width: 100%;
   height: auto;
+  padding-top: 20px;
 }
 
 /*User Profile */
@@ -127,7 +128,6 @@
   align-items: center;
   color: #323b44;
   justify-content: center;
-  background: pink;
 }
 
 .user-nav-wrapper-profile-body {

@@ -34,6 +34,14 @@ const StudentSubject = (props) => {
     });
   }, []);
 
+  const [userId, setUseId] = useState("");
+
+  useEffect(() => {
+    Axios.get(`https://ecplc2021.herokuapp.com/user-login`).then((response) => {
+      setUseId(response.data.id);
+    });
+  }, []);
+
   return (
     <>
       {role !== "Student" ? (
@@ -84,7 +92,9 @@ const StudentSubject = (props) => {
                       <Link
                         className="class-by-subject"
                         to={
-                          props.activeLink +
+                          "/student-class/" +
+                          userId +
+                          "/subjects" +
                           "/" +
                           value.subjectName +
                           "/activities"
